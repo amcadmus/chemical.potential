@@ -11,3 +11,14 @@
 *.lai
 *.la
 *.a
+
+# emacs tmp
+*~
+
+# depends
+*.d
+
+# latex files
+*.aux
+*.dvi
+*.pdf
