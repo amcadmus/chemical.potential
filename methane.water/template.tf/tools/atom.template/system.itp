@@ -1,0 +1,15 @@
+[ defaults ]
+; nbfunc   comb-rule	gen-pairs	fudgeLJ	fudgeQQ
+  1	   1		no		1.0	1.0
+
+[ atomtypes ]
+;name  mass        charge    ptype  C6             C12           ; sigma     epsilon
+ OW    15.99940   -0.8476    A      2.617065E-03   2.633456E-06  ; 0.316557  0.650194
+ HW    1.00800     0.4238    A      0.000000E+00   0.000000E+00
+;  C    12.01100    0.000     A      0.23402E-02    0.33740E-05
+  C    12.01100    0.000     A      0.0    0.33740E-05
+
+#include "spce.itp"
+
+[ system ]
+Water
