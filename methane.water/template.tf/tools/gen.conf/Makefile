@@ -42,7 +42,7 @@ CFLAGS += 	$(addprefix -I ,$(include_dirs))
 CXX:=		g++
 CXXFLAGS += 	$(CFLAGS)
 
-target:		$(application_target)
+target:		makedir $(application_target)
 
 %:	$(cobjects) $(cppobjects) $(application_dir)/%.o
 	$(call make-target,$@,$^)
