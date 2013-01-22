@@ -1,0 +1,333 @@
+Log file opened on Tue Jan 22 14:06:58 2013
+Host: maotai  pid: 32699  nodeid: 0  nnodes:  1
+Gromacs version:    VERSION 4.6-dev-20130118-bb6ea98-dirty
+GIT SHA1 hash:      bb6ea98cb90e232ba7617f223feb4e60c6697cfe (dirty)
+Precision:          single
+Memory model:       64 bit
+MPI library:        thread_mpi
+OpenMP support:     enabled
+GPU support:        enabled
+invsqrt routine:    gmx_software_invsqrt(x)
+CPU acceleration:   AVX_256
+FFT library:        fftw-3.2.2
+Large file support: enabled
+RDTSCP usage:       enabled
+Built on:           Tue Jan 22 12:20:49 CET 2013
+Built by:           wanghan@maotai [CMAKE]
+Build OS/arch:      Linux 3.2.0-0.bpo.1-amd64 x86_64
+Build CPU vendor:   GenuineIntel
+Build CPU brand:    Intel(R) Xeon(R) CPU E31245 @ 3.30GHz
+Build CPU family:   6   Model: 42   Stepping: 7
+Build CPU features: aes apic avx clfsh cmov cx8 cx16 htt lahf_lm mmx msr nonstop_tsc pcid pclmuldq pdcm popcnt pse rdtscp sse2 sse3 sse4.1 sse4.2 ssse3 tdt x2apic
+C compiler:         /usr/bin/gcc GNU gcc (Debian 4.4.5-8) 4.4.5
+C compiler flags:   -mavx   -Wextra -Wno-missing-field-initializers -Wno-sign-compare -Wall -Wno-unused -Wunused-value   -fno-inline  -g
+C++ compiler:       /usr/bin/c++ GNU c++ (Debian 4.4.5-8) 4.4.5
+C++ compiler flags: -mavx   -Wextra -Wno-missing-field-initializers -Wno-sign-compare -Wall -Wno-unused -Wunused-value   -fno-inline  -g
+CUDA compiler:      nvcc: NVIDIA (R) Cuda compiler driver;Copyright (c) 2005-2012 NVIDIA Corporation;Built on Thu_Apr__5_00:24:31_PDT_2012;Cuda compilation tools, release 4.2, V0.2.1221
+CUDA driver:        4.20
+CUDA runtime:       4.20
+
+
+                         :-)  G  R  O  M  A  C  S  (-:
+
+                Gravel Rubs Often Many Awfully Cauterized Sores
+
+                :-)  VERSION 4.6-dev-20130118-bb6ea98-dirty  (-:
+
+        Contributions from Mark Abraham, Emile Apol, Rossen Apostolov, 
+           Herman J.C. Berendsen, Aldert van Buuren, Pär Bjelkmar,  
+     Rudi van Drunen, Anton Feenstra, Gerrit Groenhof, Christoph Junghans, 
+        Peter Kasson, Carsten Kutzner, Per Larsson, Pieter Meulenhoff, 
+           Teemu Murtola, Szilard Pall, Sander Pronk, Roland Schulz, 
+                Michael Shirts, Alfons Sijbers, Peter Tieleman,
+
+               Berk Hess, David van der Spoel, and Erik Lindahl.
+
+       Copyright (c) 1991-2000, University of Groningen, The Netherlands.
+         Copyright (c) 2001-2012,2013, The GROMACS development team at
+        Uppsala University & The Royal Institute of Technology, Sweden.
+            check out http://www.gromacs.org for more information.
+
+         This program is free software; you can redistribute it and/or
+       modify it under the terms of the GNU Lesser General Public License
+        as published by the Free Software Foundation; either version 2.1
+             of the License, or (at your option) any later version.
+
+     :-)  /home/cocktail/wanghan/study/chemical.potential/methane.water/local.4.6/bin/mdrun  (-:
+
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+B. Hess and C. Kutzner and D. van der Spoel and E. Lindahl
+GROMACS 4: Algorithms for highly efficient, load-balanced, and scalable
+molecular simulation
+J. Chem. Theory Comput. 4 (2008) pp. 435-447
+-------- -------- --- Thank You --- -------- --------
+
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+D. van der Spoel, E. Lindahl, B. Hess, G. Groenhof, A. E. Mark and H. J. C.
+Berendsen
+GROMACS: Fast, Flexible and Free
+J. Comp. Chem. 26 (2005) pp. 1701-1719
+-------- -------- --- Thank You --- -------- --------
+
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+E. Lindahl and B. Hess and D. van der Spoel
+GROMACS 3.0: A package for molecular simulation and trajectory analysis
+J. Mol. Mod. 7 (2001) pp. 306-317
+-------- -------- --- Thank You --- -------- --------
+
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+H. J. C. Berendsen, D. van der Spoel and R. van Drunen
+GROMACS: A message-passing parallel molecular dynamics implementation
+Comp. Phys. Comm. 91 (1995) pp. 43-56
+-------- -------- --- Thank You --- -------- --------
+
+Input Parameters:
+   integrator           = sd
+   nsteps               = 1
+   init-step            = 0
+   cutoff-scheme        = Group
+   ns_type              = Grid
+   nstlist              = 10
+   ndelta               = 2
+   nstcomm              = 100
+   comm-mode            = Linear
+   nstlog               = 0
+   nstxout              = 0
+   nstvout              = 0
+   nstfout              = 0
+   nstcalcenergy        = 100
+   nstenergy            = 100
+   nstxtcout            = 100
+   init-t               = 0
+   delta-t              = 0.002
+   xtcprec              = 1000
+   fourierspacing       = 0.12
+   nkx                  = 0
+   nky                  = 0
+   nkz                  = 0
+   pme-order            = 4
+   ewald-rtol           = 1e-05
+   ewald-geometry       = 0
+   epsilon-surface      = 0
+   optimize-fft         = FALSE
+   ePBC                 = xyz
+   bPeriodicMols        = FALSE
+   bContinuation        = FALSE
+   bShakeSOR            = FALSE
+   etc                  = No
+   bPrintNHChains       = FALSE
+   nsttcouple           = -1
+   epc                  = No
+   epctype              = Isotropic
+   nstpcouple           = -1
+   tau-p                = 2
+   ref-p (3x3):
+      ref-p[    0]={ 0.00000e+00,  0.00000e+00,  0.00000e+00}
+      ref-p[    1]={ 0.00000e+00,  0.00000e+00,  0.00000e+00}
+      ref-p[    2]={ 0.00000e+00,  0.00000e+00,  0.00000e+00}
+   compress (3x3):
+      compress[    0]={ 0.00000e+00,  0.00000e+00,  0.00000e+00}
+      compress[    1]={ 0.00000e+00,  0.00000e+00,  0.00000e+00}
+      compress[    2]={ 0.00000e+00,  0.00000e+00,  0.00000e+00}
+   refcoord-scaling     = No
+   posres-com (3):
+      posres-com[0]= 0.00000e+00
+      posres-com[1]= 0.00000e+00
+      posres-com[2]= 0.00000e+00
+   posres-comB (3):
+      posres-comB[0]= 0.00000e+00
+      posres-comB[1]= 0.00000e+00
+      posres-comB[2]= 0.00000e+00
+   verlet-buffer-drift  = 0.005
+   rlist                = 0.9
+   rlistlong            = 0.9
+   nstcalclr            = 0
+   rtpi                 = 0.05
+   coulombtype          = User
+   coulomb-modifier     = None
+   rcoulomb-switch      = 0
+   rcoulomb             = 0.9
+   vdwtype              = User
+   vdw-modifier         = None
+   rvdw-switch          = 0
+   rvdw                 = 0.9
+   epsilon-r            = 1
+   epsilon-rf           = 80
+   tabext               = 1
+   implicit-solvent     = No
+   gb-algorithm         = Still
+   gb-epsilon-solvent   = 80
+   nstgbradii           = 1
+   rgbradii             = 1
+   gb-saltconc          = 0
+   gb-obc-alpha         = 1
+   gb-obc-beta          = 0.8
+   gb-obc-gamma         = 4.85
+   gb-dielectric-offset = 0.009
+   sa-algorithm         = Ace-approximation
+   sa-surface-tension   = 2.05016
+   DispCorr             = No
+   bSimTemp             = FALSE
+   free-energy          = no
+   nwall                = 0
+   wall-type            = 9-3
+   wall-atomtype[0]     = -1
+   wall-atomtype[1]     = -1
+   wall-density[0]      = 0
+   wall-density[1]      = 0
+   wall-ewald-zfac      = 3
+   pull                 = no
+   rotation             = FALSE
+   disre                = No
+   disre-weighting      = Conservative
+   disre-mixed          = FALSE
+   dr-fc                = 1000
+   dr-tau               = 0
+   nstdisreout          = 100
+   orires-fc            = 0
+   orires-tau           = 0
+   nstorireout          = 100
+   dihre-fc             = 0
+   em-stepsize          = 0.01
+   em-tol               = 10
+   niter                = 20
+   fc-stepsize          = 0
+   nstcgsteep           = 1000
+   nbfgscorr            = 10
+   ConstAlg             = Lincs
+   shake-tol            = 0.0001
+   lincs-order          = 4
+   lincs-warnangle      = 30
+   lincs-iter           = 1
+   bd-fric              = 0
+   ld-seed              = 1993
+   cos-accel            = 0
+   deform (3x3):
+      deform[    0]={ 0.00000e+00,  0.00000e+00,  0.00000e+00}
+      deform[    1]={ 0.00000e+00,  0.00000e+00,  0.00000e+00}
+      deform[    2]={ 0.00000e+00,  0.00000e+00,  0.00000e+00}
+   adress               = TRUE
+   adress_type          = xsplit
+   adress_const_wf      = 1
+   adress_ex_width      = 0.5
+   adress_hy_width      = 2.75
+   adress_interface_correction = thermoforce
+   adress_site          = com
+   adress_ex_force_cap  = 0
+   adress_do_hybridpairs = FALSE
+   adress_reference_coords (3):
+      adress_reference_coords[0]= 3.75000e+00
+      adress_reference_coords[1]= 1.86036e+00
+      adress_reference_coords[2]= 1.86036e+00
+   userint1             = 0
+   userint2             = 0
+   userint3             = 0
+   userint4             = 0
+   userreal1            = 0
+   userreal2            = 0
+   userreal3            = 0
+   userreal4            = 0
+grpopts:
+   nrdf:          15
+   ref-t:         300
+   tau-t:         0.1
+anneal:          No
+ann-npoints:           0
+   acc:	           0           0           0
+   nfreeze:           N           N           N
+   energygrp-flags[  0]: 0 0 1 1
+   energygrp-flags[  1]: 0 0 1 1
+   energygrp-flags[  2]: 1 1 2 2
+   energygrp-flags[  3]: 1 1 2 2
+   efield-x:
+      n = 0
+   efield-xt:
+      n = 0
+   efield-y:
+      n = 0
+   efield-yt:
+      n = 0
+   efield-z:
+      n = 0
+   efield-zt:
+      n = 0
+   bQMMM                = FALSE
+   QMconstraints        = 0
+   QMMMscheme           = 0
+   scalefactor          = 1
+qm-opts:
+   ngQM                 = 0
+Using 1 MPI thread
+
+Detecting CPU-specific acceleration.
+Present hardware specification:
+Vendor: GenuineIntel
+Brand:  Intel(R) Xeon(R) CPU E31245 @ 3.30GHz
+Family:  6  Model: 42  Stepping:  7
+Features: aes apic avx clfsh cmov cx8 cx16 htt lahf_lm mmx msr nonstop_tsc pcid pclmuldq pdcm popcnt pse rdtscp sse2 sse3 sse4.1 sse4.2 ssse3 tdt x2apic
+Acceleration most likely to fit this hardware: AVX_256
+Acceleration selected at GROMACS compile time: AVX_256
+
+
+1 GPU detected:
+  #0: NVIDIA NVS 300, compute cap.: 1.2, ECC:  no, stat: incompatible
+
+Table routines are used for coulomb: TRUE
+Table routines are used for vdw:     TRUE
+Cut-off's:   NS: 0.9   Coulomb: 0.9   LJ: 0.9
+System total charge: 0.000
+Read user tables from table.xvg with 1501 data points.
+Tabscale = 500 points/nm
+Read user tables from table.xvg with 1501 data points.
+Tabscale = 500 points/nm
+Read user tables from table_CMW_CMW.xvg with 1001 data points.
+Tabscale = 500 points/nm
+Read user tables from table_CMW_CMW.xvg with 1001 data points.
+Tabscale = 500 points/nm
+Read user tables from table_CMW_CMC.xvg with 1001 data points.
+Tabscale = 500 points/nm
+Read user tables from table_CMW_CMC.xvg with 1001 data points.
+Tabscale = 500 points/nm
+Read user tables from table_CMC_CMC.xvg with 1001 data points.
+Tabscale = 500 points/nm
+Read user tables from table_CMC_CMC.xvg with 1001 data points.
+Tabscale = 500 points/nm
+Read user tables from tabletf_CMC.xvg with 476 data points.
+Tabscale = 100 points/nm
+
+NOTE: All elements in table tabletf_CMC.xvg are zero
+
+Read user tables from tabletf_CMW.xvg with 476 data points.
+Tabscale = 100 points/nm
+Potential shift: LJ r^-12: 0.000 r^-6 0.000
+Removing pbc first time
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+S. Miyamoto and P. A. Kollman
+SETTLE: An Analytical Version of the SHAKE and RATTLE Algorithms for Rigid
+Water Models
+J. Comp. Chem. 13 (1992) pp. 952-962
+-------- -------- --- Thank You --- -------- --------
+
+Center of mass motion removal mode is Linear
+We have the following groups for center of mass motion removal:
+  0:  rest
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+S. Fritsch, C. Junghans and K. Kremer
+Adaptive molecular simulation study on structure formation of toluene around
+C60 using Gromacs
+J. Chem. Theo. Comp. 8 (2012) pp. 398
+-------- -------- --- Thank You --- -------- --------
+
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+C. Junghans and S. Poblete
+A reference implementation of the adaptive resolution scheme in ESPResSo
+Comp. Phys. Comm. 181 (2010) pp. 1449
+-------- -------- --- Thank You --- -------- --------
+

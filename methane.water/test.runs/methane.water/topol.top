@@ -1,0 +1,27 @@
+; for simulating methane in water.
+; notice the comb-rule 2 is used!!!
+
+[ defaults ]
+; nbfunc        comb-rule       gen-pairs       fudgeLJ fudgeQQ
+  1             2               no              1.0     1.0
+
+[ atomtypes ]
+;name  mass        charge    ptype  C6             C12           ; sigma     epsilon
+ OW    15.9994    -0.8476    A      3.16557e-01    6.50194e-01   ; 0.316557  0.650194
+ HW    1.00800     0.4238    A      0.00000e+00    0.00000e+00
+CH4    16.0430     0.0000    A      3.73000e-01    1.22640e+00
+ COM   0.00000     0.0000    V      0.000000E+00   0.000000E+00
+
+[ nonbond_params ]
+; i   j   func c6             c12
+  COM  COM  1    0.000000E+00   1.000000E+00  
+
+#include "my.methane.itp"
+#include "my.spce.itp"
+
+[ system ]
+Methane in water
+
+[ molecules ]
+Methane		1
+SOL		499

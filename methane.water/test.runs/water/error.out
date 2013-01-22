@@ -1,0 +1,25 @@
+
+--- PME ERROR ESTIMATE ---
+Box volume              : 26.8214 nm^3
+Number of charged atoms : 2679 (total atoms 2679)
+Coulomb radius          : 0.9 nm
+Ewald_rtol              : 1e-05
+Ewald parameter beta    : 3.47046
+Interpolation order     : 5
+Fourier grid (nx,ny,nz) : 25 x 25 x 25
+Direct space error est. :  6.095e-02 kJ/(mol*nm)
+Reciprocal sp. err. est.:  8.821e-01 kJ/(mol*nm)
+Self-energy error term was estimated using 81 samples
+=========  After tuning ========
+Direct space error est. :  4.478e-01 kJ/(mol*nm)
+Reciprocal sp. err. est.:  4.478e-01 kJ/(mol*nm)
+Ewald_rtol              : 8.15148e-05
+Ewald parameter beta    : 3.09548
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+H. Wang, F. Dommert, C.Holm
+Optimizing working parameters of the smooth particle mesh Ewald algorithm in
+terms of accuracy and efficiency
+J. Chem. Phys. B 133 (2010) pp. 034117
+-------- -------- --- Thank You --- -------- --------
+
