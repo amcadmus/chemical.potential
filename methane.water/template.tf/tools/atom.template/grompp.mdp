@@ -66,7 +66,7 @@ implicit_solvent         = No
 ; Temperature coupling  
 Tcoupl                   = no
 ; Groups to couple separately
-tc-grps                  = SOL 
+tc-grps                  = System
 ; Time constant (ps) and reference temperature (K)
 tau_t                    = 0.1
 ref_t                    = 300 		; \nabla T = 3.5e10 K/m
