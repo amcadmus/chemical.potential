@@ -8,6 +8,12 @@ mylog=`pwd`/cal.vol.log
 makelog=`pwd`/make.log
 rm -f $mylog
 make -C tools/gen.conf -j8
+dir_name=vol.`printf %.2f $ch4_ratio`
+
+if test -d $dir_name; then
+    echo "# existing dir $dir_name, move"
+    mv $dir_name $dir_name.`date +%s`
+fi
 
 # prepare conf.gro
 echo "# prepare conf.gro"
@@ -42,9 +48,9 @@ nwat=`echo "$nmol - $nch4" | bc`
 mv -f out.gro conf.gro
 
 ## warm run
-rm -fr warmup
-cp -a tools/atom.template ./warmup
-cd warmup
+rm -fr $dir_name
+cp -a tools/atom.template ./$dir_name
+cd $dir_name
 mv ../conf.gro .
 sed "s/SOL.*/SOL $nwat/g" topol.top |
 sed "s/Methane.*/Methane $nch4/g" > tmp.top
@@ -54,10 +60,17 @@ cal_vol_set_parameter grompp.mdp
 grompp &>> $mylog
 mdrun -v &>> $mylog
 
-rm -fr ../conf.gro
-if test ! -f confout.gro; then
-    echo "no file confout.gro, exit!"
-    exit
-fi
-cp confout.gro ../conf.gro
+echo 11 12 13 | g_energy -b 100 > energy.out
+newboxx=`grep Box-X energy.out | awk '{print $2}'`
+newboxy=`grep Box-Y energy.out | awk '{print $2}'`
+newboxz=`grep Box-Z energy.out | awk '{print $2}'`
+boxx=`tail confout.gro -n 1 | awk '{print $1}'`
+boxy=`tail confout.gro -n 1 | awk '{print $2}'`
+boxz=`tail confout.gro -n 1 | awk '{print $3}'`
+scalex=`echo "$newboxx / $boxx" | bc -l`
+scaley=`echo "$newboxy / $boxy" | bc -l`
+scalez=`echo "$newboxz / $boxz" | bc -l`
+
+editconf -f confout.gro -o out.gro -scale $scalex $scaley $scalez &>> $mylog
+
 cd ..
