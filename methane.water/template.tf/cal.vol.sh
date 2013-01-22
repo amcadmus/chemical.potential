@@ -55,12 +55,20 @@ mv ../conf.gro .
 sed "s/SOL.*/SOL $nwat/g" topol.top |
 sed "s/Methane.*/Methane $nch4/g" > tmp.top
 mv -f tmp.top topol.top
-cal_vol_set_parameter grompp.mdp
+cp ../parameters.sh .
 
+cal_vol_set_parameter_warm grompp.mdp
 grompp &>> $mylog
 mdrun -v &>> $mylog
 
-echo 11 12 13 | g_energy -b 100 > energy.out
+mv -f confout.gro conf.gro
+cal_vol_set_parameter grompp.mdp
+grompp &>> $mylog
+mdrun -v &>> $mylog
+
+cal_vol_time=`echo "$cal_vol_dt * $cal_vol_nsteps" | bc -l`
+cal_vol_btime=`echo "$cal_vol_time / 2.0" | bc -l`
+echo 11 12 13 | g_energy -b $cal_vol_btime > energy.out
 newboxx=`grep Box-X energy.out | awk '{print $2}'`
 newboxy=`grep Box-Y energy.out | awk '{print $2}'`
 newboxz=`grep Box-Z energy.out | awk '{print $2}'`
