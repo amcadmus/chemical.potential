@@ -8,7 +8,7 @@ mylog=`pwd`/cal.vol.log
 makelog=`pwd`/make.log
 rm -f $mylog
 make -C tools/gen.conf -j8
-dir_name=vol.`printf %.2f $ch4_ratio`
+dir_name=vol.`printf %.3f $ch4_ratio`
 
 if test -d $dir_name; then
     echo "# existing dir $dir_name, move"
