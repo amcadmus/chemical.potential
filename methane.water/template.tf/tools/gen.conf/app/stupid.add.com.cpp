@@ -27,8 +27,8 @@ int main (int argc, char * argv[])
   
   desc.add_options()
       ("help,h", "print this message")
-      ("output-file-name,o", po::value<std::string > (&ofilename)->default_value (std::string("out.gro"), "output conf file name"))
-      ("input-file-name,f",  po::value<std::string > (&ifilename)->default_value (std::string("conf.gro"), "input conf file name"));
+      ("output-file,o", po::value<std::string > (&ofilename)->default_value (std::string("out.gro"), "output conf file name"))
+      ("input-file,f",  po::value<std::string > (&ifilename)->default_value (std::string("conf.gro"), "input conf file name"));
 
   po::variables_map vm;
   po::store(po::parse_command_line(argc, argv, desc), vm);
@@ -57,23 +57,35 @@ int main (int argc, char * argv[])
   std::vector<std::vector<double > >  posi1;
   std::vector<std::vector<double > >  velo1;
 
-  unsigned nmol = posi.size() / 3;
-  resdindex1.resize(nmol*4);
-  atomindex1.resize(nmol*4);
-  resdname1.resize(nmol*4);
-  atomname1.resize(nmol*4);
-  posi1.resize(nmol*4);
-  velo1.resize(nmol*4);
+  unsigned nmol = resdindex.back();
+  unsigned nwat, nch4;
+  for (nwat = 0; ; nwat ++){
+    if (resdname[nwat] != std::string ("SOL")) {
+      break;
+    }
+  }
+  nwat = nwat / 3;
+  nch4 = nmol - nwat;
+  
+  std::cout << "# nmol is " << nmol << std::endl;
+  std::cout << "# nmol ch4   is " << nch4 << std::endl;
+  std::cout << "# nmol water is " << nwat << std::endl;
+  
+  resdindex1.resize(nwat * 4 + nch4 * 2);
+  atomindex1.resize(nwat * 4 + nch4 * 2);
+  resdname1.resize (nwat * 4 + nch4 * 2);
+  atomname1.resize (nwat * 4 + nch4 * 2);
+  posi1.resize     (nwat * 4 + nch4 * 2);
+  velo1.resize     (nwat * 4 + nch4 * 2);
   
   unsigned countAtom = 0;
   std::vector<double > mass (3, 1.00800);
   mass[0] = 15.99940;
   double totalmass = mass[0] + mass[1] + mass[2];
 
-  std::cout << "nmol is " << nmol << std::endl;
   std::cout << "size is " << atomname.size() << std::endl;
   
-  for (unsigned i = 0; i < nmol; ++i){
+  for (unsigned i = 0; i < nwat; ++i){
     resdindex1[4*i+0] = resdindex[3*i+0];
     resdindex1[4*i+1] = resdindex[3*i+0];
     resdindex1[4*i+2] = resdindex[3*i+0];
@@ -89,7 +101,7 @@ int main (int argc, char * argv[])
     atomname1[4*i+0] = atomname[3*i+0];
     atomname1[4*i+1] = atomname[3*i+1];
     atomname1[4*i+2] = atomname[3*i+2];
-    atomname1[4*i+3] = "COM";
+    atomname1[4*i+3] = "CMW";
 
     std::vector<double > composi(3, 0.);
     std::vector<double > comvelo(3, 0.);
@@ -113,6 +125,22 @@ int main (int argc, char * argv[])
     velo1[4*i+2] = velo[3*i+2];
     velo1[4*i+3] = comvelo;
   }  
+
+  for (unsigned ii = 0; ii < nch4; ++ii){
+    resdindex1[4*nwat + 2*ii + 0] = resdindex[3*nwat + ii];
+    resdindex1[4*nwat + 2*ii + 1] = resdindex[3*nwat + ii];
+    atomindex1[4*nwat + 2*ii + 0] = ++ countAtom;
+    atomindex1[4*nwat + 2*ii + 1] = ++ countAtom;
+    resdname1[4*nwat + 2*ii + 0] = resdname[3*nwat + ii];
+    resdname1[4*nwat + 2*ii + 1] = resdname[3*nwat + ii];
+    atomname1[4*nwat + 2*ii + 0] = atomname[3*nwat + ii];
+    atomname1[4*nwat + 2*ii + 1] = "CMC";
+
+    posi1[4*nwat + 2*ii + 0] = posi[3*nwat + ii];
+    posi1[4*nwat + 2*ii + 1] = posi[3*nwat + ii];
+    velo1[4*nwat + 2*ii + 0] = velo[3*nwat + ii];
+    velo1[4*nwat + 2*ii + 1] = velo[3*nwat + ii];
+  }
   
   
   GroFileManager::write (ofilename,
