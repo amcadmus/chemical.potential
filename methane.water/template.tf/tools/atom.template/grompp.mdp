@@ -66,7 +66,7 @@ implicit_solvent         = No
 ; Temperature coupling  
 Tcoupl                   = no
 ; Groups to couple separately
-tc-grps                  = SOL 
+tc-grps                  = System
 ; Time constant (ps) and reference temperature (K)
 tau_t                    = 0.1
 ref_t                    = 300 		; \nabla T = 3.5e10 K/m
@@ -74,7 +74,7 @@ ref_t                    = 300 		; \nabla T = 3.5e10 K/m
 Pcoupl                   = No
 Pcoupltype               = isotropic
 ; Time constant (ps), compressibility (1/bar) and reference P (bar)
-tau_p                    = 0.5
+tau_p                    = 2.0
 compressibility          = 4.5e-5
 ref_p                    = 1.0
 ; Scaling of reference coordinates, No, All or COM

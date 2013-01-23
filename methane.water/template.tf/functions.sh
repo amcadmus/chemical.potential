@@ -30,6 +30,23 @@ function set_parameter () {
     mv -f tmp $file
 }
 
+function cal_vol_set_parameter () {
+    file=$1
+    seed=`date +%s`
+
+    sed -e "/^nsteps /s/=.*/= $cal_vol_nsteps/g" $file |\
+    sed -e "/^nstenergy /s/=.*/= $cal_vol_nstenergy/g" |\
+    sed -e "/^nstcomm /s/=.*/= $cal_vol_nstenergy/g" |\
+    sed -e "/^nstxtcout /s/=.*/= $cal_vol_nstxtcout/g" |\
+    sed -e "/^adress /s/=.*/= no/g" |\
+    sed -e "/^Pcoupl /s/=.*/= Parrinello-Rahman/g" |\
+    sed -e "/^gen_vel /s/=.*/= no/g" |\
+    sed -e "/^dt /s/=.*/= $cal_vol_dt/g" > tmp
+    mv -f tmp $file
+#    sed -e "/^Pcoupl /s/=.*/= Berendsen/g" |\
+}
+
+
 function post_process () {
     output_dir=$1
     rm -fr $output_dir
