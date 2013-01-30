@@ -6,9 +6,9 @@
     <!-- types involved in this interaction -->
    
     <!-- thermodynmic force: apply in this range -->
-    <min>1.8</min>
-    <max>4.2</max>
-    <step>0.1</step>
+    <min>.45</min>
+    <max>3.30</max>
+    <step>0.01</step>
     <!--spline:offset beyond the hyrbid zone to take into account for fitting the spline-->
     <inverse>
       <!-- target distribution -->
@@ -21,17 +21,52 @@
       <post_add></post_add>
       <!-- name of the table for gromacs run -->
       <gromacs>
-        <table>tabletf.xvg</table>
+        <table>tabletf_CMW.xvg</table>
       </gromacs>
       <tf>
-	<spline_start>1.4</spline_start>
-	<spline_end>4.6</spline_end>
-	<spline_step>0.4</spline_step>
+	<spline_start>.4</spline_start>
+	<spline_end>3.35</spline_end>
+	<spline_step>0.42142857142857142857</spline_step>
 	<molname>SOL</molname>
-	<prefactor>0.01382</prefactor> 
+	<prefactor>0.039</prefactor> 
     </tf>
     </inverse>
   </non-bonded>
+
+  <!-- example for a non-bonded interaction entry -->
+  <non-bonded>
+    <!-- name of the index group to calculate density from -->
+    <name>Meth</name>
+    <!-- types involved in this interaction -->
+   
+    <!-- thermodynmic force: apply in this range -->
+    <min>.45</min>
+    <max>3.30</max>
+    <step>0.01</step>
+    <!--spline:offset beyond the hyrbid zone to take into account for fitting the spline-->
+    <inverse>
+      <!-- target distribution -->
+      <target>dens.Meth.xvg</target>
+      <!-- update cycles -->
+      <do_potential>1</do_potential>
+      <!-- additional post processing of dU before added to potential -->
+      <post_update></post_update>
+      <!-- additional post processing of U after dU added to potential -->
+      <post_add></post_add>
+      <!-- name of the table for gromacs run -->
+      <gromacs>
+        <table>tabletf_CMC.xvg</table>
+      </gromacs>
+      <tf>
+	<spline_start>.4</spline_start>
+	<spline_end>3.35</spline_end>
+	<spline_step>0.42142857142857142857</spline_step>
+	<molname>Meth</molname>
+	<prefactor>0.039</prefactor> 
+    </tf>
+    </inverse>
+  </non-bonded>
+
   
   <!-- general options for inverse script -->
   <inverse>
@@ -49,15 +84,15 @@
       <pot_max>1000000</pot_max>
       <mdrun>
 	<!-- mdrun command -->
-	<opts>-dd 2 2 2</opts>
+	<opts>-v</opts>
       </mdrun>
       <!-- extend the tables to this value -->
-      <table_end>10.0</table_end>
+      <table_end>4.75000000000000000000</table_end>
     </gromacs>
     <!-- these files are copied for each new run -->
-    <filelist>adress_spce.itp grompp.mdp topol.top table.xvg tablerdf.xvg index.ndx table_CG_CG.xvg</filelist>
+    <filelist>my.spce.itp my.methane.itp grompp.mdp topol.top table.xvg tablerdf.xvg index.ndx table_CMW_CMW.xvg table_CMW_CMC.xvg table_CMC_CMC.xvg</filelist>
     <!-- do so many iterations -->
-    <iterations_max>100</iterations_max>
+    <iterations_max>20</iterations_max>
     <!-- ibi: inverse biltzmann imc: inverse monte carlo tf: thermody force -->
     <method>tf</method>
     <!-- directory for user scripts -->

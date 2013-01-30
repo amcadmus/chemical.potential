@@ -9,59 +9,28 @@ rm -f $mylog
 
 # prepare conf.gro
 echo "# prepare conf.gro"
-## gen from base (default spc216.gro)
-genconf -f $base_conf -o conf.gro -nbox $n_base_block &>> $mylog
-## resize to right density
+rm -f conf.gro
+dir_name=vol.`printf %.3f $ch4_ratio`
+cp $conf_dir/$dir_name/conf.gro .
+nch4=`grep CH4 conf.gro | wc -l`
+nwat=`grep SOL conf.gro | wc -l`
+nwat=`echo "$nwat / 3" | bc`
+nmol=`echo "$nwat + $nch4" | bc `
 boxx=`tail conf.gro -n 1 | awk '{print $1}'`
 boxy=`tail conf.gro -n 1 | awk '{print $2}'`
 boxz=`tail conf.gro -n 1 | awk '{print $3}'`
-natom=`head -n 2 conf.gro | tail -n 1`
-nmol=`echo "$natom / 3" | bc`
-now_density=`echo "$natom / 3 / ($boxx * $boxy * $boxz)" | bc -l`
-scale=`echo "($now_density / $number_density)" | bc -l`
-editconf -f conf.gro -o out.gro -scale $scale 1 1 &>> $mylog
-mv -f out.gro conf.gro
-boxx=`tail conf.gro -n 1 | awk '{print $1}'`
-boxy=`tail conf.gro -n 1 | awk '{print $2}'`
-boxz=`tail conf.gro -n 1 | awk '{print $3}'`
-
-newboxx=`printf "%.1f" $boxx`
-scalex=`echo "$newboxx / $boxx" | bc -l`
-scaleyz=`echo "sqrt(1./$scalex)" | bc -l`
-editconf -f conf.gro -o out.gro -scale $scalex $scaleyz $scaleyz &>> $mylog
-mv -f out.gro conf.gro
-boxx=`tail conf.gro -n 1 | awk '{print $1}'`
-boxy=`tail conf.gro -n 1 | awk '{print $2}'`
-boxz=`tail conf.gro -n 1 | awk '{print $3}'`
-
-## warm run
-rm -fr warmup
-cp -a tools/atom.template ./warmup
-cd warmup
-mv ../conf.gro .
-sed "s/SOL.*/SOL $nmol/g" topol.top > tmp.top
-mv -f tmp.top topol.top
-grompp &>> $mylog
-mdrun -v &>> $mylog
-rm -fr ../conf.gro
-if test ! -f confout.gro; then
-    echo "no file confout.gro, exit!"
-    exit
-fi
-cp confout.gro ../conf.gro
-cd ..
-## add COM site
-make -C tools/gen.conf/ clean &> $makelog
-make -j4 -C tools/gen.conf/ &> $makelog
-tools/gen.conf/stupid.add.com -f conf.gro -o out.gro &>> $mylog
-mv -f out.gro conf.gro
+half_boxx=`echo "$boxx/2.0" | bc -l`
+half_boxy=`echo "$boxy/2.0" | bc -l`
+half_boxz=`echo "$boxz/2.0" | bc -l`
 
 # prepare dens.SOL.xvg
-echo "# prepare dens.SOL.xvg"
+echo "# prepare dens.SOL.xvg and dens.Meth.xvg"
 rm -f dens.SOL.xvg
+rm -f dens.Meth.xvg
 for i in `seq 0 0.05 $boxx`;
 do
     echo "$i 0 0" >> dens.SOL.xvg
+    echo "$i 0 0" >> dens.Meth.xvg
 done
 # echo "0 0 0" > dens.SOL.xvg
 # tmp=`echo "$boxx/4.0" | bc -l`
@@ -81,11 +50,9 @@ cp -a tools/tf.template ./tf
 echo "# prepare grompp.mdp"
 rm -fr grompp.mdp
 cp tf/grompp.mdp .
-half_boxx=`echo "$boxx/2.0" | bc -l`
-half_boxy=`echo "$boxy/2.0" | bc -l`
-half_boxz=`echo "$boxz/2.0" | bc -l`
 sed -e "/^adress_ex_width/s/=.*/= $ex_region_r/g" grompp.mdp |\
 sed -e "/^adress_hy_width/s/=.*/= $hy_region_r/g" |\
+sed -e "/^adress /s/=.*/= yes/g" |\
 sed -e "/^nsteps/s/=.*/= $gmx_nsteps/g" |\
 sed -e "/^nstenergy/s/=.*/= $gmx_nstenergy/g" |\
 sed -e "/^nstxtcout/s/=.*/= $gmx_nstxtcout/g" |\
@@ -93,11 +60,15 @@ sed -e "/^adress_reference_coords/s/=.*/= $half_boxx $half_boxy $half_boxz/g" > 
 mv -f grompp.mdp.tmp grompp.mdp
 
 # prepare index file
+make -C tools/gen.conf/ -j8 &> /dev/null
+./tools/gen.conf/stupid.add.com -f conf.gro -o out.gro &>> $mylog
+mv -f out.gro conf.gro
 echo "# prepare index file"
-echo "a COM" > command.tmp
-echo "name 3 CG" >> command.tmp
-echo "a HW1 HW2 OW" >> command.tmp
-echo "name 4 EX" >> command.tmp
+echo "a CMW" > command.tmp
+echo "a CMC" >> command.tmp
+echo "a OW HW1 HW2" >> command.tmp
+echo "a CH4" >> command.tmp
+echo "name 8 EXW" >> command.tmp
 echo "q" >> command.tmp
 cat command.tmp  | make_ndx -f conf.gro &>> $mylog
 rm -fr command.tmp
@@ -126,18 +97,29 @@ mv -f settings.xml.tmp settings.xml
 echo "# prepare topol.top"
 rm -fr topol.top
 cp tf/topol.top .
-sed "s/SOL.*/SOL $nmol/g" topol.top > tmp.top
+sed "s/SOL.*/SOL $nwat/g" topol.top |
+sed "s/^Meth.*/Meth $nch4/g" > tmp.top
 mv -f tmp.top topol.top
 
 # prepare table of cg
 echo "# prepare table of cg"
-rm -f tf/table_CG_CG.xvg
-cp -L $cg_pot_file tf/table_CG_CG.xvg
+rm -f tf/table_CMC_CMC.xvg
+rm -f tf/table_CMW_CMW.xvg
+rm -f tf/table_CMW_CMC.xvg
+cp -L $cg_pot_dir/table_CMC_CMC.xvg ./tf/
+cp -L $cg_pot_dir/table_CMW_CMW.xvg ./tf/
+cp -L $cg_pot_dir/table_CMW_CMC.xvg ./tf/
+
+# prepare initial guess
+echo "# prepare initial guess"
+if test -f $init_guess_SOL_tf; then
+    cp $init_guess_SOL_tf ./tf/SOL.pot.in
+fi
 
 # copy all file to tf
 echo "# copy files to tf"
-rm -fr tf/conf.gro tf/dens.SOL.xvg tf/grompp.mdp tf/index.ndx tf/settings.xml tf/topol.top
-mv -f conf.gro dens.SOL.xvg grompp.mdp index.ndx settings.xml topol.top tf/
+rm -fr tf/conf.gro tf/dens.SOL.xvg tf/dens.Meth.xvg tf/grompp.mdp tf/index.ndx tf/settings.xml tf/topol.top
+mv -f conf.gro dens.SOL.xvg dens.Meth.xvg grompp.mdp index.ndx settings.xml topol.top tf/
 
 # calculate tf
 echo "# calculate tf"

@@ -15,8 +15,8 @@ CH4    16.0430     0.0000    A      1.321112e-02   3.557891e-05  ; 0.373     1.2
 #include "my.spce.itp"
 
 [ system ]
-Methane in water
+methane in water
 
 [ molecules ]
 SOL		3455
-Methane		1
+Meth		1

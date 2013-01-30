@@ -21,7 +21,7 @@ nstfout                  = 0
 ; Checkpointing helps you continue after crashes
 nstcheckpoint            = 10000
 ; Output frequency for energies to log file and energy file
-nstlog                   = 0
+nstlog                   = 10000
 nstenergy                = 100
 ; Output frequency and precision for xtc file
 nstxtcout                = 100
@@ -29,6 +29,9 @@ xtc-precision            = 1000
 ; This selects the subset of atoms for the xtc file. You can
 ; select multiple groups. By default all atoms will be written.
 xtc-grps                 = 
+; Selection of energy groups
+energygrps               =  EXW CH4 CMW CMC
+energygrp_table          =  CMW CMW CMC CMC CMW CMC
 
 ; NEIGHBORSEARCHING PARAMETERS
 ; nblist update frequency
@@ -43,10 +46,10 @@ rlist                    = 0.9
 
 ; OPTIONS FOR ELECTROSTATICS AND VDW
 ; Method for doing electrostatics
-coulombtype              = Reaction-Field
+coulombtype              = reaction-field
 rcoulomb-switch          = 0
 rcoulomb                 = 0.9
-; Relative dielectric constant for the medium and the reaction field
+; Dielectric constant (DC) for cut-off or DC of reaction field
 epsilon_r                = 1
 epsilon_rf               = 80
 ; Method for doing Van der Waals
@@ -58,9 +61,6 @@ rvdw                     = 0.9
 DispCorr                 = no
 ; Extension of the potential lookup tables beyond the cut-off
 table-extension          = 1
-; Selection of energy groups
-energygrps               =  CG EX
-energygrp_table	         =  CG CG
 
 ; IMPLICIT SOLVENT ALGORITHM
 implicit_solvent         = No
@@ -91,10 +91,22 @@ gen-vel                  = no
 ; OPTIONS FOR BONDS    
 constraints              = none
 
-adress_type			= xsplit
-adress_cg_grp_names		= CG
-adress_ex_width			= 2.0
-adress_hy_width			= 2.0
-adress_interface_correction	= thermoforce
-adress_reference_coords		= 7.4482   3.7241   3.7241
 
+; AdResS parameters
+adress			 = yes
+adress_type              = xsplit
+adress_const_wf          = 1
+adress_ex_width          = 0.5
+adress_hy_width          = 2.75
+adress_ex_forcecap       = 0
+adress_interface_correction = thermoforce
+adress_site              = com
+adress_reference_coords  = 3.75000000000000000000 1.86035500000000000000 1.86035500000000000000
+adress_tf_grp_names      = CMC CMW
+adress_cg_grp_names      = CMC CMW
+adress_do_hybridpairs    = no
+
+userreal1                = 0
+userreal2                = 0
+userreal3                = 0
+userreal4                = 0

@@ -53,7 +53,7 @@ cp -a tools/atom.template ./$dir_name
 cd $dir_name
 mv ../conf.gro .
 sed "s/SOL.*/SOL $nwat/g" topol.top |
-sed "s/Methane.*/Methane $nch4/g" > tmp.top
+sed "s/Meth.*/Meth $nch4/g" > tmp.top
 mv -f tmp.top topol.top
 cp ../parameters.sh .
 

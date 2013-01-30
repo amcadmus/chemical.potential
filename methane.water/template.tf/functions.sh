@@ -46,6 +46,21 @@ function cal_vol_set_parameter () {
 #    sed -e "/^Pcoupl /s/=.*/= Berendsen/g" |\
 }
 
+function cal_vol_set_parameter_warm () {
+    file=$1
+    seed=`date +%s`
+
+    sed -e "/^nsteps /s/=.*/= 200000/g" $file |\
+    sed -e "/^nstenergy /s/=.*/= $cal_vol_nstenergy/g" |\
+    sed -e "/^nstcomm /s/=.*/= $cal_vol_nstenergy/g" |\
+    sed -e "/^nstxtcout /s/=.*/= $cal_vol_nstxtcout/g" |\
+    sed -e "/^adress /s/=.*/= no/g" |\
+    sed -e "/^Pcoupl /s/=.*/= berendsen/g" |\
+    sed -e "/^gen_vel /s/=.*/= no/g" |\
+    sed -e "/^dt /s/=.*/= 0.0002/g" > tmp
+    mv -f tmp $file
+#    sed -e "/^Pcoupl /s/=.*/= Berendsen/g" |\
+}
 
 function post_process () {
     output_dir=$1

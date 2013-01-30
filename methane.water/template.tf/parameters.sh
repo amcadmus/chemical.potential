@@ -4,7 +4,9 @@ base_conf=tools/gen.conf/spc216.gro
 n_base_block="4 2 2"
 number_density=33.286
 ch4_ratio=0.01
-cg_pot_file=/home/cocktail/wanghan/study/thermo.convection/results.mu/caltf.H.wca/tools/table_CG_CG.xvg
+cg_pot_dir=./tools/tf.template/
+conf_dir=../cal.vol
+init_guess_SOL_tf=./tools/tabletf_SOL.xvg
 
 # cal.vol.sh
 cal_vol_nsteps=4000000
@@ -13,9 +15,9 @@ cal_vol_nstenergy=100
 cal_vol_nstxtcout=200
 
 # gen.tf.sh parameters
-gmx_nsteps=200000
-gmx_nstenergy=50
-gmx_nstxtcout=50
+gmx_nsteps=16000000
+gmx_nstenergy=200
+gmx_nstxtcout=1000
 
 ex_region_r=0.5
 hy_region_r=2.75
