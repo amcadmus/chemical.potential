@@ -7,6 +7,7 @@ ch4_ratio=0.01
 cg_pot_dir=./tools/tf.template/
 conf_dir=../cal.vol
 init_guess_SOL_tf=./tools/tabletf_SOL.xvg
+init_guess_Meht_tf=./tools/tabletf_Meth.xvg
 
 # cal.vol.sh
 cal_vol_nsteps=4000000

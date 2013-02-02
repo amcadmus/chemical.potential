@@ -115,6 +115,9 @@ echo "# prepare initial guess"
 if test -f $init_guess_SOL_tf; then
     cp $init_guess_SOL_tf ./tf/SOL.pot.in
 fi
+if test -f $init_guess_Meth_tf; then
+    cp $init_guess_Meth_tf ./tf/Meth.pot.in
+fi
 
 # copy all file to tf
 echo "# copy files to tf"
