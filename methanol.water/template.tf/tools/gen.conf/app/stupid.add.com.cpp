@@ -58,25 +58,25 @@ int main (int argc, char * argv[])
   std::vector<std::vector<double > >  velo1;
 
   unsigned nmol = resdindex.back();
-  unsigned nwat, nch4;
+  unsigned nwat, nMeOH;
   for (nwat = 0; ; nwat ++){
     if (resdname[nwat] != std::string ("SOL")) {
       break;
     }
   }
   nwat = nwat / 3;
-  nch4 = nmol - nwat;
+  nMeOH = nmol - nwat;
   
   std::cout << "# nmol is " << nmol << std::endl;
-  std::cout << "# nmol ch4   is " << nch4 << std::endl;
+  std::cout << "# nmol MeOH   is " << nMeOH << std::endl;
   std::cout << "# nmol water is " << nwat << std::endl;
   
-  resdindex1.resize(nwat * 4 + nch4 * 2);
-  atomindex1.resize(nwat * 4 + nch4 * 2);
-  resdname1.resize (nwat * 4 + nch4 * 2);
-  atomname1.resize (nwat * 4 + nch4 * 2);
-  posi1.resize     (nwat * 4 + nch4 * 2);
-  velo1.resize     (nwat * 4 + nch4 * 2);
+  resdindex1.resize(nwat * 4 + nMeOH * 4);
+  atomindex1.resize(nwat * 4 + nMeOH * 4);
+  resdname1.resize (nwat * 4 + nMeOH * 4);
+  atomname1.resize (nwat * 4 + nMeOH * 4);
+  posi1.resize     (nwat * 4 + nMeOH * 4);
+  velo1.resize     (nwat * 4 + nMeOH * 4);
   
   unsigned countAtom = 0;
   std::vector<double > mass (3, 1.00800);
@@ -126,21 +126,68 @@ int main (int argc, char * argv[])
     velo1[4*i+3] = comvelo;
   }  
 
-  for (unsigned ii = 0; ii < nch4; ++ii){
-    resdindex1[4*nwat + 2*ii + 0] = resdindex[3*nwat + ii];
-    resdindex1[4*nwat + 2*ii + 1] = resdindex[3*nwat + ii];
-    atomindex1[4*nwat + 2*ii + 0] = ++ countAtom;
-    atomindex1[4*nwat + 2*ii + 1] = ++ countAtom;
-    resdname1[4*nwat + 2*ii + 0] = resdname[3*nwat + ii];
-    resdname1[4*nwat + 2*ii + 1] = resdname[3*nwat + ii];
-    atomname1[4*nwat + 2*ii + 0] = atomname[3*nwat + ii];
-    atomname1[4*nwat + 2*ii + 1] = "CMC";
+  mass[0] = 15.035;
+  mass[1] = 15.999;
+  mass[2] =  1.008;
+  unsigned shift1 = 4 * nwat;
+  unsigned shift = 3 * nwat;
 
-    posi1[4*nwat + 2*ii + 0] = posi[3*nwat + ii];
-    posi1[4*nwat + 2*ii + 1] = posi[3*nwat + ii];
-    velo1[4*nwat + 2*ii + 0] = velo[3*nwat + ii];
-    velo1[4*nwat + 2*ii + 1] = velo[3*nwat + ii];
-  }
+  for (unsigned i = 0; i < nMeOH; ++i){
+    resdindex1[shift1 +4*i+0] = resdindex[shift +3*i+0];
+    resdindex1[shift1 +4*i+1] = resdindex[shift +3*i+0];
+    resdindex1[shift1 +4*i+2] = resdindex[shift +3*i+0];
+    resdindex1[shift1 +4*i+3] = resdindex[shift +3*i+0];
+    atomindex1[shift1 +4*i+0] = ++ countAtom;
+    atomindex1[shift1 +4*i+1] = ++ countAtom;
+    atomindex1[shift1 +4*i+2] = ++ countAtom;
+    atomindex1[shift1 +4*i+3] = ++ countAtom;
+    resdname1[shift1 +4*i+0] = resdname[shift +3*i+0];
+    resdname1[shift1 +4*i+1] = resdname[shift +3*i+0];
+    resdname1[shift1 +4*i+2] = resdname[shift +3*i+0];
+    resdname1[shift1 +4*i+3] = resdname[shift +3*i+0];
+    atomname1[shift1 +4*i+0] = atomname[shift +3*i+0];
+    atomname1[shift1 +4*i+1] = atomname[shift +3*i+1];
+    atomname1[shift1 +4*i+2] = atomname[shift +3*i+2];
+    atomname1[shift1 +4*i+3] = "CMC";
+
+    std::vector<double > composi(3, 0.);
+    std::vector<double > comvelo(3, 0.);
+    
+    for (unsigned jj = 0; jj < 3; ++jj){
+      for (unsigned dd = 0; dd < 3; ++dd){
+	composi[dd] += mass[jj] * posi[3*i+jj][dd];
+	comvelo[dd] += mass[jj] * velo[3*i+jj][dd];
+      }
+    }
+    for (unsigned dd = 0; dd < 3; ++dd){
+      composi[dd] /= totalmass;
+      comvelo[dd] /= totalmass;
+    }
+    posi1[shift1 +4*i+0] = posi[shift +3*i+0];
+    posi1[shift1 +4*i+1] = posi[shift +3*i+1];
+    posi1[shift1 +4*i+2] = posi[shift +3*i+2];
+    posi1[shift1 +4*i+3] = composi;
+    velo1[shift1 +4*i+0] = velo[shift +3*i+0];
+    velo1[shift1 +4*i+1] = velo[shift +3*i+1];
+    velo1[shift1 +4*i+2] = velo[shift +3*i+2];
+    velo1[shift1 +4*i+3] = comvelo;
+  }  
+
+  // for (unsigned ii = 0; ii < nMeOH; ++ii){
+  //   resdindex1[4*nwat + 2*ii + 0] = resdindex[3*nwat + ii];
+  //   resdindex1[4*nwat + 2*ii + 1] = resdindex[3*nwat + ii];
+  //   atomindex1[4*nwat + 2*ii + 0] = ++ countAtom;
+  //   atomindex1[4*nwat + 2*ii + 1] = ++ countAtom;
+  //   resdname1[4*nwat + 2*ii + 0] = resdname[3*nwat + ii];
+  //   resdname1[4*nwat + 2*ii + 1] = resdname[3*nwat + ii];
+  //   atomname1[4*nwat + 2*ii + 0] = atomname[3*nwat + ii];
+  //   atomname1[4*nwat + 2*ii + 1] = "CMC";
+
+  //   posi1[4*nwat + 2*ii + 0] = posi[3*nwat + ii];
+  //   posi1[4*nwat + 2*ii + 1] = posi[3*nwat + ii];
+  //   velo1[4*nwat + 2*ii + 0] = velo[3*nwat + ii];
+  //   velo1[4*nwat + 2*ii + 1] = velo[3*nwat + ii];
+  // }
   
   
   GroFileManager::write (ofilename,

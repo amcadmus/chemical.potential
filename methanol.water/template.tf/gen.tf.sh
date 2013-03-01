@@ -10,12 +10,12 @@ rm -f $mylog
 # prepare conf.gro
 echo "# prepare conf.gro"
 rm -f conf.gro
-dir_name=vol.`printf %.3f $ch4_ratio`
+dir_name=vol.`printf %.3f $MeOH_ratio`
 cp $conf_dir/$dir_name/conf.gro .
-nch4=`grep CH4 conf.gro | wc -l`
+nMeOH=`grep MEOH conf.gro | wc -l`
 nwat=`grep SOL conf.gro | wc -l`
 nwat=`echo "$nwat / 3" | bc`
-nmol=`echo "$nwat + $nch4" | bc `
+nmol=`echo "$nwat + $nMeOH" | bc `
 boxx=`tail conf.gro -n 1 | awk '{print $1}'`
 boxy=`tail conf.gro -n 1 | awk '{print $2}'`
 boxz=`tail conf.gro -n 1 | awk '{print $3}'`
@@ -67,7 +67,7 @@ echo "# prepare index file"
 echo "a CMW" > command.tmp
 echo "a CMC" >> command.tmp
 echo "a OW HW1 HW2" >> command.tmp
-echo "a CH4" >> command.tmp
+echo "a MEOH" >> command.tmp
 echo "name 8 EXW" >> command.tmp
 echo "q" >> command.tmp
 cat command.tmp  | make_ndx -f conf.gro &>> $mylog
@@ -98,7 +98,7 @@ echo "# prepare topol.top"
 rm -fr topol.top
 cp tf/topol.top .
 sed "s/SOL.*/SOL $nwat/g" topol.top |
-sed "s/^Meth.*/Meth $nch4/g" > tmp.top
+sed "s/^Meth.*/Meth $nMeOH/g" > tmp.top
 mv -f tmp.top topol.top
 
 # prepare table of cg
