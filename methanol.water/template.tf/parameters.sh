@@ -3,10 +3,11 @@
 base_conf=tools/gen.conf/methanol.gro
 n_base_block="4 2 2"
 number_density=33.286
-MeOH_ratio=0.01
+MeOH_ratio=0.1
 cg_pot_dir=./tools/tf.template/
 conf_dir=../cal.vol
 init_guess_SOL_tf=./tools/tabletf_SOL.xvg
+init_guess_Meth_tf=./tools/tabletf_Meth.xvg
 
 # cal.vol.sh
 cal_vol_nsteps=40000
@@ -26,6 +27,9 @@ tf_step=0.01
 tf_spline_extension=0.1
 tf_spline_step=0.42142857142857142857
 tf_prefactor=0.039
+SOL_tf_prefactor=0.039
+Meth_tf_prefactor=0.039
+equi_time_discard=1000
 
 tf_iterations_max=20
 

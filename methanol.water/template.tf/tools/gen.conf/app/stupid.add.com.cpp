@@ -129,6 +129,7 @@ int main (int argc, char * argv[])
   mass[0] = 15.035;
   mass[1] = 15.999;
   mass[2] =  1.008;
+  totalmass = mass[0] + mass[1] + mass[2];
   unsigned shift1 = 4 * nwat;
   unsigned shift = 3 * nwat;
 
@@ -155,8 +156,8 @@ int main (int argc, char * argv[])
     
     for (unsigned jj = 0; jj < 3; ++jj){
       for (unsigned dd = 0; dd < 3; ++dd){
-	composi[dd] += mass[jj] * posi[3*i+jj][dd];
-	comvelo[dd] += mass[jj] * velo[3*i+jj][dd];
+	composi[dd] += mass[jj] * posi[shift +3*i+jj][dd];
+	comvelo[dd] += mass[jj] * velo[shift +3*i+jj][dd];
       }
     }
     for (unsigned dd = 0; dd < 3; ++dd){

@@ -11,7 +11,11 @@ rm -f $mylog
 echo "# prepare conf.gro"
 rm -f conf.gro
 dir_name=vol.`printf %.3f $MeOH_ratio`
-cp $conf_dir/$dir_name/conf.gro .
+if test ! -f $conf_dir/$dir_name/out.gro; then
+    echo "cannot find file $conf_dir/$dir_name/out.gro, exit"
+    exit
+fi
+cp $conf_dir/$dir_name/out.gro ./conf.gro
 nMeOH=`grep MEOH conf.gro | wc -l`
 nwat=`grep SOL conf.gro | wc -l`
 nwat=`echo "$nwat / 3" | bc`
@@ -82,6 +86,8 @@ tf_max=`echo "$ex_region_r + $hy_region_r + $tf_extension" | bc -l`
 tf_spline_start=`echo "$ex_region_r - $tf_spline_extension" | bc -l`
 tf_spline_end=`  echo "$ex_region_r + $hy_region_r + $tf_spline_extension" | bc -l`
 half_boxx_1=`echo "$half_boxx + 1." | bc -l`
+prefactor_l1=`grep -n prefactor settings.xml | head -n 1 | cut -f 1 -d ":"`
+prefactor_l2=`grep -n prefactor settings.xml | tail -n 1 | cut -f 1 -d ":"`
 sed -e "s/<min>.*<\/min>/<min>$tf_min<\/min>/g" settings.xml |\
 sed -e "s/<max>.*<\/max>/<max>$tf_max<\/max>/g" |\
 sed -e "s/<step>.*<\/step>/<step>$tf_step<\/step>/g" |\
@@ -89,7 +95,9 @@ sed -e "s/<spline_start>.*<\/spline_start>/<spline_start>$tf_spline_start<\/spli
 sed -e "s/<spline_end>.*<\/spline_end>/<spline_end>$tf_spline_end<\/spline_end>/g" |\
 sed -e "s/<spline_step>.*<\/spline_step>/<spline_step>$tf_spline_step<\/spline_step>/g" |\
 sed -e "s/<table_end>.*<\/table_end>/<table_end>$half_boxx_1<\/table_end>/g" |\
-sed -e "s/<prefactor>.*<\/prefactor>/<prefactor>$tf_prefactor<\/prefactor>/g" |\
+sed -e "${prefactor_l1}s/<prefactor>.*<\/prefactor>/<prefactor>$SOL_tf_prefactor<\/prefactor>/g" |\
+sed -e "${prefactor_l2}s/<prefactor>.*<\/prefactor>/<prefactor>$Meth_tf_prefactor<\/prefactor>/g" |\
+sed -e "s/<equi_time>.*<\/equi_time>/<equi_time>$equi_time_discard<\/equi_time>/g" |\
 sed -e "s/<iterations_max>.*<\/iterations_max>/<iterations_max>$tf_iterations_max<\/iterations_max>/g" > settings.xml.tmp
 mv -f settings.xml.tmp settings.xml
 
@@ -114,6 +122,9 @@ cp -L $cg_pot_dir/table_CMW_CMC.xvg ./tf/
 echo "# prepare initial guess"
 if test -f $init_guess_SOL_tf; then
     cp $init_guess_SOL_tf ./tf/SOL.pot.in
+fi
+if test -f $init_guess_Meth_tf; then
+    cp $init_guess_Meth_tf ./tf/Meth.pot.in
 fi
 
 # copy all file to tf
