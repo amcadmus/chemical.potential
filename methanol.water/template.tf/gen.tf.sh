@@ -16,8 +16,9 @@ if test ! -f $conf_dir/$dir_name/out.gro; then
     exit
 fi
 cp $conf_dir/$dir_name/out.gro ./conf.gro
-nMeOH=`grep MEOH conf.gro | wc -l`
+nMeOH=`grep MeOH conf.gro | wc -l`
 nwat=`grep SOL conf.gro | wc -l`
+nMeOH=`echo "$nMeOH / 3" | bc`
 nwat=`echo "$nwat / 3" | bc`
 nmol=`echo "$nwat + $nMeOH" | bc `
 boxx=`tail conf.gro -n 1 | awk '{print $1}'`
@@ -71,8 +72,9 @@ echo "# prepare index file"
 echo "a CMW" > command.tmp
 echo "a CMC" >> command.tmp
 echo "a OW HW1 HW2" >> command.tmp
-echo "a MEOH" >> command.tmp
+echo "a MeOH" >> command.tmp
 echo "name 8 EXW" >> command.tmp
+echo "name 9 EXC" >> command.tmp
 echo "q" >> command.tmp
 cat command.tmp  | make_ndx -f conf.gro &>> $mylog
 rm -fr command.tmp
@@ -136,5 +138,5 @@ mv -f conf.gro dens.SOL.xvg dens.Meth.xvg grompp.mdp index.ndx settings.xml topo
 echo "# calculate tf"
 cd tf
 sync
-csg_inverse --options settings.xml
+# csg_inverse --options settings.xml
 cd ..
