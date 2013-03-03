@@ -138,5 +138,5 @@ mv -f conf.gro dens.SOL.xvg dens.MeOH.xvg grompp.mdp index.ndx settings.xml topo
 echo "# calculate tf"
 cd tf
 sync
-# csg_inverse --options settings.xml
+csg_inverse --options settings.xml
 cd ..
