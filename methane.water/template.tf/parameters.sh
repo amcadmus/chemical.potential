@@ -7,7 +7,7 @@ ch4_ratio=0.01
 cg_pot_dir=./tools/tf.template/
 conf_dir=../cal.vol
 init_guess_SOL_tf=./tools/tabletf_SOL.xvg
-init_guess_Meht_tf=./tools/tabletf_Meth.xvg
+init_guess_Meth_tf=./tools/tabletf_Meth.xvg
 
 # cal.vol.sh
 cal_vol_nsteps=4000000
@@ -27,6 +27,9 @@ tf_step=0.01
 tf_spline_extension=0.1
 tf_spline_step=0.42142857142857142857
 tf_prefactor=0.039
+SOL_tf_prefactor=0.039
+Meth_tf_prefactor=0.039
+equi_time_discard=1000
 
 tf_iterations_max=20
 
