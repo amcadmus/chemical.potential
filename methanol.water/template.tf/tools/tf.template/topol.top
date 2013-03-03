@@ -14,7 +14,7 @@ CMC    0.00000     0.0000    V      0.000000E+00   0.000000E+00
   CMC  CMC  1    0.000000E+00   1.000000E+00  
   CMW  CMC  1    0.000000E+00   1.000000E+00  
 
-#include "methane.itp"
+#include "methanol.itp"
 #include "spce.itp"
 
 [ system ]

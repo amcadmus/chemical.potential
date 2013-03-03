@@ -30,7 +30,7 @@ xtc-precision            = 1000
 ; select multiple groups. By default all atoms will be written.
 xtc-grps                 = 
 ; Selection of energy groups
-energygrps               =  EXW CH4 CMW CMC
+energygrps               =  EXW EXC CMW CMC
 energygrp_table          =  CMW CMW CMC CMC CMW CMC
 
 ; NEIGHBORSEARCHING PARAMETERS

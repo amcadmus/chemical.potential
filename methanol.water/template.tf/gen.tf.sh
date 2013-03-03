@@ -72,7 +72,7 @@ echo "# prepare index file"
 echo "a CMW" > command.tmp
 echo "a CMC" >> command.tmp
 echo "a OW HW1 HW2" >> command.tmp
-echo "a MeOH" >> command.tmp
+echo "a Me1 O2 H3" >> command.tmp
 echo "name 8 EXW" >> command.tmp
 echo "name 9 EXC" >> command.tmp
 echo "q" >> command.tmp

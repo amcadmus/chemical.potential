@@ -8,11 +8,11 @@ SOL		2
      1     OW      1    SOL     OW      1    -0.8476   15.99940
      2      H      1    SOL    HW1      1     0.4238    1.00800
      3      H      1    SOL    HW2      1     0.4238    1.00800
+     4    CMW      1    SOL    CMW      2     0.0000
 #else
      1     OW      1    SOL     OW      1    -0.8476    9.95140
      2      H      1    SOL    HW1      1     0.4238    4.03200
      3      H      1    SOL    HW2      1     0.4238    4.03200
-     4    CMW      1    SOL    CMW      2     0.0000
 #endif
 
 [ virtual_sites3 ]

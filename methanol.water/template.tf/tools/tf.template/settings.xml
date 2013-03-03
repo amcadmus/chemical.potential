@@ -90,7 +90,7 @@
       <table_end>4.75000000000000000000</table_end>
     </gromacs>
     <!-- these files are copied for each new run -->
-    <filelist>my.spce.itp my.methane.itp grompp.mdp topol.top table.xvg tablerdf.xvg index.ndx table_CMW_CMW.xvg table_CMW_CMC.xvg table_CMC_CMC.xvg</filelist>
+    <filelist>spce.itp methanol.itp grompp.mdp topol.top table.xvg tablerdf.xvg index.ndx table_CMW_CMW.xvg table_CMW_CMC.xvg table_CMC_CMC.xvg</filelist>
     <!-- do so many iterations -->
     <iterations_max>20</iterations_max>
     <!-- ibi: inverse biltzmann imc: inverse monte carlo tf: thermody force -->
