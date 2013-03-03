@@ -11,7 +11,7 @@ rm -f $mylog
 echo "# prepare conf.gro"
 rm -f conf.gro
 dir_name=vol.`printf %.3f $ch4_ratio`
-cp $conf_dir/$dir_name/conf.gro .
+cp $conf_dir/$dir_name/out.gro ./conf.gro
 nch4=`grep CH4 conf.gro | wc -l`
 nwat=`grep SOL conf.gro | wc -l`
 nwat=`echo "$nwat / 3" | bc`
