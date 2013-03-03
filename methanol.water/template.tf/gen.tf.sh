@@ -29,13 +29,13 @@ half_boxy=`echo "$boxy/2.0" | bc -l`
 half_boxz=`echo "$boxz/2.0" | bc -l`
 
 # prepare dens.SOL.xvg
-echo "# prepare dens.SOL.xvg and dens.Meth.xvg"
+echo "# prepare dens.SOL.xvg and dens.MeOH.xvg"
 rm -f dens.SOL.xvg
-rm -f dens.Meth.xvg
+rm -f dens.MeOH.xvg
 for i in `seq 0 0.05 $boxx`;
 do
     echo "$i 0 0" >> dens.SOL.xvg
-    echo "$i 0 0" >> dens.Meth.xvg
+    echo "$i 0 0" >> dens.MeOH.xvg
 done
 # echo "0 0 0" > dens.SOL.xvg
 # tmp=`echo "$boxx/4.0" | bc -l`
@@ -98,7 +98,7 @@ sed -e "s/<spline_end>.*<\/spline_end>/<spline_end>$tf_spline_end<\/spline_end>/
 sed -e "s/<spline_step>.*<\/spline_step>/<spline_step>$tf_spline_step<\/spline_step>/g" |\
 sed -e "s/<table_end>.*<\/table_end>/<table_end>$half_boxx_1<\/table_end>/g" |\
 sed -e "${prefactor_l1}s/<prefactor>.*<\/prefactor>/<prefactor>$SOL_tf_prefactor<\/prefactor>/g" |\
-sed -e "${prefactor_l2}s/<prefactor>.*<\/prefactor>/<prefactor>$Meth_tf_prefactor<\/prefactor>/g" |\
+sed -e "${prefactor_l2}s/<prefactor>.*<\/prefactor>/<prefactor>$MeOH_tf_prefactor<\/prefactor>/g" |\
 sed -e "s/<equi_time>.*<\/equi_time>/<equi_time>$equi_time_discard<\/equi_time>/g" |\
 sed -e "s/<iterations_max>.*<\/iterations_max>/<iterations_max>$tf_iterations_max<\/iterations_max>/g" > settings.xml.tmp
 mv -f settings.xml.tmp settings.xml
@@ -108,7 +108,7 @@ echo "# prepare topol.top"
 rm -fr topol.top
 cp tf/topol.top .
 sed "s/SOL.*/SOL $nwat/g" topol.top |
-sed "s/^Meth.*/Meth $nMeOH/g" > tmp.top
+sed "s/^Methanol.*/Methanol $nMeOH/g" > tmp.top
 mv -f tmp.top topol.top
 
 # prepare table of cg
@@ -125,14 +125,14 @@ echo "# prepare initial guess"
 if test -f $init_guess_SOL_tf; then
     cp $init_guess_SOL_tf ./tf/SOL.pot.in
 fi
-if test -f $init_guess_Meth_tf; then
-    cp $init_guess_Meth_tf ./tf/Meth.pot.in
+if test -f $init_guess_MeOH_tf; then
+    cp $init_guess_MeOH_tf ./tf/MeOH.pot.in
 fi
 
 # copy all file to tf
 echo "# copy files to tf"
-rm -fr tf/conf.gro tf/dens.SOL.xvg tf/dens.Meth.xvg tf/grompp.mdp tf/index.ndx tf/settings.xml tf/topol.top
-mv -f conf.gro dens.SOL.xvg dens.Meth.xvg grompp.mdp index.ndx settings.xml topol.top tf/
+rm -fr tf/conf.gro tf/dens.SOL.xvg tf/dens.MeOH.xvg tf/grompp.mdp tf/index.ndx tf/settings.xml tf/topol.top
+mv -f conf.gro dens.SOL.xvg dens.MeOH.xvg grompp.mdp index.ndx settings.xml topol.top tf/
 
 # calculate tf
 echo "# calculate tf"

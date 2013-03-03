@@ -36,7 +36,7 @@
   <!-- example for a non-bonded interaction entry -->
   <non-bonded>
     <!-- name of the index group to calculate density from -->
-    <name>Meth</name>
+    <name>MeOH</name>
     <!-- types involved in this interaction -->
    
     <!-- thermodynmic force: apply in this range -->
@@ -46,7 +46,7 @@
     <!--spline:offset beyond the hyrbid zone to take into account for fitting the spline-->
     <inverse>
       <!-- target distribution -->
-      <target>dens.Meth.xvg</target>
+      <target>dens.MeOH.xvg</target>
       <!-- update cycles -->
       <do_potential>1</do_potential>
       <!-- additional post processing of dU before added to potential -->
@@ -61,7 +61,7 @@
 	<spline_start>.4</spline_start>
 	<spline_end>3.35</spline_end>
 	<spline_step>0.42142857142857142857</spline_step>
-	<molname>Meth</molname>
+	<molname>MeOH</molname>
 	<prefactor>0.039</prefactor> 
     </tf>
     </inverse>
