@@ -108,7 +108,7 @@ echo "# prepare topol.top"
 rm -fr topol.top
 cp tf/topol.top .
 sed "s/SOL.*/SOL $nwat/g" topol.top |
-sed "s/^Methanol.*/Methanol $nMeOH/g" > tmp.top
+sed "s/^MeOH.*/MeOH $nMeOH/g" > tmp.top
 mv -f tmp.top topol.top
 
 # prepare table of cg

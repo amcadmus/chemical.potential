@@ -11,7 +11,7 @@
 
 [ moleculetype ]
 ; name  nrexcl
-Methanol        2
+MeOH        2
 
 [ atoms ]
 ;   nr  type    resnr   residu  atom    cgnr    charge	mass
