@@ -31,6 +31,10 @@ SOL_tf_prefactor=0.039
 MeOH_tf_prefactor=0.039
 equi_time_discard=1000
 
+poten_SOL_sigma=0.3
+poten_MeOH_sigma=0.4
+poten_CROS_sigma=0.35
+
 tf_iterations_max=20
 
 # run.tf.sh parameters

@@ -7,6 +7,18 @@ mylog=`pwd`/gen.tf.log
 makelog=`pwd`/make.log
 rm -f $mylog
 
+# prepare potentials
+echo "# prepare potentials"
+make -C ./tools/gen.wca makedir &> $makelog
+make -C ./tools/gen.wca &> $makelog
+cd ./tools/gen.wca
+./gen.wca --sigma $poten_SOL_sigma  -o table_CMW_CMW.xvg
+./gen.wca --sigma $poten_Meth_sigma -o table_CMC_CMC.xvg
+./gen.wca --sigma $poten_CROS_sigma -o table_CMW_CMC.xvg
+rm -f ../tf.template/table_CM*_CM*.xvg
+mv table_CMW_CMW.xvg table_CMC_CMC.xvg table_CMW_CMC.xvg ../tf.template/
+cd ../..
+
 # prepare conf.gro
 echo "# prepare conf.gro"
 rm -f conf.gro
