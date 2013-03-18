@@ -1,0 +1,10 @@
+[ moleculetype ]
+; molname	nrexcl
+SOL		1
+
+[ atoms ]
+;   nr   type  resnr residue  atom   cgnr     charge       mass
+;     1     OW      1    SOL     OW      1    -0.8476   15.99940
+;     2      H      1    SOL    HW1      1     0.4238    1.00800
+;     3      H      1    SOL    HW2      1     0.4238    1.00800
+     1    CMW      1    SOL    CMW      1     0.0000	18.015

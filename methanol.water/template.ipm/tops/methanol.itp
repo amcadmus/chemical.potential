@@ -1,0 +1,10 @@
+[ moleculetype ]
+; name  nrexcl
+MeOH        1
+
+[ atoms ]
+;   nr   type  resnr residue  atom   cgnr     charge       mass
+;1       CMet     1       MeOH    Me1     1        0.29  15.035
+;2       OMet     1       MeOH    O2      1       -0.69  15.999
+;3       H        1       MeOH    H3      1        0.40   1.008
+1       CMC      1       MeOH    CMC     1       0.0000 32.042
