@@ -6,7 +6,7 @@ conf_dir=../cal.vol
 
 # gen.tf.sh parameters
 gen_traj_nsteps_0=100000
-gen_traj_nsteps_1=200000
+gen_traj_nsteps_1=1600000
 
 gmx_dt=0.002
 gmx_taut=0.5
