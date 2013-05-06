@@ -1,0 +1,26 @@
+; for simulating methane in water.
+; notice the comb-rule 1 is used!!!
+
+#include "gromos43a1.ff/forcefield.itp"
+
+; [ defaults ]
+; ; nbfunc        comb-rule       gen-pairs       fudgeLJ fudgeQQ
+;   1             1               no              1.0     1.0
+
+[ atomtypes ]
+; ;name  mass        charge    ptype	C6             C12           ; sigma     epsilon
+; OMet	15.999	-0.69		A	2.6169e-3      2.5231e-6
+; CMet	15.035	 0.29		A	8.8758e-3     17.8426e-6
+; H	1.008	 0.4		A	0.0000e+0      0.0000e+0
+;OW	15.9994	-0.8476		A	2.617204e-03   2.633746e-06  ; 0.316557  0.650194
+;HW	1.00800	 0.4238		A	0.00000e+00    0.00000e+00
+
+#include "methanol.itp"
+#include "spce.itp"
+
+[ system ]
+methanol in water
+
+[ molecules ]
+SOL		3455
+Methanol	1

@@ -1,0 +1,95 @@
+# nmol is 3200
+# nmol MeOH   is 320
+# nmol water is 2880
+size is 9600
+                         :-)  G  R  O  M  A  C  S  (-:
+
+                God Rules Over Mankind, Animals, Cosmos and Such
+
+               :-)  VERSION 4.6.1-dev-20130124-fb5b9bd-dirty  (-:
+
+        Contributions from Mark Abraham, Emile Apol, Rossen Apostolov, 
+           Herman J.C. Berendsen, Aldert van Buuren, Pär Bjelkmar,  
+     Rudi van Drunen, Anton Feenstra, Gerrit Groenhof, Christoph Junghans, 
+        Peter Kasson, Carsten Kutzner, Per Larsson, Pieter Meulenhoff, 
+           Teemu Murtola, Szilard Pall, Sander Pronk, Roland Schulz, 
+                Michael Shirts, Alfons Sijbers, Peter Tieleman,
+
+               Berk Hess, David van der Spoel, and Erik Lindahl.
+
+       Copyright (c) 1991-2000, University of Groningen, The Netherlands.
+         Copyright (c) 2001-2012,2013, The GROMACS development team at
+        Uppsala University & The Royal Institute of Technology, Sweden.
+            check out http://www.gromacs.org for more information.
+
+         This program is free software; you can redistribute it and/or
+       modify it under the terms of the GNU Lesser General Public License
+        as published by the Free Software Foundation; either version 2.1
+             of the License, or (at your option) any later version.
+
+                               :-)  make_ndx  (-:
+
+Option     Filename  Type         Description
+------------------------------------------------------------
+  -f       conf.gro  Input, Opt!  Structure file: gro g96 pdb tpr etc.
+  -n      index.ndx  Input, Opt., Mult. Index file
+  -o      index.ndx  Output       Index file
+
+Option       Type   Value   Description
+------------------------------------------------------
+-[no]h       bool   no      Print help info and quit
+-[no]version bool   no      Print version info and quit
+-nice        int    0       Set the nicelevel
+-natoms      int    0       set number of atoms (default: read from
+                            coordinate or index file)
+
+
+Reading structure file
+
+gcq#270: "AH ....Satisfaction" (IRIX imapd)
+
+Going to read 0 old index file(s)
+Analysing residue names:
+There are:  2880      Water residues
+There are:   320      Other residues
+Analysing residues not classified as Protein/DNA/RNA/Water and splitting into groups...
+
+  0 System              : 12800 atoms
+  1 Water               : 11520 atoms
+  2 SOL                 : 11520 atoms
+  3 non-Water           :  1280 atoms
+  4 Other               :  1280 atoms
+  5 MeOH                :  1280 atoms
+
+ nr : group       !   'name' nr name   'splitch' nr    Enter: list groups
+ 'a': atom        &   'del' nr         'splitres' nr   'l': list residues
+ 't': atom type   |   'keep' nr        'splitat' nr    'h': help
+ 'r': residue         'res' nr         'chain' char
+ "name": group        'case': case sensitive           'q': save and quit
+ 'ri': residue index
+
+> 
+Found 2880 atoms with name CMW
+
+  6 CMW                 :  2880 atoms
+
+> 
+Found 320 atoms with name CMC
+
+  7 CMC                 :   320 atoms
+
+> 
+Found 8640 atoms with names OW HW1 HW2
+
+  8 OW_HW1_HW2          :  8640 atoms
+
+> 
+Found 960 atoms with names ME1 O2 H3
+
+  9 ME1_O2_H3           :   960 atoms
+
+> 
+
+> 
+
+> 
