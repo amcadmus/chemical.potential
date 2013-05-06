@@ -1,0 +1,20 @@
+; for simulating methane in water.
+; notice the comb-rule 1 is used!!!
+
+#include "gromos43a1.ff/forcefield.itp"
+
+[ atomtypes ]
+;name  mass        charge    ptype  C6             C12           ; sigma     epsilon
+CMC    0.00000     0.0000    V      0.000000E+00   1.000000E+00
+
+[ nonbond_params ]
+; i   j   func c6             c12
+  CMC  CMC  1    0.000000E+00   1.000000E+00  
+
+#include "methanol.itp"
+
+[ system ]
+pure methanol
+
+[ molecules ]
+MeOH		1
