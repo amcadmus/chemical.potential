@@ -15,4 +15,4 @@ input_conf_file="confs/spc.input.gro"	# input conf for productive run
 
 make_file=machine.dep/Makefile.fu
 env_file=machine.dep/env.sh.fu
-submit_file=machine.dep/auto.adagio.pert.sh
+submit_file=machine.dep/auto.adagio.sh
