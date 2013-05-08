@@ -42,6 +42,7 @@ adress_itp=`echo $adress_itp_file | cut -f $num_slice -d'/'`
 echo "# gnereating system: $target_dir"
 cp -a template.sys		$target_dir
 do_copy_file $env_file		$target_dir/env.sh
+do_copy_file $submit_file	$target_dir/
 
 echo "# prepare atom template"
 do_copy_file $itp_file		$target_dir/tools/atom.template/

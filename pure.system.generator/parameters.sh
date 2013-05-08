@@ -7,11 +7,11 @@ force_field="gromos53a6"
 
 mdrun_command="mdrun"
 mdrun_options=""
-epsilon_rf=60					# 60 is for spc water..
-itp_file="tops/spc.itp"			# 
-adress_itp_file="tops/spc.adress.itp"	# the COM top should be included!!
-block_conf_file="confs/spc.block.gro"	# building block of conf
-input_conf_file="confs/spc.input.gro"	# input conf for productive run
+epsilon_rf=80					# 60 is for spc water..
+itp_file="tops/spce.itp"			# 
+adress_itp_file="tops/spce.adress.itp"	# the COM top should be included!!
+block_conf_file="confs/spce.block.gro"	# building block of conf
+input_conf_file="confs/spce.input.gro"	# input conf for productive run
 
 make_file=machine.dep/Makefile.fu
 env_file=machine.dep/env.sh.fu
