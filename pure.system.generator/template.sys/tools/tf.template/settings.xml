@@ -49,8 +49,8 @@
       <pot_max>1000000</pot_max>
       <mdrun>
 	<!-- mdrun command -->
-	<command>mdrun</command>
-	<opts>-v</opts>
+	<command>INSERT_MDRUN_COMMAND</command>
+	<opts>INSERT_MDRUN_OPTIONS</opts>
       </mdrun>
       <!-- extend the tables to this value -->
       <table_end>4.75000000000000000000</table_end>

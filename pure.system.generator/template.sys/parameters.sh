@@ -19,6 +19,7 @@ gmx_nsteps=10000
 gmx_nstenergy=50
 gmx_nstxtcout=50
 gmx_tau_t=1.0
+gmx_epsilon_rf=INSERT_EPSILON_RF
 
 ex_region_r=0.5
 hy_region_r=2.75

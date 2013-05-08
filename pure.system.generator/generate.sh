@@ -9,6 +9,9 @@ function do_insertion () {
     sed -e "s/INSERT_CG_NAME/$cg_charge_group_name/g" |\
     sed -e "s/INSERT_ATOM_ITP/$atom_itp/g" |\
     sed -e "s/INSERT_ADRESS_ITP/$adress_itp/g" |\
+    sed -e "s/INSERT_MDRUN_COMMAND/$mdrun_command/g" |\
+    sed -e "s/INSERT_MDRUN_OPTIONS/$mdrun_options/g" |\
+    sed -e "s/INSERT_EPSILON_RF/$epsilon_rf/g" |\
     sed -e "s/INSERT_MOL_NAME/$mol_name/g" > tmp.tmp.tmp
     mv -f tmp.tmp.tmp $filename
 }

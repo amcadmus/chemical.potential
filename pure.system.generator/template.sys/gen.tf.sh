@@ -61,6 +61,7 @@ sed -e "/^tau_t/s/=.*/= $gmx_tau_t/g" |\
 sed -e "/^nsteps/s/=.*/= $gmx_nsteps/g" |\
 sed -e "/^nstenergy/s/=.*/= $gmx_nstenergy/g" |\
 sed -e "/^nstxtcout/s/=.*/= $gmx_nstxtcout/g" |\
+sed -e "/^epsilon_rf/s/=.*/= $gmx_epsilon_rf/g" |\
 sed -e "/^adress_reference_coords/s/=.*/= $half_boxx $half_boxy $half_boxz/g" > grompp.mdp.tmp
 mv -f grompp.mdp.tmp grompp.mdp
 
@@ -130,3 +131,9 @@ cd tf
 sync
 csg_inverse --options settings.xml
 cd ..
+
+# rm trajs
+echo "# rm trajs"
+rm -f tf/step_*/traj.xtc
+
+
