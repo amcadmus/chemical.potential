@@ -1,15 +1,18 @@
 #!/bin/bash
 
-mol_name=MeOH
-cg_charge_group_name=CMC
-ex_charge_group_name=EXC
+mol_name=SOL
+cg_charge_group_name=CMW
+ex_charge_group_name=EXW
 force_field="gromos53a6"
 
 mdrun_command="mdrun"
 mdrun_options=""
 epsilon_rf=60					# 60 is for spc water..
-itp_file="tops/methanol.itp"			# 
-adress_itp_file="tops/methanol.adress.itp"	# the COM top should be included!!
-block_conf_file="confs/methanol.block.gro"	# building block of conf
-input_conf_file="confs/methanol.input.gro"	# input conf for productive run
-make_file=makefiles/Makefile.fu
+itp_file="tops/spc.itp"			# 
+adress_itp_file="tops/spc.adress.itp"	# the COM top should be included!!
+block_conf_file="confs/spc.block.gro"	# building block of conf
+input_conf_file="confs/spc.input.gro"	# input conf for productive run
+
+make_file=machine.dep/Makefile.fu
+env_file=machine.dep/env.sh.fu
+submit_file=machine.dep/auto.adagio.pert.sh

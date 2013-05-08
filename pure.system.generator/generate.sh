@@ -16,6 +16,16 @@ function do_insertion () {
     mv -f tmp.tmp.tmp $filename
 }
 
+function do_copy_file () {
+    sfile=$1
+    dfile=$2
+    if test ! -f $sfile; then
+	echo "# no file $sfile"
+	exit
+    fi
+    cp -L $sfile $dfile
+}
+
 target_dir=pure.$mol_name
 if test -d $target_dir; then
     echo "# backup existing $target_dir"
@@ -30,31 +40,32 @@ adress_itp=`echo $adress_itp_file | cut -f $num_slice -d'/'`
 
 
 echo "# gnereating system: $target_dir"
-cp -a template.sys $target_dir
+cp -a template.sys		$target_dir
+do_copy_file $env_file		$target_dir/env.sh
 
 echo "# prepare atom template"
-cp -a $itp_file			$target_dir/tools/atom.template/
-cp -a tops/topol.top		$target_dir/tools/atom.template/
+do_copy_file $itp_file		$target_dir/tools/atom.template/
+do_copy_file tops/topol.top	$target_dir/tools/atom.template/
 do_insertion			$target_dir/tools/atom.template/topol.top
 
 echo "# copy block conf"
-cp -a $block_conf_file		$target_dir/block.gro
+do_copy_file $block_conf_file	$target_dir/block.gro
 
 echo "# copy simul conf"
-cp -a $input_conf_file		$target_dir/input.gro
+do_copy_file $input_conf_file	$target_dir/input.gro
 
 echo "# prepare gen.wca"
-cp -a $make_file		$target_dir/tools/gen.wca/Makefile
+do_copy_file $make_file		$target_dir/tools/gen.wca/Makefile
 
 echo "# prepare gen.conf"
-cp -a $make_file		$target_dir/tools/gen.conf/Makefile
+do_copy_file $make_file		$target_dir/tools/gen.conf/Makefile
 
 echo "# prepare tf template"
-cp -a $itp_file			$target_dir/tools/tf.template/
-cp -a $adress_itp_file		$target_dir/tools/tf.template/
-cp -a tops/topol.adress.top	$target_dir/tools/tf.template/topol.top
+do_copy_file $itp_file		$target_dir/tools/tf.template/
+do_copy_file $adress_itp_file	$target_dir/tools/tf.template/
+do_copy_file tops/topol.adress.top	$target_dir/tools/tf.template/topol.top
 do_insertion			$target_dir/tools/tf.template/topol.top
-cp -a tops/topol.top		$target_dir/tools/tf.template/topol.atom.top
+do_copy_file tops/topol.top	$target_dir/tools/tf.template/topol.atom.top
 do_insertion			$target_dir/tools/tf.template/topol.atom.top
 do_insertion			$target_dir/tools/tf.template/grompp.mdp
 do_insertion			$target_dir/tools/tf.template/settings.xml
