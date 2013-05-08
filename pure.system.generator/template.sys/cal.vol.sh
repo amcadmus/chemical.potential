@@ -4,13 +4,12 @@ source env.sh
 source parameters.sh
 source functions.sh
 
-MeOH_ratio=1.0
-
 mylog=`pwd`/cal.vol.log
 makelog=`pwd`/make.log
 rm -f $mylog
-make -C tools/gen.conf -j8
-dir_name=vol.`printf %.3f $MeOH_ratio`
+make -C tools/gen.conf clean &> $makelog
+make -C tools/gen.conf -j8 &> $makelog
+dir_name=run
 
 if test -d $dir_name; then
     echo "# existing dir $dir_name, move"
@@ -19,38 +18,10 @@ fi
 
 # prepare conf.gro
 echo "# prepare conf.gro"
-## gen from base (default spc216.gro)
-echo '## gen from base (default spc216.gro)'
+echo "## gen from base conf: $base_conf"
 genconf -f $base_conf -o conf.gro -nbox $n_base_block -shuffle &>> $mylog
-## resize to right density
-echo '## resize to right density'
-boxx=`tail conf.gro -n 1 | awk '{print $1}'`
-boxy=`tail conf.gro -n 1 | awk '{print $2}'`
-boxz=`tail conf.gro -n 1 | awk '{print $3}'`
-natom=`head -n 2 conf.gro | tail -n 1`
-nmol=`echo "$natom / 3" | bc`
-# now_density=`echo "$natom / 3 / ($boxx * $boxy * $boxz)" | bc -l`
-# scale=`echo "($now_density / $number_density)" | bc -l`
-# editconf -f conf.gro -o out.gro -scale $scale 1 1 &>> $mylog
-# mv -f out.gro conf.gro
-# boxx=`tail conf.gro -n 1 | awk '{print $1}'`
-# boxy=`tail conf.gro -n 1 | awk '{print $2}'`
-# boxz=`tail conf.gro -n 1 | awk '{print $3}'`
-
-# newboxx=`printf "%.1f" $boxx`
-# scalex=`echo "$newboxx / $boxx" | bc -l`
-# scaleyz=`echo "sqrt(1./$scalex)" | bc -l`
-# editconf -f conf.gro -o out.gro -scale $scalex $scaleyz $scaleyz &>> $mylog
-# mv -f out.gro conf.gro
-# boxx=`tail conf.gro -n 1 | awk '{print $1}'`
-# boxy=`tail conf.gro -n 1 | awk '{print $2}'`
-# boxz=`tail conf.gro -n 1 | awk '{print $3}'`
-
-## replace water by MeOH
-echo '## replace water by MeOH'
-nMeOH=`./tools/gen.conf/change.MeOH -f conf.gro -o out.gro -r $MeOH_ratio | grep "nmol MeOH" | awk '{print $5}'`
-nwat=`echo "$nmol - $nMeOH" | bc`
-mv -f out.gro conf.gro
+echo '## get num mol'
+nINSERT_MOL_NAME=`./tools/gen.conf/nresd -f conf.gro | grep INSERT_MOL_NAME | awk '{print $2}'` 
 
 ## warm run
 echo '## warm run'
@@ -58,21 +29,20 @@ rm -fr $dir_name
 cp -a tools/atom.template ./$dir_name
 cd $dir_name
 mv ../conf.gro .
-sed "s/^SOL.*/SOL $nwat/g" topol.top |
-sed "s/^Methanol.*/Methanol $nMeOH/g" > tmp.top
+sed "s/^INSERT_MOL_NAME.*/INSERT_MOL_NAME $nINSERT_MOL_NAME/g" topol.top > tmp.top
 mv -f tmp.top topol.top
 cp ../parameters.sh .
 
 cal_vol_set_parameter_warm grompp.mdp
-grompp &>> $mylog
-mdrun -v &>> $mylog
+grompp &> $mylog
+INSERT_MDRUN_COMMAND INSERT_MDRUN_OPTIONS 
 
 ## production run
 echo '## production run'
 mv -f confout.gro conf.gro
 cal_vol_set_parameter grompp.mdp
-grompp &>> $mylog
-mdrun -v &>> $mylog
+grompp &> $mylog
+INSERT_MDRUN_COMMAND INSERT_MDRUN_OPTIONS 
 
 ## rescale box
 echo '## rescale box'
@@ -89,6 +59,6 @@ scalex=`echo "$newboxx / $boxx" | bc -l`
 scaley=`echo "$newboxy / $boxy" | bc -l`
 scalez=`echo "$newboxz / $boxz" | bc -l`
 
-editconf -f confout.gro -o out.gro -scale $scalex $scaley $scalez &>> $mylog
+editconf -f confout.gro -o out.gro -scale $scalex $scaley $scalez &> $mylog
 
 cd ..

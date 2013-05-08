@@ -18,7 +18,7 @@ echo "# prepare potentials"
 cd ./tools/gen.wca
 ./gen.wca --sigma $poten_INSERT_MOL_NAME_sigma -o table_INSERT_CG_NAME_INSERT_CG_NAME.xvg
 rm -f ../tf.template/table_CM*_CM*.xvg
-mv table_INSERT_CG_NAME_INSERT_CG_NAME.xvg ../tf.template/
+mv table_INSERT_CG_NAME_INSERT_CG_NAME.xvg ../../
 cd ../..
 
 # prepare conf.gro
@@ -101,7 +101,7 @@ mv -f tmp.top topol.atom.top
 # prepare table of cg
 echo "# prepare table of cg"
 rm -f tf/table_INSERT_CG_NAME_INSERT_CG_NAME.xvg
-cp -L $cg_pot_dir/table_INSERT_CG_NAME_INSERT_CG_NAME.xvg ./tf/
+cp -L table_INSERT_CG_NAME_INSERT_CG_NAME.xvg ./tf/
 
 # prepare initial guess
 echo "# prepare initial guess"

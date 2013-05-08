@@ -74,6 +74,9 @@ do_insertion			$target_dir/tools/tf.template/settings.xml
 echo "# prepare sh scripts"
 do_insertion			$target_dir/gen.tf.sh
 chmod a+x			$target_dir/gen.tf.sh
+do_insertion			$target_dir/cal.vol.sh
+chmod a+x			$target_dir/cal.vol.sh
 do_insertion			$target_dir/parameters.sh
-sed -e "s/^input_conf=.*/input_conf=input.gro/g" $target_dir/parameters.sh > tmp.tmp.tmp
+sed -e "s/^input_conf=.*/input_conf=input.gro/g" $target_dir/parameters.sh | \
+sed -e "s/^base_conf=.*/base_conf=block.gro/g" > tmp.tmp.tmp
 mv -f tmp.tmp.tmp $target_dir/parameters.sh

@@ -1,11 +1,10 @@
 #!/bin/bash
 
-base_conf=tools/gen.conf/methanol.gro
 n_base_block="4 2 2"
-number_density=33.286
-cg_pot_dir=./tools/tf.template/
+base_conf=tools/gen.conf/methanol.gro
 input_conf=./confs/04-02-02.gro
-init_guess_INSERT_MOL_NAME_tf=./tools/tabletf_INSERT_MOL_NAME.xvg
+init_guess_INSERT_MOL_NAME_tf=./tabletf_INSERT_MOL_NAME.xvg
+# number_density=33.286		# the number density of spce.
 
 # cal.vol.sh
 cal_vol_nsteps=40000
