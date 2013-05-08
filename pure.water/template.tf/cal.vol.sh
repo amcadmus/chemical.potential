@@ -4,6 +4,8 @@ source env.sh
 source parameters.sh
 source functions.sh
 
+MeOH_ratio=0.0
+
 mylog=`pwd`/cal.vol.log
 makelog=`pwd`/make.log
 rm -f $mylog
@@ -76,7 +78,7 @@ mdrun -v &>> $mylog
 echo '## rescale box'
 cal_vol_time=`echo "$cal_vol_dt * $cal_vol_nsteps" | bc -l`
 cal_vol_btime=`echo "$cal_vol_time / 2.0" | bc -l`
-echo 13 14 15 | g_energy -b $cal_vol_btime > energy.out
+echo 11 12 13 | g_energy -b $cal_vol_btime > energy.out
 newboxx=`grep Box-X energy.out | awk '{print $2}'`
 newboxy=`grep Box-Y energy.out | awk '{print $2}'`
 newboxz=`grep Box-Z energy.out | awk '{print $2}'`

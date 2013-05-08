@@ -25,12 +25,14 @@ int main (int argc, char * argv[])
   std::string ifilename;
   std::string ofilename;
   string tpfilename;
+  string cgName;
   po::options_description desc ("Allow options");
   
   desc.add_options()
       ("help,h", "print this message")
       ("output,o", po::value<std::string > (&ofilename)->default_value (std::string("out.gro")), "output conf file name")
       ("topol,p",  po::value<std::string > (&tpfilename)->default_value (std::string("topol.top")), "input topol name")
+      ("cg-name", po::value<std::string > (&cgName)->default_value (std::string("CG")), "name of explicit group")
       ("input,f",  po::value<std::string > (&ifilename)->default_value (std::string("conf.gro")), "input conf file name");
 
   po::variables_map vm;
@@ -92,8 +94,8 @@ int main (int argc, char * argv[])
       }
       posi1.push_back (com);
       velo1.push_back (comvelo);
-      resdname1.push_back ("RESDN");
-      atomname1.push_back ("ATOMN");
+      resdname1.push_back (top.moles[ii].name);
+      atomname1.push_back (cgName);
       resdindex1.push_back (resdcount);
       atomindex1.push_back (atomcount);
       resdcount ++;

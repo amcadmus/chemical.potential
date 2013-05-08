@@ -8,7 +8,6 @@ input_conf=./confs/spce.04-02-02.gro
 init_guess_SOL_tf=./tools/tabletf_SOL.xvg
 
 # cal.vol.sh
-MeOH_ratio=0.0
 cal_vol_nsteps=40000
 cal_vol_dt=0.002
 cal_vol_nstenergy=100

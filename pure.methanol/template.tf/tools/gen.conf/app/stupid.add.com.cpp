@@ -60,7 +60,7 @@ int main (int argc, char * argv[])
   unsigned nmol = resdindex.back();
   unsigned nwat, nMeOH;
   for (nwat = 0; ; nwat ++){
-    if (resdname[nwat] != std::string ("SOL")) {
+    if (nwat == resdname.size() || resdname[nwat] != std::string ("SOL")) {
       break;
     }
   }

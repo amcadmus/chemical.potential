@@ -15,7 +15,7 @@ cal_vol_nstxtcout=200
 
 # gen.tf.sh parameters
 gmx_dt=0.001
-gmx_nsteps=100000
+gmx_nsteps=10000
 gmx_nstenergy=50
 gmx_nstxtcout=50
 gmx_tau_t=1.0

@@ -3,10 +3,11 @@
 source env.sh
 source parameters.sh
 
+MeOH_ratio=1.0
+
 mylog=`pwd`/gen.tf.log
 makelog=`pwd`/make.log
 rm -f $mylog
-MeOH_ratio=1.0
 
 # prepare potentials
 echo "# prepare potentials"
@@ -21,12 +22,11 @@ cd ../..
 # prepare conf.gro
 echo "# prepare conf.gro"
 rm -f conf.gro
-dir_name=vol.`printf %.3f $MeOH_ratio`
-if test ! -f $conf_dir/$dir_name/out.gro; then
-    echo "cannot find file $conf_dir/$dir_name/out.gro, exit"
+if test ! -f $input_conf; then
+    echo "cannot find file $input_conf, exit"
     exit
 fi
-cp $conf_dir/$dir_name/out.gro ./conf.gro
+cp $input_conf ./conf.gro
 nMeOH=`grep MeOH conf.gro | wc -l`
 nMeOH=`echo "$nMeOH / 3" | bc`
 nmol=$nMeOH

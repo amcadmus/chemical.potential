@@ -153,14 +153,14 @@ parseTop (const string & fname,
   readBlocks (file, keys, lines);
   vector<string > words;
 
-  cout << "n. keys " << keys.size() << endl;
-  cout << "n. lines " << lines.size() << endl;
-  for (unsigned ii = 0; ii < keys.size(); ++ii){
-    cout << "key: " << keys[ii] << endl;
-    for (unsigned jj = 0; jj < lines[ii].size(); ++jj){
-      cout << lines[ii][jj] << endl;
-    }
-  }
+  // cout << "n. keys " << keys.size() << endl;
+  // cout << "n. lines " << lines.size() << endl;
+  // for (unsigned ii = 0; ii < keys.size(); ++ii){
+  //   cout << "key: " << keys[ii] << endl;
+  //   for (unsigned jj = 0; jj < lines[ii].size(); ++jj){
+  //     cout << lines[ii][jj] << endl;
+  //   }
+  // }
   
   for (unsigned ii = 0; ii < keys.size(); ++ii){
     if (keys[ii] == "moleculetype"){

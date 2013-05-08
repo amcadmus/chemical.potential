@@ -4,7 +4,7 @@ base_conf=tools/gen.conf/methanol.gro
 n_base_block="4 2 2"
 number_density=33.286
 cg_pot_dir=./tools/tf.template/
-conf_dir=../cal.vol
+input_conf=./confs/04-02-02.gro
 init_guess_MeOH_tf=./tools/tabletf_MeOH.xvg
 
 # cal.vol.sh

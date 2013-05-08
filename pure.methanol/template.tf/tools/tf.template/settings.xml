@@ -49,6 +49,7 @@
       <pot_max>1000000</pot_max>
       <mdrun>
 	<!-- mdrun command -->
+	<command>mdrun</command>
 	<opts>-v</opts>
       </mdrun>
       <!-- extend the tables to this value -->

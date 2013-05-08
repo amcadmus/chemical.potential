@@ -37,6 +37,9 @@ do_insertion			$target_dir/tools/atom.template/topol.top
 echo "# copy block conf"
 cp -a $block_conf_file		$target_dir/block.gro
 
+echo "# copy simul conf"
+cp -a $input_conf_file		$target_dir/input.gro
+
 echo "# prepare gen.wca"
 cp -a $make_file		$target_dir/tools/gen.wca/Makefile
 
@@ -44,13 +47,18 @@ echo "# prepare gen.conf"
 cp -a $make_file		$target_dir/tools/gen.conf/Makefile
 
 echo "# prepare tf template"
+cp -a $itp_file			$target_dir/tools/tf.template/
 cp -a $adress_itp_file		$target_dir/tools/tf.template/
 cp -a tops/topol.adress.top	$target_dir/tools/tf.template/topol.top
 do_insertion			$target_dir/tools/tf.template/topol.top
+cp -a tops/topol.top		$target_dir/tools/tf.template/topol.atom.top
+do_insertion			$target_dir/tools/tf.template/topol.atom.top
 do_insertion			$target_dir/tools/tf.template/grompp.mdp
 do_insertion			$target_dir/tools/tf.template/settings.xml
 
 echo "# prepare sh scripts"
 do_insertion			$target_dir/gen.tf.sh
+chmod a+x			$target_dir/gen.tf.sh
 do_insertion			$target_dir/parameters.sh
-
+sed -e "s/^input_conf=.*/input_conf=input.gro/g" $target_dir/parameters.sh > tmp.tmp.tmp
+mv -f tmp.tmp.tmp $target_dir/parameters.sh

@@ -88,10 +88,14 @@ mv -f settings.xml.tmp settings.xml
 
 # prepare topol.top
 echo "# prepare topol.top"
-rm -fr topol.top
+nINSERT_MOL_NAME=`./tools/gen.conf/nresd -f conf.gro | grep INSERT_MOL_NAME | awk '{print $2}'`
+rm -fr topol.top topol.atom.top
 cp tf/topol.top .
 sed "s/^INSERT_MOL_NAME.*/INSERT_MOL_NAME $nINSERT_MOL_NAME/g" topol.top > tmp.top
 mv -f tmp.top topol.top
+cp tf/topol.atom.top .
+sed "s/^INSERT_MOL_NAME.*/INSERT_MOL_NAME $nINSERT_MOL_NAME/g" topol.atom.top > tmp.top
+mv -f tmp.top topol.atom.top
 
 # prepare table of cg
 echo "# prepare table of cg"
@@ -107,15 +111,15 @@ fi
 # copy all file to tf
 echo "# copy files to tf"
 rm -fr tf/conf.gro tf/dens.INSERT_MOL_NAME.xvg tf/grompp.mdp tf/index.ndx tf/settings.xml tf/topol.top
-mv -f conf.gro dens.INSERT_MOL_NAME.xvg grompp.mdp settings.xml topol.top tf/
+mv -f conf.gro dens.INSERT_MOL_NAME.xvg grompp.mdp settings.xml topol.top topol.atom.top tf/
 
 # prepare index file
 cd tf/
-gmx_dump -p topol.top > tmp.top
+gmxdump -p topol.top > tmp.top
 ../tools/gen.conf/adress.ndx -p tmp.top --ex-name INSERT_EX_NAME --cg-name INSERT_CG_NAME -o index.ndx
 # prepare conf
-../tools/gen.conf/add.com -f conf.gro -o out.gro -p tmp.top
-mv -f out.gro conf.gro
+gmxdump -p topol.atom.top > tmp.top
+../tools/gen.conf/add.com -f conf.gro -o out.gro -p tmp.top --cg-name INSERT_CG_NAME
 mv -f out.gro conf.gro
 rm -f tmp.top
 cd ..

@@ -1,7 +1,7 @@
 ; for simulating methane in water.
 ; notice the comb-rule 1 is used!!!
 
-#include "INSERT_FORCE_FIELD/forcefield.itp"
+#include "INSERT_FORCE_FIELD.ff/forcefield.itp"
 
 [ atomtypes ]
 ;name  mass        charge    ptype  C6             C12           ; sigma     epsilon
@@ -17,4 +17,4 @@ INSERT_CG_NAME    0.00000     0.0000    V      0.000000E+00   1.000000E+00
 pure adress
 
 [ molecules ]
-INSERT_MOL_NAME		1
+INSERT_MOL_NAME 1
