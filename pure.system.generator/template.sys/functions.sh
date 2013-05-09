@@ -41,6 +41,7 @@ function cal_vol_set_parameter () {
     sed -e "/^adress /s/=.*/= no/g" |\
     sed -e "/^Pcoupl /s/=.*/= Parrinello-Rahman/g" |\
     sed -e "/^gen_vel /s/=.*/= no/g" |\
+    sed -e "/^epsilon_rf /s/=.*/= $gmx_epsilon_rf/g" |\
     sed -e "/^dt /s/=.*/= $cal_vol_dt/g" > tmp
     mv -f tmp $file
 #    sed -e "/^Pcoupl /s/=.*/= Berendsen/g" |\
@@ -57,6 +58,7 @@ function cal_vol_set_parameter_warm () {
     sed -e "/^adress /s/=.*/= no/g" |\
     sed -e "/^Pcoupl /s/=.*/= berendsen/g" |\
     sed -e "/^gen_vel /s/=.*/= no/g" |\
+    sed -e "/^epsilon_rf /s/=.*/= $gmx_epsilon_rf/g" |\
     sed -e "/^dt /s/=.*/= 0.0002/g" > tmp
     mv -f tmp $file
 #    sed -e "/^Pcoupl /s/=.*/= Berendsen/g" |\

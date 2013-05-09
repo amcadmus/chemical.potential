@@ -105,8 +105,8 @@ cp -L table_INSERT_CG_NAME_INSERT_CG_NAME.xvg ./tf/
 
 # prepare initial guess
 echo "# prepare initial guess"
-if test -f $init_guess_INSERT_MOL_NAME_tf; then
-    cp $init_guess_INSERT_MOL_NAME_tf ./tf/INSERT_MOL_NAME.pot.in
+if test -f $init_guess_INSERT_CG_NAME_tf; then
+    cp $init_guess_INSERT_CG_NAME_tf ./tf/INSERT_MOL_NAME.pot.in
 fi
 
 # copy all file to tf

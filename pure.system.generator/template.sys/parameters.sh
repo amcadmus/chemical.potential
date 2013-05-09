@@ -3,7 +3,7 @@
 n_base_block="4 2 2"
 base_conf=tools/gen.conf/methanol.gro
 input_conf=./confs/04-02-02.gro
-init_guess_INSERT_MOL_NAME_tf=./tabletf_INSERT_MOL_NAME.xvg
+init_guess_INSERT_CG_NAME_tf=./tabletf_INSERT_CG_NAME.xvg
 # number_density=33.286		# the number density of spce.
 
 # cal.vol.sh
