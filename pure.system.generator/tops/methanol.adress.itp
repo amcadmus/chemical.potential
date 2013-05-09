@@ -14,18 +14,23 @@
 MeOH        2
 
 [ atoms ]
-;   nr  type    resnr   residu  atom    cgnr    charge	mass
-#ifdef _FF_GROMOS96
-1       CMet     1       MeOH    Me1     1        0.176 15.035   
-2       OMet     1       MeOH    O2      1       -0.574 15.999 
-3       H        1       MeOH    H3      1        0.398  1.008 
-4       CMC      1       MeOH    CMC     2       0.0000
+;   nr  type    resnr   residu  atom    cgnr    charge  mass
+#ifdef _FF_GROMOS43A1
+1       CMet     1       MeOH    Me1     1        0.176 15.035
+2       OMet     1       MeOH    O2      1       -0.574 15.999
+3       H        1       MeOH    H3      1        0.398  1.008
+#else
+#ifdef _FF_GROMOS53A6
+1       CMet     1       MeOH    Me1     1        0.266 15.035
+2       OMet     1       MeOH    O2      1       -0.674 15.999
+3       H        1       MeOH    H3      1        0.408  1.008
 #else
 1       CMet     1       MeOH    Me1     1        0.29  15.035
 2       OMet     1       MeOH    O2      1       -0.69  15.999
 3       H        1       MeOH    H3      1        0.40   1.008
-4       CMC      1       MeOH    CMC     2       0.0000
 #endif
+#endif
+4       CMC      1       MeOH    CMC     2       0.0000
 
 [ virtual_sitesn ]
 ; Site funct atom indexes
