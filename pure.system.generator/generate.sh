@@ -9,6 +9,7 @@ function do_insertion () {
     sed -e "s/INSERT_CG_NAME/$cg_charge_group_name/g" |\
     sed -e "s/INSERT_ATOM_ITP/$atom_itp/g" |\
     sed -e "s/INSERT_ADRESS_ITP/$adress_itp/g" |\
+    sed -e "s/INSERT_CG_ITP/$cg_itp/g" |\
     sed -e "s/INSERT_MDRUN_COMMAND/$mdrun_command/g" |\
     sed -e "s/INSERT_MDRUN_OPTIONS/$mdrun_options/g" |\
     sed -e "s/INSERT_EPSILON_RF/$epsilon_rf/g" |\
@@ -37,6 +38,9 @@ atom_itp=`echo $itp_file | cut -f $num_slice -d'/'`
 num_slice=`echo $adress_itp_file | fgrep -o / | wc -l`
 num_slice=$(($num_slice+1))
 adress_itp=`echo $adress_itp_file | cut -f $num_slice -d'/'`
+num_slice=`echo $cg_itp_file | fgrep -o / | wc -l`
+num_slice=$(($num_slice+1))
+cg_itp=`echo $cg_itp_file | cut -f $num_slice -d'/'`
 
 
 echo "# gnereating system: $target_dir"
@@ -64,8 +68,11 @@ do_copy_file $make_file		$target_dir/tools/gen.conf/Makefile
 echo "# prepare tf template"
 do_copy_file $itp_file		$target_dir/tools/tf.template/
 do_copy_file $adress_itp_file	$target_dir/tools/tf.template/
+do_copy_file $cg_itp_file	$target_dir/tools/tf.template/
 do_copy_file tops/topol.adress.top	$target_dir/tools/tf.template/topol.top
 do_insertion			$target_dir/tools/tf.template/topol.top
+do_copy_file tops/topol.cg.top	$target_dir/tools/tf.template/topol.cg.top
+do_insertion			$target_dir/tools/tf.template/topol.cg.top
 do_copy_file tops/topol.top	$target_dir/tools/tf.template/topol.atom.top
 do_insertion			$target_dir/tools/tf.template/topol.atom.top
 do_insertion			$target_dir/tools/tf.template/grompp.mdp
@@ -76,6 +83,10 @@ do_insertion			$target_dir/gen.tf.sh
 chmod a+x			$target_dir/gen.tf.sh
 do_insertion			$target_dir/cal.vol.sh
 chmod a+x			$target_dir/cal.vol.sh
+do_insertion			$target_dir/ipm.traj.sh
+chmod a+x			$target_dir/ipm.traj.sh
+do_insertion			$target_dir/ipm.c.sh
+chmod a+x			$target_dir/ipm.c.sh
 do_insertion			$target_dir/parameters.sh
 sed -e "s/^input_conf=.*/input_conf=input.gro/g" $target_dir/parameters.sh | \
 sed -e "s/^base_conf=.*/base_conf=block.gro/g" > tmp.tmp.tmp

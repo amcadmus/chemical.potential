@@ -5,14 +5,15 @@ cg_charge_group_name=CMW
 ex_charge_group_name=EXW
 force_field="gromos53a6"
 
-mdrun_command="mpiexec mdrun_mpi"
+mdrun_command="mdrun"
 mdrun_options=""
-epsilon_rf=60					# 60 is for spc water..
+epsilon_rf=80					# 60 is for spc water..
 itp_file="tops/spc.itp"			# 
 adress_itp_file="tops/spc.adress.itp"	# the COM top should be included!!
+cg_itp_file="tops/spc.cg.itp"		# the COM top should be included!!
 block_conf_file="confs/spc.block.gro"	# building block of conf
 input_conf_file="confs/spc.input.gro"	# input conf for productive run
 
-make_file=machine.dep/Makefile.hlrn
-env_file=machine.dep/env.sh.hlrn
-submit_file=machine.dep/auto.hlrn.sh
+make_file=machine.dep/Makefile.fu
+env_file=machine.dep/env.sh.fu
+submit_file=machine.dep/auto.adagio.sh

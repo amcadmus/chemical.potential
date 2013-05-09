@@ -34,6 +34,15 @@ poten_INSERT_MOL_NAME_sigma=0.4
 
 tf_iterations_max=20
 
+# ipm parameters
+ipm_dt=0.002
+ipm_gen_traj_nsteps_0=100000
+ipm_gen_traj_nsteps_1=1600000
+ipm_C_nsteps=2000000
+ipm_nstenergy=200
+ipm_nstxtcout=200
+ipm_tau_t=0.1
+
 # run.tf.sh parameters
 #run_dir=./run
 tf_file=tabletf.xvg

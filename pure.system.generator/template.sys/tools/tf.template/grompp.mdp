@@ -93,7 +93,7 @@ constraints              = none
 
 
 ; AdResS parameters
-adress			 = yes
+adress = yes
 adress_type              = xsplit
 adress_const_wf          = 1
 adress_ex_width          = 0.5
