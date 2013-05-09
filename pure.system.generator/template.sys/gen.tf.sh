@@ -18,7 +18,7 @@ echo "# prepare potentials"
 cd ./tools/gen.wca
 ./gen.wca --sigma $poten_INSERT_MOL_NAME_sigma -o table_INSERT_CG_NAME_INSERT_CG_NAME.xvg
 rm -f ../tf.template/table_INSERT_CG_NAME_INSERT_CG_NAME.xvg
-mv table_INSERT_CG_NAME_INSERT_CG_NAME.xvg ../../
+mv -f table_INSERT_CG_NAME_INSERT_CG_NAME.xvg ../../
 cd ../..
 
 # prepare conf.gro

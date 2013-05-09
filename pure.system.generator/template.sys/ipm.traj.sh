@@ -19,7 +19,7 @@ echo "# prepare potentials"
 cd ./tools/gen.wca
 ./gen.wca --sigma $poten_INSERT_MOL_NAME_sigma -o table_INSERT_CG_NAME_INSERT_CG_NAME.xvg
 rm -f ../tf.template/table_INSERT_CG_NAME_INSERT_CG_NAME.xvg
-mv table_INSERT_CG_NAME_INSERT_CG_NAME.xvg ../../
+mv -f table_INSERT_CG_NAME_INSERT_CG_NAME.xvg ../../
 cd ../..
 
 # make dir
@@ -36,16 +36,16 @@ if test ! -f $input_conf; then
     echo "cannot find file $input_conf, exit"
     exit
 fi
-nSOL=`./tools/gen.conf/nresd -f $input_conf | grep SOL | awk '{print $2}'`
+nINSERT_MOL_NAME=`./tools/gen.conf/nresd -f $input_conf | grep INSERT_MOL_NAME | awk '{print $2}'`
 
 # prepare topol.top
 echo "# prepare topol.top"
 cp tools/tf.template/topol.cg.top ./
-sed "s/^SOL.*/SOL $nSOL/g" topol.cg.top > tmp.top
+sed "s/^INSERT_MOL_NAME.*/INSERT_MOL_NAME $nINSERT_MOL_NAME/g" topol.cg.top > tmp.top
 mv -f tmp.top $target_dir/topol.top
 rm -f topol.cg.top
 cp tools/tf.template/topol.atom.top ./
-sed "s/^SOL.*/SOL $nSOL/g" topol.atom.top > tmp.top
+sed "s/^INSERT_MOL_NAME.*/INSERT_MOL_NAME $nINSERT_MOL_NAME/g" topol.atom.top > tmp.top
 mv -f tmp.top $target_dir/topol.atom.top
 rm -f topol.atom.top
 cp tools/tf.template/INSERT_CG_ITP ./$target_dir/
