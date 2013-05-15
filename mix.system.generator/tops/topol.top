@@ -1,0 +1,14 @@
+; for simulating methane in water.
+; notice the comb-rule 1 is used!!!
+
+#include "INSERT_FORCE_FIELD.ff/forcefield.itp"
+
+#include "INSERT_ATOM1_ITP"
+#include "INSERT_ATOM2_ITP"
+
+[ system ]
+mixed atomic system 
+
+[ molecules ]
+INSERT_MOL1_NAME 1
+INSERT_MOL2_NAME 1

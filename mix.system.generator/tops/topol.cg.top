@@ -1,0 +1,22 @@
+#include "INSERT_FORCE_FIELD.ff/forcefield.itp"
+
+[ atomtypes ]
+;name  mass        charge    ptype  C6             C12           ; sigma     epsilon
+INSERT_CG1_NAME    0.00000     0.0000    A      0.000000E+00   1.000000E+00
+INSERT_CG2_NAME    0.00000     0.0000    A      0.000000E+00   1.000000E+00
+
+[ nonbond_params ]
+; i   j   func c6             c12
+  INSERT_CG1_NAME  INSERT_CG1_NAME  1    0.000000E+00   1.000000E+00  
+  INSERT_CG1_NAME  INSERT_CG2_NAME  1    0.000000E+00   1.000000E+00  
+  INSERT_CG2_NAME  INSERT_CG2_NAME  1    0.000000E+00   1.000000E+00  
+
+#include "INSERT_CG1_ITP"
+#include "INSERT_CG2_ITP"
+
+[ system ]
+mixed cg system
+
+[ molecules ]
+INSERT_MOL1_NAME 1
+INSERT_MOL2_NAME 1

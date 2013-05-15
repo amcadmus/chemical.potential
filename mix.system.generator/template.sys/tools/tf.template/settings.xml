@@ -1,0 +1,106 @@
+<cg>
+  <!-- example for a non-bonded interaction entry -->
+  <non-bonded>
+    <!-- name of the index group to calculate density from -->
+    <name>INSERT_MOL1_NAME</name>
+    <!-- types involved in this interaction -->
+   
+    <!-- thermodynmic force: apply in this range -->
+    <min>.45</min>
+    <max>3.30</max>
+    <step>0.01</step>
+    <!--spline:offset beyond the hyrbid zone to take into account for fitting the spline-->
+    <inverse>
+      <!-- target distribution -->
+      <target>dens.INSERT_MOL1_NAME.xvg</target>
+      <!-- update cycles -->
+      <do_potential>1</do_potential>
+      <!-- additional post processing of dU before added to potential -->
+      <post_update></post_update>
+      <!-- additional post processing of U after dU added to potential -->
+      <post_add></post_add>
+      <!-- name of the table for gromacs run -->
+      <gromacs>
+        <table>tabletf_INSERT_CG1_NAME.xvg</table>
+      </gromacs>
+      <tf>
+	<spline_start>.4</spline_start>
+	<spline_end>3.35</spline_end>
+	<spline_step>0.42142857142857142857</spline_step>
+	<molname>INSERT_MOL1_NAME</molname>
+	<prefactor>0.039</prefactor> 
+    </tf>
+    </inverse>
+  </non-bonded>
+  
+  <!-- example for a non-bonded interaction entry -->
+  <non-bonded>
+    <!-- name of the index group to calculate density from -->
+    <name>INSERT_MOL2_NAME</name>
+    <!-- types involved in this interaction -->
+   
+    <!-- thermodynmic force: apply in this range -->
+    <min>.45</min>
+    <max>3.30</max>
+    <step>0.01</step>
+    <!--spline:offset beyond the hyrbid zone to take into account for fitting the spline-->
+    <inverse>
+      <!-- target distribution -->
+      <target>dens.INSERT_MOL2_NAME.xvg</target>
+      <!-- update cycles -->
+      <do_potential>1</do_potential>
+      <!-- additional post processing of dU before added to potential -->
+      <post_update></post_update>
+      <!-- additional post processing of U after dU added to potential -->
+      <post_add></post_add>
+      <!-- name of the table for gromacs run -->
+      <gromacs>
+        <table>tabletf_INSERT_CG2_NAME.xvg</table>
+      </gromacs>
+      <tf>
+	<spline_start>.4</spline_start>
+	<spline_end>3.35</spline_end>
+	<spline_step>0.42142857142857142857</spline_step>
+	<molname>INSERT_MOL2_NAME</molname>
+	<prefactor>0.039</prefactor> 
+    </tf>
+    </inverse>
+  </non-bonded>
+
+  <!-- general options for inverse script -->
+  <inverse>
+    <!-- 300*0.00831451 gromacs units -->
+    <kBT>2.49435</kBT>
+    <!-- use gromacs as simulation program -->
+    <program>gromacs</program>
+    <!-- gromacs specific options -->
+    <gromacs>
+      <!-- trash so many frames at the beginning -->
+      <equi_time>10</equi_time>
+      <!-- grid for table*.xvg !-->
+      <table_bins>0.01</table_bins>
+      <!-- cut the potential at this value (gromacs bug) -->
+      <pot_max>1000000</pot_max>
+      <mdrun>
+	<!-- mdrun command -->
+	<command>INSERT_MDRUN_COMMAND</command>
+	<opts>INSERT_MDRUN_OPTIONS</opts>
+      </mdrun>
+      <!-- extend the tables to this value -->
+      <table_end>4.75000000000000000000</table_end>
+    </gromacs>
+    <!-- these files are copied for each new run -->
+    <filelist>INSERT_ADRESS1_ITP INSERT_ADRESS2_ITP grompp.mdp topol.top table.xvg tablerdf.xvg index.ndx table_INSERT_CG1_NAME_INSERT_CG1_NAME.xvg table_INSERT_CG1_NAME_INSERT_CG2_NAME.xvg table_INSERT_CG2_NAME_INSERT_CG2_NAME.xvg</filelist>
+    <!-- do so many iterations -->
+    <iterations_max>20</iterations_max>
+    <!-- ibi: inverse biltzmann imc: inverse monte carlo tf: thermody force -->
+    <method>tf</method>
+    <!-- directory for user scripts -->
+    <scriptpath></scriptpath>
+    <!-- write log to this file -->
+    <log_file>inverse.log</log_file>
+    <!-- write restart step to this file -->
+    <restart_file>restart_points.log</restart_file>
+  </inverse>
+</cg>
+
