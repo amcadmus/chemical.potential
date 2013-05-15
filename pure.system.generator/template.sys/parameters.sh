@@ -7,17 +7,17 @@ init_guess_INSERT_CG_NAME_tf=./tabletf_INSERT_CG_NAME.xvg
 # number_density=33.286		# the number density of spce.
 
 # cal.vol.sh
-cal_vol_nsteps=40000
+cal_vol_nsteps=200000
 cal_vol_dt=0.002
 cal_vol_nstenergy=100
-cal_vol_nstxtcout=200
+cal_vol_nstxtcout=1000
 
 # gen.tf.sh parameters
-gmx_dt=0.001
-gmx_nsteps=10000
-gmx_nstenergy=50
-gmx_nstxtcout=50
-gmx_tau_t=1.0
+gmx_dt=0.002
+gmx_nsteps=200000
+gmx_nstenergy=100
+gmx_nstxtcout=100
+gmx_tau_t=0.1
 gmx_epsilon_rf=INSERT_EPSILON_RF
 gmx_rcut=0.9
 
@@ -27,8 +27,8 @@ tf_extension=0.05
 tf_step=0.01
 tf_spline_extension=0.1
 tf_spline_step=0.42142857142857142857
-INSERT_MOL_NAME_tf_prefactor=0.02
-equi_time_discard=10
+INSERT_MOL_NAME_tf_prefactor=0.04
+equi_time_discard=200
 
 poten_INSERT_MOL_NAME_sigma=0.4
 
