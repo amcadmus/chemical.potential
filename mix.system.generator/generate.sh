@@ -72,10 +72,10 @@ do_insertion			$target_dir/tools/atom.template/topol.top
 
 echo "# copy block conf"
 test ! -d $target_dir/confs/	&& rm -f $target_dir/confs && mkdir -p $target_dir/confs/
-#do_copy_file $block_conf_file	$target_dir/confs/block.gro
+cp $block_conf_file		$target_dir/confs/
 
 echo "# copy simul conf"
-#do_copy_file $input_conf_file	$target_dir/confs/input.gro
+#cp $input_conf_file		$target_dir/confs/
 
 echo "# prepare gen.wca"
 do_copy_file $make_file		$target_dir/tools/gen.wca/Makefile

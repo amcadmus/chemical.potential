@@ -21,8 +21,8 @@ atom2_itp_file="tops/methanol.itp"		#
 adress2_itp_file="tops/methanol.adress.itp"	# the COM top should be included!!
 cg2_itp_file="tops/methanol.cg.itp"		# 
 
-block_conf_file="confs/spc.block.gro"		# building block of conf
-input_conf_file="confs/spc.input.gro"		# input conf for productive run
+block_conf_file="confs/*.gro"		# building block of conf
+input_conf_file="confs/input*.gro"		# input conf for productive run
 
 make_file=machine.dep/Makefile.fu
 env_file=machine.dep/env.sh.fu
