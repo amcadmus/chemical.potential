@@ -34,7 +34,7 @@ int main(int argc, char * argv[])
     ("epsilon,e", po::value<double > (&eps)->default_value (0.650194),  "epsilon")
     ("sigma,s",   po::value<double > (&sig)->default_value (0.316557),  "epsilon")
     ("bin,b", po::value<double > (&bin)->default_value (0.002), "size of the bin")
-    ("xup,x", po::value<double > (&xup)->default_value (2.0), "up of x")
+    ("xup,x", po::value<double > (&xup)->default_value (3.0), "up of x")
     ("ucap,u", po::value<double > (&ucap)->default_value (1e6), "cap value of energy")
     ("output,o",   po::value<std::string > (&ofile)->default_value ("table_CG_CG.xvg"), "output file");
   

@@ -16,7 +16,8 @@ make -C ./tools/gen.wca/ -j8 &> /dev/null
 # prepare potentials
 echo "# prepare potentials"
 cd ./tools/gen.wca
-./gen.wca --sigma $poten_INSERT_MOL_NAME_sigma -o table_INSERT_CG_NAME_INSERT_CG_NAME.xvg
+table_xup=`echo "$gmx_rcut + 1.0 + 0.2" | bc -l`
+./gen.wca --xup $table_xup --sigma $poten_INSERT_MOL_NAME_sigma -o table_INSERT_CG_NAME_INSERT_CG_NAME.xvg
 rm -f ../tf.template/table_INSERT_CG_NAME_INSERT_CG_NAME.xvg
 mv -f table_INSERT_CG_NAME_INSERT_CG_NAME.xvg ../../
 cd ../..
@@ -62,6 +63,9 @@ sed -e "/^nsteps/s/=.*/= $gmx_nsteps/g" |\
 sed -e "/^nstenergy/s/=.*/= $gmx_nstenergy/g" |\
 sed -e "/^nstxtcout/s/=.*/= $gmx_nstxtcout/g" |\
 sed -e "/^epsilon_rf/s/=.*/= $gmx_epsilon_rf/g" |\
+sed -e "/^rlist /s/=.*/= $gmx_rcut/g" |\
+sed -e "/^rcoulomb /s/=.*/= $gmx_rcut/g" |\
+sed -e "/^rvdw /s/=.*/= $gmx_rcut/g" |\
 sed -e "/^adress_reference_coords/s/=.*/= $half_boxx $half_boxy $half_boxz/g" > grompp.mdp.tmp
 mv -f grompp.mdp.tmp grompp.mdp
 

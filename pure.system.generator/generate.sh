@@ -54,10 +54,11 @@ do_copy_file tops/topol.top	$target_dir/tools/atom.template/
 do_insertion			$target_dir/tools/atom.template/topol.top
 
 echo "# copy block conf"
-do_copy_file $block_conf_file	$target_dir/block.gro
+test ! -d $target_dir/confs/	&& rm -f $target_dir/confs && mkdir -p $target_dir/confs/
+do_copy_file $block_conf_file	$target_dir/confs/block.gro
 
 echo "# copy simul conf"
-do_copy_file $input_conf_file	$target_dir/input.gro
+do_copy_file $input_conf_file	$target_dir/confs/input.gro
 
 echo "# prepare gen.wca"
 do_copy_file $make_file		$target_dir/tools/gen.wca/Makefile
@@ -88,6 +89,6 @@ chmod a+x			$target_dir/ipm.traj.sh
 do_insertion			$target_dir/ipm.c.sh
 chmod a+x			$target_dir/ipm.c.sh
 do_insertion			$target_dir/parameters.sh
-sed -e "s/^input_conf=.*/input_conf=input.gro/g" $target_dir/parameters.sh | \
-sed -e "s/^base_conf=.*/base_conf=block.gro/g" > tmp.tmp.tmp
+sed -e "s/^input_conf=.*/input_conf=confs\/input.gro/g" $target_dir/parameters.sh | \
+sed -e "s/^base_conf=.*/base_conf=confs\/block.gro/g" > tmp.tmp.tmp
 mv -f tmp.tmp.tmp $target_dir/parameters.sh
