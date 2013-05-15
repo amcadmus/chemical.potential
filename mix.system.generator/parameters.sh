@@ -24,6 +24,6 @@ cg2_itp_file="tops/methanol.cg.itp"		#
 block_conf_file="confs/*.gro"		# building block of conf
 input_conf_file="confs/input*.gro"		# input conf for productive run
 
-make_file=machine.dep/Makefile.fu
-env_file=machine.dep/env.sh.fu
-submit_file=machine.dep/auto.fu.sh
+make_file=machine.dep/Makefile.hlrn
+env_file=machine.dep/env.sh.hlrn
+submit_file=machine.dep/auto.hlrn.sh

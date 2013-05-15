@@ -31,7 +31,7 @@ cp -a tools/atom.template ./$dir_name
 cd $dir_name
 mv ../conf.gro .
 sed "s/^INSERT_MOL1_NAME.*/INSERT_MOL1_NAME $nINSERT_MOL1_NAME/g" topol.top |\
-sed "s/^INSERT_MOL2_NAME.*/INSERT_MOL2_NAME $nINSERT_MOL2_NAME/g" topol.top  > tmp.top
+sed "s/^INSERT_MOL2_NAME.*/INSERT_MOL2_NAME $nINSERT_MOL2_NAME/g" > tmp.top
 mv -f tmp.top topol.top
 cp ../parameters.sh .
 
