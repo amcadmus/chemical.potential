@@ -100,12 +100,12 @@ int main (int argc, char * argv[])
   }
 
   for (unsigned jj = 0; jj < exIdx.size(); ++jj){
-    if (ii >= exName.size()) {
+    if (jj >= exName.size()) {
       cerr << "inconsistent number of mole name in top and number of ex name on command line" << endl;
       cerr << "ex names are: " << exNameString << endl;
       return 1;
     }
-    if (ii >= cgName.size()) {
+    if (jj >= cgName.size()) {
       cerr << "inconsistent number of mole name in top and number of cg name on command line" << endl;
       cerr << "cg names are: " << cgNameString << endl;
       return 1;

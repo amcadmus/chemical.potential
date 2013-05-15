@@ -33,7 +33,7 @@ function do_copy_file () {
     cp -L $sfile $dfile
 }
 
-target_dir=pure.$mol_name
+target_dir=mixed.$mol1_name.$mol2_name
 if test -d $target_dir; then
     echo "# backup existing $target_dir"
     mv $target_dir $target_dir.`date +%s`
@@ -65,16 +65,17 @@ do_copy_file $env_file		$target_dir/env.sh
 do_copy_file $submit_file	$target_dir/
 
 echo "# prepare atom template"
-do_copy_file $itp_file		$target_dir/tools/atom.template/
+do_copy_file $atom1_itp_file	$target_dir/tools/atom.template/
+do_copy_file $atom2_itp_file	$target_dir/tools/atom.template/
 do_copy_file tops/topol.top	$target_dir/tools/atom.template/
 do_insertion			$target_dir/tools/atom.template/topol.top
 
 echo "# copy block conf"
 test ! -d $target_dir/confs/	&& rm -f $target_dir/confs && mkdir -p $target_dir/confs/
-do_copy_file $block_conf_file	$target_dir/confs/block.gro
+#do_copy_file $block_conf_file	$target_dir/confs/block.gro
 
 echo "# copy simul conf"
-do_copy_file $input_conf_file	$target_dir/confs/input.gro
+#do_copy_file $input_conf_file	$target_dir/confs/input.gro
 
 echo "# prepare gen.wca"
 do_copy_file $make_file		$target_dir/tools/gen.wca/Makefile
@@ -83,9 +84,12 @@ echo "# prepare gen.conf"
 do_copy_file $make_file		$target_dir/tools/gen.conf/Makefile
 
 echo "# prepare tf template"
-do_copy_file $itp_file		$target_dir/tools/tf.template/
-do_copy_file $adress_itp_file	$target_dir/tools/tf.template/
-do_copy_file $cg_itp_file	$target_dir/tools/tf.template/
+do_copy_file $atom1_itp_file	$target_dir/tools/tf.template/
+do_copy_file $atom2_itp_file	$target_dir/tools/tf.template/
+do_copy_file $adress1_itp_file	$target_dir/tools/tf.template/
+do_copy_file $adress2_itp_file	$target_dir/tools/tf.template/
+do_copy_file $cg1_itp_file	$target_dir/tools/tf.template/
+do_copy_file $cg2_itp_file	$target_dir/tools/tf.template/
 do_copy_file tops/topol.adress.top	$target_dir/tools/tf.template/topol.top
 do_insertion			$target_dir/tools/tf.template/topol.top
 do_copy_file tops/topol.cg.top	$target_dir/tools/tf.template/topol.cg.top
