@@ -24,15 +24,16 @@ echo "# particle insertion c"
 
 # prepare dir
 echo "# prepare dir"
-rm -fr ipm.c
-mkdir -p ipm.c
-cp ipm.traj/confout.gro	ipm.c/conf.gro
-cp ipm.traj/*itp	ipm.c/
-cp ipm.traj/table*xvg	ipm.c/
-cp ipm.traj/grompp.mdp	ipm.c/
-cp ipm.traj/topol.top	ipm.c/
-cd ipm.c/
-ln -s ../ipm.traj/traj.xtc .
+target_dir=dir.ipm.INSERT_CG1_NAME
+rm -fr $target_dir
+mkdir -p $target_dir
+cp dir.ipm.traj/confout.gro	$target_dir/conf.gro
+cp dir.ipm.traj/*itp		$target_dir/
+cp dir.ipm.traj/table*xvg	$target_dir/
+cp dir.ipm.traj/grompp.mdp	$target_dir/
+cp dir.ipm.traj/topol.top	$target_dir/
+cd $target_dir/
+ln -s ../dir.ipm.traj/traj.xtc .
 
 # prepare grompp.mdp
 echo "# prepare grompp.mdp"
@@ -40,25 +41,26 @@ set_parameter_ipm_C grompp.mdp
 
 # prepare conf.gro
 echo "# prepare conf.gro"
-num_lines=`grep INSERT_CG_NAME conf.gro | wc -l | awk '{print $1}'`
+num_lines=`grep INSERT_CG1_NAME conf.gro | wc -l | awk '{print $1}'`
 head -n 1 conf.gro > out.gro
 echo $(($num_lines+1)) >> out.gro
-grep INSERT_CG_NAME conf.gro >> out.gro
-grep INSERT_CG_NAME conf.gro | tail -n 1 >> out.gro
+grep INSERT_CG1_NAME conf.gro >> out.gro
+grep INSERT_CG1_NAME conf.gro | tail -n 1 >> out.gro
 tail -n 1 conf.gro >> out.gro
 
 mv -f out.gro conf.gro
 
 # prepare index file
 echo "# prepare index file"
-echo "a INSERT_CG_NAME" > command.tmp
+echo "a INSERT_CG1_NAME" >  command.tmp
+echo "a INSERT_CG2_NAME" >> command.tmp
 echo "q" >> command.tmp
 cat command.tmp  | make_ndx -f conf.gro &> $mylog
 rm -fr command.tmp
 
 # prepare topol.top
 echo "# prepare topol.top"
-echo "INSERT_MOL_NAME 1" >> topol.top
+echo "INSERT_MOL1_NAME 1" >> topol.top
 
 # run ipm
 echo "# run ipm"

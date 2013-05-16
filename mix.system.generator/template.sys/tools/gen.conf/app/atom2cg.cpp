@@ -16,6 +16,7 @@
 #include "GroFileManager.h"
 #include <boost/program_options.hpp>
 #include "GmxTop.h"
+#include "StringSplit.h"
 
 namespace po = boost::program_options;
 using namespace GmxTop;
@@ -25,12 +26,13 @@ int main (int argc, char * argv[])
   std::string ifilename;
   std::string ofilename;
   string tpfilename;
-  string cgName;
+  string cgNameString;
+  vector<string > cgName;
   po::options_description desc ("Allow options");
   
   desc.add_options()
       ("help,h", "print this message")
-      ("cg-name", po::value<std::string > (&cgName)->default_value (std::string("CG")), "name of explicit group")
+      ("cg-name", po::value<std::string > (&cgNameString)->default_value (std::string("CG")), "name of explicit group")
       ("output,o", po::value<std::string > (&ofilename)->default_value (std::string("out.gro")), "output conf file name")
       ("topol,p",  po::value<std::string > (&tpfilename)->default_value (std::string("topol.top")), "input topol name")
       ("input,f",  po::value<std::string > (&ifilename)->default_value (std::string("conf.gro")), "input conf file name");
@@ -43,6 +45,8 @@ int main (int argc, char * argv[])
     std::cout << desc<< "\n";
     return 0;
   }
+
+  StringOperation::split (cgNameString, cgName);
 
   std::vector<int >  resdindex;
   std::vector<std::string >   resdname;
@@ -68,6 +72,11 @@ int main (int argc, char * argv[])
   unsigned point = 0;
   unsigned countMol = 0;
   for (unsigned ii = 0; ii < top.moles.size(); ++ii){
+    if (ii >= cgName.size()) {
+      cerr << "inconsistent number of mole name in top and number of cg name on command line" << endl;
+      cerr << "cg names are: " << cgNameString << endl;
+      return 1;
+    }
     for (unsigned jj = 0; jj < unsigned(top.numMol[ii]); ++jj){
       countMol ++;
       std::vector<double > com (3, 0);
@@ -85,7 +94,7 @@ int main (int argc, char * argv[])
       posi1.push_back (com);
       velo1.push_back (vector<double >(3, 0.));
       resdname1.push_back (top.moles[ii].name);
-      atomname1.push_back (cgName);
+      atomname1.push_back (cgName[ii]);
       resdindex1.push_back (countMol);
       atomindex1.push_back (countMol);      
     }
