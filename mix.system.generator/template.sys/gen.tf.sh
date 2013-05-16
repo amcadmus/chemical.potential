@@ -114,11 +114,11 @@ nINSERT_MOL2_NAME=`./tools/gen.conf/nresd -f conf.gro | grep INSERT_MOL2_NAME | 
 rm -fr topol.top topol.atom.top
 cp tf/topol.top .
 sed "s/^INSERT_MOL1_NAME.*/INSERT_MOL1_NAME $nINSERT_MOL1_NAME/g" topol.top |\
-sed "s/^INSERT_MOL2_NAME.*/INSERT_MOL2_NAME $nINSERT_MOL2_NAME/g" topol.top > tmp.top
+sed "s/^INSERT_MOL2_NAME.*/INSERT_MOL2_NAME $nINSERT_MOL2_NAME/g" > tmp.top
 mv -f tmp.top topol.top
 cp tf/topol.atom.top .
 sed "s/^INSERT_MOL1_NAME.*/INSERT_MOL1_NAME $nINSERT_MOL1_NAME/g" topol.atom.top |\
-sed "s/^INSERT_MOL2_NAME.*/INSERT_MOL2_NAME $nINSERT_MOL2_NAME/g" topol.atom.top > tmp.top
+sed "s/^INSERT_MOL2_NAME.*/INSERT_MOL2_NAME $nINSERT_MOL2_NAME/g" > tmp.top
 mv -f tmp.top topol.atom.top
 
 # prepare table of cg

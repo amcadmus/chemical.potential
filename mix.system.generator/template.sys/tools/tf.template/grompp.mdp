@@ -30,7 +30,7 @@ xtc-precision            = 1000
 ; select multiple groups. By default all atoms will be written.
 xtc-grps                 = 
 ; Selection of energy groups
-energygrps               =  INSERT_EX1_NAME INSERT_CG2_NAME INSERT_EX1_NAME INSERT_CG2_NAME
+energygrps               =  INSERT_EX1_NAME INSERT_CG1_NAME INSERT_EX2_NAME INSERT_CG2_NAME
 energygrp_table          =  INSERT_CG1_NAME INSERT_CG1_NAME INSERT_CG1_NAME INSERT_CG2_NAME INSERT_CG2_NAME INSERT_CG2_NAME
 
 ; NEIGHBORSEARCHING PARAMETERS
