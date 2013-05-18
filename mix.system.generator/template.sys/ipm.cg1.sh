@@ -41,10 +41,10 @@ set_parameter_ipm_C grompp.mdp
 
 # prepare conf.gro
 echo "# prepare conf.gro"
-num_lines=`grep INSERT_CG1_NAME conf.gro | wc -l | awk '{print $1}'`
+num_lines=`head -n 2 conf.gro | tail -n 1`
 head -n 1 conf.gro > out.gro
 echo $(($num_lines+1)) >> out.gro
-grep INSERT_CG1_NAME conf.gro >> out.gro
+head -n $(($num_lines+2)) conf.gro | tail -n $num_lines >> out.gro
 grep INSERT_CG1_NAME conf.gro | tail -n 1 >> out.gro
 tail -n 1 conf.gro >> out.gro
 
