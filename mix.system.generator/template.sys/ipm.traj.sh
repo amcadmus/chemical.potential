@@ -17,6 +17,7 @@ target_dir=dir.ipm.traj
 # prepare potentials
 echo "# prepare potentials"
 cd ./tools/gen.wca
+table_xup=`echo "$gmx_rcut + 1.0 + 0.2" | bc -l`
 ./gen.wca --xup $table_xup --sigma $poten_INSERT_MOL1_NAME_sigma -o table_INSERT_CG1_NAME_INSERT_CG1_NAME.xvg
 ./gen.wca --xup $table_xup --sigma $poten_INSERT_MOL2_NAME_sigma -o table_INSERT_CG2_NAME_INSERT_CG2_NAME.xvg
 ./gen.wca --xup $table_xup --sigma $poten_CROX_sigma		 -o table_INSERT_CG1_NAME_INSERT_CG2_NAME.xvg

@@ -106,8 +106,10 @@ do_insertion			$target_dir/cal.vol.sh
 chmod a+x			$target_dir/cal.vol.sh
 do_insertion			$target_dir/ipm.traj.sh
 chmod a+x			$target_dir/ipm.traj.sh
-do_insertion			$target_dir/ipm.c.sh
-chmod a+x			$target_dir/ipm.c.sh
+do_insertion			$target_dir/ipm.cg1.sh
+chmod a+x			$target_dir/ipm.cg1.sh
+do_insertion			$target_dir/ipm.cg2.sh
+chmod a+x			$target_dir/ipm.cg2.sh
 do_insertion			$target_dir/parameters.sh
 sed -e "s/^input_conf=.*/input_conf=confs\/input.gro/g" $target_dir/parameters.sh | \
 sed -e "s/^base_conf=.*/base_conf=confs\/block.gro/g" > tmp.tmp.tmp
