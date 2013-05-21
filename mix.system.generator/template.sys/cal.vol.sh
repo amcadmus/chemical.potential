@@ -19,7 +19,7 @@ fi
 # prepare conf.gro
 echo "# prepare conf.gro"
 echo "## gen from base conf: $base_conf"
-genconf -f $base_conf -o conf.gro -nbox $n_base_block -shuffle &> $mylog
+genconf -f $base_conf -o conf.gro -nbox $n_base_block &> $mylog
 ./tools/gen.conf/reorder -f conf.gro -o tmp.tmp.gro
 mv -f tmp.tmp.gro conf.gro
 echo '## get num mol'
