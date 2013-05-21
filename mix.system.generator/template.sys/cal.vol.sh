@@ -20,6 +20,8 @@ fi
 echo "# prepare conf.gro"
 echo "## gen from base conf: $base_conf"
 genconf -f $base_conf -o conf.gro -nbox $n_base_block -shuffle &> $mylog
+./tools/gen.conf/reorder -f conf.gro -o tmp.tmp.gro
+mv -f tmp.tmp.gro conf.gro
 echo '## get num mol'
 nINSERT_MOL1_NAME=`./tools/gen.conf/nresd -f conf.gro | grep INSERT_MOL1_NAME | awk '{print $2}'` 
 nINSERT_MOL2_NAME=`./tools/gen.conf/nresd -f conf.gro | grep INSERT_MOL2_NAME | awk '{print $2}'` 
