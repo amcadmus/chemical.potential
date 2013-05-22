@@ -4,4 +4,4 @@ SOL		2
 
 [ atoms ]
 ;   nr   type  resnr residue  atom   cgnr     charge       mass
-     1    CMW      1    SOL    CMW      1     0.0000	18.015
+     1    PREP_INSERT_CG_NAME      1    SOL    PREP_INSERT_CG_NAME      1     0.0000	18.015

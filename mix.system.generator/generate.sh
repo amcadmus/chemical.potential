@@ -2,6 +2,13 @@
 
 source parameters.sh
 
+function prep_itp () {
+    filename=$1
+    cgname=$2
+    sed -e "s/PREP_INSERT_CG_NAME/$cgname/g" $filename > tmp.tmp.tmp
+    mv -f tmp.tmp.tmp $filename
+}
+
 function do_insertion () {
     filename=$1
     sed -e "s/INSERT_FORCE_FIELD/$force_field/g" $filename |\
@@ -90,6 +97,14 @@ do_copy_file $adress1_itp_file	$target_dir/tools/tf.template/
 do_copy_file $adress2_itp_file	$target_dir/tools/tf.template/
 do_copy_file $cg1_itp_file	$target_dir/tools/tf.template/
 do_copy_file $cg2_itp_file	$target_dir/tools/tf.template/
+prep_itp			$target_dir/tools/tf.template/$adress1_itp INSERT_CG1_NAME
+prep_itp			$target_dir/tools/tf.template/$adress2_itp INSERT_CG2_NAME
+prep_itp			$target_dir/tools/tf.template/$cg1_itp INSERT_CG1_NAME
+prep_itp			$target_dir/tools/tf.template/$cg2_itp INSERT_CG2_NAME
+do_insertion			$target_dir/tools/tf.template/$adress1_itp
+do_insertion			$target_dir/tools/tf.template/$adress2_itp
+do_insertion			$target_dir/tools/tf.template/$cg1_itp
+do_insertion			$target_dir/tools/tf.template/$cg2_itp
 do_copy_file tops/topol.adress.top	$target_dir/tools/tf.template/topol.top
 do_insertion			$target_dir/tools/tf.template/topol.top
 do_copy_file tops/topol.cg.top	$target_dir/tools/tf.template/topol.cg.top

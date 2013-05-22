@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mol1_name=SOL
+mol1_name=MeOH
 mol2_name=Meth
 cg1_charge_group_name=CMW
 cg2_charge_group_name=CMC
@@ -11,11 +11,11 @@ force_field="gromos53a6"
 
 mdrun_command="mpiexec mdrun_mpi"
 mdrun_options="-v"
-epsilon_rf=60					# 60 is for spc water..
+epsilon_rf=19					# 60 is for spc water..
 
-atom1_itp_file="tops/spc.itp"			# 
-adress1_itp_file="tops/spc.adress.itp"		# the COM top should be included!!
-cg1_itp_file="tops/spc.cg.itp"			# 
+atom1_itp_file="tops/methanol.itp"			# 
+adress1_itp_file="tops/methanol.adress.itp"		# the COM top should be included!!
+cg1_itp_file="tops/methanol.cg.itp"			# 
 
 atom2_itp_file="tops/methane.itp"		# 
 adress2_itp_file="tops/methane.adress.itp"	# the COM top should be included!!

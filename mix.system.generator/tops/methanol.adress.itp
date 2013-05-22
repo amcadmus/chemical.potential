@@ -30,7 +30,7 @@ MeOH        2
 3       H        1       MeOH    H3      1        0.40   1.008
 #endif
 #endif
-4       CMC      1       MeOH    CMC     2       0.0000
+4       PREP_INSERT_CG_NAME      1       MeOH    PREP_INSERT_CG_NAME     2       0.0000
 
 [ virtual_sitesn ]
 ; Site funct atom indexes

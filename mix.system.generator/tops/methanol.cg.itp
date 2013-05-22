@@ -4,4 +4,4 @@ MeOH        2
 
 [ atoms ]
 ;   nr  type    resnr   residu  atom    cgnr    charge	mass
-1       CMC      1       MeOH    CMC     1       0.0000 32.042
+1       PREP_INSERT_CG_NAME      1       MeOH    PREP_INSERT_CG_NAME     1       0.0000 32.042

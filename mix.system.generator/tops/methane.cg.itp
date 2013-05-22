@@ -4,5 +4,5 @@ Meth		1
 
 [ atoms ]
 ;   nr   type  resnr residue  atom   cgnr     charge       mass
-     1   CMC     1     Meth   CMC      1       0.0000	16.0430
+     1   PREP_INSERT_CG_NAME     1     Meth   PREP_INSERT_CG_NAME      1       0.0000	16.0430
 
