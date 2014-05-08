@@ -29,7 +29,7 @@
 \newcommand{\thf}{{\textrm{th}}}
 \newcommand{\res}{{\textrm{rep}}}
 \newcommand{\ext}{{\textrm{extra}}}
-\newcommand{\exc}{{\textrm{exc}}}
+\newcommand{\exc}{{\textrm{ex}}}
 \newcommand{\thermo}{{\textrm{Q}}}
 \newcommand{\hadress}{{\textrm{H}}}
 \newcommand{\dadress}{{\textrm{D}}}
@@ -63,6 +63,11 @@ We compare our results with those obtained from full atomistic simulations using
   \begin{itemize}
   \item interface region $\rightarrow$ transition region
   \item hybrid region $\rightarrow$ transition region
+  \item define COM, change all ``center of mass'' to COM
+  \item change the title of sec.III
+  \item do not be too mean, we cite BOTH of their PRL H-Adress paper...
+  \item some times, it is called GC-AdResS, sometimes original AdResS, sometimes standard AdResS, sometimes force-interpolation AdResS....
+  \item rewrite eq. 4, see if it is OK for you
   \end{itemize}
 }
 
@@ -71,7 +76,7 @@ The chemical potential represents an important thermodynamic information for any
 Recently we have suggested that the chemical potential could be calculated by employing the Adaptive Resolution Simulation method in its Grand Canonical-like formulation (GC-AdResS) \cite{prl12,jctchan,prx}.
 AdResS was originally designed  to interface regions of space at different levels of molecular resolution within one simulation set up. This allows for large and efficient multiscale simulations where the high resolution region is restricted to a small portion of space and the rest of the system is at coarser level. The recent version of the method, GC-AdResS, given its theoretical framework, should automatically calculate the chemical potential during the process of initial equilibration: in this work we prove that this is indeed the case and report results for the chemical potential for various liquids and mixtures of particular relevance in (bio)-chemistry and material science. We compare our results with those from full atomistic TI and find a satisfactory agreement. This agreement allows us to conclude that every time a multiscale GC-AdResS is performed, $\mu^{ex}$ is automatically calculated for each liquid component and implicitly confirm that the basic thermodynamics of the system is well described by the method.
 \recheck{Moreover, in recent work AdResS has been merged with the MARTINI force field \cite{matej-sw1,matej-sw2}. In this context, the possibility of having a quantity like the chemical potential under \bluec{what is ``explicit control''} can be used as a further argument for the validity of the method in applications to large systems of biological interest.}
-Below we provide the basic technical ingredients of GC-AdResS which are relevant for the calculation of the chemical potential, more specific details can be found in \cite{jctchan, prx}.
+Below we provide the basic technical ingredients of GC-AdResS which are relevant for the calculation of the chemical potential, more specific details can be found in~\cite{jctchan, prx}.
 
 \section{From AdResS to GC-AdResS}
 The original idea of AdResS is based on a simple intuitive physical principle:
@@ -85,12 +90,14 @@ The original idea of AdResS is based on a simple intuitive physical principle:
 \end{equation}
 where $i$ and $j$ indicates two molecules, ${\vect F}^{\AT}$ is the
 force derived from the atomistic force field and  ${\vect F}^{\CG}$
-from the corresponding coarse-grained potential, $\vect r$ is the center of mass (COM) position of
+from the corresponding coarse-grained potential, \recheck{$\vect r$ is the center of mass (COM) position of}
 the molecule and $w$ is an interpolating function which smoothly goes from $0$
-to $1$ (or vice versa) in the interface region ($\Delta$) where the lower resolution is then
+to $1$ (or vice versa) in the transition region ($\Delta$) where the lower resolution is then
 slowly transformed (according to $w$) in the high resolution (or vice versa),
-as illustrated in Fig.\ref{fig1}. .  
-\item In the interface region a thermodynamic force acting on the center of mass (CM) of each molecule and a locally acting thermostat are added to assure the overall thermodynamic equilibrium at a given temperature. The thermodynamic force is defined in such a way that $p_{AT}+\rho_{0}\int_{\Delta}{\bf F}_{th}({\bf r})d{\bf r}=p_{CG}$, where $p_{AT}$  is the target pressure of the atomistic system (region), $p_{CG}$ is the pressure of the coarse-grained model, $\rho_{0}$ is the target molecular density of the atomistic system (region)\cite{prl12}. An additional locally acting thermostat is added to take care of the loss/gain of energy in the transition region.
+as illustrated in Fig.\ref{fig1}.
+\item In the transition region a thermodynamic force acting on the COM of each molecule and a locally acting thermostat are added to assure the overall thermodynamic equilibrium at a given temperature. The thermodynamic force is defined in such a way that
+  $p_{\AT}+\rho_{0}\int_{\Delta}{\vect F}_{th}({\vect r})d{\vect r}=p_{\CG}$,
+  where $p_{AT}$  is the target pressure of the atomistic system (region), $p_{CG}$ is the pressure of the coarse-grained model, $\rho_{0}$ is the target molecular density of the atomistic system (region)~\cite{prl12}. An additional locally acting thermostat is added to take care of the loss/gain of energy in the transition region.
 \end{itemize}
 \begin{figure}
 \center
@@ -99,60 +106,74 @@ as illustrated in Fig.\ref{fig1}. .
 molecular representation. Here it is shown the case of the tetrahedral molecule used as a test case in the original development of AdResS. The region on the right,
 is the low resolution region (coarse-grained), the central part is
 the transition (hybrid) region $\Delta$, where the switching function
-$w(x)$ (in green) is defined, and the region on the left, is the high resolution region (atomistic). It must be noticed that differently from the original AdResS, in GC-AdResS the range of definition of $w(x)$ is extended of an amount of ${\bf R}_{c}$. The extension of this additional region is equal to the cutoff radius of the atomistic interactions and $w(x)$ takes the constant value of $1$. The consequence is that molecules in the atomistic region interact with the rest of the system always and only via well defined atomistic interactions. This characteristic, in turn, allows to write an exact Hamiltonian for the atomistic region and thus treat the system in a Grand-Canonical fashion.\label{fig1}}
+$w(x)$ (in green. \recheck{Here the space is devided in $x$ direction, so it is a function of only $x$.}) is defined, and the region on the left, is the high resolution region (atomistic). It must be noticed that differently from the original AdResS, in GC-AdResS the range of definition of $w(x)$ is extended of an amount of ${\vect R}_{c}$. The extension of this additional region is equal to the cutoff radius of the atomistic interactions and $w(x)$ takes the constant value of $1$. The consequence is that molecules in the atomistic region interact with the rest of the system always and only via well defined atomistic interactions. This characteristic, in turn, allows to write an exact Hamiltonian for the atomistic region and thus treat the system in a Grand-Canonical fashion.\label{fig1}}
 \end{figure} 
-In \cite{prx} we have defined necessary conditions in $\Delta$ such that the spatial probability distribution of the full-atomistic reference system was reproduced up to a certain (desired) order in the atomistic region of the adaptive system. \recheck{We have defined the $i$th order of a spatial (configurational) probability distribution of $N$ molecules, $p({\bf r}_{1}, \cdots, {\bf r}_{N})$, as:
+In \cite{prx} we have defined necessary conditions in $\Delta$ such that the spatial probability distribution of the full-atomistic reference system was reproduced up to a certain (desired) order in the atomistic region of the adaptive system. \recheck{We have defined the $m$th order of a spatial (configurational) probability distribution of $N$ molecules, $p({\vect r}_{1}, \cdots, {\vect r}_{N})$, as:
 \begin{equation}
-p^{(i)}({\bf r}_{1}, \cdots, {\bf r}_{i})=\int p({\bf r}_{1}, \cdots, {\bf r}_{i},{\bf r}_{i+1}, \cdots, {\bf r}_{N}) \: d{\bf r}_{i+1}\cdots d{\bf r}_{N}
+p^{(m)}({\vect r}_{1}, \cdots, {\vect r}_{m})=\int p({\vect r}_{1}, \cdots, {\vect r}_{m},{\vect r}_{m+1}, \cdots, {\vect r}_{N}) \: d{\vect r}_{m+1}\cdots d{\vect r}_{N}
 \label{order}
 \end{equation}
-The first order, often mentioned in this work corresponds to the molecular number density $\rho({\bf r})$.}
+The first order, often mentioned in this work corresponds to the molecular number density $\rho({\vect r})$.}
 Moreover we have shown that, because of the necessary conditions, the accuracy in the atomistic region is independent of the accuracy of the coarse-grained model, thus, in the coarse-grained region, one can use a generic liquid of spheres whose only requirement is that it has the same molecular density of the reference system.
- In the simulation set up, ${\bf F}_{th}$ is calculated via an iterative procedure as a function of the molecular density in $\Delta$. The iterative scheme consists of calculating ${\bf F}^{i+1}_{th}({\bf r})=\frac{1}{\rho_{0}\kappa_{T}}\nabla \rho^{i}({\bf r})$, ($\kappa_{T}$ the isothermal compressibility) and the force is considered converged when in $\Delta$ the target density $\rho_{0}$ is reached. As a result, ${\bf F}_{th}({\bf r})$, acting in $\Delta$, assures that there are no artificial density variations across the system, thus it allows to accurately reproduce the first order of the probability distribution in the atomistic region. Higher orders can be systematically achieved by imposing in $\Delta$ a corrective force proportional to the gradient of the corresponding higher order of the probability distribution; for example, the gradient of the CM-CM radial distribution function for the second order. Next it was proved that indeed the target Grand Canonical distribution, that is the probability distribution of a subsystem (of the size of the atomistic region in GC-AdResS) in a large full atomistic simulation is accurately reproduced. A large number of tests were performed and the reproduction by GC-AdResS of the probability distribution was numerically proved up to (at least) the third order, more than sufficient in MD simulations. Within this framework it was finally shown that the sum of work of ${\bf F}_{th}({\bf r})$ and that of the thermostat corresponds to the difference in chemical potential between the atomistic and coarse-grained resolution; this subject is treated in the next section.
-\section{Calculation of $\mu$}
-In Ref.\cite{prx} it has been shown that the chemical potential of the atomistic and coarse-grained resolution are related by the following formula: 
+
+In the simulation set up, ${\vect F}_{th}$ is calculated via an iterative procedure \recheck{using} the molecular number density in $\Delta$. The iterative scheme consists of calculating \recheck{${\vect F}^{k+1}_{th}({\vect r}) = {\vect F}^{k}_{th}({\vect r}) + \frac{1}{\rho^2_{0}\kappa_{T}}\nabla \rho^{k}({\vect r})$} ($\kappa_{T}$ the isothermal compressibility), and the thermodynamic force is considered converged when the target density $\rho_{0}$ is reached in $\Delta$. As a result, ${\vect F}_{th}({\vect r})$, acting in $\Delta$, assures that there are no artificial density variations across the system, thus it allows to accurately reproduce the first order of the probability distribution in the atomistic region. Higher orders can be systematically achieved by imposing in $\Delta$ a corrective force.
+% proportional to the gradient of the corresponding higher order of the probability distribution;
+\recheck{For example, the COM-COM radial distribution function correction for the second order~\cite{jctchan}.} Next it was proved that indeed the target Grand Canonical distribution, that is the probability distribution of a subsystem (of the size of the atomistic region in GC-AdResS) in a large full atomistic simulation is accurately reproduced. A large number of tests were performed and the reproduction by GC-AdResS of the probability distribution was numerically proved up to (at least) the third order, more than sufficient in MD simulations. Within this framework it was finally shown that the sum of work of ${\vect F}_{th}({\vect r})$ and that of the thermostat corresponds to the difference in chemical potential between the atomistic and coarse-grained resolution; this subject is treated in the next section.
+
+
+\section{Calculation of Excess Chemical Potential}
+
+In Ref.~\cite{prx} it has been shown that the chemical potential of the atomistic and coarse-grained resolution are related by the following formula: 
 \begin{equation}
-\mu_{CG}=\mu_{AT}+\omega_{th}+\omega_{Q}
+\mu_{\CG}=\mu_{\AT}+\omega_{\thf}+\omega_{\thermo}
 \label{mu}
 \end{equation}
- with $\mu_{CG}$ the chemical potential of the coarse-grained system (in GC-AdResS this corresponds to a liquid of generic spheres), $\mu_{AT}$  the chemical potential of the atomistic system, $\omega_{th}=\int_{\Delta}{\bf F}_{th}({\bf r})d{\bf r}$ the work of the thermodynamic force in the transition region, $\omega_{Q}$ the work/heat provided by the thermostat in order to slowly equilibrate the inserted/removed degrees of freedom in the transition region. $\omega_{Q}$ is composed by two parts, one, called $\omega_{extra}$, which compensates the dissipation of energy due to the change of interactions in $\Delta$, and another, $\omega_{DOF}$, which is related to the equilibration of the reinserted/removed degrees of freedom (rotational and vibrational). \recheck{ While the determination of $\omega_{DOF}$ is not required for the our final aim (that is the calcualtion of the excess chemical potential, as explain later on), the calculation of $\omega_{Q}$ is very relevant. However this calculation is not straightforward and we have proposed to introduce an auxiliary Hamiltonian approach where the coarse-grained and atomistic potential are interpolated, and not the forces as in AdResS. Next, we impose that the Hamiltonian system must have the same thermodynamic equilibrium of the original force-based AdResS system; this is done by introducing a thermodynamic force in the auxiliary Hamiltonian approach, which, at the target temperature, keeps the density of particles across the system as in AdResS. \recheck{In the Hamiltonian approach we have the same equilibrium of the original adaptive (and full atomistic) system  and the difference between the work of the original thermodynamic force and the work of the thermodynamic force calculated in the Hamiltonian approach gives $\omega_{Q}$ (further details about this point are given in the Appendix)}. Moreover we have proven numerically, for the case of liquid water, that $\omega_{extra}=\int_{\Delta}\langle w\nabla_{x} w(x)( V_{AT}-V_{CG})\rangle_{\bf r} d{\bf r}$, where $V_{AT}$ and $V_{CG}$ are the atomistic and coarse-grained potential. 
-\recheck{In the next section of this work we show analytically that the formula above is exact (at least) at the first order w.r.t. the probability distribution of the system as defined in Eq.\ref{order}}.
-The result above implies that $\omega_{Q}$ can be calculated in a straightforward way during the initial equilibration within in the standard GC-AdResS code. 
-\recheck{It must be noticed that, within the AdResS scheme, an approach similar to the auxilary Hamiltonian  has been recently proposed and applied to mixtures  by Potestio {\it et al.} \cite{h-adress} (see also \cite{luigientropy} where such an approach is commented)}. At this point according to \eqref{mu}, if one knows $\mu_{CG}$, then  GC-AdResS can automatically provide $\mu_{AT}$. However we need to do one step more, in fact the quantity of interest is not the total chemical potential, but the excess chemical potential $\mu^{ex}_{AT}$ which corresponds to the expression of \eqref{mu} where the kinetic (ideal gas) part is subtracted. Regarding the kinetic part, one can notice that the contribution coming from the center of mass is the same for the coarse-grained and for the atomistic molecules, thus it is automatically removed in the calculation of \eqref{mu}.
-The kinetic part of $\mu_{AT}$ due to the rotational and vibrational degrees of freedom corresponds in our case to $\omega_{DOF}$ and \recheck{in principle can be calculated by hand (chemical potential of an isolated molecules). However such a calcualtion may become rather tedious for large and/or complex molecules but in our case it is actually not required.} In fact the technical set up of AdResS considers the removed degrees of freedom as phantom variables but thermally equilibrate them anyway \cite{simon-ch}. Thus the heat provided by the thermostat for the rotational and vibrational part is the same in the atomistic and coarse-graining molecules and is automatically removed in the difference. Finally, the calculation of $\mu^{ex}_{CG}$ can be done with standard methods, TI or IPM, which for simple spherical molecules, like those of the coarse-grained system, requires a negligible computational cost.
+with $\mu_{\CG}$ the chemical potential of the coarse-grained system (in GC-AdResS this corresponds to a liquid of generic spheres), $\mu_{\AT}$  the chemical potential of the atomistic system, $\omega_{\thf}=\int_{\Delta}{\vect F}_{\thf}({\vect r})d{\vect r}$ the work of the thermodynamic force in the transition region, $\omega_{\thermo}$ the work/heat provided by the thermostat in order to slowly equilibrate the inserted/removed degrees of freedom in the transition region. $\omega_{\thermo}$ is composed by two parts, one, called $\omega_{\ext}$, which compensates the dissipation of energy due to the change of interactions in $\Delta$, and another, $\omega_{\dof}$, which is related to the equilibration of the reinserted/removed degrees of freedom (rotational and vibrational). {While the determination of $\omega_{\dof}$ is not required for the our final aim (that is the calcualtion of the excess chemical potential, as explain later on), the calculation of $\omega_{\thermo}$ is very relevant. However this calculation is not straightforward and we have proposed to introduce an auxiliary Hamiltonian approach where the coarse-grained and atomistic potential are interpolated, and not the forces as in AdResS. Next, we impose that the Hamiltonian system must have the same thermodynamic equilibrium of the original force-based AdResS system; this is done by introducing a thermodynamic force in the auxiliary Hamiltonian approach, which, at the target temperature, keeps the density of particles across the system as in AdResS. \recheck{In the auxiliary Hamiltonian approach we have the same equilibrium as the original adaptive (and full atomistic) system  and the difference between the work of the original thermodynamic force and the work of the thermodynamic force calculated in the Hamiltonian approach gives $\omega_{\ext}$ (further details about this point are given in the Appendix)}. Moreover we have proven numerically, for the case of liquid water, that
+  $\omega_{\ext}=\int_{\Delta}\nabla w(\vect r)\langle w( U^{\AT}-U^{\CG})\rangle_{\vect r} d{\vect r}$,
+  where $U_{AT}$ and $U_{CG}$ are the atomistic and coarse-grained potential. 
+  \recheck{In the next section of this work we show analytically that the formula above is exact (at least) at the first order w.r.t. the probability distribution of the system as defined in Eq.\ref{order}}.
+  
+The result above implies that $\omega_{\thermo}$ can be calculated in a straightforward way during the initial equilibration within in the standard GC-AdResS code. 
+\recheck{It must be noticed that, within the AdResS scheme, an approach similar to the auxiliary Hamiltonian  has been recently proposed and \bluec{applied to model pure and mixture systems} by Potestio {\it et al.} \cite{h-adress-0, h-adress} (see also \cite{luigientropy} where such an approach is commented)}. At this point according to \eqref{mu}, if one knows $\mu_{\CG}$, then  GC-AdResS can automatically provide $\mu_{\AT}$. However we need to do one step more, in fact the quantity of interest is not the total chemical potential, but the excess chemical potential $\mu^{\exc}_{\AT}$ which corresponds to the expression of \eqref{mu} where the kinetic (ideal gas) part is subtracted. Regarding the kinetic part, one can notice that the contribution coming from the COM is the same for the coarse-grained and for the atomistic molecules, thus it is automatically removed in the calculation of \eqref{mu}.
+The kinetic part of $\mu_{\AT}$ due to the rotational and vibrational degrees of freedom corresponds in our case to $\omega_{\dof}$ and \recheck{in principle can be calculated by hand (chemical potential of an isolated molecules). However such a calcualtion may become rather tedious for large and/or complex molecules but in our case it is actually not required.} In fact the \recheck{Gromacs implementation of AdResS} considers the removed degrees of freedom as phantom variables but thermally equilibrate them anyway \cite{simon-ch}. Thus the heat provided by the thermostat for the rotational and vibrational part is the same in the atomistic and coarse-graining molecules and is automatically removed in the difference. Finally, the calculation of $\mu^{\exc}_{\CG}$ can be done with standard methods, TI or IPM, which for simple spherical molecules, like those of the coarse-grained system, requires a negligible computational cost.
 In conclusion, we have the final expression:
 \begin{equation}
-\mu^{ex}_{AT}=\mu^{ex}_{CG}-\int_{\Delta}{F}_{th}({\bf r})d{\bf r}-\int_{\Delta}\langle w\nabla_{x} w(x) (V_{AT}-V_{CG})\rangle_{\bf r} d{\bf r}
+  \mu^{\exc}_{\AT}=
+  \mu^{\exc}_{\CG}-
+  \int_{\Delta}{F}_{th}({\vect r})d{\vect r}-
+  \int_{\Delta}\nabla_{\vect r} w(\vect r) \langle w(U^{\AT}-U^{\CG})\rangle_{\vect r} d{\vect r}
 \label{finalmu}
 \end{equation}
-\section*{Analytic eriviation of the $w_{extra}$}
-\recheck{In this section we derive analytically the equivalence: $\omega_{extra}=\int_{\Delta}\langle w\nabla_{x} w(x)( V_{AT}-V_{CG})\rangle_{\bf r} d{\bf r}$ and define its limitations.\\
+
+
+\section{Analytic Deriviation of the $w_{\ext}$}
+{In this section we derive analytically the equivalence:
+  $\omega_{\ext}=\int_{\Delta}\nabla_{\vect r} w(\vect r) \langle w(U^{\AT}-U^{\CG})\rangle_{\vect r} d{\vect r}$ and define its limitations.
 We define a potential coupling the atomistic and coarse-grained resolution as the spatial interpolation of the atomistic and coarse-grained potential, as done instead for the forces in the standard AdResS:
 \begin{align}
-  V =
+  U =
   \sum_{i<j} w(\vect r_i) w(\vect r_j)
-  V^\AT_{i,j}
+  U^\AT_{i,j}
   +
   \sum_{i<j}[1- w(\vect r_i) w(\vect r_j)]
-  V^\CG_{i,j},
+  U^\CG_{i,j},
 \end{align}
-where  $\vect r_i$ denotes
-the center-of-mass (COM) position of the molecule with index $i$.
-$V^\AT_{i,j}$ and $V^\CG_{i,j}$ are the atomistic and coarse-grained interaction potential between molecule $i$ and $j$, respectively, with:
-\begin{align}
-  V^\AT_{i,j} =
-  \sum_{\alpha\in i}\sum_{\beta\in j} V^\AT(\vect r_\alpha - \vect r_\beta),\quad
-  V^\CG_{i,j} =
-  V^\CG(\vect r_i - \vect r_j).
+where $U^\AT_{i,j}$ and $U^\CG_{i,j}$ are the atomistic and coarse-grained interaction potential between molecule $i$ and $j$, respectively, defined by
+\begin{align}\label{eqn:pot-interpol}
+  U^\AT_{i,j} =
+  \sum_{\alpha\in i}\sum_{\beta\in j} U^\AT(\vect r_\alpha - \vect r_\beta),\quad
+  U^\CG_{i,j} =
+  U^\CG(\vect r_i - \vect r_j),
 \end{align}
 where index $\alpha$ and $\beta$ denotes the atom position of the corresponding molecule.
-The center of mass of the molecule is defined as:
+The COM of the molecule is defined as:
 \begin{align}
   \vect r_i = \sum_{\alpha\in i} \frac{m_\alpha}{\sum_{\alpha\in i} m_\alpha} \vect r_\alpha,
 \end{align}
 where $m_\alpha$ is the mass of atom $\alpha$.
-The
-corresponding intermolecular force is given by:
+\recheck{The potential interpolation~\eqref{eqn:pot-interpol} provides an auxiliary Hamiltonian to the AdResS system, and
+the
+corresponding intermolecular force is given by:}
 \begin{align}\label{eqn:interpol-f}
   \vect F_{i,j} =
   w(\vect r_i) w(\vect r_j)
@@ -161,14 +182,16 @@ corresponding intermolecular force is given by:
   [1- w(\vect r_i) w(\vect r_j)]
   \vect F_{i,j}^\CG
   -
-  \nabla w(\vect r_i) w(\vect r_j)
-  (V^\AT_{i,j} - V^\CG_{i,j})
+  \nabla_{\vect r} w(\vect r_i) w(\vect r_j)
+  (U^\AT_{i,j} - U^\CG_{i,j}).
 \end{align}
-We define the force of changing representation:
+\recheck{We refer to the AdResS simulation using force scheme~\eqref{eqn:interpol-f} as
+  auxiliary Hamiltonian AdResS, and all properties of this approach will be added a superscript ``H''}.
+We define the force of changing representation by
 \begin{align}\label{eqn:frep}
   \vect F_{\res,i} = 
-  \sum_j \nabla w(\vect r_i) w(\vect r_j)
-  (V^\AT_{i,j} - V^\CG_{i,j})
+  \sum_j \nabla_{\vect r} w(\vect r_i) w(\vect r_j)
+  (U^\AT_{i,j} - U^\CG_{i,j}).
 \end{align}
 %An important fact is that the force of changing representation is not
 %symmetric w.r.t molecule $\alpha$ and $\beta$, therefore, the Newton's
@@ -186,7 +209,7 @@ We define the force of changing representation:
 We use the same notation as in our previous work~\cite{prx}.
 The thermodynamic variables for the atomistic and coarse-grained regions
 are denoted by $(N_1, V_1, T)$ and $(N_3, V_3, T)$, respectively.
-We assume that the hybrid region is an infinitely thin filter (that is a much smaller region than the atomistic and coarse-grained region) that allows molecules
+We assume that the transition region is an infinitely thin filter (that is a much smaller region than the atomistic and coarse-grained region) that allows molecules
 to change resolution as they cross it. Therefore, it is 
 reasonable to assume that:
 \begin{align}
@@ -196,40 +219,38 @@ reasonable to assume that:
 where $V$ and $N$ are the total volume and total number of
 molecules of the system. In this work, we adopt the same
 assumptions as those listed in Sec.III.C of Ref.~\cite{prx},
-i.e. we assume to be in the thermodynamic limit, and molecules are short-range
-correlated (short-ranged must be intended as a range comparable to the size of the filter). The thermodynamic force for GC-AdResS ($\vect F_\thf$) and for the approach with the auxiliary Hamiltonian ($\vect F^\hadress_\thf$, i.e. potential interpolation AdResS),
+i.e. we assume the system to be in the thermodynamic limit, and molecules are short-range
+correlated (short-ranged must be intended as a range comparable to the size of the filter). The thermodynamic force for GC-AdResS ($\vect F_\thf$) \recheck{and for the auxiliary Hamiltonian AdResS ($\vect F^\hadress_\thf$),}
 enforce the system to have a flat density:
 \begin{align}
   \rho_\HY &= \rho_\AT = \rho_\CG = \rho_0\\
   \rho_\HY^\hadress &= \rho_\AT = \rho_\CG = \rho_0
 \end{align}
 Where $\rho_0$ is the equilibrium number density of the system defined by $\rho_0 = N/V$.
-\
-As shown in Refs.\cite{prl12, prx} $\vect F_\thf$ provides the
+As shown in Refs.\cite{prl12, prx}, $\vect F_\thf$ provides the
 balance of the grand potential or equivalently
 \begin{align}\label{eqn:peq}
   p_\AT = p_\CG - \rho_0 \,\omega_\thf 
 \end{align}
-where $p$ denotes the pressure, and $ \omega_\thf$ denotes the
-integral of the thermodynamic force.} \\
+where $ \omega_\thf$ denotes the integral of the thermodynamic force $\vect F_\thf$. \\
 
-Instead when we consider the auxiliary Hamiltonian approach,  the force of changing representation is not
-symmetric w.r.t molecule $\alpha$ and $\beta$, therefore, the Newton's
+Instead when we consider the auxiliary Hamiltonian approach, the third part of the R.H.S.~of Eq.~\eqref{eqn:interpol-f} is not
+symmetric w.r.t molecule $i$ and $j$, therefore, the Newton's
 action-reaction law (momentum conservation) does not hold anymore.
 As a consequence, the pressure relation between the AT and CG
 resolution~\eqref{eqn:peq} does not hold anymore and should be derived again.
-Now assume, for simplicity, that the system changes resolution only along the $x$ direction.
+Now assume, \recheck{for simplicity and without lost of generality}, that the system changes resolution only along the $x$ direction.
 We impose an infinitesimal increment of the volume $\Delta V$ to the
 AT region, and apply the same decrement of the volume $-\Delta V$ to the CG
-region.  The volume of the hybrid region is kept constant as if an ideal ``piston'' moves toward the CG region by an amount $\Delta L$.
+region.  The volume of the transition region is kept constant as if an ideal ``piston'' moves toward the CG region by an amount $\Delta L$.
 We assume $\Delta V = \Delta L\cdot S$, where $S$ is the
 cutting surface area.
-For infinitesimal displacement , $\Delta L$, we mean a displacement which is much smaller than the size of the
-hybrid region. This is achievable by taking the limit of $\Delta L\rightarrow 0$,
+The displacement $\Delta L$ should be infinitesimal, i.e.~much smaller than the size of the
+transition region. This is achievable by taking the limit of $\Delta L\rightarrow 0$,
 while keeping the system size fixed.
 It must be noticed that also the displacements of the molecules are infinitesimal, so that it can be reasonably assumed that
 the resolution of the molecules remains the same under a displacement of $\Delta L$.
-Therefore, the change of the free energy of the system is
+Therefore, the change of the free energy of the system is \recheck{approximately}:
 \begin{align}\nonumber
   \Delta A \approx&\,
   A_\AT(N_1, V_1+\Delta V, T) -
@@ -238,15 +259,17 @@ Therefore, the change of the free energy of the system is
   A_\CG(N_3, V_3-\Delta V, T) -
   A_\CG(N_3, V_3, T)\\\label{eqn:apptmp3}
   &+
-  \int d r\, \rho_0 S\cdot \Delta L\cdot
-  \vect F^\hadress_\thf(r)
+  \int_\Delta d \vect r\, \rho_0 S\cdot \Delta L\cdot
+  \big[\vect F^\hadress_\thf(\vect r)
   -
-  \int d r\, \rho_0 S\cdot \Delta L\cdot
-  \big\langle \vect F_\res(r)\big\rangle
+  \big\langle \vect F_\res(\vect r)\big\rangle\,\big]
 \end{align}
-where $A_\AT$ and $A_\CG$ is the free energy of the AT and CG region, respectively \recheck{HAN: why is it justified to split the free energy in free energies of subsystems and why the free energy of the HYB region is only the work and not also its kinetic component. I understand that since the molecule do not change resolution, their kinetic part stays the same and thus the difference is zero. However this formula needs either a reference or few more explanations}.
-$N_1$ and $N_3$ is the number of molecules in the AT and CG region, and
-$V_1$ and $V_3$ is the volume in the AT and CG region, respectively. $T$ is the temperature
+where $A_\AT$ and $A_\CG$ are the free energies of the AT and CG region, respectively.
+\recheck{Since the system is in the thermodynamic limit, and the interactions in the system are short-ranged,
+  the total free energy has the above splitting form.}
+% \recheck{HAN: why is it justified to split the free energy in free energies of subsystems and why the free energy of the HYB region is only the work and not also its kinetic component. I understand that since the molecule do not change resolution, their kinetic part stays the same and thus the difference is zero. However this formula needs either a reference or few more explanations}.
+$N_1$ and $N_3$ are the numbers of molecules in the AT and CG region, and
+$V_1$ and $V_3$ are the volumes in the AT and CG region, respectively. $T$ is the temperature
 of the system.
 The last term comes from the work done on the piston. It is composed by
 two parts, the first is the work done by the thermodynamic force, and the
@@ -256,28 +279,32 @@ action-reaction law. The first and second part of Eq.~\eqref{eqn:interpol-f}
 do not contribute, because they obey the Newton's action-reaction law, so
 their total work is zero as long as the transition region move infinitesimally in one direction.
 The notation $\langle\cdot\rangle$ in Eq.~\eqref{eqn:apptmp3} denotes the ensemble averge.
-It is straightforward to show that \recheck{HAN, here it must be shown} 
+It is straightforward to show that \recheck{HAN, here it must be shown} \bluec{No, who cannot derive it should be sent back to the graduate course of thermodynamics.} 
 \begin{align}\label{eqn:peq-d}
   \Delta A \approx
   -p_\AT\Delta V + p_\CG\Delta V -
   \rho_0 \Delta V (\omega_\thf^\hadress - \omega_\res), 
 \end{align}
-where $w_\thf^\hadress$ is the integral of the potential interpolation
+where $w_\thf^\hadress$ is the integral of the 
 thermodynamic force $\vect F_\thf^\hadress$, and
 $ \omega_\res$ is the work of changing representation,
 which can be explicitly written down as:
 \begin{align}\label{eqn:w-rep}
   \omega_\res
-  = \int_\HY d r\,\langle \vect F_\res (r)\rangle
-  = \int_\HY d r\,\nabla\omega(r)\,
-  \big\langle \omega(r')\, [U^\AT(r-r') - U^\CG(r-r')]\big\rangle_{r'}
+  = \int_\HY d \vect r\,\langle \vect F_\res (\vect r)\rangle
+  = \int_\HY d \vect r\,\nabla_{\vect r}\omega(\vect r)\,
+  \big\langle \omega(\vect r')\, [U^\AT(\vect r-\vect r') - U^\CG(\vect r-\vect r')]\big\rangle_{\vect r'; \vect r}
 \end{align}
-The average is taken over all possible positions of the second molecule
-in the pairwise interaction. In case of molecules that contain
+\recheck{The average is taken over all possible positions of the second molecule, provided the position of the first molecule
+in the pairwise interaction}. In case of molecules that contain
 more than one atom, the averge is also taken over all possible
 conformations of the molecules. 
-By using the same argument as the Section III.C of Ref.~\cite{prx} \recheck{Han, which ones?}, we can
-show that in the thermodynamic limit, the equilibrium volume of the AT region maxiimize the
+% By using the same argument as the Section III.C of Ref.~\cite{prx} \recheck{Han, which ones?}, we can
+% show that
+\bluec{here since we have the auxiliary Hamiltonian, then the system can be treated by the conclusions
+  that can be found in standard thermodynamic text books. If the referee does not understand, he should
+be sent back to the graduate cource. }
+In the thermodynamic limit, the equilibrium volume of the AT region maxiimize the
 free energy, i.e.~$\Delta A / \Delta V
 = 0$, which yields
 \begin{align}\label{eqn:peq-h}
@@ -288,8 +315,8 @@ we have:
 \begin{align}\label{eqn:hd-rel}
   \omega_\res = \omega_\thf^\hadress -   \omega_\thf,
 \end{align}
-which relates the thermodynamic force of the potential interpolation
-and force interpolation AdResS.\\
+which relates the thermodynamic force of the auxiliary Hamiltonian AdResS
+and the GC-AdResS.\\
 
 In Ref.~\cite{prx} we proved that under proper assumptions,
 when the flat density profile is enforced by the thermodynamic force,
@@ -298,22 +325,21 @@ is given by
 \begin{align}\label{eqn:mueq-d}
  \mu_\CG - \mu_\AT =   \omega_\thf + \omega_\dof + \omega_\ext
 \end{align}
-The same argument can be applied to the potential interpolation approach,
+The same argument can be applied to the auxiliary Hamiltonian approach,
 and yields  the chemical potential difference between the AT and CG resolutions
 \begin{align}\label{eqn:mueq-h}
  \mu_\CG - \mu_\AT =   \omega^\hadress_\thf + \omega_\dof 
 \end{align}
-Since we have an auxiliary Hamiltonian, by using the the potential
-interpolation, we do not have the term $w_\ext$ in the above
+Since we have an auxiliary Hamiltonian, we do not have the term $w_\ext$ in the above
 fomula.
-By comparing~\eqref{eqn:mueq-d} with~\eqref{eqn:mueq-d}, we have the
+By comparing~\eqref{eqn:mueq-d} with~\eqref{eqn:mueq-h}, we have the
 relation
 \begin{align}\label{eqn:hd-rel-2}
-  \omega_\thermo^\ext = \omega^\hadress_\thf - \omega_\thf,
+  \omega_\ext = \omega^\hadress_\thf - \omega_\thf,
 \end{align}
-which also relates the thermodynamic force of the potential interpolation
-and force interpolation AdResS.\\
-\\
+which also relates the thermodynamic force of the auxiliary Hamiltonian AdResS
+and GC-AdResS.\\
+
 
 From Eq.~\eqref{eqn:hd-rel} and \eqref{eqn:hd-rel-2}, we
 find the extra work of the thermostat in GC-AdResS being identical to the work of changing
@@ -338,21 +364,31 @@ are in the CG region, therefore, the kinetic part of $\mu_\AT$ and
 $\mu_\CG$ are identical, and $\omega_\dof$ vanishes. Therefore,
 by inserting Eq.~\eqref{eqn:wextra} into \eqref{eqn:mueq-d}, we have
 \begin{align}
-  \mu_\AT^\ext = \mu_\CG^\ext - \int_\HY dr \vect F_\thf(r)
-  -\int_\HY dr \nabla\omega(r)\,\big\langle \omega(r')\, [U^\AT(r-r') - U^\CG(r-r')]\big\rangle_{r'}
+  \mu_\AT^\exc = \mu_\CG^\exc - \int_\HY d\vect r \vect F_\thf(\vect r)
+-\int_\HY d \vect r\,\nabla_{\vect r}\omega(\vect r)\,
+\big\langle \omega(\vect r')\, [U^\AT(\vect r-\vect r') - U^\CG(\vect r-\vect r')]\big\rangle_{\vect r'; \vect r}
+% -\int_\HY dr \nabla\omega(r)\,\big\langle \omega(r')\, [U^\AT(r-r') - U^\CG(r-r')]\big\rangle_{r'}
 \end{align}
-In the next section we apply the procedure to the calculation of the excess chemical potential of several liquids and mixtures.}
-\section*{Results and Discussion}
+In the next section we apply the procedure to the calculation of the excess chemical potential of several liquids and mixtures.
+
+\section{Results and Discussion}
 We have calculated $\mu^{ex}$ for different liquids and mixtures, choosing cases which are representative of a large class of systems. Hydrophobic solvation in methane/water and in ethane/water mixtures, hydrophilic solvation in urea/water, a balance of both in water/tert-Butyl alcohol (TBA) mixture, other liquids, e.g. pure methanol and DMSO (and their mixtures with water), non aqueous mixtures in TBA/DMSO and alkane liquids such as methane, ethane and propane. Moreover, systems as water/urea are commonly used as cosolvent of biological molecules \cite{nico-debashish} while systems as tert-Butyl alcohol/water play a key role in modern technology \cite{irata}, thus they are of high interest {\it per se}. All technical details of each simulation are presented in the Appendix.
 Results are reported in Table \ref{table} where the comparison with values obtained using full atomistic TI and available experiments, at the same concentrations, of our calculation is made; in our previous work we have already shown that value of the chemical potential of liquid water obtained with IPM is well reproduced by GC-AdResS, however the computational cost of IMP was very large, thus we do not consider calculations done with IPM in this paper. 
 The agreement with full atomistic TI simulations is satisfactory in all cases, and thus it proves the solidity of GC-AdResS in describing the essential thermodynamics of a large class of systems.
 We also compare the obtained values with those available in literature \cite{vang,nico}. Although the concentration of the minor component in the mixtures that we consider, is higher than the concentrations considered in Refs.\cite{vang,nico}, we are anyway in the very dilute regime and thus the chemical potential should not change in a significant way; we have verified  such a supposed consistency. 
-The chemical potential of $i$-th liquid's component in a mixture is calculated as:
+The chemical potential of $k$-th liquid's component in a mixture is calculated as:
 \begin{equation}
-\mu^{ex,i}_{AT}=\mu^{ex,i}_{CG}-\int_{\Delta}{F}^{i}_{th}({\bf r})d{\bf r}-\int_{\Delta}\langle w\nabla_{x_{i}} w(x)(V_{AT}-V_{CG})\rangle_{\bf r}d{\bf r}
+  \mu^{\exc,k}_{\AT}=
+  \mu^{\exc,k}_{\CG}-
+  \int_{\Delta}{\vect F}^k_{\thf}({\vect r})d{\vect r}-
+  \int_{\Delta}\nabla_{\vect r} w(\vect r) \langle w(U^{\AT}-U^{\CG})\rangle_{\vect r, k} d{\vect r}
+% \mu^{ex,i}_{AT}=\mu^{ex,i}_{CG}-\int_{\Delta}{F}^{i}_{th}({\vect r})d{\vect r}-\int_{\Delta}\langle w\nabla_{x_{i}} w(x)(V_{AT}-V_{CG})\rangle_{\vect r}d{\vect r}
 \label{icomp}
 \end{equation}
-where ${F}^{i}_{th}(x)$ is the thermodynamic force applied to the molecules of the $i$-th component; this assures that, at the given concentration, the density of molecules of species $i$, in the transition region, is equivalent to the density of the same liquid's component in a reference full atomistic simulation. $\nabla_{x_{i}} w(x)$ is the gradient along $x$ (in a rectangular box) applied to the switching function $w(x)$ in the center of mass of molecules of component $i$. 
+where ${F}^{k}_{\thf}(x)$ is the thermodynamic force applied to the molecules of the $k$-th component; this assures that, at the given concentration, the density of molecules of species $k$, in the transition region, is equivalent to the density of the same liquid's component in a reference full atomistic simulation.
+\recheck{The ensemble evarage is taken over the position of the second molecule, provided that the first moelcule is of species $k$, and located at postion $\vect r$}.
+% $\nabla_{x_{i}} w(x)$ is the gradient along $x$ (in a rectangular box) applied to the switching function $w(x)$ in the COM of molecules of component $i$. 
+
 \begin{table}[htpb]
 \begin{center}
 %\begin{tabular}{ccccc}
@@ -393,10 +429,12 @@ TBA in TBA/DMSO mixture & 0.02 & -24.8 $\pm$ 0.4 & -24.0 $\pm$ 0.5 & -- \\
 \includegraphics[width=0.475\textwidth]{alcohol-water.eps}\\
 \includegraphics[width=0.475\textwidth]{water-water.eps}
 \caption{Top: TBA-TBA radial distribution function; middle: the same plot for TBA-water; bottom: for water-water. The $g(r)$ is calculated only in the atomistic region.  Molecules located beyond a distance equal to the interactions' cut off, $0.9 nm$, are not considered since would include hybrid and coarse-grained molecules. \label{gr}}
-\end{figure} 
+\end{figure}
+
 In essence, according to the results obtained, GC-AdResS allows an on-the-fly determination of $\mu^{ex}$ of each component of a liquid, whenever a simulation is performed, without extra computational costs.
 Moreover, Fig.\ref{urea-TBA} shows the action of the thermodynamic force and of the thermostat in the transition region $\Delta$ for TBA-water; the molecular density is sufficiently close to that of reference (the largest difference is below $20\%$ and the average difference is below $10\%$), and thus it assures that in the atomistic region there are no (significant) artificial effects on the molecular density due to the perturbation represented by the interpolation of forces in $\Delta$. In Fig.\ref{gr} we report various radial distribution functions for TBA-water in the atomistic region of the adaptive set up. The agreement with data from a full atomistic simulation is highly satisfactory. Moreover, it must be underlined that, on purpose, we have chosen extreme technical conditions, that is, a very small atomistic and coarse-grained region ($0.5 nm$) and a relatively large transition region ($2.7 nm$). Even in these conditions we prove that local properties as those of Fig.\ref{urea-TBA} and Fig.\ref{gr}, together with a relevant thermodynamics quantity as $\mu^{ex}$ are well reproduced.
 This example shows the key features of GC-AdResS, that is, a multiscale simulation where the chemical potential of each component is obtained without extra computational costs and with high accuracy in a simulation where other properties are also calculated with high accuracy. It must be also noticed that the system corresponding to the figures is, among all the system considered, the case where the action of the thermodynamic force and of the thermostat produces the less accurate agreement with the reference data.
+
 \section{Current computational convenience: a critical appraisal}
 The natural question arising from the discussion above is whether or not GC-AdResS is a more convenient technical tool for calculating $\mu^{ex}$ compared to TI.
 Currently the answer is negative although the current work is the first step towards a potentially positive answer for the future. In fact, the fastest version of AdResS is implemented in the GROMACS code \cite{gromacs}; using the Gromacs version 4.5.1 a speedup of a factor four with respected to full atomistic simulations has been reported for aqueous mixtures~\cite{debashish1,nico-debashish}. In this case GC-AdResS was more convenient than TI because in one simulation one could obtain the chemical potential of each liquid component and at the same time calculate structural properties (e.g. radial distribution functions). However in the successive version of GROMACS 4.6.1 the performance of atomistic simulations (above all of SPC/E water) has been highly improved while the corresponding implementation of AdResS is not optimized yet. At the current state, AdResS can only assure a speed up factor between 1.5 and 1.9 for large systems (30000 molecules) compared to full atomistic simulations without SPC/E water. As a consequence for the calculation of $\mu^{ex}$, TI is computationally less demanding than AdResS. Another point that must be considered (in perspective) for a fair comparison between TI and GC-AdResS, is the following: even if AdResS is optimized, in any code, TI has the advantage that one can use one single molecule in the simulation box to mimic the minor component of a mixture. In our case, instead, we must treat, technically speaking, a true mixture with a certain number of molecules of the minor component immersed in the liquid of the major component. Thus, at low concentrations, GC-AdResS simulations require larger systems than those required by TI, moreover, because of the low density of the minor component, the convergence of the corresponding thermodynamic force requires long simulations. 
@@ -405,7 +443,7 @@ When the concentration becomes higher, GC-AdResS may become preferable for both 
 of both components in one simulation run, whereas in TI, one needs to run two separate simulations in order to get the chemical potential of both components.
 However, at the current state, the technical aspects of code optimization must be reported and we must make clear that the aim of this work is to show that  the automatic calculation of $\mu^{ex}$, independently from the simulation code in which is implemented and its computational cost, is a ``conceptual'' feature of GC-AdResS.
   
-\section*{Conclusion} 
+\section{Conclusion} 
 We have shown the accuracy of GC-AdResS in calculating the excess chemical potential for a representative class of complex liquids and mixtures. 
 For any system, the initial equilibration process, that is the determination of the thermodynamic force, automatically delivers the chemical potential. The only additional calculation required is that of $\mu^{ex}_{CG}$ which implies the use of IPM or TI, but for a liquid of simple spheres, thus computationally negligible.  
 The essential message is that GC-AdResS would be, {\it per se}, a reliable multiscale technique to calculate the chemical potential and, in perspective, upon computational/technical optimization it may become an efficient tool for calculating $\mu^{ex}$ compared to current techniques in MD such as TI. 
@@ -413,7 +451,8 @@ The essential message is that GC-AdResS would be, {\it per se}, a reliable multi
 \section*{Acknowledgments}
 This work was supported by the Deutsche Forschungsgemeinschaft (DFG) with the Heisenberg grant provided to L.D.S (grant code DE 1140/5-1) and with its associate DFG grants for A.G.(grant code DE 1140/7-1) and for H.W. (grant code DE 1140/4-2).H.W.~and C.S.~thank the financial support by DFG research center MATHEON.
 
-\section*{Appendix}
+\appendix
+\section{Technical details of the simulations}
 The potential energy function and the force field parameters for all the molecules
 were taken from GROMOS53A6 parameter set. Liquid water was described by the SPC
 model~\cite{spc}, methanol was described by the model developed by Walser et al~\cite{walser},
@@ -463,7 +502,7 @@ During the van der Waals coupling, soft-core interactions were used with soft-co
 $\sigma = 0.3$ and the power of $\lambda$ in soft-core equation was taken as $1$. Free energy estimates and the errors
 were calculated through Bennet's acceptance ratio method (BAR)~\cite{bar}. 
 For both the AdResS and full-atom simulations, the system size was kept same. Below is a table 
-with number of solute molecules, solvent molecules, system dimensions, size of hybrid and atomistic region (in AdResS simulations)
+with number of solute molecules, solvent molecules, system dimensions, size of transition and atomistic region (in AdResS simulations)
 for each system studied. 
 \begin{table}[!ht]
 \begin{center}
@@ -502,8 +541,33 @@ of the systems, a cut-off radius of 1.4 nm was used. Electrostatic
 interactions beyond the cut-off radius were calculated using the reaction-field term \cite{rf} with a dielectric 
 permittivity of 54 for urea in SPC water \cite{urea}, 64.8 for TBA in SPC water \cite{tba}, 61 for other solutes in SPC
 water, 19 for methanol and 46 for DMSO as the solvent \cite{vang}.
-\subsection{Auxiliary Hamiltonian: Technical Aspects}
-\recheck{In principle when the auxiliary Hamiltonian approach is used, one can perform microcanonical simulations and thus can avoid the use of a thermostat. In this case the thermodynamic force of the auxiliary Hamiltonian does not have any effect of the thermostat and thus its difference from the thermodynamic force of GC-AdResS is exactly the work that the thermostat does in GC-AdResS in order to enforce the falt density profile and thus induced the correct flux of particles which are changing resolution. The question is whether the energy is conserved in the auxiliary Hamiltonian approach. We have checked that the conservation holds for systems without electrostatics (methane,ethane,propane), thus for such systems the procedure is straightforward. Instaed, for systems with electrostatic interactions, even for full atomistic simulations, due to the fact that the force fields are designed for employing the reaction field method, the energy cannot be conserved and the coupling to a thermostat is required. This is a well known problem reported in the manual of Gromacs. However, in our case, for both, the auxiliary Hamiltonian and GC-AdResS the energy drift due to the reaction field method is the essentially same because they have equivalent electrostatic interactions, thus the energy drift due to the use of the reaction field method is automatically removed when we consider the difference between the thermodynamic forces of the two approaches, that is the force of changing resolution.} 
+
+\section{Technical Aspects of the Auxiliary Hamiltonian AdResS}
+\recheck{In principle when the auxiliary Hamiltonian approach is used,
+  one can perform microcanonical simulations and thus can avoid the
+  use of a thermostat. \bluec{I do not understand the following sentence... cannot revise it
+    plz make it short and clear. thanks..}
+  \bluec{In this case the thermodynamic force of the
+  auxiliary Hamiltonian does not have any effect of the thermostat and
+  thus its difference from the thermodynamic force of GC-AdResS is
+  exactly the work that the thermostat does in GC-AdResS in order to
+  enforce the falt density profile and thus induced the correct flux
+  of particles which are changing resolution.} The question is whether
+  the energy is conserved in the auxiliary Hamiltonian approach. We
+  have checked that the conservation holds for systems without
+  electrostatics (methane,ethane,propane), thus for such systems the
+  procedure is straightforward. Instaed, for systems with
+  electrostatic interactions, even for full atomistic simulations, due
+  to the fact that the force fields are designed for employing the
+  reaction field method, the energy cannot be conserved and the
+  coupling to a thermostat is required. This is a well known problem
+  reported in the manual of Gromacs. However, in our case, for both,
+  the auxiliary Hamiltonian and GC-AdResS the energy drift due to the
+  reaction field method is the essentially same because they have
+  equivalent electrostatic interactions, thus the energy drift due to
+  the use of the reaction field method is automatically removed when
+  we consider the difference between the thermodynamic forces of the
+  two approaches, that is the force of changing resolution.}
 
 
 
@@ -532,6 +596,8 @@ H.Wang, C.Hartmann, C.Sch\"{u}tte and L.Delle Site, Phys.Rev.X, {\bf 3}, 011018 
 J.Zavadlav, M.N.Melo, S.J. Marrink and M.Praprotnik, J.Chem.Phys. {\bf 140}, 054114 (2014)
 \bibitem{matej-sw2}
 J.Zavadlav, M.N.Melo, A.Vicente Cunha, A.H. De Vries ,S.J. Marrink and M.Praprotnik, J.Chem.Th.Comp. DOI:10.1021/ct5001523 (2014)
+\bibitem{h-adress-0}
+R.Potestio, S.Fritsch, P.Espanol, R.Delgado-Buscalioni, K.Kremer, R.Everaers and D.Donadio, Phys.Rev.Lett. {\bf 111}, 060601 (2013)
 \bibitem{h-adress}
 R.Potestio, P.Espanol, R.Delgado-Buscalioni, R.Everaers, K.Kremer, and D.Donadio, Phys.Rev.Lett. {\bf 111}, 060601 (2013)
 \bibitem{luigientropy}
