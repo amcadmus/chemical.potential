@@ -123,6 +123,10 @@ int main (int argc, char * argv[])
   BlockAverage_acc baposi (1);
 
   for (int ii = 0; ii < nposi; ++ii){
+    if (ii % 100 == 0){
+      printf ("# process: %.1f percent\r", double(double(ii) / double(nposi) * 100.0));
+      fflush (stdout);
+    }
     double posix = RandomGenerator_MT19937::genrand_real1();
     posix *= mywx.p4;
     double w1 = mywx.value (posix);
@@ -143,6 +147,7 @@ int main (int argc, char * argv[])
     basphere.calculate();
     baposi.deposite (basphere.getAvg());
   }
+  printf ("\n");
 
   baposi.calculate();
 
