@@ -2,8 +2,9 @@
 %\documentclass[aps,twocolumn]{revtex4-1}
 \documentclass[a4paper,preprint,unsortedaddress]{revtex4-1}
 %\documentclass[a4paper]{article}
-\usepackage{amsmath,amssymb,amsfonts,latexsym,graphicx}
-\usepackage[dvips]{color}
+\usepackage{amsmath,amssymb,amsfonts,latexsym}
+\usepackage[dvips]{graphicx}
+\usepackage{color}
 \usepackage{indentfirst} 
 
 % \parindent=0mm
@@ -33,6 +34,8 @@
 \newcommand{\thermo}{{\textrm{Q}}}
 \newcommand{\hadress}{{\textrm{H}}}
 \newcommand{\dadress}{{\textrm{D}}}
+\newcommand{\typea}{{\textrm{A}}}
+\newcommand{\typeb}{{\textrm{B}}}
 
 
 \begin{document}
@@ -58,18 +61,6 @@ We compare our results with those obtained from full atomistic simulations using
 
 \maketitle
 
-\bluec{
-  Unified of terminology:
-  \begin{itemize}
-  \item interface region $\rightarrow$ transition region
-  \item hybrid region $\rightarrow$ transition region
-  \item define COM, change all ``center of mass'' to COM
-  \item change the title of sec.III
-  \item do not be too mean, we cite BOTH of their PRL H-Adress paper...
-  \item some times, it is called GC-AdResS, sometimes original AdResS, sometimes standard AdResS, sometimes force-interpolation AdResS....
-  \item rewrite eq. 4, see if it is OK for you
-  \end{itemize}
-}
 
 \section{Introduction}
 The chemical potential represents an important thermodynamic information for any system, in particular for liquids, where the possibility of combining different substances for forming optimal mixtures is strictly related to knowledge of the chemical potential of each component in the mixture environment. In this perspective, molecular simulation represents a powerful tool for predicting the chemical potential of complex molecular systems. Popular, well established methodologies in Molecular Dynamics (MD) are Widom particle insertion (IPM) \cite{widom} and thermodynamic integration (TI) \cite{ti}. IPM is computationally very demanding often beyond a reasonable limit even in presence of large computational resources, but upon convergence, is rather accurate. TI is computationally convenient but specifically designed to calculate the chemical potential and thus  it may not be optimal for employing MD for studying other properties. In fact TI requires artificial modification of the atomistic interactions (see Appendix).
@@ -128,7 +119,7 @@ In Ref.~\cite{prx} it has been shown that the chemical potential of the atomisti
 \mu_{\CG}=\mu_{\AT}+\omega_{\thf}+\omega_{\thermo}
 \label{mu}
 \end{equation}
-with $\mu_{\CG}$ the chemical potential of the coarse-grained system (in GC-AdResS this corresponds to a liquid of generic spheres), $\mu_{\AT}$  the chemical potential of the atomistic system, $\omega_{\thf}=\int_{\Delta}{\vect F}_{\thf}({\vect r})d{\vect r}$ the work of the thermodynamic force in the transition region, $\omega_{\thermo}$ the work/heat provided by the thermostat in order to slowly equilibrate the inserted/removed degrees of freedom in the transition region. $\omega_{\thermo}$ is composed by two parts, one, called $\omega_{\ext}$, which compensates the dissipation of energy due to the change of interactions in $\Delta$, and another, $\omega_{\dof}$, which is related to the equilibration of the reinserted/removed degrees of freedom (rotational and vibrational). {While the determination of $\omega_{\dof}$ is not required for the our final aim (that is the calcualtion of the excess chemical potential, as explain later on), the calculation of $\omega_{\thermo}$ is very relevant. However this calculation is not straightforward and we have proposed to introduce an auxiliary Hamiltonian approach where the coarse-grained and atomistic potential are interpolated, and not the forces as in AdResS. Next, we impose that the Hamiltonian system must have the same thermodynamic equilibrium of the original force-based AdResS system; this is done by introducing a thermodynamic force in the auxiliary Hamiltonian approach, which, at the target temperature, keeps the density of particles across the system as in AdResS. \recheck{In the auxiliary Hamiltonian approach we have the same equilibrium as the original adaptive (and full atomistic) system  and the difference between the work of the original thermodynamic force and the work of the thermodynamic force calculated in the Hamiltonian approach gives $\omega_{\ext}$ (further details about this point are given in the Appendix)}. Moreover we have proven numerically, for the case of liquid water, that
+with $\mu_{\CG}$ the chemical potential of the coarse-grained system (in GC-AdResS this corresponds to a liquid of generic spheres), $\mu_{\AT}$  the chemical potential of the atomistic system, $\omega_{\thf}=\int_{\Delta}{\vect F}_{\thf}({\vect r})d{\vect r}$ the work of the thermodynamic force in the transition region, $\omega_{\thermo}$ the work/heat provided by the thermostat in order to slowly equilibrate the inserted/removed degrees of freedom in the transition region. $\omega_{\thermo}$ is composed by two parts, one, called $\omega_{\ext}$, which compensates the dissipation of energy due to the \bluec{non-conservative interactions} in $\Delta$, and another, $\omega_{\dof}$, which is related to the equilibration of the reinserted/removed degrees of freedom (rotational and vibrational). {While the determination of $\omega_{\dof}$ is not required for the our final aim (that is the calcualtion of the excess chemical potential, as explain later on), the calculation of $\omega_{\thermo}$ is very relevant. However this calculation is not straightforward and we have proposed to introduce an auxiliary Hamiltonian approach where the coarse-grained and atomistic potential are interpolated, and not the forces as in AdResS. Next, we impose that the Hamiltonian system must have the same thermodynamic equilibrium of the original force-based AdResS system; this is done by introducing a thermodynamic force in the auxiliary Hamiltonian approach, which, at the target temperature, keeps the density of particles across the system as in AdResS. \recheck{In the auxiliary Hamiltonian approach we have the same equilibrium as the original adaptive (and full atomistic) system  and the difference between the work of the original thermodynamic force and the work of the thermodynamic force calculated in the Hamiltonian approach gives $\omega_{\ext}$ (further details about this point are given in the Appendix)}. Moreover we have proven numerically, for the case of liquid water, that
   $\omega_{\ext}=\int_{\Delta}\nabla w(\vect r)\langle w( U^{\AT}-U^{\CG})\rangle_{\vect r} d{\vect r}$,
   where $U_{AT}$ and $U_{CG}$ are the atomistic and coarse-grained potential. 
   \recheck{In the next section of this work we show analytically that the formula above is exact (at least) at the first order w.r.t. the probability distribution of the system as defined in Eq.\ref{order}}.
@@ -146,7 +137,7 @@ In conclusion, we have the final expression:
 \end{equation}
 
 
-\section{Analytic Deriviation of the $w_{\ext}$}
+\section{Analytic Deriviation of the $w_{\ext}$}\label{sec:tmp4}
 {In this section we derive analytically the equivalence:
   $\omega_{\ext}=\int_{\Delta}\nabla_{\vect r} w(\vect r) \langle w(U^{\AT}-U^{\CG})\rangle_{\vect r} d{\vect r}$ and define its limitations.
 We define a potential coupling the atomistic and coarse-grained resolution as the spatial interpolation of the atomistic and coarse-grained potential, as done instead for the forces in the standard AdResS:
@@ -279,7 +270,8 @@ action-reaction law. The first and second part of Eq.~\eqref{eqn:interpol-f}
 do not contribute, because they obey the Newton's action-reaction law, so
 their total work is zero as long as the transition region move infinitesimally in one direction.
 The notation $\langle\cdot\rangle$ in Eq.~\eqref{eqn:apptmp3} denotes the ensemble averge.
-It is straightforward to show that \recheck{HAN, here it must be shown} \bluec{No, who cannot derive it should be sent back to the graduate course of thermodynamics.} 
+It is straightforward to show that
+% \recheck{HAN, here it must be shown} \bluec{No, who cannot derive it should be sent back to the graduate course of thermodynamics.} 
 \begin{align}\label{eqn:peq-d}
   \Delta A \approx
   -p_\AT\Delta V + p_\CG\Delta V -
@@ -292,18 +284,22 @@ which can be explicitly written down as:
 \begin{align}\label{eqn:w-rep}
   \omega_\res
   = \int_\HY d \vect r\,\langle \vect F_\res (\vect r)\rangle
-  = \int_\HY d \vect r\,\nabla_{\vect r}\omega(\vect r)\,
-  \big\langle \omega(\vect r')\, [U^\AT(\vect r-\vect r') - U^\CG(\vect r-\vect r')]\big\rangle_{\vect r'; \vect r}
+  = \int_\HY d \vect r\,\nabla_{\vect r}w(\vect r)\,
+  \big\langle w(\vect r')\,
+  [\sum_{\alpha,\beta}U^\AT(\vect r_\alpha-\vect r'_\beta) - U^\CG(\vect r-\vect r')]\big\rangle_{\vect r'; \vect r}
 \end{align}
-\recheck{The average is taken over all possible positions of the second molecule, provided the position of the first molecule
-in the pairwise interaction}. In case of molecules that contain
+\bluec{The average is taken over all
+  possible positions of the second molecule (i.e.~$\vect r'$),
+  provided the position of the first molecule (i.e.~$\vect r$)
+  in the pairwise interaction.
+In case of molecules that contain
 more than one atom, the averge is also taken over all possible
-conformations of the molecules. 
+conformations in the atomistic resolution.}
 % By using the same argument as the Section III.C of Ref.~\cite{prx} \recheck{Han, which ones?}, we can
 % show that
-\bluec{here since we have the auxiliary Hamiltonian, then the system can be treated by the conclusions
-  that can be found in standard thermodynamic text books. If the referee does not understand, he should
-be sent back to the graduate cource. }
+% \bluec{here since we have the auxiliary Hamiltonian, then the system can be treated by the conclusions
+%   that can be found in standard thermodynamic text books. If the referee does not understand, he should
+% be sent back to the graduate cource. }
 In the thermodynamic limit, the equilibrium volume of the AT region maxiimize the
 free energy, i.e.~$\Delta A / \Delta V
 = 0$, which yields
@@ -363,10 +359,10 @@ molecules also keep the atomistic degrees of freedom eventhough they
 are in the CG region, therefore, the kinetic part of $\mu_\AT$ and
 $\mu_\CG$ are identical, and $\omega_\dof$ vanishes. Therefore,
 by inserting Eq.~\eqref{eqn:wextra} into \eqref{eqn:mueq-d}, we have
-\begin{align}
+\begin{align}\label{eqn:tmp24}
   \mu_\AT^\exc = \mu_\CG^\exc - \int_\HY d\vect r \vect F_\thf(\vect r)
--\int_\HY d \vect r\,\nabla_{\vect r}\omega(\vect r)\,
-\big\langle \omega(\vect r')\, [U^\AT(\vect r-\vect r') - U^\CG(\vect r-\vect r')]\big\rangle_{\vect r'; \vect r}
+-\int_\HY d \vect r\,\nabla_{\vect r}w(\vect r)\,
+\big\langle w(\vect r')\, [\sum_{\alpha,\beta}U^\AT(\vect r_\alpha-\vect r'_\beta) - U^\CG(\vect r-\vect r')]\big\rangle_{\vect r'; \vect r}
 % -\int_\HY dr \nabla\omega(r)\,\big\langle \omega(r')\, [U^\AT(r-r') - U^\CG(r-r')]\big\rangle_{r'}
 \end{align}
 In the next section we apply the procedure to the calculation of the excess chemical potential of several liquids and mixtures.
@@ -383,7 +379,7 @@ The chemical potential of $k$-th liquid's component in a mixture is calculated a
   \int_{\Delta}{\vect F}^k_{\thf}({\vect r})d{\vect r}-
   \int_{\Delta}\nabla_{\vect r} w(\vect r) \langle w(U^{\AT}-U^{\CG})\rangle_{\vect r, k} d{\vect r}
 % \mu^{ex,i}_{AT}=\mu^{ex,i}_{CG}-\int_{\Delta}{F}^{i}_{th}({\vect r})d{\vect r}-\int_{\Delta}\langle w\nabla_{x_{i}} w(x)(V_{AT}-V_{CG})\rangle_{\vect r}d{\vect r}
-\label{icomp}
+\label{eqn:tmp25}
 \end{equation}
 where ${F}^{k}_{\thf}(x)$ is the thermodynamic force applied to the molecules of the $k$-th component; this assures that, at the given concentration, the density of molecules of species $k$, in the transition region, is equivalent to the density of the same liquid's component in a reference full atomistic simulation.
 \recheck{The ensemble evarage is taken over the position of the second molecule, provided that the first moelcule is of species $k$, and located at postion $\vect r$}.
@@ -570,10 +566,212 @@ water, 19 for methanol and 46 for DMSO as the solvent \cite{vang}.
   two approaches, that is the force of changing resolution.}
 
 
+\section{Extending the chemical potential expression to multi-component system}
 
 
+In this section we explain how to extend the chemical potential
+expresstion Eq.~\eqref{eqn:tmp24} for pure system to multi-component
+system, i.e.~\eqref{eqn:tmp25}.
+For simplicity and without lost of generality, we assume that the system
+is composed by two components, and the number of molecules are
+$N^\typea$ and $N^\typeb$, respectively. The superscript ``$\typea$'' and ``$\typeb$'' throughout this section 
+denotes the index of the components.  We further denote the number of 
+molecule $\typea$ in the atomistic, transition, and coarse-grained regions by
+$N^\typea_1$, $N^\typea_2$ and $N^\typea_3$, respectively. While those for type $\typeb$ molecules
+are $N^\typeb_1$, $N^\typeb_2$ and $N^\typeb_3$, respectively.  By
+assuming the transition region is infinitely small comparing with the
+atomistic and coarse-grained regions, we have the following
+constrains:
+\begin{align}
+  V &= V_1 + V_3\\
+  N &= N^\typea + N^\typeb\\
+  N^\typea &= N^\typea_1 + N^\typea_3\\
+  N^\typeb &= N^\typeb_1 + N^\typeb_3
+\end{align}
+By calculating the thermodynamic forces for each of the components, which
+are denoted by $\vect F^\typea_\thf$ and $\vect F^\typeb_\thf$,
+we impose the correct density profile to the system:
+\begin{align}
+  \rho_\HY^\typea &= \rho_\AT^\typea = \rho_\CG^\typea = \rho_0^\typea\\
+  \rho_\HY^\typeb &= \rho_\AT^\typeb = \rho_\CG^\typeb = \rho_0^\typeb
+\end{align}
+These can be achieved by the iterative thermodynamic force scheme for each
+component in the mixture system.\\
 
+Similar to Eq.~\eqref{eqn:peq}, we have for the force interpolation AdResS:
+\begin{align}\label{eqn:peq-d-ab}
+  p_\CG - p_\AT=\rho_0^\typea \omega^\typea_\thf + \rho_0^\typeb \omega^\typeb_\thf
+\end{align}
+Following the same argument in Sec.~\ref{sec:tmp4}, for $\typea$--$\typeb$
+mixture we have
+\begin{align}\label{eqn:peq-h-ab}
+  p_\CG - p_\AT=
+  \rho_0^\typea (\omega^{\typea,\hadress}_\thf - \omega^\typea_\res)
+  +
+  \rho_0^\typeb (\omega^{\typeb,\hadress}_\thf - \omega^\typeb_\res),
+\end{align}
+where the work of change representation for molecule $\typea$ is defined by
+\begin{align}\label{eqn:wrep-split-a}
+  \omega^\typea_\res 
+  &=
+  \omega^{\typea\typea}_\res +\omega^{\typea\typeb}_\res
+  = \int_\HY d\vect r \langle \vect F^{\typea\typea}_\res(\vect r)\rangle
+  + \int_\HY d\vect r \langle \vect F^{\typea\typeb}_\res(\vect r)\rangle,\\
+  \label{eqn:wrep-split-b}
+  \omega^\typeb_\res 
+  &=
+  \omega^{\typeb\typea}_\res +\omega^{\typeb\typeb}_\res
+  = \int_\HY d\vect r \langle \vect F^{\typeb\typea}_\res(\vect r)\rangle
+  + \int_\HY d\vect r \langle \vect F^{\typeb\typeb}_\res(\vect r)\rangle.
+\end{align}
+Here work of changing representation is splitted based on the
+type of interaction, e.g.~$\omega_\res^{\typea\typeb}$ is due to the
+cross interaction between molecule $\typea$ and $\typeb$.
+We have the explicit expressions:
+\begin{align}
+  \langle \vect F^{\typea\typea}_\res(\vect r)\rangle
+  &=
+  \nabla_{\vect r} w(\vect r)\,
+  \big\langle w(\vect r')
+  \big[\, \sum_{\alpha,\beta} U^\AT_{\typea\typea}(\vect r_\alpha- \vect r'_\beta)
+  - U^\CG_{\typea\typea}(\vect r- \vect r') \,\big]
+  \big\rangle_{\vect r',\typea; \vect r,\typea}\\
+  \langle \vect F^{\typea\typeb}_\res(\vect r)\rangle
+  &=
+  \nabla_{\vect r} w(\vect r)\,
+  \big\langle w(\vect r')
+  \big[\, \sum_{\alpha,\beta} U^\AT_{\typea\typeb}(\vect r_\alpha- \vect r'_\beta)
+  - U^\CG_{\typea\typeb}(\vect r- \vect r') \,\big]
+  \big\rangle_{\vect r',\typeb; \vect r,\typea}\\
+  \langle \vect F^{\typeb\typea}_\res(\vect r)\rangle
+  &=
+  \nabla_{\vect r} w(\vect r)\,
+  \big\langle w(\vect r')
+  \big[\, \sum_{\alpha,\beta} U^\AT_{\typeb\typea}(\vect r_\alpha- \vect r'_\beta)
+  - U^\CG_{\typeb\typea}(\vect r- \vect r') \,\big]
+  \big\rangle_{\vect r',\typea; \vect r,\typeb}\\
+  \langle \vect F^{\typeb\typeb}_\res(\vect r)\rangle
+  &=
+  \nabla_{\vect r} w(\vect r)\,
+  \big\langle w(\vect r')
+  \big[\, \sum_{\alpha,\beta} U^\AT_{\typeb\typeb}(\vect r_\alpha- \vect r'_\beta)
+  - U^\CG_{\typeb\typeb}(\vect r- \vect r') \,\big]
+  \big\rangle_{\vect r',\typeb; \vect r,\typeb}
+\end{align}
+The notations are self-explanatory. For example $ U^\AT_{\typea\typeb}$
+denotes the atomistic interaction between molecule $\typea$ and $\typeb$.
+Notation $\langle\cdot\rangle_{\vect r',\typea; \vect r,\typeb}$ denotes the
+ensemble average taken with respect to position $\vect r'$ being molecule
+$\typea$, provided a molecule $\typeb$ taking the postion $\vect r$.
+If the molecules contain more than one atom, then the average is also taken
+over all possible conformations.
+Therefore, the physical meaning of the
+force $\langle \vect F^{\typea\typeb}_\res(\vect r)\rangle$
+is that providing a molecule of type $\typea$ at $\vect r$,
+the averaged force between this atom and all molecule type $\typeb$
+in the system.
+Although we have $U^\AT_{\typea\typeb} = U^\AT_{\typeb\typea}$ and
+$U^\CG_{\typea\typeb} = U^\CG_{\typeb\typea}$, it should
+be noted that we do not have
+$\omega_\res^{\typeb\typea} = \omega_\res^{\typea\typeb}$  in general.
+From Eq.~\eqref{eqn:peq-d-ab}, \eqref{eqn:peq-h-ab},
+\eqref{eqn:wrep-split-a} and \eqref{eqn:wrep-split-b}, we have
+\begin{align}\label{eqn:hd-rel-ab}
+  \rho_0^\typea(\omega_\thf^{\typea,\hadress} - \omega_\thf^\typea
+  - \omega^{\typea\typea}_\res - \omega^{\typea\typeb}_\res)
+  +
+  \rho_0^\typeb(\omega_\thf^{\typeb,\hadress} - \omega_\thf^\typeb
+  - \omega^{\typeb\typea}_\res - \omega^{\typeb\typeb}_\res) = 0
+\end{align}
 
+We denotes the work done by the transition region on the two types
+of molecules by $\omega_0^\typea$ and $\omega_0^\typeb$, respectively.
+To find out the chemical potential difference between AT and CG resolutions,
+the same idea as presented in Sec.III.C of Ref.5 can be extended
+to the two component system. This extension is straightforward and trivial. We do not want
+to write them down, because one can just step-by-step follow the
+deriviation for the one component system, and no new technique is needed.
+In the end, we proved
+\begin{align}\label{eqn:tmpc7}
+  \mu^\typea_\AT(N^\typea_1, N^\typeb_1, V_1, T) &= \mu^\typea_\CG(N^\typea_1, N^\typeb_1, V_1, T) - \omega^\typea_0\\\label{eqn:tmpc8}
+  \mu^\typeb_\AT(N^\typea_1, N^\typeb_1, V_1, T) &= \mu^\typeb_\CG(N^\typea_1, N^\typeb_1, V_1, T) - \omega^\typeb_0
+\end{align}
+Now, $N^\typea_1$ and $N^\typeb_1$ has the meaning of the averaged number of type $\typea$ and
+type $\typeb$ molecules in the atomistic region, respectively.  Under the thermodynamic
+limit, this number maximize the Helmholtz free energy and is the one
+of statistical importance, see more discussions in
+Ref.5. We do not distinguish these notations from
+before, because the exact meaning is clear from the context.
+The meaning of the chemical potential, e.g.~$\mu_\AT^\typea$, is clear:
+it is the free energy increament of inserting one type $\typea$ molecule
+into the infinitely large $\typea$--$\typeb$ mixture.\\
+
+Similar to the pure system, from Eq.~\eqref{eqn:tmpc7} and \eqref{eqn:tmpc8},
+we write down  for the force interpolation AdResS:
+\begin{align}\label{eqn:mueq-d-a}
+ \mu^\typea_\CG - \mu^\typea_\AT &=   \omega^\typea_\thf + \omega^\typea_\dof + \omega^\typea_\ext\\\label{eqn:mueq-d-b}
+ \mu^\typeb_\CG - \mu^\typeb_\AT &=   \omega^\typeb_\thf + \omega^\typeb_\dof + \omega^\typeb_\ext
+\end{align}
+The meaning of $ \omega^\typea_\thf$ and $ \omega^\typeb_\thf$ are clear:
+the integral of the thermodynamic force $\vect F^\typea_\thf$ and
+$\vect F^\typeb_\thf$, respectively. $\omega^\typea_\ext$ is the energy
+dissipation due to molecule $\typea$ that
+changes resolution in the transition region,
+and  $\omega^\typeb_\ext$ is defined similarly.
+The energy dissipation can be further splitted as
+\begin{align}\label{eqn:wextra-split-a}
+  \omega^\typea_\ext& = \omega^{\typea\typea}_\ext + \omega^{\typea\typeb}_\ext\\\label{eqn:wextra-split-b}
+  \omega^\typeb_\ext& = \omega^{\typeb\typea}_\ext + \omega^{\typeb\typeb}_\ext
+\end{align}
+$ \omega^{\typea\typea}_\ext$ is the energy dissipation of a molecule
+$\typea$ produced by only non-conservative interactions between
+molecule type $\typea$ and type $\typea$.
+While $\omega^{\typea\typeb}_\ext$ is
+the energy dissipation of a molecule $\typea$
+due to the non-conservative cross interaction between
+type $\typea$ and $\typeb$.  The defintions are similar for $
+\omega^{\typeb\typea}_\ext$ and $ \omega^{\typeb\typeb}_\ext$.
+It should be noticed that, we do not have
+$\omega^{\typeb\typea}_\ext = \omega^{\typea\typeb}_\ext$ in gneneral.
+The same argument is applied to the auxiliary Hamiltonian approach, and
+yields
+\begin{align}\label{eqn:mueq-h-a}
+ \mu^\typea_\CG - \mu^\typea_\AT &=   \omega^{\typea,\hadress}_\thf + \omega^\typea_\dof \\\label{eqn:mueq-h-b}
+ \mu^\typeb_\CG - \mu^\typeb_\AT &=   \omega^{\typeb,\hadress}_\thf + \omega^\typeb_\dof
+\end{align}
+By using Eq.~\eqref{eqn:mueq-d-a}, \eqref{eqn:wextra-split-a} and \eqref{eqn:mueq-h-a}, we have
+\begin{align}\label{eqn:hd-rel-2-a}
+  \omega^{\typea\typea}_\ext + \omega^{\typea\typeb}_\ext
+  = \omega^{\typea,\hadress}_\thf - \omega^\typea_\thf.
+\end{align}
+Using Eq.~\eqref{eqn:mueq-d-b}, \eqref{eqn:wextra-split-b} and \eqref{eqn:mueq-h-b}, we have
+\begin{align}\label{eqn:hd-rel-2-b}
+  \omega^{\typeb\typea}_\ext + \omega^{\typeb\typeb}_\ext
+  = \omega^{\typeb,\hadress}_\thf - \omega^\typeb_\thf.
+\end{align}
+
+By inserting Eq.~\eqref{eqn:hd-rel-2-a} and \eqref{eqn:hd-rel-2-b} into
+Eq.~\eqref{eqn:hd-rel-ab}, we have
+\begin{align}\label{eqn:hd-rel-ab-1}
+  \rho_0^\typea(\omega_\ext^{\typea\typea} + \omega_\ext^{\typea\typeb}
+  - \omega^{\typea\typea}_\res - \omega^{\typea\typeb}_\res)
+  +
+  \rho_0^\typeb(\omega_\ext^{\typeb\typea} + \omega_\ext^{\typeb\typeb}
+  - \omega^{\typeb\typea}_\res - \omega^{\typeb\typeb}_\res) = 0
+\end{align}
+It is very easy to identify
+$\omega_\ext^{\typea\typea} = \omega_\res^{\typea\typea} $  and
+because  these two terms exclusively
+involves $\typea$--$\typea$ interaction.
+The same is true for $\typeb$--$\typeb$ interaction:
+$\omega_\ext^{\typeb\typeb} = \omega_\res^{\typeb\typeb} $.
+From the physical meaning of $\omega_\ext^{\typea\typeb}$,
+$\omega_\res^{\typea\typeb}$, $\omega_\ext^{\typeb\typea}$ and
+$\omega_\res^{\typeb\typea}$, it is the most natural way to further
+identify $\omega_\ext^{\typea\typeb} = \omega_\res^{\typea\typeb}$
+and $\omega_\ext^{\typeb\typea}=\omega_\res^{\typeb\typea}$.
+In summary, we prove the extension of chemical potential expression
+for multi-component system, i.e.~Eq.~\eqref{eqn:tmp25}.
 
 
 \begin{thebibliography}{24}
