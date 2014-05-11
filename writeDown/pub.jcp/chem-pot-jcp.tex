@@ -72,8 +72,8 @@ Below we provide the basic technical ingredients of GC-AdResS which are relevant
 \section{From AdResS to GC-AdResS}
 The original idea of AdResS is based on a simple intuitive physical principle:
 \begin{itemize}
-\item divide the space in three regions, one with atomistic resolution (AT) and one with coarse-grained (spherical) resolution (CG) interfaced by a smaller region with an hybrid treatment, which is usually called transition region or hybrid region.
-\item couple the molecules in the different regions through a spatial interpolation formula on the forces:
+\item Divide the space in three regions, one with atomistic resolution (AT) and one with coarse-grained (spherical) resolution (CG) interfaced by a smaller region with an hybrid treatment, which is usually called transition region or hybrid region.
+\item Couple the molecules in the different regions through a spatial interpolation formula on the forces:
 \begin{equation}
 {\vect F}_{i,j}=w(\vect r_i)w(\vect r_j){\vect
   F}_{i,j}^{\AT}+[1-w(\vect r_i)w(\vect r_j)]{\vect F}^{\CG}_{i,j} 
@@ -87,8 +87,8 @@ to $1$ (or vice versa) in the transition region ($\Delta$) where the lower resol
 slowly transformed (according to $w$) in the high resolution (or vice versa),
 as illustrated in Fig.\ref{fig1}.
 \item In the transition region a thermodynamic force acting on the COM of each molecule and a locally acting thermostat are added to assure the overall thermodynamic equilibrium at a given temperature. The thermodynamic force is defined in such a way that
-  $p_{\AT}+\rho_{0}\int_{\Delta}{\vect F}_{th}({\vect r})d{\vect r}=p_{\CG}$,
-  where $p_{AT}$  is the target pressure of the atomistic system (region), $p_{CG}$ is the pressure of the coarse-grained model, $\rho_{0}$ is the target molecular density of the atomistic system (region)~\cite{prl12}. An additional locally acting thermostat is added to take care of the loss/gain of energy in the transition region.
+  $p_{\AT}+\rho_{0}\int_{\Delta}{\vect F}_{\thf}({\vect r})d{\vect r}=p_{\CG}$,
+  where $p_{\AT}$  is the target pressure of the atomistic system (region), $p_{\CG}$ is the pressure of the coarse-grained model, $\rho_{0}$ is the target molecular density of the atomistic system (region)~\cite{prl12}. An additional locally acting thermostat is added to take care of the loss/gain of energy in the transition region.
 \end{itemize}
 \begin{figure}
 \center
@@ -120,15 +120,15 @@ In Ref.~\cite{prx} it has been shown that the chemical potential of the atomisti
 \mu_{\CG}=\mu_{\AT}+\omega_{\thf}+\omega_{\thermo}
 \label{mu}
 \end{equation}
-with $\mu_{\CG}$ the chemical potential of the coarse-grained system (in GC-AdResS this corresponds to a liquid of generic spheres), $\mu_{\AT}$  the chemical potential of the atomistic system, $\omega_{\thf}=\int_{\Delta}{\vect F}_{\thf}({\vect r})d{\vect r}$ the work of the thermodynamic force in the transition region, $\omega_{\thermo}$ the work/heat provided by the thermostat in order to slowly equilibrate the inserted/removed degrees of freedom in the transition region. $\omega_{\thermo}$ is composed by two parts, one, called $\omega_{\ext}$, which compensates the dissipation of energy due to the non-conservative interactions in $\Delta$, and another, $\omega_{\dof}$, which is related to the equilibration of the reinserted/removed degrees of freedom (rotational and vibrational). \recheck{While the determination of $\omega_{\dof}$ is not required for the our final aim (that is the calculation of the excess chemical potential, as explained later on), the calculation of $\omega_{\thermo}$ is very relevant}. However this calculation is not straightforward and we have proposed to introduce an auxiliary Hamiltonian approach where the coarse-grained and atomistic potential are interpolated, and not the forces as in AdResS. Next, we impose that the Hamiltonian system must have the same thermodynamic equilibrium of the original force-based GC-AdResS system; this is done by introducing a thermodynamic force in the auxiliary Hamiltonian approach, which, at the target temperature, keeps the density of particles across the system as in GC-AdResS. \recheck{In the auxiliary Hamiltonian approach we have the same equilibrium as the original adaptive (and full atomistic) system  and the difference between the work of the original thermodynamic force and the work of the thermodynamic force calculated in the Hamiltonian approach gives $\omega_{\ext}$ (further details about this point are given in the Appendix)}. Moreover we have proven numerically, for the case of liquid water, that
+with $\mu_{\CG}$ the chemical potential of the coarse-grained system (in GC-AdResS this corresponds to a liquid of generic spheres), $\mu_{\AT}$  the chemical potential of the atomistic system, $\omega_{\thf}=\int_{\Delta}{\vect F}_{\thf}({\vect r})d{\vect r}$ the work of the thermodynamic force in the transition region, $\omega_{\thermo}$ the work/heat provided by the thermostat in order to slowly equilibrate the inserted/removed degrees of freedom in the transition region. $\omega_{\thermo}$ is composed by two parts, one, called $\omega_{\ext}$, which compensates the dissipation of energy due to the non-conservative interactions in $\Delta$, and another, $\omega_{\dof}$, which is related to the equilibration of the reinserted/removed degrees of freedom (rotational and vibrational). \recheck{While the determination of $\omega_{\dof}$ is not required for the our final aim (that is the calculation of the excess chemical potential, as explained later on), the calculation of $\omega_{\thermo}$ is very relevant}. However this calculation is not straightforward and we have proposed to introduce an auxiliary Hamiltonian approach where the coarse-grained and atomistic potential are interpolated, and not the forces as in \bluec{the original} AdResS. Next, we impose that the Hamiltonian system must have the same thermodynamic equilibrium of the original force-based GC-AdResS system; this is done by introducing a thermodynamic force in the auxiliary Hamiltonian approach, which, at the target temperature, keeps the density of particles across the system as in GC-AdResS. \recheck{In the auxiliary Hamiltonian approach we have the same equilibrium as the original adaptive (and full atomistic) system  and the difference between the work of the original thermodynamic force and the work of the thermodynamic force calculated in the Hamiltonian approach gives $\omega_{\ext}$ (further details about this point are given in the \bluec{Appendix~\ref{app:tmp2}})}. Moreover we have proven numerically, for the case of liquid water, that
   $\omega_{\ext}=\int_{\Delta}\nabla w(\vect r)\langle w( U^{\AT}-U^{\CG})\rangle_{\vect r} d{\vect r}$,
-  where $U_{AT}$ and $U_{CG}$ are the atomistic and coarse-grained potential.
-\recheck{It must be noticed that the auxiliary Hamiltonian approach shall not be considered a Hamiltonian approach to adaptive resolution simulation. In fact, as discussed in Ref.\cite{prx} the equilibrium is imposed artificially and {\it per se} does not have any physical meaning (for more details, see discussion in the Appendix)}. 
+  where $U_{\AT}$ and $U_{\CG}$ are the atomistic and coarse-grained potential.
+\recheck{It must be noticed that the auxiliary Hamiltonian approach shall not be considered a Hamiltonian approach to adaptive resolution simulation. In fact, as discussed in Ref.\cite{prx} the equilibrium is imposed artificially and {\it per se} does not have any physical meaning (for more details, see discussion in the \bluec{Appendix~\ref{app:tmp2}})}. 
   \recheck{In the next section of this work we show analytically that the formula above is exact (at least) at the first order w.r.t. the probability distribution of the system as defined in Eq.\ref{order}}.
   
 The result above implies that $\omega_{\thermo}$ can be calculated in a straightforward way during the initial equilibration within in the standard GC-AdResS code. 
-\recheck{It must be noticed that, within the AdResS scheme, an approach similar to the auxiliary Hamiltonian  has been recently proposed and applied to liquids ad mixtures (of toy models so far) by Potestio {\it et al.} \cite{h-adress-0, h-adress} (see also \cite{luigientropy} where such an approach is commented)}. At this point according to \eqref{mu}, if one knows $\mu_{\CG}$, then  GC-AdResS can automatically provide $\mu_{\AT}$. However we need to do one step more, in fact the quantity of interest is not the total chemical potential, but the excess chemical potential $\mu^{\exc}_{\AT}$ which corresponds to the expression of \eqref{mu} where the kinetic (ideal gas) part is subtracted. Regarding the kinetic part, one can notice that the contribution coming from the COM is the same for the coarse-grained and for the atomistic molecules, thus it is automatically removed in the calculation of \eqref{mu}.
-The kinetic part of $\mu_{\AT}$ due to the rotational and vibrational degrees of freedom corresponds in our case to $\omega_{\dof}$ and \recheck{in principle can be calculated by hand (chemical potential of an isolated molecules). However such a calculation may become rather tedious for large and/or complex molecules but in our case it is actually not required.} In fact the \recheck{Gromacs implementation of AdResS} considers the removed degrees of freedom as phantom variables but thermally equilibrate them anyway \cite{simon-ch}. Thus the heat provided by the thermostat for the rotational and vibrational part is the same in the atomistic and coarse-graining molecules and is automatically removed in the difference. Finally, the calculation of $\mu^{\exc}_{\CG}$ can be done with standard methods, TI or IPM, which for simple spherical molecules, like those of the coarse-grained system, requires a negligible computational cost.
+\recheck{It must be noticed that, within the AdResS scheme, an approach similar to the auxiliary Hamiltonian  has been recently proposed and applied to liquids and mixtures (of toy models so far) by Potestio {\it et al.} \cite{h-adress-0, h-adress} (see also \cite{luigientropy} where such an approach is commented)}. At this point according to \eqref{mu}, if one knows $\mu_{\CG}$, then  GC-AdResS can automatically provide $\mu_{\AT}$. However we need to do one step more, in fact the quantity of interest is not the total chemical potential, but the excess chemical potential $\mu^{\exc}_{\AT}$ which corresponds to the expression of \eqref{mu} where the kinetic (ideal gas) part is subtracted. Regarding the kinetic part, one can notice that the contribution coming from the COM is the same for the coarse-grained and for the atomistic molecules, thus it is automatically removed in the calculation of \eqref{mu}.
+The kinetic part of $\mu_{\AT}$ due to the rotational and vibrational degrees of freedom corresponds in our case to $\omega_{\dof}$ and \recheck{in principle can be calculated by hand (chemical potential of an isolated molecules). However such a calculation may become rather tedious for large and/or complex molecules but in our case it is actually not required.} In fact the \recheck{Gromacs implementation of AdResS} considers the removed degrees of freedom as phantom variables but thermally equilibrate them anyway~\cite{simon-ch}. Thus the heat provided by the thermostat for the rotational and vibrational part is the same in the atomistic and coarse-graining molecules and is automatically removed in the difference. Finally, the calculation of $\mu^{\exc}_{\CG}$ can be done with standard methods, TI or IPM, which for simple spherical molecules, like those of the coarse-grained system, requires a negligible computational cost.
 In conclusion, we have the final expression:
 \begin{equation}
   \mu^{\exc}_{\AT}=
@@ -142,7 +142,7 @@ In conclusion, we have the final expression:
 \section{Analytic Derivation of the $w_{\ext}$}\label{sec:tmp4}
 \recheck{In this section we derive analytically the equivalence:
   $\omega_{\ext}=\int_{\Delta}\nabla_{\vect r} w(\vect r) \langle w(U^{\AT}-U^{\CG})\rangle_{\vect r} d{\vect r}$ and define its conceptual limitations.
-We define a potential coupling the atomistic and coarse-grained resolution as the spatial interpolation of the atomistic and coarse-grained potential, as done instead for the forces in the standard AdResS:
+We consider a potential coupling between the atomistic and coarse-grained resolution as the spatial interpolation of the atomistic and coarse-grained potential, as done instead for the forces in the standard AdResS:
 \begin{align}
   U =
   \sum_{i<j} w(\vect r_i) w(\vect r_j)
@@ -158,12 +158,12 @@ where $U^\AT_{i,j}$ and $U^\CG_{i,j}$ are the atomistic and coarse-grained inter
   U^\CG_{i,j} =
   U^\CG(\vect r_i - \vect r_j),
 \end{align}
-where index $\alpha$ and $\beta$ denotes the atom position of the corresponding molecule.
+where  $\alpha$ and $\beta$ denotes the atom indexes of the corresponding molecule.
 The COM of the molecule is defined as:
 \begin{align}
   \vect r_i = \sum_{\alpha\in i} \frac{m_\alpha}{\sum_{\alpha\in i} m_\alpha} \vect r_\alpha,
 \end{align}
-where $m_\alpha$ is the mass of atom $\alpha$.
+where $m_\alpha$ is the mass of atom $\alpha$ of molecule $i$.
 \recheck{The potential interpolation~\eqref{eqn:pot-interpol} provides an auxiliary Hamiltonian to the AdResS system, and
 the
 corresponding intermolecular force is given by:}
@@ -220,17 +220,17 @@ Instead when we consider the auxiliary Hamiltonian approach, the third term on t
 symmetric w.r.t molecule $i$ and $j$, therefore, the Newton's
 action-reaction law (momentum conservation) does not hold anymore.
 As a consequence, the pressure relation between the AT and CG
-resolution~\eqref{eqn:peq} does not hold anymore and should be derived again.
+resolution~\eqref{eqn:peq} does not hold and should be derived again.
 Now assume, \recheck{for simplicity and without lost of generality}, that the system changes resolution only along the $x$ direction.
 We impose an infinitesimal increment of the volume $\Delta V$ to the
 AT region, and apply the same decrement of the volume $-\Delta V$ to the CG
-region.  The volume of the transition region is kept constant as if an ideal ``piston'' moves toward the CG region by an amount $\Delta L$.
+region.  The volume of the transition region is kept constant as if it is an ideal ``piston'' that moves toward the CG region by an amount $\Delta L$.
 We assume $\Delta V = \Delta L\cdot S$, where $S$ is the
 cutting surface area.
 The displacement $\Delta L$ should be infinitesimal, i.e.~much smaller than the size of the
 transition region. This is achievable by taking the limit of $\Delta L\rightarrow 0$,
 while keeping the system size fixed.
-It must be noticed that also the displacements of the molecules are infinitesimal, so that it can be reasonably assumed that
+It must be noticed that also the displacements of the molecules are infinitesimal, so it can be reasonably assumed that
 the resolution of the molecules remains the same under a displacement of $\Delta L$.
 Therefore, the change of the free energy of the system is approximately:
 \begin{align}\nonumber
@@ -258,7 +258,8 @@ the work done by the force of changing representation (which does not vanish due
 action-reaction law). The first and second term of Eq.~\eqref{eqn:interpol-f}
 being forces based on pairwise interactions only, do not contribute to the difference of energy; in fact 
 their total work is zero (as long as the transition region move infinitesimally along $x$).
-The notation $\langle\cdot\rangle$ in Eq.~\eqref{eqn:apptmp3} denotes the ensemble average.
+The notation $\langle\cdot\rangle$ in Eq.~\eqref{eqn:apptmp3} denotes the ensemble average, which
+will be specified soon.
 It is straightforward to show that
 \begin{align}\label{eqn:peq-d}
   \Delta A \approx
@@ -310,7 +311,7 @@ and yields  the chemical potential difference between the AT and CG resolutions
  \mu_\CG - \mu_\AT =   \omega^\hadress_\thf + \omega_\dof 
 \end{align}
 In the auxiliary Hamiltonian, we do not have the term $w_\ext$ in the above
-formula (being this latter, in GC-AdResS, generated by the non conservative effect of the force interpolation).
+formula \bluec{(being this latter, in GC-AdResS, generated by the non conservative effect of the force interpolation).}
 By comparing~\eqref{eqn:mueq-d} with~\eqref{eqn:mueq-h}, we have the
 relation
 \begin{align}\label{eqn:hd-rel-2}
@@ -322,7 +323,7 @@ and GC-AdResS.\\
 
 From Eq.~\eqref{eqn:hd-rel} and \eqref{eqn:hd-rel-2}, we
 find the extra work of the thermostat in GC-AdResS being identical to the work of changing
-representation of the Hamiltonian auxiliary approach:
+representation of the auxiliary Hamiltonian approach:
 \begin{align}\label{eqn:wextra}
   \omega_\ext = \omega_\res,
 \end{align}
@@ -330,14 +331,14 @@ which basically proves the statement at the beginning of this section.  The ense
 average on the R.H.S.~of Eq.~\eqref{eqn:w-rep} is performed in the
 ensemble of the system treated with the potential interpolation approach, and the question is if the ensemble average is equivalent if it is performed in the simulation where the force
 interpolation approach is used.  It is obvious that the spatial probability distribution corresponding to the system treated with the potential interpolation is consistent with the force
-interpolation at least up to the 1st order as defined in Eq.\ref{order}.  It is also
+interpolation at least up to the first order.  It is also
 possible to systematically obtain equivalence in the ensemble average operation  at higher orders of accuracy of the probability distribution, as, for example, it is done for the radial distribution function in Ref.~\cite{jctchan}.
 However, here we do not consider higher order corrections, because it
 has been numerically shown that actually the ensemble average of
 $\vect F_\res$ dose not depend on in which ensemble it is
 calculated~\cite{prx}. Therefore, we use Eq.~\eqref{eqn:wextra} to
 calculate $\omega_\ext$, and measure the ensemble average by the
-standard AdResS.  As previously reported, in the computer implementation, the CG
+standard AdResS.  As previously discussed, in the Gromacs implementation, the CG
 molecules also keep the atomistic degrees of freedom even though they
 are in the CG region, therefore, the kinetic part of $\mu_\AT$ and
 $\mu_\CG$ are identical, and $\omega_\dof$ vanishes. Therefore,
@@ -348,14 +349,14 @@ by inserting Eq.~\eqref{eqn:wextra} into \eqref{eqn:mueq-d}, we have
 \big\langle w(\vect r')\, [\sum_{\alpha,\beta}U^\AT(\vect r_\alpha-\vect r'_\beta) - U^\CG(\vect r-\vect r')]\big\rangle_{\vect r'; \vect r}
 % -\int_\HY dr \nabla\omega(r)\,\big\langle \omega(r')\, [U^\AT(r-r') - U^\CG(r-r')]\big\rangle_{r'}
 \end{align}
-The extension of Eq.\ref{eqn:tmp24} to multicomponent systems is reported in the Appendix, while in the next section we apply the method to the calculation of $\mu^{ex}$ to liquids and mixtures.} 
+The extension of Eq.\ref{eqn:tmp24} to multicomponent systems is reported in the Appendix~\ref{app:tmp3}, while in the next section we apply the method to the calculation of $\mu^{ex}$ to liquids and mixtures.} 
 
 \section{Results and Discussion}
-We have calculated $\mu^{ex}$ for different liquids and mixtures, choosing cases which are representative of a large class of systems. Hydrophobic solvation in methane/water and in ethane/water mixtures, hydrophilic solvation in urea/water, a balance of both in water/tert-Butyl alcohol (TBA) mixture, other liquids, e.g. pure methanol and DMSO (and their mixtures with water), non aqueous mixtures in TBA/DMSO and alkane liquids such as methane, ethane and propane. Moreover, systems as water/urea are commonly used as cosolvent of biological molecules \cite{nico-debashish} while systems as tert-Butyl alcohol/water play a key role in modern technology \cite{irata}, thus they are of high interest {\it per se}. All technical details of each simulation are presented in the Appendix.
+We have calculated $\mu^{ex}$ for different liquids and mixtures, choosing cases which are representative of a large class of systems. Hydrophobic solvation in methane/water and in ethane/water mixtures, hydrophilic solvation in urea/water, a balance of both in water/tert-Butyl alcohol (TBA) mixture, other liquids, e.g. pure methanol and DMSO (and their mixtures with water), non aqueous mixtures in TBA/DMSO and alkane liquids such as methane, ethane and propane. Moreover, systems as water/urea are commonly used as cosolvent of biological molecules \cite{nico-debashish} while systems as tert-Butyl alcohol/water play a key role in modern technology \cite{irata}, thus they are of high interest {\it per se}. All technical details of each simulation are presented in the Appendix~\ref{app:tmp1}.
 Results are reported in Table \ref{table} where the comparison with values obtained using full atomistic TI and available experiments, at the same concentrations, of our calculation is made; in our previous work we have already shown that value of the chemical potential of liquid water obtained with IPM is well reproduced by GC-AdResS, however the computational cost of IMP was very large, thus we do not consider calculations done with IPM in this paper. 
 The agreement with full atomistic TI simulations is satisfactory in all cases, and thus it proves the solidity of GC-AdResS in describing the essential thermodynamics of a large class of systems.
 We also compare the obtained values with those available in literature \cite{vang,nico}. Although the concentration of the minor component in the mixtures that we consider, is higher than the concentrations considered in Refs.\cite{vang,nico}, we are anyway in the very dilute regime and thus the chemical potential should not change in a significant way; we have verified  such a supposed consistency. 
-The chemical potential of $k$-th liquid's component in a mixture is calculated as \recheck{(see Appendix)}:
+The chemical potential of $k$-th liquid's component in a mixture is calculated as \recheck{(see Appendix~\ref{app:tmp3})}:
 \begin{equation}
   \mu^{\exc,k}_{\AT}=
   \mu^{\exc,k}_{\CG}-
@@ -431,7 +432,7 @@ The essential message is that GC-AdResS would be, {\it per se}, a reliable multi
 This work was supported by the Deutsche Forschungsgemeinschaft (DFG) with the Heisenberg grant provided to L.D.S (grant code DE 1140/5-1) and with its associate DFG grants for A.G.(grant code DE 1140/7-1) and for H.W. (grant code DE 1140/4-2).H.W.~and C.S.~thank the financial support by DFG research center MATHEON. \recheck{We thank Christoph Junghans and Debashish Mukherji for contributing to the information reported in section IV about the speed up factor}.
 
 \appendix
-\section{Technical details of the simulations}
+\section{Technical details of the simulations}\label{app:tmp1}
 The potential energy function and the force field parameters for all the molecules
 were taken from GROMOS53A6 parameter set. Liquid water was described by the SPC
 model~\cite{spc}, methanol was described by the model developed by Walser et al~\cite{walser},
@@ -458,11 +459,11 @@ of a coupling parameter $\lambda$, which indicates a level of change taken place
 A and B. The interactions are switched off as $\lambda$ is 
 continuously decreased in the stepwise manner. Simulations conducted at different values of 
 $\lambda$ allow to plot a $\frac{\partial H}{\partial \lambda}$ curve, from which 
-$\mu^{excess}$ is derived \cite{mu}. 
+$\mu^{\exc}$ is derived \cite{mu}. 
 \begin{equation}
- \mu_{iB} - \mu_{iA} = \int_{0}^{1} \left \langle \frac{\partial H}{\partial \lambda} \right \rangle_{\lambda} d\lambda 
+ \mu^\exc_{iB} - \mu^\exc_{iA} = \int_{0}^{1} \left \langle \frac{\partial H}{\partial \lambda} \right \rangle_{\lambda} d\lambda 
 \end{equation}
-where $U_{i}$ is the interaction energy of particle $i$ with the remaining particles and $\langle . \rangle$
+\bluec{where $U_{i}$ is the interaction energy of particle $i$ with the remaining particles} and $\langle \cdot \rangle$
 denotes the canonical (NVT) or isobaric-isothermal (NPT) ensemble average. We computed the excess 
 free energy using a two-stage approach as described in~\cite{mobley}, first coupling van der Waals interactions to transform the 
 non-interacting molecule into a partially-interacting uncharged molecule, then coupling Coulomb
@@ -471,8 +472,8 @@ free energy $\Delta G_{final}$ is the sum of $\Delta G$ values obtained from the
 \begin{equation}
  \Delta G_{final} = \Delta G_{ele} + \Delta G_{vdw}
 \end{equation}
-where $\Delta G_{ele}$ is the free energy change associated with introducing the van der Waals interactions and 
-$\Delta G_{vdw}$ is the free energy change associated with introducing Coulomb interactions. 
+where $\Delta G_{vdw}$ is the free energy change associated with introducing the van der Waals interactions and 
+$\Delta G_{ele}$ is the free energy change associated with introducing Coulomb interactions. 
 We evaluated the above integral for 21 values of $\lambda$ (evenly spaced between 0 and 1) in both the procedures.
 At each value of $\lambda$, first a steepest descent energy minimization was performed followed 
 by 200 ps of NPT equilibration and 400 ps of data collection under constant volume and temperature
@@ -521,11 +522,11 @@ interactions beyond the cut-off radius were calculated using the reaction-field 
 permittivity of 54 for urea in SPC water \cite{urea}, 64.8 for TBA in SPC water \cite{tba}, 61 for other solutes in SPC
 water, 19 for methanol and 46 for DMSO as the solvent \cite{vang}.
 
-\section{Technical Aspects of the Auxiliary Hamiltonian AdResS}
+\section{Technical Aspects of the Auxiliary Hamiltonian AdResS}\label{app:tmp2}
 \recheck{In principle when the auxiliary Hamiltonian approach is used,
   one can perform microcanonical simulations and thus can avoid the
-  use of a thermostat. In this case the thermodynamic force of the
-  auxiliary Hamiltonian would not carry any effect of the thermostat and thus the difference between the work of the thermodynamic force of GC-AdResS and that of the auxiliary Hamiltonian is
+  use of a thermostat. In this case, the thermodynamic force of the
+  auxiliary Hamiltonian would not carry any effect of the thermostat, and thus the difference between the work of the thermodynamic force of GC-AdResS and that of the auxiliary Hamiltonian is
   exactly the work that the thermostat does in GC-AdResS in order to compensate energy dissipation. The question is whether
   the energy is conserved in the auxiliary Hamiltonian approach. We
   have checked that the conservation holds for systems without
@@ -544,7 +545,7 @@ water, 19 for methanol and 46 for DMSO as the solvent \cite{vang}.
   two approaches, that is the force of changing resolution.}
 
 
-\section{Extension of the chemical potential derivation to multi-component systems}
+\section{Extension of the chemical potential derivation to multi-component systems}\label{app:tmp3}
 
 
 \recheck{In this section we  extend the chemical potential
@@ -629,10 +630,11 @@ The explicit expressions are:
   \big\rangle_{\vect r',\typeb; \vect r,\typeb}
 \end{align}
 The notations are self-explanatory; for example $ U^\AT_{\typea\typeb}$
-denotes the expression for atomistic interactions between a molecule of type $\typea$ and one of type $\typeb$ (similarly $ U^\AT_{\typea\typea}$ and$ U^\AT_{\typeb\typeb}$) while $ U^\CG_{\typea\typeb}$ is the equivalent for coarse-grained interactions.
+denotes the expression for atomistic interactions between one molecule of type $\typea$ and one of type $\typeb$ ($U^\AT_{\typea\typea}$ and$ U^\AT_{\typeb\typeb}$ are similar),
+while $ U^\CG_{\typea\typeb}$ is the equivalent for coarse-grained interactions.
 Notation $\langle\cdot\rangle_{\vect r',\typeb; \vect r,\typea}$ denotes the
 ensemble average performed with respect to position $\vect r'$ of molecule
-$\typeb$, provided that a molecule $\typea$ takes the position $\vect r$ (the same applies for other combinations on indices ${\vect r'}, {\vect r}, {\typea}, {\typeb}$.
+$\typeb$, provided that a molecule $\typea$ takes the position $\vect r$ (the same applies for other combinations on indices ${\vect r'}, {\vect r}, {\typea}, {\typeb}$).
 If molecules contain more than one atom, then the average is also taken
 over all possible conformations.
 Therefore, the physical meaning of (for example) 
@@ -661,9 +663,7 @@ Such a procedure leads to:
   \mu^\typea_\AT(N^\typea_1, N^\typeb_1, V_1, T) &= \mu^\typea_\CG(N^\typea_3, N^\typeb_3, V_3, T) - \omega^\typea_0\\\label{eqn:tmpc8}
   \mu^\typeb_\AT(N^\typea_1, N^\typeb_1, V_1, T) &= \mu^\typeb_\CG(N^\typea_3, N^\typeb_3, V_3, T) - \omega^\typeb_0
 \end{align}
-where, $N^\typea_1$ and $N^\typeb_1$ denote the number of type $\typea$ and
-type $\typeb$ molecules in the atomistic region ($N^\typea_3$ and $N^\typeb_3$ in the CG region instead).  In the thermodynamic
-limit, these numbers maximize the Helmholtz free energy.
+In the thermodynamic limit, these numbers maximize the Helmholtz free energy.
 In this context the chemical potential, e.g.~$\mu_\AT^\typea$, is the free energy increment due to the insertion of one molecule of type $\typea$ 
 into the infinitely large $\typea$--$\typeb$ mixture.\\
 Similarly to the case of the one component system, from Eq.~\eqref{eqn:tmpc7} and \eqref{eqn:tmpc8},
@@ -719,7 +719,7 @@ Eq.~\eqref{eqn:hd-rel-ab}, we have
   - \omega^{\typeb\typea}_\res - \omega^{\typeb\typeb}_\res) = 0
 \end{align}
 It is natural to conclude that
-$\omega_\ext^{\typea\typea} = \omega_\res^{\typea\typea} $  
+$\omega_\ext^{\typea\typea} = \omega_\res^{\typea\typea} $,
 because  these two terms exclusively
 involves $\typea$--$\typea$ interaction.
 The same is true for $\typeb$--$\typeb$ interaction:
@@ -727,8 +727,8 @@ $\omega_\ext^{\typeb\typeb} = \omega_\res^{\typeb\typeb} $.
 The physical meaning of $\omega_\ext^{\typea\typeb}$,
 $\omega_\res^{\typea\typeb}$, $\omega_\ext^{\typeb\typea}$ and
 $\omega_\res^{\typeb\typea}$, leads to 
-identify $\omega_\ext^{\typea\typeb}$ with $\omega_\res^{\typea\typeb}$
-and $\omega_\ext^{\typeb\typea}=\omega_\res^{\typeb\typea}$.
+identify of $\omega_\ext^{\typea\typeb}$ with $\omega_\res^{\typea\typeb}$,
+and $\omega_\ext^{\typeb\typea}$ with $\omega_\res^{\typeb\typea}$.
 It follows that (for example) for component $\typea$:
 \begin{equation}
 \mu^{A}_{CG}-\mu^{A}_{AT}=\int _{\Delta}{\bf F}^{A}_{th}({\bf r})d{\bf r}+\int_{\Delta} \langle \vect F^{\typea\typea}_\res(\vect r)\rangle d{\bf r}+\int_{\Delta} \langle \vect F^{\typea\typeb}_\res(\vect r)\rangle d{\bf r}
