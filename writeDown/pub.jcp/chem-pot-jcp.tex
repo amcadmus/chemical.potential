@@ -120,10 +120,10 @@ In Ref.~\cite{prx} it has been shown that the chemical potential of the atomisti
 \mu_{\CG}=\mu_{\AT}+\omega_{\thf}+\omega_{\thermo}
 \label{mu}
 \end{equation}
-with $\mu_{\CG}$ the chemical potential of the coarse-grained system (in GC-AdResS this corresponds to a liquid of generic spheres), $\mu_{\AT}$  the chemical potential of the atomistic system, $\omega_{\thf}=\int_{\Delta}{\vect F}_{\thf}({\vect r})d{\vect r}$ the work of the thermodynamic force in the transition region, $\omega_{\thermo}$ the work/heat provided by the thermostat in order to slowly equilibrate the inserted/removed degrees of freedom in the transition region. $\omega_{\thermo}$ is composed by two parts, one, called $\omega_{\ext}$, which compensates the dissipation of energy due to the non-conservative interactions in $\Delta$, and another, $\omega_{\dof}$, which is related to the equilibration of the reinserted/removed degrees of freedom (rotational and vibrational). \recheck{While the determination of $\omega_{\dof}$ is not required for the our final aim (that is the calculation of the excess chemical potential, as explained later on), the calculation of $\omega_{\thermo}$ is very relevant}. However this calculation is not straightforward and we have proposed to introduce an auxiliary Hamiltonian approach where the coarse-grained and atomistic potential are interpolated, and not the forces as in \bluec{the original} AdResS. Next, we impose that the Hamiltonian system must have the same thermodynamic equilibrium of the original force-based GC-AdResS system; this is done by introducing a thermodynamic force in the auxiliary Hamiltonian approach, which, at the target temperature, keeps the density of particles across the system as in GC-AdResS. \recheck{In the auxiliary Hamiltonian approach we have the same equilibrium as the original adaptive (and full atomistic) system  and the difference between the work of the original thermodynamic force and the work of the thermodynamic force calculated in the Hamiltonian approach gives $\omega_{\ext}$ (further details about this point are given in the \bluec{Appendix~\ref{app:tmp2}})}. Moreover we have proven numerically, for the case of liquid water, that
+with $\mu_{\CG}$ the chemical potential of the coarse-grained system (in GC-AdResS this corresponds to a liquid of generic spheres), $\mu_{\AT}$  the chemical potential of the atomistic system, $\omega_{\thf}=\int_{\Delta}{\vect F}_{\thf}({\vect r})d{\vect r}$ the work of the thermodynamic force in the transition region, $\omega_{\thermo}$ the work/heat provided by the thermostat in order to slowly equilibrate the inserted/removed degrees of freedom in the transition region. $\omega_{\thermo}$ is composed by two parts, one, called $\omega_{\ext}$, which compensates the dissipation of energy due to the non-conservative interactions in $\Delta$, and another, $\omega_{\dof}$, which is related to the equilibration of the reinserted/removed degrees of freedom (rotational and vibrational). \recheck{While the determination of $\omega_{\dof}$ is not required for the our final aim (that is the calculation of the excess chemical potential, as explained later on), the calculation of $\omega_{\thermo}$ is very relevant}. However this calculation is not straightforward and we have proposed to introduce an auxiliary Hamiltonian approach where the coarse-grained and atomistic potential are interpolated, and not the forces as in \recheck{the original} AdResS. Next, we impose that the Hamiltonian system must have the same thermodynamic equilibrium of the original force-based GC-AdResS system; this is done by introducing a thermodynamic force in the auxiliary Hamiltonian approach, which, at the target temperature, keeps the density of particles across the system as in GC-AdResS. \recheck{In the auxiliary Hamiltonian approach we have the same equilibrium as the original adaptive (and full atomistic) system  and the difference between the work of the original thermodynamic force and the work of the thermodynamic force calculated in the Hamiltonian approach gives $\omega_{\ext}$ (further details about this point are given in the {Appendix~\ref{app:tmp2}})}. Moreover we have proven numerically, for the case of liquid water, that
   $\omega_{\ext}=\int_{\Delta}\nabla w(\vect r)\langle w( U^{\AT}-U^{\CG})\rangle_{\vect r} d{\vect r}$,
   where $U_{\AT}$ and $U_{\CG}$ are the atomistic and coarse-grained potential.
-\recheck{It must be noticed that the auxiliary Hamiltonian approach shall not be considered a Hamiltonian approach to adaptive resolution simulation. In fact, as discussed in Ref.\cite{prx} the equilibrium is imposed artificially and {\it per se} does not have any physical meaning (for more details, see discussion in the \bluec{Appendix~\ref{app:tmp2}})}. 
+\recheck{It must be noticed that the auxiliary Hamiltonian approach shall not be considered a Hamiltonian approach to adaptive resolution simulation. In fact, as discussed in Ref.\cite{prx} the equilibrium is imposed artificially and {\it per se} does not have any physical meaning (for more details, see discussion in the {Appendix~\ref{app:tmp2}})}. 
   \recheck{In the next section of this work we show analytically that the formula above is exact (at least) at the first order w.r.t. the probability distribution of the system as defined in Eq.\ref{order}}.
   
 The result above implies that $\omega_{\thermo}$ can be calculated in a straightforward way during the initial equilibration within in the standard GC-AdResS code. 
@@ -311,7 +311,7 @@ and yields  the chemical potential difference between the AT and CG resolutions
  \mu_\CG - \mu_\AT =   \omega^\hadress_\thf + \omega_\dof 
 \end{align}
 In the auxiliary Hamiltonian, we do not have the term $w_\ext$ in the above
-formula \bluec{(being this latter, in GC-AdResS, generated by the non conservative effect of the force interpolation).}
+formula {(being the term $w_\ext$ in GC-AdResS, generated by the non-conservative effect of the force interpolation).}
 By comparing~\eqref{eqn:mueq-d} with~\eqref{eqn:mueq-h}, we have the
 relation
 \begin{align}\label{eqn:hd-rel-2}
@@ -729,12 +729,12 @@ $\omega_\res^{\typea\typeb}$, $\omega_\ext^{\typeb\typea}$ and
 $\omega_\res^{\typeb\typea}$, leads to 
 identify of $\omega_\ext^{\typea\typeb}$ with $\omega_\res^{\typea\typeb}$,
 and $\omega_\ext^{\typeb\typea}$ with $\omega_\res^{\typeb\typea}$.
-It follows that (for example) for component $\typea$:
+It follows that (for example) for component $\typea$, the excess chemical potential difference is:
 \begin{equation}
-\mu^{A}_{CG}-\mu^{A}_{AT}=\int _{\Delta}{\bf F}^{A}_{th}({\bf r})d{\bf r}+\int_{\Delta} \langle \vect F^{\typea\typea}_\res(\vect r)\rangle d{\bf r}+\int_{\Delta} \langle \vect F^{\typea\typeb}_\res(\vect r)\rangle d{\bf r}
+\mu^{\typea,\exc}_{\CG}-\mu^{\typea,\exc}_{\AT}=\int _{\Delta}{\vect F}^{\typea}_{\thf}({\vect r})d{\vect r}+\int_{\Delta} \langle \vect F^{\typea\typea}_\res(\vect r)\rangle d{\vect r}+\int_{\Delta} \langle \vect F^{\typea\typeb}_\res(\vect r)\rangle d{\vect r}
 \label{fineq}
 \end{equation}
- and this proves ~Eq.~\eqref{eqn:tmp25}.}
+ and this proves Eq.~\eqref{eqn:tmp25}.}
 
 
 \begin{thebibliography}{24}
