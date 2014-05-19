@@ -3,32 +3,13 @@
 \usepackage{a4}
 \usepackage{graphicx}
 \usepackage{pslatex}
-\usepackage[]{color}
-\usepackage{amsmath,amssymb,amsfonts,latexsym,graphicx}
-
+\usepackage{color}
 \pagestyle{empty}
 \parindent0cm
 % \addtolength{\textheight}{2cm}
-% \addtolength{\textwidth}{1cm}
 \renewcommand{\sfdefault}{cmss}
 \renewcommand{\familydefault}{\sfdefault}
-\newcommand{\redc}[1]{{\color{red} #1}}            
-\newcommand{\recheck}[1]{{\color{red} #1}}            
-
-\newcommand{\vect}[1]{\textbf{\textit{#1}}}
-\newcommand{\dof}{{\textrm{DOF}}}
-\newcommand{\AT}{{\textrm{{AT}}}}
-\newcommand{\EX}{{\textrm{EX}}}
-\newcommand{\CG}{{\textrm{CG}}}
-\newcommand{\HY}{{\Delta}}
-\newcommand{\rdf}{{\textrm{rdf}}}
-\newcommand{\thf}{{\textrm{th}}}
-\newcommand{\res}{{\textrm{rep}}}
-\newcommand{\ext}{{\textrm{extra}}}
-\newcommand{\exc}{{\textrm{exc}}}
-\newcommand{\thermo}{{\textrm{Q}}}
-\newcommand{\hadress}{{\textrm{H}}}
-\newcommand{\dadress}{{\textrm{D}}}
+\newcommand{\recheck}[1]{{\color{red} #1}}
 
 \newcommand{\kopf}{\noindent
 \raisebox{2.5cm}[0cm][0cm]
@@ -43,7 +24,6 @@
 }}
 %\raisebox{2cm}[0cm][0cm]{\rule{\textwidth}{0.2mm}}}
 \begin{document}
-
 \kopf
 \vspace{2cm}
 \hfill\raisebox{1.5cm}[0cm][0cm]
@@ -55,7 +35,6 @@ D-14195 Berlin\\
 Tel:\ +49 (0)30 838 75775 \\
 Fax:\ + 49 (0)30 838 75412 \\
 }}
-
 \vspace{3cm}
 \noindent\raisebox{1.5cm}[0cm][0cm]
 {\fbox{\parbox[t]{0.6\textwidth}
@@ -67,205 +46,127 @@ Fax:\ + 49 (0)30 838 75412 \\
 
 \vspace{1cm}
 \parskip 2ex
-Dear Editor\\
+Dear Editor
+
 We would like to thank both referees for the criticisms and suggestions.
-We agree on several points, however tend to strongly disagree on some crucial ones.\\
 Below please find a reply to each of the concerns raised by the referees and the
-corresponding modification of the manuscript (where required).\\
-Moreover one section is dedicated to comments that are for you and are properly labeled.\\
+corresponding modification of the manuscript (where required).
+In order to facilitate the work of the referees we have highlighted in red, the additions/modifications in the manuscript.
 
-{\bf For the Editor:}
+\vskip 1cm
+Sincerely,
 
-Regarding the comment of {\bf Reviewer 1}:
+Luigi Delle Site
 
-{\it  It is not easy to judge the relevance of this
+\newpage
+
+{\bf For the Editor only:}
+
+
+Regarding the comment of {\bf Reviewer 1}:\\
+{\color{blue} \it  It is not easy to judge the relevance of this
   work because it might contain enough simulations, but not new information. In fact, its main contribution is a table, with comparison with reported data.}
 
 In the previous paper published about one year ago in Physical Review X,
-we have developed what we have {\bf openly} proposed in that paper as a {\bf very rigorous approach} where all the formulas were derived analytically and checked mathematically.
-
+we have developed what we have {\bf openly} proposed in that paper as a {\bf rigorous approach} where all the formulas were derived analytically and checked mathematically.
 The whole theory is based on two assumptions:
 
-(1) Thermodynamic limit for the \redc{atomistic and the coarse-grained region. (i.e. the number of molecules in both of the two
+(1) Thermodynamic limit for the coarse-grained region (i.e. number of molecule very large).
+
+(2) Hybrid region considered as a thin filter compared to the size of the two other regions.
+
+In a simulation of course these conditions cannot be met at the ideal level, thus the original idea of this paper was that of treating real systems in order to explore the numerical {\bf accuracy} that the formulas can provide. Thirteen systems (about 300 simulations) were studied with both AdResS and with the thermodynamic integration, this {\it per se} is a major numerical effort, even for large computer facilities, however, the systems were carefully chosen as representative of different classes of liquids and mixtures characterized by different physics. The {\bf new information} consists of thirteen values of the chemical potential which are reproduced by GC-AdResS, thus showing that the method is trustable for such kind of calculations and that the hypothesis (1) and (2) above can be easily met in standard simulations.
+In the paper, we have made clear the intention described above, but it seems that the first referee has missed it.
+Moreover, the request of the first referee about showing concentration dependent behaviors in order to show that we are consistent with previous work at very low concentrations was actually not of major interest, since we always compare each GC-AdResS calculation with the corresponding TI at the same concentrations. {\bf In our view this was clear also to the referee and it was also clear to him/her the amount of additional computational effort he/she was asking for}.
+
+However, independently from the referee's comment, we decided to do the study about the concentration dependent. In fact, in case of positive outcome, we would show that our method is very robust over different thermodynamic state points (and, as minor point, we would make happy the referee about the consistency with previous work). Indeed our results strongly support such a conclusion. However the computational cost was massive (about 300 additional simulations!), for this reason we ask you to consider this point in case the referee requires additional simulations.
+
+In addition, we did not like the comment of the referee:\\
+{\color{blue}\it ``There is also a theoretical
+  weakness in the sense that the main equation used to evaluate the chem. potential seems to be derived in an ad hoc fashion, and ``proven numerically'', as the authors wrote.}
+
+It was not the aim of the paper to have an analytic derivation of the formula, this does not mean that the approach is weak and above all the referee gave the impression that we obtained something by manipulating formulas and computational tools in order to ``force'' our results.
+
+Given our major effort over the last 2-3 years to merge analytic/mathematical work with numerical applications to realistic chemical systems, the opinion of the referee is quite discouraging. 
+However, our impression is that the first referee did not really read our previous paper and/or he/she may not have the background for catching analytic/mathematical derivations of formulas in full. In any case, in this revised version we have added the analytic derivation of the formula, (and in order to address the point raised by the second referee, we have added also the analytic derivation of the extension of the formula to multicomponent component systems). We have tried to be not too much mathematical, in order to reach the whole community interested in the subject. However, to merge computational results about chemical systems and analytic derivation of the formulas in one coherent paper is not easy, we made a strong effort in such direction and we hope that you will appreciate it.
+
+We have also added two very recent references related to the use of AdResS with the MARTINI force field. The senior authors of such publications pointed out to us the importance of calculating the chemical potential as a test of thermodynamical consistency of the whole system, especially for systems of the kind they are treating (large bio-systems).
+
+\recheck{do not say that...}
+Finally, the referee asked us to ``{\it ameliorate} the language; we are fully aware of not being mother tongue Oxford academics, but we asked several colleagues to read the paper and tell us if it was understandable; we got only positive comments, we cannot do more than that.
+
+We have added all the calculations/information asked by the referees and we are confident that now the paper is ready for publication.
+
+
+\newpage
+
+{\bf Reply to Reviewer 1:}
+
+{\color{blue}{\it ``..... The idea of calculating excess
+    chemical potentials from adaptive resolution techniques is appealing}}
+
+We are pleased that the referee recognizes that the overall idea is interesting; we take this comment as a positive basis of our work.
+
+{\color{blue}{\it ``This work is in fact a sort of extension of Ref. 5, and its contribution is just to offer a check of the
+statements, hypothesis and calculations made on that previous paper. It is not easy to judge the relevance of this
+work because it might contain enough simulations, but not new information. In fact, its main contribution is a table, with comparison with reported data.}}
+
+In Ref.5, we claim to have developed a rigorous approach from the
+point of view of physics and went even further by exploring how far
+one could make it mathematically rigorous/exact. We have found that
+under the hypothesis:
+
+(1) Thermodynamic limit for the \recheck{atomistic and the coarse-grained region. (i.e. the number of molecules in both of the two
   regions are infinitely large, and the coarse-grained region is infinitely larger than the atomistic region)}  
 
 (2) Hybrid region considered as a thin filter compared to the size of the two other regions.
 
-In a simulation of course these conditions cannot be met at the ideal
-level, 
-thus the idea of this paper was that of treating real systems
-in order to explore the numerical {\bf accuracy} that the formulas can
-provide. Thirteen systems were studied with both AdResS and with the
-thermodynamic integration, this {\it per se} is a major numerical
-effort, \recheck{I would delete ``even for large computer facilities'', see the reason below}, however, the systems were
-carefully chosen as representative of different classes of liquids and
-mixtures characterized by different physics. The {\bf new information}
-consists of thirteen values of the chemical potential which are
-reproduced by AdResS, thus showing that the method is trustable for
-such kind of calculations and that the hypothesis (1) and (2) above
-can be easily met in \recheck{systems of relatively small sizes (see Table~II of the manuscript). Actually
-  all simulations reported were performed on a 8-core workstation.}
-\recheck{Comment from HAN: the thermodynamic limit does not imply extremely large system,
-  rather, comparatively small systems that can be simulated on desktop-workstations.
-  This is actully the advantage of our method, and one of the important information
-  delievered by the paper.}
-
-Moreover, regarding the comment below:
-
-{\it On the other hand, the paper lacks important pieces of
-  information and many incomplete statements and definitions (see
-  below). There is also a theoretical weakness in the sense that the
-  main equation used to evaluate the chem. potential seems to be
-  derived in an ad hoc fashion, and ``proven numerically'', as the
-  authors wrote. It is not easy to rely on an equation/method which
-  lacks a solid theoretical background (mostly in statistical
-  physics)}
-
-Some of the information asked from the referee is indeed missing,
-i.e.~description of the coarse-grained model. \recheck{Actually  this is} a
-further advantage of our approach: One does NOT need to derive the
-\recheck{coarse-grained models}, but simply takes spherical models interacting via a WCA
-potential. It is in fact the thermodynamic force which makes them
-compatible with the corresponding full atomistic models. We will add this part in
-the Appendix.
-
-However, we tend to strongly disagree on the comment about the lack of
-solid theoretical background. \recheck{One can refer to all details of
-  the theoretical developement that has alreadly been published in
-  Phys.Rev.X.,} and we would like very much to avoid to report again
-the whole derivation \recheck{ in this paper, since it would be redundant.}
-
-If, instead, the referee means that he found our paper on Phys.Rev.X
-was not solid enough or wrong, then clear scientific arguments must be
-brought forward and eventually a comment to the PRX paper should be
-done. We did not find helpful the \recheck{words like ``{\bf seems to
-    be derived}''}. In the PRX paper, we claimed that the equations
-were \recheck{derived \textbf{rigorously} and {\bf exactly}},
-\recheck{thus either the referee had found some mistakes in our
-  previous paper (then this should be made clear), or he did not read
-  the PRX paper.}
-
-In conclusion, we will take several suggestions from {\bf Reviewer 1},
-\recheck{however, we will reduce the additions about the
-derivation of the formulas to the minimum. Mostly we refer to the exact
-equations in the PRX paper}. \recheck{Indeed, we intend} that people focus on
-the numerical calculations rather then on the analytical derivations
-which can be found in full details in the PRX paper.
-
-We are confident that regarding these points we have your understanding.
-
-\vskip 2cm
-
-Below we report the reply to each referee. The comment of the referees
-are in italics.  In order to facilitate the work of the referee, the
-additions/modifications in the text will be in red.
-
-
-{\bf Reply to Reviewer 1:}
-
-{\it ``..... The idea of calculating excess
-  chemical potentials from adaptive resolution techniques is appealing}
-
-We are pleased that the referee recognizes that the overall idea is interesting; we take this comment as a positive basis of our work.
-
-{\it ``This work is in fact a sort of extension of Ref. 5, and its contribution is just to offer a check of the
-statements, hypothesis and calculations made on that previous paper. It is not easy to judge the relevance of this
-work because it might contain enough simulations, but not new information. In fact, its main contribution is a table, with comparison with reported data.}
-
-In Ref.5, we claim to have developed a rigorous approach from the
-point of view of physics, and gone even further by exploring how far
-one could make it mathematically rigorous/exact. We have found that
-under the hypothesis:
-
-(1) Thermodynamic limit for the \redc{atomistic and the coarse-grained
-  region. (i.e. the number of molecules in both of the two regions are
-  infinitely large, and the coarse-grained region is infinitely larger
-  than the atomistic region)}
-
-(2) Hybrid region considered as a thin filter compared to the size of
-the two other regions.
-
 The method is mathematically rigorous and for some aspects even
 exact. Conditions (1) and (2) are ideal, so it was important to know
 how they can be met in \recheck{practical simulations, especially in
-the mixture systems that the solute concentration is dilute.} The aim of this
-paper is: {\bf to explore the numerical accuracy of the theory (for
-  the chemical potential) proposed in Ref.5}.
+the mixture systems that the solute concentration is dilute.} The aim of this paper is: {\bf to
+  explore the numerical accuracy of the theory (for the chemical
+  potential) proposed in Ref.5}.  We have done it for thirteen
+representative and computationally expensive systems.  We hope the
+referee can recognize that this effort is a non-trivial one. However
+as asked by him/her, we have added all the simulations requested (see
+below).
 
-We have done it for thirteen representative \recheck{I would remove ``and computationally expensive'', reason as before} systems.
-We hope the referee can recognize that this effort is a non trivial one.
+{\color{blue}{\it On the other hand, the paper lacks important pieces of information and many incomplete statements and definitions (see below). There is also a theoretical
+    weakness in the sense that the main equation used to evaluate the chem. potential seems to be derived in an ad hoc fashion, and ``proven numerically'', as the authors wrote. It is not easy to rely on an equation/method which lacks a solid theoretical background (mostly in statistical physics)}}
+
+% \recheck{
+%   The main purpose of the paper was to show the numerical accuracy of the theory, so we did not provide the theoretical derivation of
+% }
+% We have taken such a comment as a motivation to make an effort and finalize a derivation of the formula defined {\it ``weak''} by the referee. The derivation is presented as one of the results of this paper and has got its own section.
+We have taken such a comment as a motivation to \recheck{provide the} derivation of the formula defined {\it ``weak''} by the referee. The derivation is presented as one of the results of this paper and has got its own section.
 
 
-{\it On the other hand, the paper lacks important pieces of information and many incomplete statements and definitions (see below). There is also a theoretical
-weakness in the sense that the main equation used to evaluate the chem. potential seems to be derived in an ad hoc fashion, and ``proven numerically'', as the authors wrote. It is not easy to rely on an equation/method which lacks a solid theoretical background (mostly in statistical physics)}
+{\color{blue}{\it (1) A description of the cg model is lacking. Please specify how do you treat and the interaction potential for
+cg molecules of solvent and solute. I suppose that both types of molecules (solvent and solute) free to cross the hybrid layer.
+Please confirm. Please add a section about the cg model.}}
 
-The sentence {\bf ``proven numerically''} has been used by the referee
-as argument for an {\it ad hoc} formulation of the method, and our
-impression is that he/she means that we constructed it based on
-\recheck{what we see numerically}. \recheck{ In fact, it is not. In
-  Ref.5, the theory was ({\bf explicitly}) derived from thermodynamic
-  priciples, and was proved in a rigorous and exact way (in the due
-  limits). The conclusion itself does not need further numerical verfication.
-  The referee is legitimate to think that it is not rigorous, but
-  then he/she should point out explicitly the weak points of Ref.5 and
-  provide solid arguments.  However, in this case the referee should 
-  correct/comment the paper of Ref.5. The numerical tests
-  presented by this manuscript provide extra information on how our
-  theory works in practial pure/mixutre systems, in which
-  thermodynamic limit can only be approached, but never be reached. We believe this is a plus
-  rather than a minus of our work. We are confident that the referee
-  sees our point.
-}
+We added the procedure in the appendix. It must be noticed that, as a
+major result of Ref.5, we actually do not need to derive a detailed cg
+model. In fact our approach allows us to use simple spherical models
+whose size is about the vdW radius of the specific molecule. The spheres
+interact via the simple WCA potentials. It is then the thermodynamic force
+that makes the thermodynamics of the cg models compatible with the
+atomistic one. Both types of molecules change their resolution when they pass from
+one region to another.
 
-The sentence {\bf ``proven numerically''} has been used by the referee
-as argument for an {\it ad hoc} formulation of the method, and our
-impression is that he/she means that we constructed it in order to get
-what we wanted. In fact it is not, the formula we have proven
-numerically is actually an extra information. We do not need to use
-it, in fact we have a technically rigorous way to check the heat given
-by the thermostat; this formula just gives an interesting insight,
-this is explicitly written in Ref.5. In this paper we have explored it
-further and proved that works for other twelve systems. We believe
-this is a plus rather than a minus of our work.
+{\color{blue}{\it (2) Definitions of $V_{AT}$ and $V_{CG}$ are also lacking in terms of particle indexes. The model definition is important to distinguish between total energies and pair-wise terms, e.g. $V_AT(xij)$.}}
 
-In general, as we have said above, we have presented our approach in
-Ref.5 ({\bf explicitly}) as rigorous and exact (in the due limits).
-The referee is legitimate to think that it is not, but then he/she
-should point out explicitly the weak points of Ref.5 and provide solid
-arguments.  However, in this case should be corrected/commented the
-paper of Ref.5, the numerical result of this paper suggest that at the
-simulation level the method cannot be that bad. We are confident that
-the referee sees our point.
+Done. See the new Section IV for a detailed description.
 
-We found several comments extremely useful to improve the quality of the paper and performed several additional calculations in order to fulfill the request of the referee, we report below the description of all of them.
-
-{\it (1) A description of the cg model is lacking. Please specify how
-  do you treat and the interaction potential for cg molecules of
-  solvent and solute. I suppose that both types of molecules (solvent
-  and solute) free to cross the hybrid layer.  Please confirm. Please
-  add a section about the cg model.}
-
-We added it in the appendix. It must be noticed that we actually do
-not need to derive a cg model. In fact our approach allows us to use
-simple spherical models \recheck{(e.g.~interacting via the WCA potential)} whose size is about the vdW radius of the
-specific molecule. It is
-then the thermodynamic force that makes the thermodynamics of the cg
-models compatible with the atomistic one. Molecules change their
-resolution when they pass from one region to another.
-
-{\it (2) Definitions of $V_{AT}$ and $V_{CG}$ are also lacking in terms of particle indexes. The model definition is important to distinguish between total energies and pair-wise terms, e.g. $V_{AT}(xij)$.}
-
-\recheck{we can refer to the new appendix}
-
-{\it (3) Figure 1. ``allows to write an exact Hamiltonian for the atomistic region and thus treat the system in a GC fashion.'' This phrase is
+{\color{blue}{\it (3) Figure 1. ``allows to write an exact Hamiltonian for the atomistic region and thus treat the system in a GC fashion.'' This phrase is
 difficult to understand. The AT region is connected with the CG domain (via a transition layer which is not small, but much thicker than the
 molecular size). Thus either one has a complete Hamiltonian for the whole AT+HYB+CG system, or else, there is no Hamiltonian. In other words, if
 the interactions between AT and HYB, and CG molecules are not derived from H, then there is no Hamiltonian. Also, ``...treat the system in a GC
 fashion'' is also difficult to understand (maybe the authors mean ``...consider the AT region as an open subsystem''). I would suggest
-deleting this phrase and refer in the text to their theoretical findings in Ref. 5 about particle number distributions p(N),etc.}
+deleting this phrase and refer in the text to their theoretical findings in Ref. 5 about particle number distributions p(N),etc.}}
 
-Actually this is the very core of our derivation. If the referee think
-that this is wrong, then Ref.5 is entirely wrong.
+Actually this is the very core of our derivation. If the referee think that this is wrong, then Ref.5 is entirely wrong.
 
 In fact we have extended the hybrid region adding a region equal to
 the interaction cut off where the resolution is full atomistic, but
@@ -275,241 +176,244 @@ with the hybrid region {\bf ONLY} at atomistic level (coarse-grained
 molecules are in the region beyond the cut off one). In fact beyond
 the cut off radius there is no interaction or better the interaction
 is zero. As a consequence the molecules of the atomistic region have a
-well defined Hamiltonian. This is the Hamiltonian of an open system,
-\recheck{and is parametrized by the the coordinate of the molecules
-  that are interacting with the atomistic region}. \recheck{It is comparable with  a
-subsystem of a large full atomistic simulation}; the Hamiltonian of the
-subsystem is well defined, without any artificial interpolation.  This
-is clearly reported in Eq.12 of Ref.5.
+well defined Hamiltonian: The Hamiltonian of an open system.
+It is as we take a subsystem of a full atomistic simulation; the Hamiltonian of the subsystem is well defined, without any artificial interpolation.
+Moreover an open subsystem of a much larger system is naturally Grand Canonical.
+This is clearly reported in Ref.5 and Eq.12 provides the exact definition of the Hamiltonian.
+We have added the exact reference for the equation with the specific Hamiltonian, and we do not believe it should be explicitly reported and discussed in the current paper because it would be redundant and anyway it is not crucial to any of the derivations of this work.
 
-Although we believe it is redundant we have reported the explicit form
-of the Hamiltonian of the atomistic region also in this paper.
 
-\recheck{{\bf HAN can you write it for me in Latex}}.
-\recheck{{\bf See below}}
-\begin{align}
-  \mathcal H^{\AT}_{N_1} (\vect x_1; \vect x_2, N_2)
-  =
-  \sum_{i=1}^{N_1}\frac12 m_i\vect v_i^2
-  + \sum_{i,j=1}^{N_1}\frac 12 V^\AT_{i,j}
-  + \sum_{i=1}^{N_1}\sum_{j=N_1+1}^{N_1+N_2} V^\AT_{i,j},
-\end{align}
-where $V^\AT_{i,j}$ is the atomistic molecular potential, which is given by
-\begin{align}
-  V^\AT_{i,j} =
-  \sum_{\alpha\in i}\sum_{\beta\in j} V^\AT(\vect r_\alpha - \vect r_\beta).
-\end{align}
-where index $\alpha$ and $\beta$ denotes the atoms on the
-corresponding molecule.  $N_1$ and $N_2$ are the number of molecules
-in the AT and atomistic part of the HY region, respectively. $\vect x_1$
-and $\vect x_2$ are the phase space variables (joint of velocity and position)
-in the  AT and atomistic part of the HY region, respectively.
+{\color{blue}{\it (4) Page 4. ``...reproduce the first order of the
+    probability...'' and ``Higher orders...'' Could the authors
+    specify what (small) quantity the order is referred to?, I think
+    it could be orders in the density of solute molecules, or maybe in
+    density variation with respect the average. Please be more clear
+    when referring to ``orders'' elsewhere in the manuscript.}}
 
-{\it (4) Page 4. ``...reproduce the first order of the
-  probability...'' and ``Higher orders...'' Could the authors specify
-  what (small) quantity the order is referred to?, I think it could be
-  orders in the density of solute molecules, or maybe in density
-  variation with respect the average. Please be more clear when
-  referring to ``orders'' elsewhere in the manuscript.}
-
-\recheck{comment from HAN: why not add your short description on the
-  orders to the paper? It is concise and would be convenient for the
-  readers who are only interested in the numerical result, and do not
-  have time to read Ref.5.}
-  
-This is clearly described in Ref.5 and we felt it would be redundant
-to write it here once again; we have defined the first order of the
-probability distribution of a system as its molecular density, a
-function in three-dimension. The second order is the two-body
+This is clearly described in Ref.5; we have defined the first order of
+the probability distribution of a system as its molecular density, a
+function in three-dimensions. The second order is the two-body
 distribution (6-dimensional function) of which the radial distribution
 function is a specific expression; the third order is the three-body
-distribution (in 9-dimension) etc etc. The full probability is a
+distribution (in 9 dimensions) etc etc. The full probability is a
 3N-dimensional function of which the different orders are a lower
 dimensional approximation.
 
-If the referee put this as a condition of rejection, then we would add
-it, but we strongly believe that it is not needed for this paper.
+We have added the explicit definition in the revised version of the paper.
 
-{\it (5) Page 5. Auxiliary Hamiltonian. For the sake of clarity, the
-  authors should write down this Hamiltonian they refer to, with full
-  index details. Also, please write down the form of thermodynamic
-  force in the auxiliary Hamiltonian. They mention that simulations
-  using the auxiliary Hamiltonian were made with no thermostat. Did
-  the authors check that the ``energy'' of this Hamiltonian is
-  conserved? Please comment on this important issue.}
+{\color{blue}{\it (5) Page 5. Auxiliary Hamiltonian. For the sake of
+    clarity, the authors should write down this Hamiltonian they refer
+    to, with full index details. Also, please write down the form of
+    thermodynamic force in the auxiliary Hamiltonian. They mention
+    that simulations using the auxiliary Hamiltonian were made with no
+    thermostat. Did the authors check that the ``energy'' of this
+    Hamiltonian is conserved? Please comment on this important
+    issue.}}
 
-\recheck{Comment from HAN: Wo DO use a thermostat for the potential-interpolation
-  simulation.  we should be honest on this point. And the prove in the
-  appendix also assumes that ths thstem is thermostated. Tell me why you wrote ``
-  we do not need to use a thermostat''? Or you simply mean that we in principle we
-  do not need, but in practice, to generate the Boltzmann distribution we use it.}
-  
-  As before, it is reported in all details in Ref.5 and we thought it
-  was redundant. The thermodynamic force must have exactly the same
-  numerical formula of the standard AdResS, otherwise it would not
-  work for our purposes: if two expressions are formally identical but
-  one has the effect of the thermostat and the other not then the
-  difference isolates the effect of the thermostat. For the
-  Hamiltonian system we use the same formula and impose artificially
-  the same density of the AdResS system thus we get a condition on the
-  gradient of the molecular density in the transition region.
-  
-  Yes, we have checked the conservation of the energy. However this
-  was preliminary to everything, in fact it must be clear that if the
-  energy was not conserved, then we would also get completely wrong
-  results (the heat would either be too low or too high and anyway
-  would not converge).
+As before, it is reported in all details in Ref.5 and we thought it
+was redundant, but we have added it in the revised version. The
+thermodynamic force must have exactly the same numerical formula of
+the standard AdResS, otherwise it would not work for our purposes: if
+two expressions are formally identical but one has the effect of the
+thermostat and the other not then the difference isolates the effect
+of the thermostat. For the Hamiltonian system we use the same formula
+and impose artificially the same density of the AdResS system thus we
+get a condition on the gradient of the molecular density in the
+transition region, this is now reported in the paper.
+
+Yes, we have checked the conservation of the energy and added a
+section dedicated to this issue in the Appendix. There we report the
+advantage and limitations of such an approach (i.e. when we can
+consider pure conservation and when the coupling to a thermostat is
+anyway needed).
 
 
-  {\it (6) ``Keeps the density of particles across the system as in
-    AdResS''. Do you mean at constant density?}
+{\color{blue}{\it (6) ``Keeps the density of particles across the system as in AdResS''. Do you mean at constant density?}}
 
 Yes
 
 
-{\it (7) ``It must be noticed that the relation we obtained form the
-  chem. pot. is similar to that obtained in... Ref[6]''. This
-  statement is not clear. The equation this method proposes seems not
-  similar to that of Ref. 6. In particular the term is quite different
-  from which is the corresponding free energy difference appearing in
-  Ref. 6. The authors should explicitly write out this essential term
-  of the calculation, indicating summations with particle indexes. It
-  would seem from the (not-written auxiliary Hamiltonian) that the
-  particles index of the first ``w'' is not the same as that of the
-  ``nabla w''. Please derive and clarify this term so anybody could
-  understand it.
+{\color{blue}{\it (7) ``It must be noticed that the relation we
+    obtained form the chem. pot. is similar to that obtained
+    in... Ref[6]''. This statement is not clear. The equation this
+    method proposes seems not similar to that of Ref. 6. In particular
+    the term is quite different from which is the corresponding free
+    energy difference appearing in Ref. 6. The authors should
+    explicitly write out this essential term of the calculation,
+    indicating summations with particle indexes. It would seem from
+    the (not-written auxiliary Hamiltonian) that the particles index
+    of the first ``w'' is not the same as that of the ``nabla
+    w''. Please derive and clarify this term so anybody could
+    understand it.
 
-  The effect of discrepancies with Ref.6 are not simple to trace, but
-  certainly not zero. The authors state: ``H-Adress and CG-Adress are
-  the same up to first order'' (please again, in what?). A reference
-  proving this statement is not mentioned, but I guess the authors
-  refer to Ref. 7 for that prove. However after reading that paper
-  (Ref. 7) I saw no prove of this (just essentially the same phrase,
-  without prove). The authors should prove this statement here or
-  delete this phrase, or comment about the lack of comparisons, at
-  present.}
+    The effect of discrepancies with Ref.6 are not
+    simple to trace, but certainly not zero. The authors state:
+    ``H-Adress and CG-Adress are the same up to first order'' (please
+    again, in what?). A reference proving this statement is not
+    mentioned, but I guess the authors refer to Ref. 7 for that
+    prove. However after reading that paper (Ref. 7) I saw no prove of
+    this (just essentially the same phrase, without prove). The
+    authors should prove this statement here or delete this phrase, or
+    comment about the lack of comparisons, at present.}}
 
-We see the point of the referee, perhaps we should do a paper with
-explicit formulas and data to show similarity and differences between
-the two methods.
-
-However since this is not a relevant part of the paper, we decided to
-remove any reference to similarities and differences with Ref.6.  We
-will cite their second paper dealing with a mixture. We hope that the
-referee is happy with the deletion of Ref.6 and addition of a new
-reference.
+We see the point of the referee, perhaps we should do a paper with explicit formulas and data to show similarity and differences between the two methods.
+However since this is not a relevant part of the paper, we decided to remove any reference to similarities and differences with Ref.6.
+and add the reference from the same authors on mixtures.
 
 
-{\it (8) Fig. 2. Please indicate the locations of the HYB domain. A
-  difference of about 20 percent in density is not small, although
-  *inside* the AT domain, the g(r) might not be too sensible to such
-  density difference (as shown in the fig.). On the other hand,
-  contrary with what the authors state below, a large transition
-  region is beneficial, because molecules have larger space to adapt
-  to the change in resolution. Please correct this.}
+{\color{blue}{\it (8) Fig. 2. Please indicate the locations of the HYB
+    domain. A difference of about 20 percent in density is not small,
+    although *inside* the AT domain, the g(r) might not be too
+    sensible to such density difference (as shown in the fig.). On the
+    other hand, contrary with what the authors state below, a large
+    transition region is beneficial, because molecules have larger
+    space to adapt to the change in resolution. Please correct this.}}
 
-We disagree with the referee.
-\recheck{The large deviation is due to the sampling error, because the
-  number of TBA molecules in the system is very small (80, see the Table II).
+
+\recheck{The Fig.2 (Fig.4 in the revision) plots the density profile only for the HYB region, as the caption states.}
+% We disagree.
+\recheck{The relatively large deviation is due to the sampling error, because the
+  number of TBA molecules in the system is very small (80, see the Table II, i.e.~the Table IV in the revision).
   We could reach a much better accuracy of the density if we do longer simulations,
   but it would require much more computer time.}
-% We could reach a much higher accuracy if
-% we set the level of accuracy of the thermodynamic force higher (but
-% requires more computer time)
-However, we wanted to show that even with 20 percent of (maximum)
-difference we get the chemical potential accurate and the density in
-the AT region flat.
-\recheck{comment from HAN: is the HY region goes
-  from 0.5 nm to 3.2 nm, i.e.~the whole range of the figure 2? Then we
-  do not show the density in the AT region is flat.}
+% We could reach a much higher accuracy if we set the level
+% of accuracy of the thermodynamic force higher (but requires more
+% computer time).
+However, we wanted to show that even with 20 percent of
+(maximum) difference we get the chemical potential accurate and the
+density in the AT region flat.
 
-Regarding the point
-that a larger region is beneficial, we must disagree. This is based on
-arguments (which we will give next) and long experience with such
-systems. What is important in AdResS is that the AT and CG region are
-large, in fact if they are large they are going to thermalize and in
-general equilibrate substantially the hybrid region.  We have recently
-made tests on related issues and found that if one uses a large
-thermalized reservoir then small regions where the density or the the
-temperature are not targeted, are automatically equilibrated by the
-large reservoir. Moreover our analytic derivation suggests the same.
-On the contrary a HYB region is charaterized by non physical
-description of the potentials and thus it does not have as a reference
-any thermodynamic state point. As a consequence the larger the HYB
-region the larger the perturbation. Of course there is a minimal size
-that is a region equal to the interaction cut off.  These aspects have
-been explored and described in details in several previous papers
-among which:
-
-(1) Matej Praprotnik, Luigi Delle Site, and Kurt Kremer, .J.Chem.Phys. 123, 224106 (2005).
-
-(2)Silvina Matysiak, Cecilia Clementi, Matej Praprotnik, Kurt Kremer and Luigi Delle Site, J.Chem.Phys. 128, 024503 (2008).
-
-(3) S.Poblete, M.Praprotnik, K.Kremer and L.Delle Site,  J.Chem.Phys. 132, 114101 (2010).
-
-{\it (9) Table I. What results of Ref. 15 corresponds to table I?,
-  this is not mentioned. Results in Ref 12 and 15 were made at lower
-  concentration, but the authors state that the excess chem pot is not
-  sensible to the solute concentration in this regime. And say that
-  ``we have verified that such consistency holds''. This is important
-  though, and the authors should include a graph with the calculated
-  excess chem. pot. against the solute concentration, showing that it
-  goes to a plateau at low concentration consistent with the
-  experimental value reported (at least for some of the cases
-  considered). Error bars are crucial, but means nothing without the
-  simulation times required to obtain them. The authors should include
-  a more clear measure of this. A possible one could be showing the
-  accumulated standard error against the simulation time and compare
-  the IPM, the TI (free energy estimate using Bennet's method) and
-  their own method. With the specification of the system size (table
-  II) this already gives an idea of the computational costs.}
-
-We do understand the concerns of the referee about the values referred
-to paper in Ref.15, however all the values in the table for TI were
-obtained by us.  We have checked (the sentence {\it ``we have verified
-  such a consistency''}) that our values are close to those at lower
-concentration.  We have also made the (expensive) calculation of the
-concentration dependence and show that indeed goes towards a plateau
-added the error etc etc.  The figure and related comments have been
-added in the revised version of the manuscript.
-
-However, at the current stage the comparison about the computational time required by AdResS and TI would not be fair.
-In fact for this reason we have {\bf honestly} reported current numerical limitations in Section IV.
-
-This paper is about the capability and numerical accuracy of the approach.
-
-{\it (10) Sec. IV. ...a critical appraisal. This comment is connected with 8). In this section the authors state that their method is not as fast as TI if dilute systems are considered. I would just like to comment that this observation seems to conflict with the comment made in Ref. 7 (``orders of magnitude faster than IPM''). Indeed, Widom method is not very good for large molecules in liquids, this is well known. So, as far I understand, the author's conclusion is that the best option is to use TI for dilute systems while adaptive resolution pays off when dealing with many solute molecules. This observation is important and should be shown in a graph (e.g. standard error vs. simulation time for TI and CG-Adress, in the dilute case and less diluted case)}
-
-NO, we only say that in the future, AdResS, once its implementation is optimized, may even offer a better way to calculate the chemical potential in some situations, at the moment, although in very recent work we have reached a speed up factor of more than two w.r.t. full atomistic simulation, the computational implementation of AdResS in Gromacs is still not optimal. What we instead claim (for sure) is that if you do in any case an AdResS simulation, you automatically get the chemical potential, that is this is an automatic feature of the simulation method. This is reported clearly in the paper and we believe that it does not need further clarifications.\\
-
-{\it (11) Recent works: an extension to the Hamiltonian based method the authors refer to, appeared in ``Phys. Rev. Lett. 2013, 111, 060601''. This work should be cited because it precisely deal with mixtures being in close relation with this work.}
-
-OK, as said before we cite this instead of Ref.6.
+Regarding the point that a larger
+region is beneficial, we must disagree. This is based on arguments
+(which we will give next) and long experience with such systems. What
+is important in AdResS is that the AT and CG region are large, in fact
+if they are large they are going to thermalize and in general
+equilibrate substantially the hybrid region.  We have recently made
+tests on related issues and found that if one uses a large thermalized
+reservoir then small regions where the density or the the temperature
+are not targeted, are automatically equilibrated by the large
+reservoir. Moreover our analytic derivation suggests the same.  On the
+contrary a HYB region is characterized by non-physical description of
+the potentials and thus it does not have as a reference any
+thermodynamic state point. As a consequence the larger the HYB region
+the larger the perturbation. Of course there is a minimal size that is
+a region equal to the interaction cut off.  These aspects have been
+explored and described in details in several previous papers among
+which:
+\begin{itemize}
+\item (1) Matej Praprotnik, Luigi Delle Site, and Kurt Kremer, .J.Chem.Phys. 123, 224106 (2005).
+\item (2)Silvina Matysiak, Cecilia Clementi, Matej Praprotnik, Kurt Kremer and Luigi Delle Site, J.Chem.Phys. 128, 024503 (2008).
+\item (3) S.Poblete, M.Praprotnik, K.Kremer and L.Delle Site,  J.Chem.Phys. 132, 114101 (2010).
+\end{itemize}
 
 
+{\color{blue}{\it (9) Table I. What results of Ref. 15 corresponds to
+    table I?, this is not mentioned. Results in Ref 12 and 15 were
+    made at lower concentration, but the authors state that the excess
+    chem pot is not sensible to the solute concentration in this
+    regime. And say that ``we have verified that such consistency
+    holds''. This is important though, and the authors should include
+    a graph with the calculated excess chem. pot. against the solute
+    concentration, showing that it goes to a plateau at low
+    concentration consistent with the experimental value reported (at
+    least for some of the cases considered). Error bars are crucial,
+    but means nothing without the simulation times required to obtain
+    them. The authors should include a more clear measure of this. A
+    possible one could be showing the accumulated standard error
+    against the simulation time and compare the IPM, the TI (free
+    energy estimate using Bennet's method) and their own method. With
+    the specification of the system size (table II) this already gives
+    an idea of the computational costs.}}
 
-{\bf Reply to Reviewer 2}:\\
+We have added a plot (for one system) of $\mu^{ex}$
+v.s. concentration, we have shown that the chemical potential
+converges to the experimental value for very dilute
+concentrations. Moreover our plot is consistent with that of Lee and
+van der Vegt, (ref.18) which is supposed to be {\it ``state of the
+  art''} result in the field.  For computational costs, see below.
 
- {\it I would recommend that the authors consider the following minor revisions. Most significantly, it would be very helpful for the authors to discuss the apparently systematic errors that arise in their estimation of the chemical potentials. The following provides further details and minor comments.
 
-Table 1 compares the chemical potentials determined from GC-AdResS and thermodynamic integration (TI). (It would be helpful to know the basis for estimating the uncertainty of these calculations.) The results indicate that there is a fairly small, but systematic discrepancy between the two methods. In particular, in almost all cases, GC-AdResS underestimates the magnitude of the chemical potential. It would be very interesting and helpful if the authors could investigate and provide insight into the origin of this discrepancy.}
+{\color{blue}{\it (10) Sec. IV. ...a critical appraisal. This comment
+    is connected with 8). In this section the authors state that their
+    method is not as fast as TI if dilute systems are considered. I
+    would just like to comment that this observation seems to conflict
+    with the comment made in Ref. 7 (``orders of magnitude faster than
+    IPM''). Indeed, Widom method is not very good for large molecules
+    in liquids, this is well known. So, as far I understand, the
+    author's conclusion is that the best option is to use TI for
+    dilute systems while adaptive resolution pays off when dealing
+    with many solute molecules. This observation is important and
+    should be shown in a graph (e.g. standard error vs. simulation
+    time for TI and CG-Adress, in the dilute case and less diluted
+    case)}}
+
+We have added a table where we show the total time needed to calculate
+$\mu^{ex}$ with GC-AdResS and with TI.  The table show that the total time
+needed for obtaining the plot of $\mu^{ex}$ v.s. concentration is
+slightly shorter with our method than with TI.  Moreover one must add
+the fact that we use relatively small system (5000 molecules) and that
+GC-AdResS is not yet optimized in Gromacs.  We hope that this is a
+good argument to convince the referee that maybe it is worth to look
+at GC-AdResS as a potential complementary (not substitutive) method
+for calculating $\mu^{ex}$.
+
+{\color{blue}{\it (11) Recent works: an extension to the Hamiltonian
+    based method the authors refer to, appeared in
+    ``Phys. Rev. Lett. 2013, 111, 060601''. This work should be cited
+    because it precisely deal with mixtures being in close relation
+    with this work.}}
+
+Done.
+
+
+\newpage
+
+{\bf Reply to Reviewer 2}:
+
+{\color{blue}{\it I would recommend that the authors consider the
+    following minor revisions. Most significantly, it would be very
+    helpful for the authors to discuss the apparently systematic
+    errors that arise in their estimation of the chemical
+    potentials. The following provides further details and minor
+    comments. Table 1 compares the chemical potentials determined from
+    GC-AdResS and thermodynamic integration (TI). (It would be helpful
+    to know the basis for estimating the uncertainty of these
+    calculations.) The results indicate that there is a fairly small,
+    but systematic discrepancy between the two methods. In particular,
+    in almost all cases, GC-AdResS underestimates the magnitude of the
+    chemical potential. It would be very interesting and helpful if
+    the authors could investigate and provide insight into the origin
+    of this discrepancy.}}
 
 The only reason that came to our mind is that such a systematic difference may come from the interaction cut off.
-In fact, currently, we are using the reaction field method for electrostatics and thus the accuracy may indeed depend on that.\\
-We found this point very interesting and studied the dependence of our results from the cut off. Indeed it seems that, etc etc...... {\bf WHEN ANIMESH IS READY}\\
+In fact, currently, we are using the reaction field method for electrostatics and thus the accuracy may indeed depend on that.
+
+In the revised version we have added a plot that shows the convergence
+of $\mu^{ex}$ as a function of the interaction cut-off.  Indeed we can
+systematically improve our results if we go to higher cut-off (for
+systems whose electrostatics is particularly relevant).  However, we
+also show that for a cut-off of 1.4 nm (standard in full atom
+simulations) we already reach a quite accurate value.  This is
+reported and commented in the revised version.
 
 
-{\it  I am somewhat confused by the notation for $F_{th}$. Is this a vector quantity? Is the integral on page 3 giving a vector or a scalar? The notation seems confusing and inconsistent. Also, I am confused by the first equality sign after $F_{th}$. It would be helpful if the authors could clarify this.}
+{\color{blue}{\it I am somewhat confused by the notation for
+    $F_{th}$. Is this a vector quantity? Is the integral on page 3
+    giving a vector or a scalar? The notation seems confusing and
+    inconsistent. Also, I am confused by the first equality sign after
+    $F_{th}$. It would be helpful if the authors could clarify this.}
+}
 
-We apologize for the misprint, the term $F_{th}=$ has been removed\\
+We apologize for the misprint, the term $F_{th}=$ has been removed, and now the quantity is well defined.
 
 
-{\it On page 5, the authors indicate that equipartition implies a
-  contribution to the chemical potential of 1/2 kT for each atomic
-  degree of freedom (dof). I would expect that this would be true if
-  each atomic dof contributes quadratically to the Hamiltonian. It
-  would be helpful if the authors could clarify why this would be so
-  for dof's that do not contribute quadratically to the Hamiltonian.}
+{\color{blue}{\it On page 5, the authors indicate that equipartition
+    implies a contribution to the chemical potential of 1/2 kT for
+    each atomic degree of freedom (dof). I would expect that this
+    would be true if each atomic dof contributes quadratically to the
+    Hamiltonian. It would be helpful if the authors could clarify why
+    this would be so for dof's that do not contribute quadratically to
+    the Hamiltonian.}}
 
 We must again apologize, we reported the same written in Ref.5 where
 we gave a general explanation in case molecules had also vibrational
@@ -521,54 +425,14 @@ in the GC region simplifies the procedure.  For this reason we have
 left only this part and removed the comment about the equipartition
 theorem.
 
-{\it  It would be helpful if the authors could clarify why/how eq 3 generalizes to eq 4 in the case of a multicomponent system}
+{\color{blue}{\it  It would be helpful if the authors could clarify why/how eq 3 generalizes to eq 4 in the case of a multicomponent system}}
 
-\recheck{\bf Added below... I do not really know what to write for him/her.}
+We have added an analytic derivation of the extension to
+multicomponent systems in the appendix.  We have tried to give the
+essential physical arguments, but cannot avoid the lengthy discussion
+otherwise crucial point may be missed.
 
- We denote the volume of the system by $V$ and the temperature by
-$T$. It is divided into atomistic~($\AT$), hybrid~($\HY$), and
-coarse-grained~($\CG$) region, the volume of which are denoted by
-$V_1$, $V_2$ and $V_3$, respectively.  We assume two different types
-of molecules are mixed in the system, and the number of molecules are
-$N^1$ and $N^2$, respectively. The superscript ``1'' and ``2'' in the
-paper denotes the two component.  We further denote the number of type
-1 molecules in the atomistic, hybrid, and coarse-grained regions by
-$N^1_1$, $N^1_2$ and $N^1_3$, respectively. While for type 2 molecules
-the notations are $N^2_1$, $N^2_2$ and $N^2_3$, respectively.  By
-assuming the hybrid region is infinitely small comparing with the
-atomistic and coarse-grained regions, we have the following
-constrains:
-\begin{align}
-  V &= V_1 + V_3\\
-  N &= N^1 + N^2\\
-  N^1 &= N^1_1 + N^1_3\\
-  N^2 &= N^2_1 + N^2_3
-\end{align}
-By calculating the thermodynamic forces for both of the components, which
-are denoted by $\vect F^1_\thf$ and $\vect F^2_\thf$,
-we impose the correct density profile to the system:
-\begin{align}
-  \rho_\HY^1 &= \rho_\AT^1 = \rho_\CG^1\\
-  \rho_\HY^2 &= \rho_\AT^2 = \rho_\CG^2
-\end{align}
-We further denotes the work done by the hybrid region on the two types
-of molecules by $\omega_0^1$ and $\omega_0^2$, respectively.
-To find out the chemical potential difference between AT and CG resolutions,
-the same idea as presented in Sec.III.C of Ref.5 can be extended
-to the two component system. This extension is straightforward and trivial. We do not want
-to write them down, because one can just step-by-step follow the
-deriviation for the one component system, and no new technique is needed.
-In the end, we proved
-\begin{align}
-  \mu^1_\AT(N^1_1, N^2_1, V_1, T) &= \mu^1_\CG(N^1_1, N^2_1, V_1, T) - \omega^1_0\\
-  \mu^2_\AT(N^1_1, N^2_1, V_1, T) &= \mu^2_\CG(N^1_1, N^2_1, V_1, T) - \omega^2_0
-\end{align}
-Now, $N^1_1$ and $N^2_1$ denotes the averaged number of type 1 and
-type 2 molecules in the atomistic region.  Under the thermodynamic
-limit, this number maximize the Helmholtz free energy and is the one
-of statistical importance, see more discussions in
-Ref.5. We do not distinguish these notations from
-before, because the meaning is clear from the context.
+ 
 
 
 
@@ -577,12 +441,6 @@ before, because the meaning is clear from the context.
 
 
 
-
-
-
-Sincerely\\
-
-Luigi Delle Site
 
 
 
