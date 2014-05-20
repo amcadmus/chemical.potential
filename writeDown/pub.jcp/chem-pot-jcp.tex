@@ -124,8 +124,7 @@ with $\mu_{\CG}$ the chemical potential of the coarse-grained system (in GC-AdRe
   $\omega_{\ext}=\int_{\Delta}\nabla w(\vect r)\langle w( U^{\AT}-U^{\CG})\rangle_{\vect r} d{\vect r}$,
   where $U_{\AT}$ and $U_{\CG}$ are the atomistic and coarse-grained potential.
 \recheck{It must be noticed that the auxiliary Hamiltonian approach shall not be considered a Hamiltonian approach to adaptive resolution simulation. In fact, as discussed in Ref.\cite{prx} the equilibrium is imposed artificially and {\it per se} does not have any physical meaning (for more details, see discussion in the {Appendix~\ref{app:tmp2}})}. 
-\recheck{In the next section of this work we show analytically that the formula above is exact (at least) at the first order w.r.t. the probability distribution of the system as defined in Eq.\ref{order}}.\\
-
+\recheck{In the next section of this work we show analytically that the formula above is exact (at least) at the first order w.r.t. the probability distribution of the system as defined in Eq.\ref{order}}.
 The result above implies that $\omega_{\thermo}$ can be calculated in a straightforward way during the initial equilibration within in the standard GC-AdResS code. 
 \recheck{It must be noticed that, within the AdResS scheme, an approach similar to the auxiliary Hamiltonian  has been recently proposed and applied to liquids and mixtures (of toy models so far) by Potestio {\it et al.} \cite{h-adress-0, h-adress} (see also \cite{luigientropy} where such an approach is commented)}. At this point according to \eqref{mu}, if one knows $\mu_{\CG}$, then  GC-AdResS can automatically provide $\mu_{\AT}$. However we need to do one step more, in fact the quantity of interest is not the total chemical potential, but the excess chemical potential $\mu^{\exc}_{\AT}$ which corresponds to the expression of \eqref{mu} where the kinetic (ideal gas) part is subtracted. Regarding the kinetic part, one can notice that the contribution coming from the COM is the same for the coarse-grained and for the atomistic molecules, thus it is automatically removed in the calculation of \eqref{mu}.
 The kinetic part of $\mu_{\AT}$ due to the rotational and vibrational degrees of freedom corresponds in our case to $\omega_{\dof}$ and \recheck{in principle can be calculated by hand (chemical potential of an isolated molecules). However such a calculation may become rather tedious for large and/or complex molecules but in our case it is actually not required.} In fact the \recheck{Gromacs implementation of AdResS} considers the removed degrees of freedom as phantom variables but thermally equilibrate them anyway~\cite{simon-ch}. Thus the heat provided by the thermostat for the rotational and vibrational part is the same in the atomistic and coarse-graining molecules and is automatically removed in the difference. Finally, the calculation of $\mu^{\exc}_{\CG}$ can be done with standard methods, TI or IPM, which for simple spherical molecules, like those of the coarse-grained system, requires a negligible computational cost.
@@ -372,23 +371,23 @@ where $\vect{F}^{k}_{\thf}(x)$ is the thermodynamic force applied to the molecul
 \begin{table}[]
 \begin{center}
 %\begin{tabular}{ccccc}
-\begin{tabular}{ccccc}
+\begin{tabular}{ccrrc}
 \hline \hline
  Liquid component & Mole fraction of solute & GC-AdResS & TI & Experiment \\
 \hline
-\recheck{water} & -- & -22.1 $\pm$ 0.2  & -- & -23.5 \cite{florian} \\
-methane  & -- & -4.6 $\pm$ 0.1  & -5.2 $\pm$ 0.1 & -- \\
-ethane   & -- & -8.2 $\pm$ 0.3  &  -8.8 $\pm$ 0.1 & -- \\
-propane  & -- & -8.5 $\pm$ 0.1 & -9.5 $\pm$ 0.2 & -- \\
-\recheck{methanol}  & -- & -20.3 $\pm$ 0.2 & -20.9 $\pm$ 0.3 & -20.5 \cite{vang}  \\
-DMSO & -- & -32.2 $\pm$ 0.3 & -34.7 $\pm$ 0.7 & -32.2 \cite{dmso}  \\
-\recheck{methanol in methanol/water mixture} & 0.01 & -19.0 $\pm$ 0.2 & -- & -- \\
-\recheck{methane in methane/water mixture} & 0.006 & 9.3 $\pm$ 0.2  & -- & -- \\
-urea in urea/water mixture & 0.02 & -56.1 $\pm$ 0.6 & -58.2 $\pm$ 0.5 & -57.8 $\pm$ 2.5 \cite{urea} \\
-\recheck{ethane in ethane/water mixture} & 0.006 & 7.2 $\pm$ 0.2 & -- & -- \\ 
-\recheck{TBA in water/TBA mixture} & 0.001 & -19.5 $\pm$ 0.5 & -20.8 $\pm$ 0.6 & -19.0 \cite{nico} \\
-DMSO in DMSO/water mixture & 0.01 & -31.4 $\pm$ 0.5 & -33.2 $\pm$ 0.3 & -- \\
-TBA in TBA/DMSO mixture & 0.02 & -24.8 $\pm$ 0.4 & -24.0 $\pm$ 0.5 & -- \\
+\recheck{water} & -- & $-23.9 \pm 0.3$  & $-22.3 \pm 0.6$ & $-23.5$~\cite{florian} \\
+methane  & -- & $-4.6 \pm 0.1$  & $-5.2 \pm 0.1$ & -- \\
+ethane   & -- & $-8.2 \pm 0.3$  & $-8.8 \pm 0.1$ & -- \\
+propane  & -- & $-8.5 \pm 0.1$ & $-9.5 \pm 0.2$ & -- \\
+\recheck{methanol}  & -- & $-20.3 \pm 0.2$ & $-20.9 \pm 0.3$ & $-20.5$ \cite{vang}  \\
+DMSO & -- & $-32.2 \pm 0.3$ & $-34.7 \pm 0.7$ & $-32.2$ \cite{dmso}  \\
+\recheck{methanol in methanol/water mixture} & 0.01 & $-19.0 \pm 0.2$ & $-19.7 \pm 0.2$ & -- \\
+\recheck{methane in methane/water mixture} & 0.006 & $9.3 \pm 0.2$  & $8.2 \pm 0.3$ & -- \\
+urea in urea/water mixture & 0.02 & $-56.1 \pm 0.6$ & $-58.2 \pm 0.5$ & $-57.8 \pm 2.5$ \cite{urea} \\
+\recheck{ethane in ethane/water mixture} & 0.006 & $7.2 \pm 0.2$ & $7.3 \pm 0.3$ & -- \\ 
+\recheck{TBA in water/TBA mixture} & 0.001 & $-19.5 \pm 0.5$ & $-20.8 \pm 0.6$ & $-19.0$ \cite{nico} \\
+DMSO in DMSO/water mixture & 0.01 & $-31.4 \pm 0.5$ & $-33.2 \pm 0.3$ & -- \\
+TBA in TBA/DMSO mixture & 0.02 & $-24.8 \pm 0.4$ & $-24.0 \pm 0.5$ & -- \\
 \hline \hline
 \end{tabular}
 \caption{The excess chemical potential of different liquids and mixtures in kJ/mol calculated from GC-AdResS and TI of full atomistic simulations. Experimental values for systems at the same concentrations used in simulation are also reported for comparison. For pure systems (water and methanol) we compare our values with those obtained in literature using the same force field and computational code. For mixtures, most of the values from literature (simulation and experiments) are available at lower concentrations (see Refs.\cite{vang,nico}); However, since we are always in a very dilute regime the chemical potential does not change significantly. \recheck{We have provided evidence for the TBA/water misture that such consistency holds (see Fig.\ref{concentration})}. Note that the chemical potential of water in dilute mixtures is the same of pure water and is not reported above.
@@ -472,7 +471,7 @@ therefore, in total 42 simulations were performed to calculate each TI chemical 
 % a transition region of $1.4 nm$ each. 
 In an AdResS simulation, the initial guess of the thermodynamic force largely determines the time for convergence. 
 We started with a randomly chosen initial guess
-($-42$~kJ/mol, we picked a very small value because the TBA molecule is highly hydrophilic)
+($-42$~kJ/mol, we picked a small value because the TBA molecule is hydrophilic)
 for system with the highest mole fraction of TBA. For all the other systems, 
 we used the converged thermodynamic force obtained from the first system as an initial guess. The convergence was much 
 faster in all the other cases using this approach. Table~\ref{table3} shows the number of iterations required for 
@@ -532,6 +531,7 @@ The essential message is that GC-AdResS would be, {\it per se}, a reliable multi
 \section*{Acknowledgments}
 This work was supported by the Deutsche Forschungsgemeinschaft (DFG) with the Heisenberg grant provided to L.D.S (grant code DE 1140/5-1) and with its associate DFG grants for A.G.(grant code DE 1140/7-1) and for H.W. (grant code DE 1140/4-2).H.W.~and C.S.~thank the financial support by DFG research center MATHEON. \recheck{We thank Christoph Junghans and Debashish Mukherji for contributing to the information reported in section IV about the speed up factor}.
 
+
 \appendix
 \section{Technical details of the simulations}\label{app:tmp1}
 The potential energy function and the force field parameters for all the molecules
@@ -542,7 +542,8 @@ and DMSO was described by the model given by Geerke et.al.~\cite{dmso1}. For liq
 GROMOS43A1 parameter set was used, as it was shown to be more accurate for calculating excess free energy of 
 solvation of methanol in methanol~\cite{vang}. \\
 
-In all the AdResS simulations, 30 iterations were performed to obtain a 
+In all the AdResS simulations, the resolution changes only on $x$ direction.
+For each system, 30 iterations were performed to obtain a 
 converged thermodynamic force and a flat density profile. Each iteration consisted 
 of 200 ps of equilibration which was followed by 200 ps of data collection. 
 The simulations were performed at NVT conditions where the temperature was kept constant 
@@ -671,7 +672,7 @@ In all the simulations, a leap-frog stochastic dynamics integrator with a time s
 of 2~fs and an inverse friction coefficient of 0.1~ps was used. All bond-lengths were constrained using the LINCS 
 algorithm. \recheck{As discussed previously, a higher cut-off radius of $1.4$~nm has been used for van der Waals and Coulomb interactions,
 in AdResS and full-atom simulations}. 
-Electrostatic interactions beyond the cut-off radius were calculated using the reaction-field term \cite{rf} with a dielectric 
+Electrostatic interactions  were calculated using the reaction-field term \cite{rf} with a dielectric 
 permittivity of 54 for urea in SPC water \cite{urea}, 64.8 for TBA in SPC water \cite{nico}, 61 for other solutes in SPC
 water, 19 for methanol and 46 for DMSO as the solvent \cite{vang}.
 
