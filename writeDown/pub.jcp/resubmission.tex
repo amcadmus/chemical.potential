@@ -71,7 +71,9 @@ In the previous paper published about one year ago in Physical Review X,
 we have developed what we have {\bf openly} proposed in that paper as a {\bf rigorous approach} where all the formulas were derived analytically and checked mathematically.
 The whole theory is based on two assumptions:
 
-(1) Thermodynamic limit for the coarse-grained region (i.e. number of molecule very large).
+(1) Thermodynamic limit for the {atomistic and the coarse-grained region. (i.e. the number of molecules in both of the two
+  regions are infinitely large, and the coarse-grained region is infinitely larger than the atomistic region)}.
+% (1) Thermodynamic limit for the coarse-grained region (i.e. number of molecule very large).
 
 (2) Hybrid region considered as a thin filter compared to the size of the two other regions.
 
@@ -92,8 +94,7 @@ However, our impression is that the first referee did not really read our previo
 
 We have also added two very recent references related to the use of AdResS with the MARTINI force field. The senior authors of such publications pointed out to us the importance of calculating the chemical potential as a test of thermodynamical consistency of the whole system, especially for systems of the kind they are treating (large bio-systems).
 
-\recheck{do not say that...}
-Finally, the referee asked us to ``{\it ameliorate} the language; we are fully aware of not being mother tongue Oxford academics, but we asked several colleagues to read the paper and tell us if it was understandable; we got only positive comments, we cannot do more than that.
+Finally, the referee asked us to {\it ameliorate} the language; we are fully aware of not being mother tongue Oxford academics, but we asked several colleagues to read the paper and tell us if it was understandable; we got only positive comments, we cannot do more than that.
 
 We have added all the calculations/information asked by the referees and we are confident that now the paper is ready for publication.
 
@@ -116,14 +117,14 @@ point of view of physics and went even further by exploring how far
 one could make it mathematically rigorous/exact. We have found that
 under the hypothesis:
 
-(1) Thermodynamic limit for the \recheck{atomistic and the coarse-grained region. (i.e. the number of molecules in both of the two
-  regions are infinitely large, and the coarse-grained region is infinitely larger than the atomistic region)}  
+(1) Thermodynamic limit for the {atomistic and the coarse-grained region. (i.e. the number of molecules in both of the two
+  regions are infinitely large, and the coarse-grained region is infinitely larger than the atomistic region)}.
 
 (2) Hybrid region considered as a thin filter compared to the size of the two other regions.
 
 The method is mathematically rigorous and for some aspects even
 exact. Conditions (1) and (2) are ideal, so it was important to know
-how they can be met in \recheck{practical simulations, especially in
+how they can be met in {practical simulations, especially in
 the mixture systems that the solute concentration is dilute.} The aim of this paper is: {\bf to
   explore the numerical accuracy of the theory (for the chemical
   potential) proposed in Ref.5}.  We have done it for thirteen
@@ -139,7 +140,8 @@ below).
 %   The main purpose of the paper was to show the numerical accuracy of the theory, so we did not provide the theoretical derivation of
 % }
 % We have taken such a comment as a motivation to make an effort and finalize a derivation of the formula defined {\it ``weak''} by the referee. The derivation is presented as one of the results of this paper and has got its own section.
-We have taken such a comment as a motivation to \recheck{provide the} derivation of the formula defined {\it ``weak''} by the referee. The derivation is presented as one of the results of this paper and has got its own section.
+We have taken such a comment as a motivation to {provide the} derivation of the formula defined {\it ``weak''} by the referee. The derivation is presented as one of the results of this paper and has got its own section.
+Although developed before the submission of this paper, this result was not presented, because the paper was intended to investigate only the numerical accuracy.
 
 
 {\color{blue}{\it (1) A description of the cg model is lacking. Please specify how do you treat and the interaction potential for
@@ -270,10 +272,10 @@ and add the reference from the same authors on mixtures.
     space to adapt to the change in resolution. Please correct this.}}
 
 
-\recheck{The Fig.2 (Fig.4 in the revision) plots the density profile only for the HYB region, as the caption states.}
+{The Fig.2 (Fig.4 in the revision) plots the density profile only for the HYB region, as the caption states.}
 % We disagree.
-\recheck{The relatively large deviation is due to the sampling error, because the
-  number of TBA molecules in the system is very small (80, see the Table II, i.e.~the Table IV in the revision).
+{The relatively large deviation is due to the sampling error, because the
+  number of TBA molecules in the system is very small (80 for mole-fraction 0.02, see the Table II, i.e.~the Table IV in the revision).
   We could reach a much better accuracy of the density if we do longer simulations,
   but it would require much more computer time.}
 % We could reach a much higher accuracy if we set the level
