@@ -375,22 +375,22 @@ where $\vect{F}^{k}_{\thf}(x)$ is the thermodynamic force applied to the molecul
 \hline \hline
  Liquid component & Mole fraction of solute & GC-AdResS & TI & Experiment \\
 \hline
-\recheck{water} & -- & $-23.9 \pm 0.3$  & $-22.3 \pm 0.6$ & $-23.5$~\cite{florian} \\
+\recheck{water} & -- & $-22.8 \pm 0.2$  & $-22.1 \pm 0.3$ & $-23.5$~\cite{florian} \\
 methane  & -- & $-4.6 \pm 0.1$  & $-5.2 \pm 0.1$ & -- \\
 ethane   & -- & $-8.2 \pm 0.3$  & $-8.8 \pm 0.1$ & -- \\
 propane  & -- & $-8.5 \pm 0.1$ & $-9.5 \pm 0.2$ & -- \\
-\recheck{methanol}  & -- & $-20.3 \pm 0.2$ & $-20.9 \pm 0.3$ & $-20.5$ \cite{vang}  \\
+\recheck{methanol}  & -- & $-20.1 \pm 0.1$ & $-20.6 \pm 0.4$ & $-20.5$ \cite{vang}  \\
 DMSO & -- & $-32.2 \pm 0.3$ & $-34.7 \pm 0.7$ & $-32.2$ \cite{dmso}  \\
-\recheck{methanol in methanol/water mixture} & 0.01 & $-19.0 \pm 0.2$ & $-19.7 \pm 0.2$ & -- \\
-\recheck{methane in methane/water mixture} & 0.006 & $9.3 \pm 0.2$  & $8.2 \pm 0.3$ & -- \\
+\recheck{methanol in methanol/water mixture} & 0.01 & $-18.1 \pm 0.2$ & $-19.7 \pm 0.2$ & -- \\
+\recheck{methane in methane/water mixture} & 0.006 & $9.1 \pm 0.1$  & $8.5 \pm 0.2$ & -- \\
 urea in urea/water mixture & 0.02 & $-56.1 \pm 0.6$ & $-58.2 \pm 0.5$ & $-57.8 \pm 2.5$ \cite{urea} \\
-\recheck{ethane in ethane/water mixture} & 0.006 & $7.2 \pm 0.2$ & $7.3 \pm 0.3$ & -- \\ 
-\recheck{TBA in water/TBA mixture} & 0.001 & $-19.5 \pm 0.5$ & $-20.8 \pm 0.6$ & $-19.0$ \cite{nico} \\
+\recheck{ethane in ethane/water mixture} & 0.006 & $7.2 \pm 0.2$ & $7.4 \pm 0.3$ & -- \\ 
+\recheck{TBA in water/TBA mixture} & 0.001 & $-19.5 \pm 0.3$ & $-20.8 \pm 0.6$ & $-19.0$ \cite{nico} \\
 DMSO in DMSO/water mixture & 0.01 & $-31.4 \pm 0.5$ & $-33.2 \pm 0.3$ & -- \\
 TBA in TBA/DMSO mixture & 0.02 & $-24.8 \pm 0.4$ & $-24.0 \pm 0.5$ & -- \\
 \hline \hline
 \end{tabular}
-\caption{The excess chemical potential of different liquids and mixtures in kJ/mol calculated from GC-AdResS and TI of full atomistic simulations. Experimental values for systems at the same concentrations used in simulation are also reported for comparison. For pure systems (water and methanol) we compare our values with those obtained in literature using the same force field and computational code. For mixtures, most of the values from literature (simulation and experiments) are available at lower concentrations (see Refs.\cite{vang,nico}); However, since we are always in a very dilute regime the chemical potential does not change significantly. \recheck{We have provided evidence for the TBA/water misture that such consistency holds (see Fig.\ref{concentration})}. Note that the chemical potential of water in dilute mixtures is the same of pure water and is not reported above.
+\caption{The excess chemical potential of different liquids and mixtures in kJ/mol calculated from GC-AdResS and TI of full atomistic simulations. Experimental values for systems at the same concentrations used in simulation are also reported for comparison. For pure systems (water and methanol) we compare our values with those obtained in literature using the same force field and computational code. For mixtures, most of the values from literature (simulation and experiments) are available at lower concentrations (see Refs.\cite{vang,nico}); However, since we are always in a very dilute regime the chemical potential does not change significantly. \recheck{We have provided evidence for the TBA/water mixture that such consistency holds (see Fig.\ref{concentration})}. Note that the chemical potential of water in dilute mixtures is the same of pure water and is not reported above.
 }
 \label{table}
 \end{center}
@@ -406,28 +406,30 @@ TBA in TBA/DMSO mixture & 0.02 & $-24.8 \pm 0.4$ & $-24.0 \pm 0.5$ & -- \\
 \begin{figure}
 \center
 \includegraphics[width=0.475\textwidth]{concentration.eps}
-\caption{ \recheck{Excess chemical potential of t-butyl alcohol (TBA) in water for different concentrations (in logarithmic scale), calculated using GC-AdResS. The results are compared with thermodynamic integration values. At mole-fraction $\concenttba=0.001$, the experiment value is shown. \label{concentration}}}
+\caption{ \recheck{Excess chemical potential of tert-butyl alcohol (TBA) in water for different concentrations (in logarithmic scale), calculated using GC-AdResS. The results are compared with thermodynamic integration values. At mole-fraction $\concenttba=0.001$, the experiment value is shown. \label{concentration}}}
 \end{figure}
 
 
-\recheck{A complementary information to Table~\ref{table} is
-  Fig.\ref{convergence}. In
-  Table~\ref{table}, there is a systematic difference of
-  $1.2 \sim 2.0$~kJ/mol between our values and those of TI
-  calculations. In order to understand the possible origin of such a
-  discrepancy and provide a way to eventually improve the accuracy of
-  results, we have studied the behavior of $\mu^{ex}$ as a function of
+\recheck{A complementary information to Table~\ref{table} are 
+  Fig.~\ref{convergence} and~\ref{concentration}.
+  % In
+  % Table~\ref{table}, there is a systematic difference of
+  % $1.2 \sim 2.0$~kJ/mol between our values and those of TI
+  % calculations. In order to understand the possible origin of such a
+  % discrepancy and provide a way to eventually improve the accuracy of
+  % results,
+  In Fig.~\ref{convergence} we have studied the behavior of $\mu^{ex}$ as a function of
   the interaction cut-off. In fact the current version of GC-AdResS,
   employs the reaction field method for treating electrostatic
   interactions in the atomistic region, and the cut off is likely to
-  play a role. Fig.\ref{convergence}, for the case of DMSO/water
+  play a role in some of the systems investigated. Fig.\ref{convergence}, for the case of DMSO/water
   mixture, confirms our intuition and suggests that we could
   systematically improve the accuracy by increasing the cut-off,
-  however at a value of about $1.5$~nm, $\mu^{ex}$ converges. In any
+  and at a value of about $1.5$~nm, $\mu^{ex}$ converges. In any
   case, at a values of $1.4$~nm, which is the one routinely used in
-  full atomistic simulations and used by us in all calculations, the
-  value obtained with GC-AdResS is already satisfactory.\\
-
+  full atomistic simulations and used by us, the
+  value obtained with GC-AdResS is already satisfactory.
+  The cut-off radii used for other systems are reported in Appendix~\ref{app:tmp1}.
   A further
   question that may arise is the capability of our method to predict
   the behavior of $\mu^{ex}$ as a function of the concentration, above
@@ -436,22 +438,34 @@ TBA in TBA/DMSO mixture & 0.02 & $-24.8 \pm 0.4$ & $-24.0 \pm 0.5$ & -- \\
   good agreement between GC-AdResS and TI and show that at a very
   dilute concentration our calculated value is close to that of
   experiments, moreover the trend, regarding the TI calculations, is
-  consistent with that reported in Ref.\cite{nico}.\\}
+  consistent with that reported in Ref.\cite{nico}.\\
+}
 
 
 \begin{figure}
 \center
 \includegraphics[width=0.475\textwidth]{alcohol_rho.eps}\\
 \includegraphics[width=0.475\textwidth]{water_rho.eps}
-\caption{Top: Molecular density profile in $\Delta$ for TBA/water mixture; bottom, the same plot for water. Among all the systems considered, in this case the action of the thermodynamic force and that of the thermostat leads to the largest deviation from the reference all atomistic average density; however even in this case the discrepancy is negligible.\label{urea-TBA}}
+\caption{Top: Molecular density profile in $\Delta$ for TBA/water mixture; Bottom, the same plot for water.
+  Among all the systems considered, in this case the action of the thermodynamic force and that of the thermostat leads to the largest deviation from the reference all atomistic average density;
+  however even in this case the discrepancy is negligible. The mole-fraction is $\concenttba=0.02$, and the cut-off radius is 0.9~nm.}
+\label{urea-TBA}
 \end{figure}
+
+
 \begin{figure}
 \center
 \includegraphics[width=0.475\textwidth]{alcohol-alcohol.eps}\\
 \includegraphics[width=0.475\textwidth]{alcohol-water.eps}\\
 \includegraphics[width=0.475\textwidth]{water-water.eps}
-\caption{Top: TBA-TBA radial distribution function; middle: the same plot for TBA-water; bottom: for water-water. The $g(r)$ is calculated only in the atomistic region.  Molecules located beyond a distance equal to the interactions' cut off, $0.9 nm$, are not considered since would include hybrid and coarse-grained molecules. \label{gr}}
+\caption{Top: TBA-TBA radial distribution function; Middle: the same plot for TBA-water; Bottom: for water-water.
+  Red: the results of the AdResS simulation.
+  The $g(r)$ is calculated only in the atomistic region.
+  Blue: the results of a full-atomistic reference simulation that has the same simulation region as AdResS.
+  The mole-fraction is $\concenttba=0.02$, and the cut-off radius is 0.9~nm.}
+\label{gr}
 \end{figure}
+
 In essence, according to the results obtained, GC-AdResS allows an on-the-fly determination of $\mu^{ex}$ of each component of a liquid, whenever a simulation is performed, without extra computational costs.
 Moreover, Fig.\ref{urea-TBA} shows the action of the thermodynamic force and of the thermostat in the transition region $\Delta$ for TBA-water; the molecular density is sufficiently close to that of reference (the largest difference is below $20\%$ and the average difference is below $10\%$), and thus it assures that in the atomistic region there are no (significant) artificial effects on the molecular density due to the perturbation represented by the interpolation of forces in $\Delta$. In Fig.\ref{gr} we report various radial distribution functions for TBA-water in the atomistic region of the adaptive set up. The agreement with data from a full atomistic simulation is highly satisfactory. Moreover, it must be underlined that, on purpose, we have chosen extreme technical conditions, that is, a very small atomistic and coarse-grained region ($0.5$~nm) and a relatively large transition region ($2.7$~nm). Even in these conditions we prove that local properties as those of Fig.\ref{urea-TBA} and Fig.\ref{gr}, together with a relevant thermodynamics quantity as $\mu^{ex}$ are well reproduced.
 This example shows the key features of GC-AdResS, that is, a multiscale simulation where the chemical potential of each component is obtained without extra computational costs and with high accuracy in a simulation where other properties are also calculated with high accuracy. It must be also noticed that the system corresponding to the figures is, among all the system considered, the case where the action of the thermodynamic force and of the thermostat produces the less accurate agreement with the reference data.
@@ -500,7 +514,7 @@ $\concenttba$ &No. of iterations&Time(hrs.)&Time(hrs.)\\
 \hline
 \end{tabular}
 \caption{Time required for a full GC-AdResS and thermodynamic
-  integration (TI) calculation for tbutyl-alcohol(TBA) in water at
+  integration (TI) calculation for tert-butyl-alcohol(TBA) in water at
   different mole-fractions.
   The ``*'' means that a larger system was used for  the very dilute system ($\concenttba=0.001$), see Appendix~\ref{app:tmp1} for details.
   All the simulations were performed on a
@@ -654,11 +668,11 @@ DMSO & --- & 1500 & $15.0 \times 3.6 \times 3.3$ &  $7.0 \times 3.6 \times 3.3$ 
 urea/water & 50 & 2500 & $9.7 \times 2.9 \times 2.8$ & $6.8 \times 2.9 \times 2.8$ \\
 \recheck{ethane/water} & 40 & 6960 & $10.0 \times 4.7 \times 4.6$ & $7.0 \times 4.7 \times 4.6$ \\
 \recheck{TBA/water ($\concenttba=0.001$)} & 40 & 39960 & $50.1 \times 5.8 \times 4.3$ & $7.0 \times 5.8 \times 4.3$  \\
-\recheck{TBA/water ($\concenttba=0.02$)} & 80 & 4400 & $10 \times 3.6 \times 4.2$ & $7.0 \times 3.6 \times 4.2$  \\
-\recheck{TBA/water ($\concenttba=0.04$)} & 180 & 4300 & $10 \times 4.3 \times 3.7$ & $7.0 \times 4.3 \times 3.7$  \\
-\recheck{TBA/water ($\concenttba=0.12$)} & 538 & 3942 & $10 \times 4.4 \times 4.6$ & $7.0 \times 4.4 \times 4.6$  \\
-\recheck{TBA/water ($\concenttba=0.16$)} & 717 & 3763 & $10 \times 4.9 \times 4.6$ & $7.0 \times 4.9 \times 4.6$  \\
-\recheck{TBA/water ($\concenttba=0.20$)} & 896 & 3584 & $12 \times 4.6 \times 4.5$ & $7.0 \times 4.6 \times 4.5$  \\
+\recheck{TBA/water ($\concenttba=0.02$)} & 80 & 4400 & $10.0 \times 3.6 \times 4.2$ & $7.0 \times 3.6 \times 4.2$  \\
+\recheck{TBA/water ($\concenttba=0.04$)} & 180 & 4300 & $10.0 \times 4.3 \times 3.7$ & $7.0 \times 4.3 \times 3.7$  \\
+\recheck{TBA/water ($\concenttba=0.12$)} & 538 & 3942 & $10.0 \times 4.4 \times 4.6$ & $7.0 \times 4.4 \times 4.6$  \\
+\recheck{TBA/water ($\concenttba=0.16$)} & 717 & 3763 & $10.0 \times 4.9 \times 4.6$ & $7.0 \times 4.9 \times 4.6$  \\
+\recheck{TBA/water ($\concenttba=0.20$)} & 896 & 3584 & $12.0 \times 4.6 \times 4.5$ & $7.0 \times 4.6 \times 4.5$  \\
 DMSO/water & 50 & 4950 & $12.0 \times 4.0 \times 3.3$ & $7.0 \times 4.0 \times 3.3$ \\
 TBA/DMSO & 80 & 4400 & $10.0 \times 7.3 \times 7.2$ &  $7.0 \times 7.3 \times 7.2$ \\
 \hline \hline
@@ -670,8 +684,17 @@ TBA/DMSO & 80 & 4400 & $10.0 \times 7.3 \times 7.2$ &  $7.0 \times 7.3 \times 7.
 
 In all the simulations, a leap-frog stochastic dynamics integrator with a time step
 of 2~fs and an inverse friction coefficient of 0.1~ps was used. All bond-lengths were constrained using the LINCS 
-algorithm. \recheck{As discussed previously, a higher cut-off radius of $1.4$~nm has been used for van der Waals and Coulomb interactions,
-in AdResS and full-atom simulations}. 
+algorithm.
+For liquid water, methanol,
+methanol/water, methane/water and ethane/water  a cut-off radius of
+0.9 nm was used for van der Waals and Coulomb interactions, while for rest of the systems,
+a cut-off radius of 1.4 nm was used.
+\recheck{
+  For the TBA/water system, the chemical potential converges at cut-off 0.9~nm for mole-fraction $\concenttba=0.02$.
+  Since it would be too expensive to do the convergence tests for
+  all concentrations, we simply use a large cut-off 1.4~nm for the concentration dependency study of TBA/water.}
+% \recheck{As discussed previously, a higher cut-off radius of $1.4$~nm has been used for van der Waals and Coulomb interactions,
+% in AdResS and full-atom simulations}. 
 Electrostatic interactions  were calculated using the reaction-field term \cite{rf} with a dielectric 
 permittivity of 54 for urea in SPC water \cite{urea}, 64.8 for TBA in SPC water \cite{nico}, 61 for other solutes in SPC
 water, 19 for methanol and 46 for DMSO as the solvent \cite{vang}.
