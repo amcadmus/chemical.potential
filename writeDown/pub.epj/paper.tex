@@ -1,0 +1,415 @@
+%%%%%%%%%%%%%%%%%%%%%%% file template.tex %%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% This is a template file for The European Physical Journal Special Topics
+%
+% Copy it to a new file with a new name and use it as the basis
+% for your article
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\documentclass[epjST]{svjour}
+%
+\usepackage{graphics}
+\usepackage{color, colortbl}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{tabularx}
+
+\newcommand{\recheck}[1]{{\color{red} #1}}
+\newcommand{\redc}[1]{{\color{red} #1}}
+\newcommand{\bluec}[1]{{\color{red} #1}}
+\newcommand{\greenc}[1]{{\color{green} #1}}
+\newcommand{\vect}[1]{\textbf{\textit{#1}}}
+\newcommand{\dd}[1]{\textsf{#1}}
+\newcommand{\fwd}[0]{\textrm{fw}}
+\newcommand{\bwd}[0]{\textrm{bw}}
+\newcommand{\period}[0]{T_{\textrm{P}}}
+\newcommand{\ml}[0]{\mathcal {L}}
+\newcommand{\mo}[0]{\mathcal {O}}
+\newcommand{\mbp}[0]{\mathbb {P}}
+\newcommand{\mh}[0]{\mathcal {H}}
+\newcommand{\dist}[0]{\textrm {dist}}
+\newcommand{\AT}[0]{\textrm{AT}}
+\newcommand{\HY}[0]{\textrm{HY}}
+\newcommand{\CG}[0]{\textrm{CG}}
+\newcommand{\EX}[0]{\textrm{EX}}
+\newcommand{\moleidxone}[0]{i}
+\newcommand{\moleidxtwo}[0]{j}
+\newcommand{\atomidxone}[0]{\alpha}
+\newcommand{\atomidxtwo}[0]{\beta}
+\newcommand{\thf}{{\textrm{th}}}
+\newcommand{\rdf}{{\textrm{rdf}}}
+\newcommand{\rep}{{\textrm{rep}}}
+\newcommand{\dof}{{\textrm{DOF}}}
+\newcommand{\exc}{{\textrm{extra}}}
+\newcommand{\inv}{{\textrm{equi}}}
+
+% \usepackage{amsfonts}
+% \newcommand{\tickYes}{\checkmark}
+% \usepackage{pifont}
+% \newcommand{\tickNo}{\hspace{1pt}\ding{55}}
+% \definecolor{MyGray}{gray}{0.85}
+
+%
+\begin{document}
+%
+\title{Adaptive Resolution Simulation: Theoretical Fundations and Open Questions}
+\author{Han Wang\inst{1}\fnmsep\thanks{\email{han.wang@fu-berlin.de}}}
+%
+\institute{Zuse Institut Berlin}
+%
+\abstract{
+Insert your abstract here.
+} %end of abstract
+%
+\maketitle
+%
+
+
+\section{The two ways  of designing the hybrid region}
+
+The AdResS uses a weighting function $w(\vect r)$ that is a scalor
+function defined over the simulation region to denote the resolution
+of the system. In the atomistic region the value of the
+weighting function is usually set to 1, while in the coarse-grained
+region it is usually set to 0. In between, there is a bybrid region
+that is denoted by $\Omega_\HY$
+(or called transition region), where the molecules
+has both the atomistic and coarse-grained resolutions, and the weighting function
+goes smoothly from 1 to 0. The way of designing the weighting function
+is not unique, one possible and perhaps the most popular choice is
+\begin{equation}\label{eqn:old-w}
+  w(\vect r) =
+  \left\{
+    \begin{alignedat}{3}
+      &1 &\quad& \vect r \in \Omega_\AT\\
+      &\cos^2\Big[\frac{\pi}{2 } \cdot \frac{\dist(\vect r, \Omega_\AT)}{d_\HY}\,\Big] && \vect r \in\Omega_\HY \\
+      &0 &    & \vect r \in \Omega_\CG 
+    \end{alignedat}
+  \right.
+\end{equation}
+where $\dist(\vect r, \Omega_\AT)$ is the distance between the
+position $\vect r$ and the atomistic region, which is defined
+by $\dist(\vect r, \Omega_\AT) = \min_{\vect s\in\Omega_\AT} \vert
+\vect r - \vect s \vert$.  $d_\HY$ is the thickness of the hybrid
+region. We always assume the thickness of the hybrid region is
+uniform, which indicates that the weighting function smoothly vanishes
+at the boundary between the hybrid and the coarse-grained regions.
+Since all interactions (including the electrostatic interction) are treated
+by cut-off method, the weighting function requires the thickness of
+the hybrid region being at least one cut-off radius (denoted by $r_c$). 
+The benefite of this setting is that the atomistic
+region is not directly interacting with the coarse-grained region,
+so there is no extra work for modeling the interactions between the atomistic
+and coarse-grained resolutions.
+
+Both the atomistic and coarse-grained intermolecular interactions are
+well defined in the atomistic region and coarse-grained regions,
+respectively.  To setup an AdResS simulation, one needs to define the
+interactions in the hybrid region. There are in general two
+possibilities: force interpolation and the potential interpolation.
+The force interpolation approach defines the hybrid force between two
+molecules (saying $\moleidxone$ and $\moleidxtwo$) by a linear interpolation
+between the atomistic (denoted by ${\vect F}_{\moleidxone\moleidxtwo}^{\AT}$) and coarse-grained (denoted by ${\vect F}_{\moleidxone\moleidxtwo}^{\CG}$) forces.
+\begin{align}\label{eqn:f-f-interpol}
+  {\vect F}_{\moleidxone \moleidxtwo}=w_\moleidxone w_\moleidxtwo{\vect F}_{\moleidxone\moleidxtwo}^{\AT}+(1-w_\moleidxone w_\moleidxtwo){\vect F}^{\CG}_{\moleidxone\moleidxtwo} 
+\end{align}
+where $w_\moleidxone = w(\vect r_\moleidxone)$ is the weighting function
+measured at the center-of-mass (COM) position of molecule $\moleidxone$.
+It should be noted that the AdResS  force interpolation is not conservative, i.e.~there does not
+exist a potential so that the force interpolation is derived by taking the negative gradient of the potential~\cite{praprotnik2011comment,dellesite2007some}.
+It is easy to show that the force interpolation satisfies the momentum conservation: Since
+both the atomistic and coarse-grained forces are subject to the Newton's third law, i.e.~${\vect F}_{\moleidxone\moleidxtwo}^{\AT} = - {\vect F}_{\moleidxtwo\moleidxone}^{\AT}$
+and ${\vect F}_{\moleidxone\moleidxtwo}^{\CG} = - {\vect F}_{\moleidxtwo\moleidxone}^{\CG}$, from the definition Eq.~\eqref{eqn:f-f-interpol} we have ${\vect F}_{\moleidxone\moleidxtwo} = - {\vect F}_{\moleidxtwo\moleidxone}$.
+
+The potential interpolation approach defines the hybrid energy by the same idea:
+\begin{align}\label{eqn:v-v-interpol}
+  {V}_{\moleidxone \moleidxtwo}=w_\moleidxone w_\moleidxtwo{V}_{\moleidxone\moleidxtwo}^{\AT}+(1-w_\moleidxone w_\moleidxtwo){V}^{\CG}_{\moleidxone\moleidxtwo} 
+\end{align}
+The intermolecular force is therefore calculated by
+\begin{align}\nonumber
+  {\vect F}^V_{\moleidxone \moleidxtwo}&= -\nabla_{\moleidxone}{V}_{\moleidxone \moleidxtwo} \\ \label{eqn:f-v-interpol}
+  &=w_\moleidxone w_\moleidxtwo{\vect F}_{\moleidxone\moleidxtwo}^{\AT}+(1-w_\moleidxone w_\moleidxtwo){\vect F}^{\CG}_{\moleidxone\moleidxtwo}  - \nabla w_\moleidxone\cdot w_\moleidxtwo (V^\AT_{\moleidxone \moleidxtwo} - V^\CG_{\moleidxone \moleidxtwo})
+\end{align}
+Where $\nabla w_\moleidxone$ is the gradient of the weighting function measured at position $\vect r_\moleidxone$,
+and the superscipt ``$V$'' denotes that the force is defined
+by the potential interpolation.
+By  definition~\eqref{eqn:f-v-interpol}, the force of potential interpolation is conservative. 
+The difference between the force and potential
+interpolations lies in the last term  of Eq.~\eqref{eqn:f-v-interpol}, which is a force
+acting along the direction of decreasing weighting function.
+It should be noted that
+the last term breaks the Newton's third law, therefore the force of potential interpolation
+does not conserves the momentum.
+
+\begin{table}
+  \centering
+  \caption{A summary of the fundamental conservation laws in mechanics 
+    satisfied by the normal molecular system and AdResS systems defined by force and potential interpolations.}
+  \label{tab:conv-laws}
+  \begin{tabular*}{0.8\textwidth}{@{\extracolsep{\fill}}lcc}\hline\hline
+    &         Momentum Consv.     &       Energy Consv. \\
+    Normal molecular System     &       {Yes}        &       {Yes}\\      
+    AdResS force interpol.   &       {Yes}        &       {No}\\      
+    AdResS potential interpol.  &     {No}  &       {Yes}\\\hline\hline
+  \end{tabular*}
+\end{table}
+The fundamental conservation laws satisfied by both the force and potential interpolations
+are summarized in Tab.~\ref{tab:conv-laws}. Unlike normal molecular systems, in which both
+the momentum and energy are conserved, neither of the AdResS systems conserves
+both laws. The breaks of these mechanics conservations have substantial influence on the thermodynamic
+properties of the AdResS systems (see the discussions in Sec.~\ref{sec:thermodynamic}). The choice of the interpolation scheme depends on
+the practical requirement, for example, in some systems it is crucial to have the momentum
+conservation, then the force interpolation is prefered, and vice versa.
+In equilibrium case, we will show later in Sec.~\ref{sec:statistical}
+that both approaches approximately sample the grand-canonial ensamble.
+
+When the intermolecular force is defined by either
+Eq.~\eqref{eqn:f-f-interpol} or \eqref{eqn:f-v-interpol}, the total
+force exserts on one molecule is given by the normal adding up rule:
+\begin{align}
+  \vect F_\moleidxone = \sum_\moleidxtwo \vect F_{\moleidxone\moleidxtwo}, \quad \vect F^V_\moleidxone = \sum_\moleidxtwo \vect F^V_{\moleidxone\moleidxtwo}
+\end{align}
+On the force on the atomistic DOFs of a hybrid molecules is distributed 
+by, taking atom $\atomidxone$ on molecule $\moleidxone$ for example,
+\begin{align}
+  \vect F_\atomidxone = \frac{m_\atomidxone}{M_\moleidxone}\vect F_\moleidxone, \quad   \vect F^V_\atomidxone = \frac{m_\atomidxone}{M_\moleidxone}\vect F^V_\moleidxone 
+\end{align}
+where $m_\atomidxone$ is the mass of atom, and $M_\moleidxone$ is the total mass of molecule $\moleidxone$, i.e.~$M_\moleidxone = \sum_{\atomidxone\in\moleidxone}m_\atomidxone$.
+
+Before discussing the statistical and thermodynamic properties of AdResS, a few comments on the
+choice of the weighting function should be added. 
+In Ref.~\cite{wang2012adaptive} the authors introduced a modified weighing function that
+introduce a buffer region so that the molecules with the atomistic resolution
+interacts with the hybrid region via the atomistic intermolecular interaction:
+\begin{equation}\label{eqn:new-w}
+  w(\vect r) =
+  \left\{
+    \begin{alignedat}{3}
+      &1 &\quad& \vect r \in \Omega_\AT\\
+      &1 && \vect r \in\Omega_\HY, \dist(\vect r, \Omega_\AT) < r_c \\
+      &\cos^2\Big[\frac{\pi}{2 } \cdot \frac{\dist(\vect r, \Omega_\AT) - r_c}{d_{{\HY}} - r_c}\,\Big] && \vect r \in\Omega_\HY, \dist(\vect r, \Omega_\AT) \geq r_c\\
+      &0 &    & \vect r \in \Omega_\CG 
+    \end{alignedat}
+  \right.
+\end{equation}
+The minimum thickness of the hybrid region is therefore $2r_c$.
+It worth noting that the coarse-grained region does not requires a buffer in the hybrid region, because
+by definition the coarse-grained region interacts with the hybrid region via the coarse-grained intermolecular interaction.
+The new definition~\eqref{eqn:new-w} is crucial for the equilibrium statistical properties of the AdResS,
+however, the extra cost of is spent in the buffer $\{\vect r \vert \vect r \in\Omega_\HY, \dist(\vect r, \Omega_\AT) < r_c\}$,
+which is treated in atomistic resolution. This cost is relatively small for systems with large atomistic region.
+
+\section{Equilibrium statistical properties of adaptive resolution simulation}
+\label{sec:statistical}
+
+To consider the accuracy of the AdResS simulation, we always compare it with a
+atomistic reference system, which is of the same size as the AdResS system, and contains the same number of molecules.
+If the statistal properties of the atomistic region in the AdResS simulation
+is same as the corresponding subregion in the atomistic reference, then
+the atomistic region is embeded into the AdResS system as if it were embeded in to
+an atomistic environment, and the AdResS simulation is of good accuracy.
+
+We denote the number of molecules, volume and temperture of the system by $N$, $V$ and $T$, respectively.
+The atomistic reference system has exactly the same set of variables, and its equilibrium state  is
+the desired equilibrium.
+% The word ``desired'' means that
+% the atomistic region of the AdResS system should reproduce the equilibrium properties corresponding subregion of the reference
+% system.
+The thermodynamic variables for subregions are specified by the subscript,
+for example, the those of the atomistic region are 
+$N_\AT$, $V_\AT$ and $T_\AT$. Those of the hybrid and coarse-grained regions
+are denoted by adding ``$\HY$'' and ``$\CG$'', respectively.
+Identities $N = N_\AT + N_\HY + N_\CG$ and $V = V_\AT + V_\HY + V_\CG$ obviously hold
+in the AdResS system.
+In equilibrium, the temperature is uniform across the system: $T = T_\AT = T_\HY = T_\CG$.
+This is achieved in practice by coupling the whole system to a Langevin thermostat.
+The pressure and chemical potential of the atomistic and coarse-grained regions
+are denoted by $\{p_\AT, \mu_\AT\}$
+and $\{p_\CG, \mu_\CG\}$, respectively.
+The DOFs of molecules indexed $\moleidxone$ are $\vect x_\moleidxone = \{\vect r_\moleidxone, \vect p_\moleidxone\}$, where
+$\vect r_\moleidxone$ denotes the generalized coordinates and $\vect p_\moleidxone$ denotes the corresponding momenta.
+All DOFs of the system is denoted by $\vect x = \{\vect x_1, \cdots, \vect x_N\}$. Without lost of
+generality, the first molecules index by $\{1, \cdots, N_\AT\}$ are in the atomistic region, then $\{N_\AT+1, \cdots, N_\AT + N_\HY\}$ in hybrid region, and
+the last $N_\CG$ molecules $\{N-N_\CG+1, \cdots, N\}$ are in the coarse-grained region. The corresponding DOFs are denoted by $\vect x_\AT$, $\vect x_\HY$ and $\vect x_\CG$.
+\redc{The atomistic, hybrid and coarse-grained have different DOFs, a comment needed!}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.3\textwidth]{figs/system.thermo/system.eps}
+  \caption{A schematic plot of the AdResS system in thermodynamic
+    equilibrium. The number of molecules, volume and temperature of
+    the atomistic and coarse-grained regions are denoted by $\{N_\AT,
+    V_\AT, T\}$ and $\{N_\AT, V_\AT, T\}$, respectively. The filter
+    allows free exchange of molecules between atomistic and
+    coarse-grained regions.}
+  \label{fig:system-thermo}
+\end{figure}
+
+We consider the system in the thermodynamic limit: both the atomistic
+and the coarse-grained regions are infinitely large, and at the same
+time, the atomistic region is much larger than the coarse-grained
+region. The hybrid region is much smaller than both the atomistic and
+coarse-grained regions.  Therefore, the number of molecules in the
+three regions satisfies $N_\CG\gg N_\AT\gg N_\HY$.  The coarse-grained
+region can be treated as an infinitely large particle and energy
+reservior of the atomistic region, and the hybrid region is an
+infinitely thin filter that changes molecular resolution when a
+molecule passes by (see Fig.~\ref{fig:system-thermo}). In the
+thermodynamic limit, if there were no change of resolution (or
+considering the full atomistic reference system), it is obvious that
+the subregion corresponds to the atomistic region samples the
+grand-canonial ensemble.  The question regarding the accuracy of
+AdResS can be asked by: How accurately the atomistic region samples
+the grand-canonial ensemble in the thermodynamic limit. Being more
+specifically, we want to prove the probability density of the atomistic region satisfies
+\begin{align}\label{eqn:dist-0}
+  p(\vect x_\AT, N_\AT) \approx \frac{1}{\mathcal Z} \exp\Big\{{\beta\mu^\ast_\AT N_\AT - \beta \mh^\AT(\vect x_\AT)} \Big\}
+\end{align}
+where $\mu^\ast_\AT$ is the chemical potential of reference system in
+desired equilibrium, $\mathcal Z$ is the partition function
+normalizing the probability density, and $\mh^\AT$ is the atomistic
+Hamiltonian defined in the the subregion of the reference system that
+corresponds to the atomistic region of the AdResS system.
+
+In stead of directly proving Eq.~\eqref{eqn:dist-0}, Ref.~\cite{wang2013grand}
+suggest investigating the following equivalent equations:
+\begin{align}\label{eqn:dist-1-0}
+  p(\vect x_\AT \vert N_\AT) &\approx \frac{1}{Z_{N_\AT}} \exp\Big\{{- \beta \mh^\AT(\vect x_\AT)}\Big\}  \\\label{eqn:dist-1-1}
+  p(N_\AT) & \approx \frac{ Z_{N_\AT}}{\mathcal Z} \exp\Big\{{\beta\mu^\ast_\AT N_\AT}\Big\}
+\end{align}
+where $Z_{N_\AT}$ is the canonical partition function for an atomistic
+system with $N_\AT$ molecules
+\begin{align}
+  Z_{N_\AT} = \int d\vect x_{\AT} \exp\Big\{{- \beta \mh^\AT(\vect x_\AT)}\Big\}.
+\end{align}
+The identity of the conditional probability holds: $ p(\vect x_\AT, N_\AT)  = p(\vect x_\AT \vert N_\AT) \, p(N_\AT) $.
+
+Eq.~\ref{eqn:dist-1-0} is further splitted as
+\begin{align}
+  p(\vect x_\AT \vert N_\AT) =
+  \sum_{N_\HY} \int {d}\vect x_\HY\,
+  p(\vect x_\AT \vert N_\AT; \vect x_\HY, N_\HY)\cdot
+  p(\vect x_\HY, N_\HY\vert N_\AT)  
+\end{align}
+The first probability density in the integral is the probability density
+of atomistic DOFs conditioned on the number of atomistic molecules and all
+hybrid DOFs.
+It can shown that if
+(1) all interactions in the system are cut-offed;
+(2) The atomistic region interacts with the bybrid region only in an atomistic way;
+(3) The system is short-range correlated, and the correlation between the atomistic
+and the coarse-grained regions is negligible, then the probability density $p(\vect x_\AT \vert N_\AT; \vect x_\HY, N_\HY)$
+is approximated by
+\begin{align}\label{eqn:dist-conf-0}
+  p(\vect x_\AT \vert N_\AT; \vect x_\HY, N_\HY)
+  \propto
+  \exp\Big\{-\beta \mh^\AT(\vect x_\AT; \vect x_\HY, N_\HY) \Big\},
+\end{align}
+where 
+\begin{align}
+  \mh^\AT(\vect x_\AT; \vect x_\HY, N_\HY)
+  =
+  \sum_{i=1}^{N_\AT}\frac12 m_i\vect v_i^2 +
+  \sum_{i,j=1}^{N_\AT} \frac12 V^\AT(\vect r_{ij}) +
+  \sum_{i=1}^{N_\AT}\sum_{j=N_\AT+1}^{N_\AT + N_\HY} V^\AT(\vect r_{ij})
+\end{align}
+is the atomistic Hamiltonian with parameters $\vect x_\HY, N_\HY$. It
+should be noted that the probability density~\eqref{eqn:dist-conf-0}
+is identical to that of the reference system with a subregion that
+corresponds to the hybrid region.
+
+In general, the probability density $p(\vect x_\HY, N_\HY\vert N_\AT)$
+is not the same as the reference system.  For example, it has been
+shown that the density distribution in the hybrid region deviates from
+the desired one, even if the coarse-grained side is modelled to
+reporduce the atomistic pressure~\cite{poblete2010coupling}.  However,
+it is possible to raise necessary conditions that systematically
+improves the accuracy of the probability density. The first necessary
+condition is that the density profile of the hybrid region should be a
+constant that is identical to the density of the atomistic reference
+at desired equilibrium:
+\begin{align}
+  \rho_\HY(\vect r) = \rho_\AT^\ast = \frac NV
+\end{align}
+The second necessary condition is that the two body probability
+density in the hybrid region is the same as the full atomistic
+reference, In homogeneous and isotropic system, it is equivalent to
+ask that the hybrid radial distribution function (RDF) should be the
+same as that of the reference system:
+\begin{align}
+  g_\HY(r) = g^\ast_\AT(r).
+\end{align}
+It is fully justified to systematically raise the necessary conditions
+upto $m$-th multibody probability density, however, it is not convenient in
+numerics, because the correction to the $m$-th multibody probability density
+needs a $m$-body correction force in general, which is computationally
+too expensive.
+
+In practice, the density in the hybrid region is correct by the
+thermodynamic force, which is applied on top of the AdResS intermolecular interactions:
+\begin{align}
+  \vect F_\moleidxone &= \sum_\moleidxtwo \vect F_{\moleidxone\moleidxtwo}  + \vect F_\moleidxone^\thf  \\
+  \vect F^V_\moleidxone &= \sum_\moleidxtwo \vect F^V_{\moleidxone\moleidxtwo} + \vect F_\moleidxone^{\thf,V}
+\end{align}
+calculated by a iterative scheme:
+
+Therefore
+certain manipulation in the hybrid region is need improve the accuracy
+of $p(\vect x_\HY, N_\HY\vert N_\AT)$. However, it is still not clear
+what is the sufficient conditions to achieve good accuracy in $p(\vect x_\HY, N_\HY\vert N_\AT)$.
+It is easy to raise necessary conditions: The marginal distributions
+of the hybrid cooridnates
+\begin{align}
+  p(\vect x_\HY) = \sum_{N_\HY = 0}^\infty \sum_{N_\AT = 0}^\infty p(\vect x_\HY, N_\HY\vert N_\AT) p(N_\AT)
+\end{align}
+should be the same as the reference system. Here we use the fact that
+the probability $ p(N_\AT)$ should be of good accuracy, which will be
+discussed later. This approach is validated because the discussion of
+accuracy of $ p(N_\AT)$ does not require a good accuracy of $ p(\vect
+x_\HY, N_\HY\vert N_\AT)$.  The $m$th marginal distribution of a probability density saying $p(\vect x_\HY)$ is defined
+by
+\begin{align}
+  p_\HY^{(m)}(\vect x_1, \cdots \vect x_m) = \int\cdots\int d\vect x_{m+1}\cdots d\vect x_{N_\HY}
+  p (\vect x_1, \cdots, \vect x_m, \vect x_{m+1}, \cdots \vect x_{N_\HY})
+\end{align}
+In a homogeneous system, the first marginal distribution is the
+density profile in the
+
+
+% It is not desirable to explicitly write the 
+      
+% Eq.~\eqref{eqn:dist-1-0} and \eqref{eqn:dist-1-1} are equivalent to 
+
+% In 
+% A good accuracy means that the atomistic region is embeded into the AdResS
+% To answer what is an accurate equilibrium AdResS simulation,
+% To understand the statistical properties of an AdResS system, 
+
+
+\section{Thermodynamic properties of adaptive resolution simulation}
+\label{sec:thermodynamic}
+
+
+
+\section{Test}
+citation~\cite{wang2014exploring}
+
+\bibliography{ref}{}
+\bibliographystyle{unsrt}
+
+% \begin{thebibliography}{}
+% % and use \bibitem to create references.
+% \bibitem{RefJ}
+% % Format for Journal Reference
+% Author, Journal \textbf{Volume}, (year) page numbers
+% % Format for books
+% \bibitem{RefB}
+% Author, \textit{Book title} (Publisher, place year) page numbers
+% % etc
+% \end{thebibliography}
+
+\end{document}
+
+% end of file template.tex
+
