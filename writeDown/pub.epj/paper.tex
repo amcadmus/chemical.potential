@@ -126,9 +126,10 @@ The potential interpolation approach defines the hybrid energy by the same idea:
 \begin{align}\label{eqn:v-v-interpol}
   {V}_{\moleidxone \moleidxtwo}=w_\moleidxone w_\moleidxtwo{V}_{\moleidxone\moleidxtwo}^{\AT}+(1-w_\moleidxone w_\moleidxtwo){V}^{\CG}_{\moleidxone\moleidxtwo} 
 \end{align}
-The intermolecular force is therefore calculated by
-\begin{align}\nonumber
-  {\vect F}^V_{\moleidxone \moleidxtwo}&= -\nabla_{\moleidxone}{V}_{\moleidxone \moleidxtwo} \\ \label{eqn:f-v-interpol}
+The intermolecular force is therefore calculated by taking the negative gradient on the potential ${\vect F}^V_{\moleidxone \moleidxtwo}= -\nabla_{\moleidxone}{V}_{\moleidxone \moleidxtwo}$,
+which is explicitly written as
+\begin{align}\label{eqn:f-v-interpol}
+  {\vect F}^V_{\moleidxone \moleidxtwo}
   &=w_\moleidxone w_\moleidxtwo{\vect F}_{\moleidxone\moleidxtwo}^{\AT}+(1-w_\moleidxone w_\moleidxtwo){\vect F}^{\CG}_{\moleidxone\moleidxtwo}  - \nabla w_\moleidxone\cdot w_\moleidxtwo (V^\AT_{\moleidxone \moleidxtwo} - V^\CG_{\moleidxone \moleidxtwo})
 \end{align}
 Where $\nabla w_\moleidxone$ is the gradient of the weighting function measured at position $\vect r_\moleidxone$,
@@ -285,7 +286,8 @@ system with $N_\AT$ molecules
 \end{align}
 The identity of the conditional probability holds: $ p(\vect x_\AT, N_\AT)  = p(\vect x_\AT \vert N_\AT) \, p(N_\AT) $.
 
-Eq.~\ref{eqn:dist-1-0} is further splitted as
+\subsection{The accuracy of the configurational probability density}
+The configurational probability density~\ref{eqn:dist-1-0} is further splitted as
 \begin{align}
   p(\vect x_\AT \vert N_\AT) =
   \sum_{N_\HY} \int {d}\vect x_\HY\,
@@ -318,6 +320,8 @@ is the atomistic Hamiltonian with parameters $\vect x_\HY, N_\HY$. It
 should be noted that the probability density~\eqref{eqn:dist-conf-0}
 is identical to that of the reference system with a subregion that
 corresponds to the hybrid region.
+The probability density and local Hamiltonian
+can be written down for the coarse-grained region analogically.
 
 In general, the probability density $p(\vect x_\HY, N_\HY\vert N_\AT)$
 is not the same as the reference system.  For example, it has been
@@ -329,7 +333,7 @@ improves the accuracy of the probability density. The first necessary
 condition is that the density profile of the hybrid region should be a
 constant that is identical to the density of the atomistic reference
 at desired equilibrium:
-\begin{align}
+\begin{align}\label{eqn:necessary-1st}
   \rho_\HY(\vect r) = \rho_\AT^\ast = \frac NV
 \end{align}
 The second necessary condition is that the two body probability
@@ -337,44 +341,187 @@ density in the hybrid region is the same as the full atomistic
 reference, In homogeneous and isotropic system, it is equivalent to
 ask that the hybrid radial distribution function (RDF) should be the
 same as that of the reference system:
-\begin{align}
+\begin{align}\label{eqn:necessary-2nd}
   g_\HY(r) = g^\ast_\AT(r).
 \end{align}
 It is fully justified to systematically raise the necessary conditions
-upto $m$-th multibody probability density, however, it is not convenient in
-numerics, because the correction to the $m$-th multibody probability density
-needs a $m$-body correction force in general, which is computationally
-too expensive.
+upto $m$-th multibody probability density, for example the third necessary condition would be
+\begin{align}
+  C^{(3)}_\HY = C^{(3)\ast}_\AT
+\end{align}
+where $C^{(3)}$ is the three-body correlation.
+Since the system is homogeneous
+and isotropic, the three-body probability density is equivalent to
+three-body correlation function. 
+% However, it is not convenient in
+% numerics, because the correction to the $m$-th multibody probability density
+% needs a $m$-body correction force in general, which is computationally
+% too expensive.
 
 In practice, the density in the hybrid region is correct by the
-thermodynamic force, which is applied on top of the AdResS intermolecular interactions:
+thermodynamic force~\cite{fritsch2012adaptive}, which is applied on top of the AdResS intermolecular interactions:
 \begin{align}
-  \vect F_\moleidxone &= \sum_\moleidxtwo \vect F_{\moleidxone\moleidxtwo}  + \vect F_\moleidxone^\thf  \\
-  \vect F^V_\moleidxone &= \sum_\moleidxtwo \vect F^V_{\moleidxone\moleidxtwo} + \vect F_\moleidxone^{\thf,V}
+  \vect F_\moleidxone &= \sum_\moleidxtwo \vect F_{\moleidxone\moleidxtwo}  + \vect F_\moleidxone^\thf,  \\
+  \vect F^V_\moleidxone& = \sum_\moleidxtwo \vect F^V_{\moleidxone\moleidxtwo} + \vect F_\moleidxone^{\thf,V},
 \end{align}
-calculated by a iterative scheme:
+where the thermodynamic forces is a one-body force defined over space,
+i.e.~$\vect F^\thf_i = \vect F^\thf(\vect r_\moleidxone)$ and $\vect F^{\thf, V}_\moleidxone = \vect F^{\thf,V}(\vect r_\moleidxone)$,
+for force and potential interpolations, respectively.
+The thermodynamic force is applied only in the hybrid region, and is
+calculated by the following iterative scheme:
+\begin{align}
+  \vect F_{k+1}^{\thf(, V)} (\vect r) = \vect F_k^{\thf(, V)} (\vect r)-
+  \frac{M}{\kappa(\rho^\ast_\AT)^2} \nabla\rho_k(\vect r)
+\end{align}
+where $k$ denotes the step of iteration. $\kappa$ is the
+isothermo-compressibility. In equilibrium the density profile $\rho(\vect r)$ in the
+atomistic and coarse-grained regions are constants, so the thermodynamic force
+is updated only in the hybrid region. When the hybrid density is flat, the thermodynamic
+force converges. An important subsequence of a flat hybrid density is that
+\begin{align}
+  \rho_\AT(\vect r) = \rho_\HY(\vect r) = \rho_\CG(\vect r) = \rho_\AT^\ast,
+\end{align}
+because the density profiles match at the atomistic-hybrid and
+hybrid-coarse-grained boundaries.
 
-Therefore
-certain manipulation in the hybrid region is need improve the accuracy
-of $p(\vect x_\HY, N_\HY\vert N_\AT)$. However, it is still not clear
-what is the sufficient conditions to achieve good accuracy in $p(\vect x_\HY, N_\HY\vert N_\AT)$.
-It is easy to raise necessary conditions: The marginal distributions
-of the hybrid cooridnates
-\begin{align}
-  p(\vect x_\HY) = \sum_{N_\HY = 0}^\infty \sum_{N_\AT = 0}^\infty p(\vect x_\HY, N_\HY\vert N_\AT) p(N_\AT)
+In a numerical example of SPC/E water~\cite{berendsen1987missing}
+system, it has been shown in Ref.~\cite{wang2013grand} that when the
+thermodynamic force is applied, the AdResS atomistic region reporduces
+mulit-body configurational probability density of the reference system
+upto three-body correlation.
+In principle, higher order of mulit-body correlation can be investigated in
+a similar way. A surprising numerical observation is that although
+only the thermodynamic force is applied, the second order necessary condition~\eqref{eqn:necessary-2nd}
+is automatically fulfilled, because the RDF is identical to the reference system in the buffer hybrid region
+$\{\vect r \,:\, \vect r \in\Omega_\HY, \dist(\vect r, \Omega_\AT) < r_c\}$ that is interacting with
+the atomistic region. While the third necessary condition is not satisfied because deviation
+in the three-body correlation presents in the buffer bybrid region.
+It should be noted that there is no theoretical background why the second necessary
+condition is satisfied by only using the thermodynamic force,
+so one cannot expect the same benefit in other systems.
+
+The second necessary condition~\eqref{eqn:necessary-2nd} is fulfilled by the
+RDF correction $\vect F^\rdf$~\cite{wang2012adaptive}, which is a conservative two-body force added to the force interpolation~\eqref{eqn:f-f-interpol} as an extra term
+that applies only in the hybrid region:
+\begin{align}\label{eqn:rdf-corr-f}
+  {\vect F}_{\moleidxone \moleidxtwo}
+  =
+  w_\moleidxone w_\moleidxtwo{\vect F}_{\moleidxone\moleidxtwo}^{\AT}
+  +
+  (1-w_\moleidxone w_\moleidxtwo){\vect F}^{\CG}_{\moleidxone\moleidxtwo}
+  +
+  w_\moleidxone w_\moleidxtwo(1-w_\moleidxone w_\moleidxtwo){\vect F}^{\rdf}_{\moleidxone\moleidxtwo}.
 \end{align}
-should be the same as the reference system. Here we use the fact that
-the probability $ p(N_\AT)$ should be of good accuracy, which will be
-discussed later. This approach is validated because the discussion of
-accuracy of $ p(N_\AT)$ does not require a good accuracy of $ p(\vect
-x_\HY, N_\HY\vert N_\AT)$.  The $m$th marginal distribution of a probability density saying $p(\vect x_\HY)$ is defined
-by
+The RDF correction force is constructed from a RDF correction potential $V^\rdf$ by
 \begin{align}
-  p_\HY^{(m)}(\vect x_1, \cdots \vect x_m) = \int\cdots\int d\vect x_{m+1}\cdots d\vect x_{N_\HY}
-  p (\vect x_1, \cdots, \vect x_m, \vect x_{m+1}, \cdots \vect x_{N_\HY})
+  \vect F_{\moleidxone\moleidxtwo}^\rdf = \vect F^\rdf(\vect r_{\moleidxone\moleidxtwo})
+  = -\nabla_{\vect r} V^\rdf(r_{\moleidxone\moleidxtwo}),
 \end{align}
-In a homogeneous system, the first marginal distribution is the
-density profile in the
+which is calculated by the iterative Boltzmann inversion:
+\begin{align}
+  V_{k+1}^\rdf(r) = V_k^\rdf(r) + k_BT \ln \Big[\frac{g_k(r)}{g^\ast_\AT(r)}\Big] 
+\end{align}
+where $k$ is the step of iteration. When the RDF of $k$th iteration is
+identical to that of the full atomistic reference $g^\ast_\AT(r)$, the
+iteration converges. It has been shown that the iterative scheme of
+thermodynamic force coupled with the iterative Boltzmann inversion RDF
+is effective in correcting the density profile $g_\HY(\vect r)$ and
+RDF $g_\HY(r)$ simultaneously~\cite{wang2012adaptive}.
+For SPC/E water system when the RDF correction is applied, the third
+necessary condition is automatically satisfied~\cite{wang2013grand}. Again, there is no
+theoretical prove behind this phenomenum, and one cannot expect the same
+benefit for other systems.
+
+\noindent\textbf{Remark:} The RDF correction is developed only for the force interpolation scheme,
+and a natural extension to the potential interpolation seems to be
+\begin{align}
+  {V}_{\moleidxone \moleidxtwo}
+  =
+  w_\moleidxone w_\moleidxtwo{V}_{\moleidxone\moleidxtwo}^{\AT}
+  +
+  (1-w_\moleidxone w_\moleidxtwo){V}^{\CG}_{\moleidxone\moleidxtwo}
+  +
+  w_\moleidxone w_\moleidxtwo(1-w_\moleidxone w_\moleidxtwo){V}^{\rdf}_{\moleidxone\moleidxtwo}.  
+\end{align}
+The effectiveness of this proposal has never been tested, and is still an open question.
+
+\subsection{The accuracy of the number probability}
+
+The accuracy of number probability $p(N_\AT)$ is investigated by a
+Taylor expansion w.r.t.~the relative size of the atomistic region to
+the whole system, which vanishes in the thermodynamic limit. The sufficient condition for the first order accuracy
+asks for a balance of the chemical potential~\cite{wang2013grand}:
+\begin{align}\label{eqn:mu-eq}
+  \mu_\CG - \mu_\AT = \omega_0,
+\end{align}
+where $\omega_0$ corresponds to the work from the filter, on each
+molecule that enters the atomistic region. An important conclusion
+form Ref.~\cite{wang2013grand} is that the relation~\eqref{eqn:mu-eq}
+holds when the thermodynamic force is applied so that the atomistic
+and coarse-grained densities match. The conclusion is derived under
+the assumption of thermodynamic limit and the decorrlation between the
+atomistic and coarse-grained regions.
+
+The second order accuracy is achieved if the isothermo-compressibilty of the atomistic and coarse-grained sizes matches:
+\begin{align}
+  \kappa_\AT = \kappa_\CG
+\end{align}
+This is achieved by coarse-grained modeling, for example, the
+structure based coarse-grained models that reproduces the atomistic
+RDF~\cite{wang2009comparative}.
+
+\subsection{The WCA potential as a generic energy and particle reservior}
+
+From the accuracy analysis one surprising fact is that if the
+requirement for the accuracy is not very high, and only applying the
+thermodynamic force is acceptable, then there is actually no
+restriction on the coarse-grained model. One can even use ideal gas as
+a coarse-grained model, but the computational difficulty lies in the
+sudden switching on of the atomistic interaction when a coarse-grained
+molecule enters the hybrid region. If two molecules are entering at
+the same time and the same location, then the atomistic contribution
+to the intermolecular interaction~\eqref{eqn:f-f-interpol} or
+\eqref{eqn:f-v-interpol} is infinity, which drives the simulation
+unstable. This numerical difficulty can be avoided by using capped
+atomistic interaction~\cite{praprotnik2005adaptive}, or by using a
+gradually switching-on core-softened atomistic
+interaction~\cite{heyes2010thermodynamic}.
+In Ref.~\cite{wang2013grand}, the authors instead tested with
+Weeks-Chandler-Andersen (WCA) potential~\cite{weeks1971role} as the
+coarse-grained model, which is a short-ranged and pure repulsive
+interaction.  For a SPC/E water system, the cut-off radius of WCA potential
+can be 2.4 time smaller than the cut-off used in the atomistic
+region. Since the computational cost with is of order $\mo(r_c^3)$,
+the computational cost spent on each pair interaction
+is 19 times cheaper. For each pair of molecules the atomistic model computes
+10 pairwise interactions (9 electrostatic + 1 van der Waals), while the
+WCA model computes only one, therefore the WCA model in total costs $1/190$ 
+computational effort on force computation than atomistic model.
+The WCA approach has been successfully used in calculating the
+chemical potential of various complex fluids and mixtures~\cite{agarwal2014chemical}.
+
+
+% Therefore
+% certain manipulation in the hybrid region is need improve the accuracy
+% of $p(\vect x_\HY, N_\HY\vert N_\AT)$. However, it is still not clear
+% what is the sufficient conditions to achieve good accuracy in $p(\vect x_\HY, N_\HY\vert N_\AT)$.
+% It is easy to raise necessary conditions: The marginal distributions
+% of the hybrid cooridnates
+% \begin{align}
+%   p(\vect x_\HY) = \sum_{N_\HY = 0}^\infty \sum_{N_\AT = 0}^\infty p(\vect x_\HY, N_\HY\vert N_\AT) p(N_\AT)
+% \end{align}
+% should be the same as the reference system. Here we use the fact that
+% the probability $ p(N_\AT)$ should be of good accuracy, which will be
+% discussed later. This approach is validated because the discussion of
+% accuracy of $ p(N_\AT)$ does not require a good accuracy of $ p(\vect
+% x_\HY, N_\HY\vert N_\AT)$.  The $m$th marginal distribution of a probability density saying $p(\vect x_\HY)$ is defined
+% by
+% \begin{align}
+%   p_\HY^{(m)}(\vect x_1, \cdots \vect x_m) = \int\cdots\int d\vect x_{m+1}\cdots d\vect x_{N_\HY}
+%   p (\vect x_1, \cdots, \vect x_m, \vect x_{m+1}, \cdots \vect x_{N_\HY})
+% \end{align}
+% In a homogeneous system, the first marginal distribution is the
+% density profile in the
 
 
 % It is not desirable to explicitly write the 
@@ -390,9 +537,12 @@ density profile in the
 \section{Thermodynamic properties of adaptive resolution simulation}
 \label{sec:thermodynamic}
 
+For the 
+In Ref.~\cite{wang2013grand}, it has been shown that
 
 
-\section{Test}
+
+\section{Dynamical properties: adaptive resolution simulation beyond equilibrium}
 citation~\cite{wang2014exploring}
 
 \bibliography{ref}{}
