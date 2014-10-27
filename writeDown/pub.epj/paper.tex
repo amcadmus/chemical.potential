@@ -44,6 +44,12 @@
 \newcommand{\exc}{{\textrm{extra}}}
 \newcommand{\equi}{{\textrm{eq}}}
 
+\newcommand{\confa}[0]{{\alpha_{\textrm{R}}}}
+\newcommand{\confb}[0]{{\textrm{C}7_{\textrm{eq}}}}
+\newcommand{\confc}[0]{{\alpha_{\textrm{L}}}}
+\newcommand{\confd}[0]{{\textrm{C}7_{\textrm{ax}}}}
+
+
 % \usepackage{amsfonts}
 % \newcommand{\tickYes}{\checkmark}
 % \usepackage{pifont}
@@ -65,6 +71,24 @@ Insert your abstract here.
 \maketitle
 %
 
+\section{Introduction}
+
+Adaptive resolution simulation (AdResS)~\cite{praprotnik2005adaptive,praprotnik2006adaptive,praprotnik2007adaptive,praprotnik2008multiscale,praprotnik2011statistical,fritsch2012adaptive} is a concurrent multiscale simulation method for molecular system.
+The terminology ``concurrent multiscale simulation'' means that
+part of the system is simulated with higher resolution molecular models for the
+purpose of accuracy, and \emph{in the meanwhile} the rest of the system is
+simulated with lower resolution models for the purpose of saving computational cost.
+The AdResS is, therefore, suitable for the systems that different physcial
+phenomena happen concurrently at different time and length scales. For example,
+the structure of a protein and its solvation shell
+should be resolved at the atomistic level, while far away form the protein,
+the only the hydrodynamic properties are of interest, which can be studied with satisfactory
+accuracy with very coarse-grained or even continum
+models~\cite{zavadlav2014adaptive,zavadlav2014adaptive1,delgado2009coupling}.
+Similar  
+techniques sharing the ``concurrent'' idea of multiscale simulation can be found in, for example, Ref.~\cite{ensing2007energy,heyes2010thermodynamic,shi2006mixed,shen2014resolution,nielsen2010adaptive}.
+
+Traditionally the 
 
 \section{The two ways  of designing the hybrid region}
 
@@ -647,7 +671,7 @@ in Tab.~\ref{tab:thermodynamic}.
 \recheck{the difficulty of Langevin thermostat: destroy dynamics. Test local thermostating~\cite{wang2014exploring}
 }
 
-\subsection{Velocity auto-correlation of water}
+\subsection{Velocity and dipole auto-correlation of water}
 
 
 \subsection{Alanine dipeptide dissolved in water: equilibrium and dynamical properties}
@@ -660,78 +684,117 @@ in Tab.~\ref{tab:thermodynamic}.
     represent the conformations of the molecule. (b) and (c): The free
     energy landscape plotted using variables $\phi$ and $\psi$.  (b)
     is for full atomistic reference simulation, while (c) is for
-    AdResS simulation.}
+    AdResS simulation. The metastable conformations coded by $\confa$, $\confb$, $\confc$ and $\confd$
+    are noted on plot (b).}
   \label{fig:ala}
 \end{figure}
 
 The alanine dipeptide molecule (see Fig.~\ref{fig:ala}~(a)) is usually
-used as a testing case for computational method in simulating real
-biomolecular system.
-The system presents a very clear time-scale seperation: There are fast
-motions like bond and angle vibration that happens on the time-scale of tens of femtoseconds, while
-there are slow conformational changes that happens on the time-scale of hundreds of picoseconds.
+used as a testing case for evaluating the new computational method in simulating 
+biomolecular system (see e.g.~Ref.~\cite{apostolakis1999calculation,chodera2007automatic,kaminsky2007force,gfeller2007complex}).
+The system presents a very clear timescale seperation: There are fast
+motions like bond and angle vibration that happens in tens of femtoseconds, while
+there are slow conformational transformations that happens in hundreds of picoseconds.
 The dihedral angles $\phi$ and $\psi$ (see
 Fig.~\ref{fig:ala}~(a)) are usually chosen as slow variables that  describles
 the molecular conformation and its transitions of the moelcules, which are of
 general biological interest.
 
-The free energy defined as the logrithm of equilibrium probability density over
+The free energy defined as the logrithm of the projected equilibrium probability density on the
 $\phi$--$\psi$ space:
 \begin{align}
-  F(\phi,\psi) = -k_BT \ln p_\equi(\phi,\psi)
+  F(\phi,\psi) = -k_BT \ln p_\equi(\phi,\psi).
 \end{align}
-is plotted in Fig.~\ref{fig:ala}~(b) and (c). The AdResS free energy is
-in good consistency with the full atomistic reference system. This is expected
-at least in equilibrium, because as discussed in Sec.~\ref{sec:statistical}, the
-AdResS sampling approximates the atomistic grand-canonical ensemble.
+The free energy of the full atomistic reference system is showed in
+Fig.~\ref{fig:ala}~(b), which clearly presents the metastablity in the
+system: several highly populated regions that correspond to metastable
+conformations are seperated by lowly populated regions that are
+identified as transition regions.
+The AdResS free energy is in good
+consistency with the full atomistic reference system, and
+reproduces the metastable conformations and their populations
+with satisfactory accuracy.
+This is expected in equilibrium, because as discussed in
+Sec.~\ref{sec:statistical}, the AdResS sampling approximates the
+atomistic grand-canonical ensemble.
 
-In pratice, not only the equilibrium probability density if of interest,
-sometimes how the system relax to equilibrium is also of interest.
-A direct analysis of the MD trajectories for these properties is not easy.
+In pratice, not only the equilibrium properties like the free energy are of interest,
+but also the dynamical properties like the conformational transitions and the corresponding timescales
+are of highly biological importance.
+% sometimes how the system relaxes to equilibrium is also of interest,
+% e.g.~
+% A direct analysis of the MD trajectories for these properties is not easy.
 % Or equivalently
 % at which timescale the slow dynamics  happens and from which conformation to which it corresponds to.
-One possible solution is the Markov state model (MSM), which
-approximate the original high-dimensional dynamics by a finite-state
-Markov process (also called reduced dynamics),
-and the original time-dependent probability density define on the phase
-space $p_t(\vect x)$ is approximated by a  temporal discrete $\vect p_{k\tau}$ probability defined on the finite-state space.
+When the system presents metastablity,
+one powerful tool for this purpose
+is the Markov state model (MSM)~\cite{prinz2011probing,prinz2011markov,schuette2011markov}, which
+approximate the original high-dimensional dynamics by a finite-state reduced
+Markov process.
+The accuracy analysis regarding  this approximation is well-founded~\cite{sarich2010approximation,djurdjevac2012estimating}.
+The MSM has found successfully applications in various fileds, for example studying complex protein systems
+(two of the hundreds examples are Ref.~\cite{noe2009constructing,kohlhoff2014cloud}).
+
+In a standard MSM approach, the full phase space is firstly deomposed in to a union of finite number of states
+(not necessarily identical to the metastable conformations),
+then
+the original time-dependent probability density define on the phase
+space ($p_t(\vect x)$) is approximated by a temporal discrete $\vect p_{k\tau}$ probability defined on the finite-state space.
 The step of the temporal discretization $\tau$ is called the lag-time.
-We always assume the reduced
-dynamics is Markovian, although uaually it is not so in practice, and may become one of the main sources of the error.
-It would be lengthy to discuss the topic here, and the interested readers are refereed to Ref.~\cite{}.
-Due to the Markovianity of the reduced dynamics, the
-probability at time $k\tau$ is given by
+The reduced
+dynamics is always assumed to be Markovian,
+although uaually it is not,  and in practice it becomes one of the main sources of the error.
+% It would be lengthy to discuss the topic here, and the interested readers are refereed to Ref.~\cite{}.
+% Due to the Markovianity of the reduced dynamics, the
+Under this assumption, the original continuous dynamics is approximated by the Markov processes governed by
+% probability at time $k\tau$ is given by
 \begin{align}
-\vect p_{k\tau} = \mathcal Q^k(\tau)\circ \vect p_0,
+\vect p^\top_{k\tau} = \vect p^\top_0 \cdot \vect T^k(\tau),
 \end{align}
-where $\mathcal Q(\tau)$ is the transfer operator
-associated to the reduced dynamics. In equilibrium, the transfer operator is time-homogeneous.
-Due to the Markovianity, for any $k$, we have
-$p_{t+k\tau}(\vect x) = \mathcal Q^k(\tau)\circ p_t (\vect x)$.
-If the propagator is irreducible and aperiodic, than according to Perron-Frobenius theorem, the maximum
-eigenvalue is single and equal to 1.
+where $\vect T(\tau)$ is the transition maxtix that
+associates to the reduced dynamics. The matrix element, for example $T_{ij}$
+is defined as the probability of the system being in state
+$j$ at $\tau$,  provided the system being in state $i$ at time 0.
+% The ``$\cdot$'' denotes the matrix-vector multiplication.
+In equilibrium, the transition matrix is time-homogeneous, i.e.~$\vect T(\tau)$ does not depend on time $t$.
+% Due to the Markovianity, for any $k$, we have
+% $p_{t+k\tau}(\vect x) = \mathcal Q^k(\tau)\circ p_t (\vect x)$.
+If the transition matrix is irreducible and aperiodic, than according to Perron-Frobenius theorem, the maximum
+eigenvalue is reached and single. Due to the stochaticity of the matrix, the maximal eigenvalue is equal to 1.
 If the dynamics
-is further assumed to be reversible, then all eigenvalues of the propagator are
+is further assumed to be reversible, then all eigenvalues of the transition are
 real valued.
 The first $m$ largest eigenvalues are denoted by $1 = \lambda_1 > \lambda_2 \geq \lambda_3 \geq \cdots \geq \lambda_m$, and
-the corresponding eigenvetors are denoted by $\Phi_1, \Phi_2, \cdots, \Phi_m$. The leading eigenvector is nothing but the
-equilibrium probability that satisfies $\Phi_1 = \mathcal Q(\tau)\circ \Phi_1$.
-The time evolution of the reduced probability density can be expaned by 
-\begin{align}\label{eqn:expan}
-  \vect p_{k\tau} = \Phi_1 + \sum_{i=2}^m e^{-\frac{k\tau}{t_i}} \,a_i\Phi_i + \textrm{fast decaying dynamics},
-\end{align}
-where $t_i$ is the timescale that corresponds to the $i$th eigenvalue:
-\begin{align}\label{eqn:time-scale}
-  t_i  = -\frac{\tau}{\log\lambda_i}, \quad i=2, \cdots, m,
-\end{align}
-and $a_i$ are constant that are determined by the initial state. As can be seen from Eq.~\eqref{eqn:expan}, the
-time-dependent probability  converges to the equilibrium probability as time goes to infinity.
-The timescale of the slow part of the relaxation is govenerned by the leanding eigenvectors through Eq.~\eqref{eqn:time-scale},
-while the conformational change corresponds to each timescale is indicated by the eigenvector.
-We assume a gap in the spectrum between $\lambda_m$ and the rest of the spectrum $\lambda_{m+1}, \cdots$,
-therefore, the dynamics of the rest of the spectrum decays out very fast, and is not of particular interest.
+the corresponding left eigenvetors are denoted by $\Phi_1, \Phi_2, \cdots, \Phi_m$.
+The leading eigenvector is non-negative, and satisfies $\Phi^\top_1 = \Phi^\top_1\cdot\vect T(\tau)$.
+With proper normalization the leanding eigenvector is identical to the 
+equilibrium probability density.
+At inifinitely long time, the probability density $p_{k\tau}$ converges to the equilibrium probability.
+The speed of the convergence is characterized by the non-trivial leading timescales that are
+determined by the leading eigenvalues:  $t_i  = -{\tau}/{\log\lambda_i}, \ i=2, \cdots, m$.
+Since the eigenvectors are orthorgonal and the first eigenvectors is non-negative, the reset
+of the eigenvectors have a vanished sum over all elements: Their
+value is positive at some states and negative at some other states.
+The different signs in the eigenvectors denote the conformational transition corresponding to the
+timescale $t_i$.
 
-The accuracy analysis of the MSM can be find in literature e.g.~\cite{}.
+% If the leading eigenvector is normalized to 1.
+% The  reduced probability 
+
+% The time evolution of the reduced probability density can be expaned by 
+% \begin{align}\label{eqn:expan}
+%   \vect p_{k\tau} = \Phi_1 + \sum_{i=2}^m e^{-\frac{k\tau}{t_i}} \,a_i\Phi_i + \textrm{fast decaying dynamics},
+% \end{align}
+% where $t_i$ is the timescale that corresponds to the $i$th eigenvalue:
+% \begin{align}\label{eqn:timescale}
+%   t_i  = -\frac{\tau}{\log\lambda_i}, \quad i=2, \cdots, m,
+% \end{align}
+% and $a_i$ are constant that are determined by the initial state. As can be seen from Eq.~\eqref{eqn:expan}, the
+% time-dependent probability  converges to the equilibrium probability as time goes to infinity.
+% The timescale of the slow part of the relaxation is govenerned by the leanding eigenvalues through Eq.~\eqref{eqn:timescale},
+% while the conformational change corresponds to each timescale is indicated by the eigenvector.
+% We assume a gap in the spectrum between $\lambda_m$ and the rest of the spectrum $\lambda_{m+1}, \cdots$,
+% therefore, the dynamics of the rest of the spectrum decays out very fast, and is not of particular interest.
 
 % The spectral anaysis of the MSM will reveal the
 % implied timescales, and corresponding conformational changes.
@@ -740,7 +803,7 @@ The accuracy analysis of the MSM can be find in literature e.g.~\cite{}.
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.4\textwidth]{figs/system.alanine/fig-eig-val.png}
+  \includegraphics[width=0.5\textwidth]{figs/system.alanine/fig-eig-val.png}
   \caption{The non-trivial leading timescale calculated from the
     Markov state modeling for the system of alanine dipeptide
     dissolved in water. In this figure, $t_2$ $t_3$ and $t_4$
@@ -757,11 +820,11 @@ The accuracy analysis of the MSM can be find in literature e.g.~\cite{}.
   \centering
   \includegraphics[width=0.3\textwidth]{figs/system.alanine/fig-eig-vec-atom-2.eps}
   \includegraphics[width=0.3\textwidth]{figs/system.alanine/fig-eig-vec-atom-3.eps}
-  \includegraphics[width=0.3\textwidth]{figs/system.alanine/fig-eig-vec-atom-4.eps}\\
+  \includegraphics[width=0.3\textwidth]{figs/system.alanine/fig-eig-vec-atom-4.eps}\\[-.4cm]
   \includegraphics[width=0.3\textwidth]{figs/system.alanine/fig-eig-vec-adress-2.eps}
   \includegraphics[width=0.3\textwidth]{figs/system.alanine/fig-eig-vec-adress-3.eps}
   \includegraphics[width=0.3\textwidth]{figs/system.alanine/fig-eig-vec-adress-4.eps}\\
-  \caption{The eigenvectors corresponding to the first three leading timescales.
+  \caption{The eigenvectors corresponding to the first three leading timescales computed using lag-time $20$~ps.
     The first row presents the eigenvectors of the full atomistic reference, while the second
     row presents those of the AdResS simulation. From left to right $\Phi_2$, $\Phi_3$ and $\Phi_4$ that correspond to
     timescales $t_2$, $t_3$ and $t_4$ are given (see also Fig.~\ref{fig:ala-msm-t}). The magnitude of the eigenvectors are
@@ -771,28 +834,38 @@ The accuracy analysis of the MSM can be find in literature e.g.~\cite{}.
   \label{fig:ala-msm-v}
 \end{figure}
 
-Here we present the eigenvalues and eigenvectors in
-Fig.~\ref{fig:ala-msm-t} and \ref{fig:ala-msm-v}, respectively. The
-eigenvalue should be $\tau$ independent if the MSM is of good
-accuracy. From the Fig.~\ref{fig:ala-msm-t}, the full atomistic
+
+In the example of alanine dipeptide dissoved in water, the states in the MSM
+is defined by uniformly dividing the $\phi$-$\psi$ space in to $20\times 20$ bins.
+Each bin presents a state in MSM, and the transition matrix is sampled by equilibrium
+MD simulations with the local thermostating scheme.
+The MSM and the leading eigen properties are built and analyzed by the software EMMA~\cite{senne2012emma}.
+The resulting eigenvalues and eigenvectors of AdResS are compared with the full atomistic reference in
+Fig.~\ref{fig:ala-msm-t} and \ref{fig:ala-msm-v}. The
+eigenvalues should be $\tau$ independent if the MSM is of good
+accuracy, and from Fig.~\ref{fig:ala-msm-t} they are so for $\tau \geq 20$~ps.
+Also from the Fig.~\ref{fig:ala-msm-t}, the full atomistic
 reference and the AdResS result are consistent within the statistical
-uncertainty.  The eigenvectors of the AdResS are also consistent with
+uncertainty.
+From Fig.~\ref{fig:ala-msm-v}, the conformational transitions corrsponds
+to $t_2$, $t_3$ and $t_4$ are $\{\confa \} \leftrightarrow \{\confc,\confd\}$,
+$\{\confa, \confc \} \leftrightarrow \{\confb\}$ and $\{\confc \} \leftrightarrow \{\confd\}$, respectively.
+The eigenvectors and the indicated conformational transitions of the AdResS are also consistent with
 those of the full atomistic reference. Although calculated from the
 equilibrium MD simulations, the leading timescales and the
 corresponding eigenvectors are not the equilibrium properties, because
-the transition probability (or the propagator) are actually
-time-correlation functions, which are called dynamical properties in
+the transition probability (elements of the transition matrix) are actually
+time-correlation functions of the characteristic functions, which are called dynamical properties in
 this context. A good reproduction of the equilibrium properties does
 not necessary implies a reproduction of the dynamical properties.
-Although currently there is still no theoretical answer why AdResS is
-so good in reproducing the dynamical properties, the provided
-numercial example suggests that AdResS is promising in the applications
-beyond equilibrium.
+Although currently there is still no theoretical answer why AdResS works,
+the provided numercial example suggests that AdResS being promising in the applications beyond equilibrium,
+and  worth further theoretical studies.
 
 
 
 
-
+\section{Open problems of the adaptive resolution simulation}
 
 
 
