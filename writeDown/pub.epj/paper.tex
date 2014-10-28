@@ -60,9 +60,9 @@
 \begin{document}
 %
 \title{Adaptive Resolution Simulation: Theoretical Fundations and Open Questions}
-\author{Han Wang\inst{1}\fnmsep\thanks{\email{han.wang@fu-berlin.de}}}
+\author{Han Wang\inst{1}\fnmsep\thanks{\email{han.wang@fu-berlin.de}}, Animesh Agarwal\inst{2}}
 %
-\institute{Zuse Institut Berlin}
+\institute{Zuse Institut Berlin, \and Institut f\"ur Mathematik, Freie Universit\"at Berlin}
 %
 \abstract{
 Insert your abstract here.
@@ -73,7 +73,7 @@ Insert your abstract here.
 
 \section{Introduction}
 
-Adaptive resolution simulation (AdResS)~\cite{praprotnik2005adaptive,praprotnik2006adaptive,praprotnik2007adaptive,praprotnik2008multiscale,praprotnik2011statistical,fritsch2012adaptive} is a concurrent multiscale simulation method for molecular system.
+Adaptive resolution simulation (AdResS)~\cite{praprotnik2005adaptive,praprotnik2006adaptive,praprotnik2007adaptive,praprotnik2008multiscale,poblete2010coupling,praprotnik2011statistical,fritsch2012adaptive,bevc2013adaptive} is a concurrent multiscale simulation method for molecular system.
 The terminology ``concurrent multiscale simulation'' means that
 part of the system is simulated with higher resolution molecular models for the
 purpose of accuracy, and \emph{in the meanwhile} the rest of the system is
@@ -88,10 +88,65 @@ models~\cite{zavadlav2014adaptive,zavadlav2014adaptive1,delgado2009coupling}.
 Similar  
 techniques sharing the ``concurrent'' idea of multiscale simulation can be found in, for example, Ref.~\cite{ensing2007energy,heyes2010thermodynamic,shi2006mixed,shen2014resolution,nielsen2010adaptive}.
 
-Traditionally the 
+The time evolution of a classical molecular systems
+is modeled with Newtonian dynamics, and fundamental conservation laws
+are satisfied, i.e.~the momentum and energy conservations.
+However, in the AdResS system,
+due to the spacial change of molecular resolution,
+the two conservation laws cannot be satisfied in the same system~\cite{praprotnik2011comment,dellesite2007some}.
+Traditionally, the AdResS scheme follows the \emph{force interpolation} approaches
+that preserves the momentum conservation while breaks the energy
+conservation.
+Recently,
+alternative approaches based on \emph{potential interpolation},
+which preserve energy conservation while break momentum conservation,
+were designed~\cite{wang2013grand,potestio2013hamiltonian}.
+The choice between the two AdResS branches therefore depends on the application. For example, in the
+cases of studying hydrodynamic the momentum conservation is prefered to the energy conservation.
+However, if only the equilibrium properties are of interest,
+the question should be asked on the ensemble that AdResS samples,
+rather than directly on the mechanical conservation laws.
+In this context,
+it worth noting that the energy conservation is not a must for theoretical analysis on the equilibrium statistical properties,
+although out of the energy conservation
+one can define an auxiliary Hamiltonian~\cite{wang2013grand,agarwal2014chemical}
+(not a physical one~\cite{dellesite2013multiscale}),
+which reduces the mathematical difficulties of the theoretical analysis.
+In Sec.~\ref{sec:statistical} the force and potential interpolations are investigated 
+under the same theoretical framework (GC-AdResS)~\cite{wang2013grand} that raises necessary conditions
+for a grand-canonical sampling with AdResS scheme.
+In Sec.~\ref{sec:thermodynamic} the equilibrium thermodynamic relations between the resolutions are
+provided for both branches of the AdResS scheme.
+From these relations, it is noticed that the abscence of mechanical conservation laws 
+modifies the way of thermodynamic equilibrium between the resolutions.
 
-\section{The two ways  of designing the hybrid region}
+The GC-AdResS framework answers of how to accurately compute the  equilibrium properties.
+However, although the system is in equilibrium,
+some properties, which are called dynamical properties, cannot be simply computed from the equilibrium averages.
+% These properties are called dynamical properties.
+A typical example is the velocity auto-correlation.
+% that describs the infiniesimal response of the system
+% to external perturbation.
+Moreoever, the time-scales of conformational transformations
+of bio-macromolecules (e.g.~protein and DNA)
+are, again, not equilibrium averages.
+The investigation of these  dynamical properties are out of the scope of the GC-AdResS framework,
+and to the best of our knowledge, there is no theoretical answers on how accurately does AdResS reproduce
+dynamical properties of a system.
+Therefore, it is of practical significance to  provide numerical
+evidence on the performance of AdResS in computing the dynamical properties.
+In Sec.~\ref{sec:dynamical}, we investigate the
+velocity auto-correlation in an AdResS water system, and the
+leading time-scales and corresponding conformational dynamics of
+a model dipeptide system.
+The importance of designing the thermostat in these simulations
+is also discussed.
+The paper is closed by a concluding section~\ref{sec:conclusion}
+that mainly discusses the opening problems in AdResS from both theoretical
+and practical point of view.
 
+\section{The hybrid region: bridging the molecular models of different resolutions}
+\label{sec:design}
 The AdResS uses a weighting function $w(\vect r)$ that is a scalor
 function defined over the simulation region to denote the resolution
 of the system. In the atomistic region the value of the
@@ -193,7 +248,7 @@ properties of the AdResS systems (see the discussions in Sec.~\ref{sec:thermodyn
 the practical requirement, for example, in some systems it is crucial to have the momentum
 conservation, then the force interpolation is prefered, and vice versa.
 In equilibrium case, we will show later in Sec.~\ref{sec:statistical}
-that both approaches approximately sample the grand-canonial ensamble.
+that both approaches approximately sample the grand-canonial ensemble.
 
 When the intermolecular force is defined by either
 Eq.~\eqref{eqn:f-f-interpol} or \eqref{eqn:f-v-interpol}, the total
@@ -667,6 +722,7 @@ in Tab.~\ref{tab:thermodynamic}.
 
 
 \section{Dynamical properties: adaptive resolution simulation beyond equilibrium}
+\label{sec:dynamical}
 
 \recheck{the difficulty of Langevin thermostat: destroy dynamics. Test local thermostating~\cite{wang2014exploring}
 }
@@ -866,7 +922,7 @@ and  worth further theoretical studies.
 
 
 \section{Open problems of the adaptive resolution simulation}
-
+\label{sec:conclusion}
 
 
 \bibliography{ref}{}
