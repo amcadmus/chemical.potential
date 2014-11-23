@@ -94,15 +94,15 @@ The terminology ``concurrent multiscale simulation'' means that
 part of the system is simulated with higher resolution molecular models for the
 purpose of accuracy, and \emph{in the meanwhile} the rest of the system is
 simulated with lower resolution models for the purpose of saving computational cost.
-The AdResS is, therefore, suitable for the systems that different physical
-phenomena happen concurrently at different time and length scales. For example,
+AdResS is, therefore, suitable for the systems where different physical
+phenomena is happening concurrently at different time and length scales. For example,
 the structure of a protein and its solvation shell
 should be resolved at the atomistic level, while far away form the protein,
-the only the hydrodynamic properties of the solvent are of interest, which can be studied with satisfactory
+only the hydrodynamic properties of the solvent are of interest, which can be studied with satisfactory
 accuracy with very coarse-grained or even continuum
 models~\cite{zavadlav2014adaptive,zavadlav2014adaptive1,delgado2009coupling}.
 Similar  
-techniques sharing the concurrent idea of multiscale simulation can be found in, for example, Ref.~\cite{ensing2007energy,heyes2010thermodynamic,shi2006mixed,shen2014resolution,nielsen2010adaptive}.
+techniques sharing the concurrent idea of multiscale simulation can be found, for example in Ref.~\cite{ensing2007energy,heyes2010thermodynamic,shi2006mixed,shen2014resolution,nielsen2010adaptive}.
 
 The time evolution of a classical molecular systems
 is modeled with Newtonian dynamics, and fundamental conservation laws
@@ -123,7 +123,7 @@ However, if only the equilibrium properties are of interest,
 the question should be asked on the ensemble that AdResS samples,
 rather than directly on the mechanical conservation laws.
 In this context,
-it worth noting that the energy conservation is not a must for theoretical analyses on the equilibrium statistical properties,
+it is worth noting that energy conservation is not a must for theoretical analyses on the equilibrium statistical properties,
 although out of the energy conservation
 one can define an auxiliary Hamiltonian~\cite{wang2013grand,agarwal2014chemical}
 (not a physical one~\cite{dellesite2013multiscale}),
@@ -136,7 +136,7 @@ provided for both branches of the AdResS.
 From these relations, it is noticed that the absence of mechanical conservation laws 
 modifies the way of thermodynamic equilibrium between the resolutions.
 
-The GC-AdResS framework answers of how to accurately compute the  equilibrium properties.
+The GC-AdResS framework answers how to accurately compute the  equilibrium properties.
 However, although the system is in equilibrium,
 some properties, which are called dynamical properties, cannot be simply computed from the equilibrium ensemble averages.
 % These properties are called dynamical properties.
@@ -158,7 +158,7 @@ a model dipeptide system.
 The importance of designing the thermostat in these simulations
 is also discussed.
 The paper is closed by a concluding section
-that mainly discusses the opening problems in AdResS from both theoretical
+that mainly discusses the open problems in AdResS from both theoretical
 and practical perspectives.
 
 \section{The hybrid resolution: bridging the molecular models of different resolutions}
@@ -179,7 +179,7 @@ hydrodynamic description~\cite{delgado2009coupling}.
 \end{figure}
 
 In AdResS scheme, the simulation region $\Omega$ is 
-is decomposed without overlapping into three regions:
+decomposed without overlapping into three regions:
 the atomistic region $\Omega_\AT$, the coarse-grained region $\Omega_\CG$, and
 a hybrid region $\Omega_\HY$ bridging the former two regions.
 That means the atomistic region is always connected to the coarse-grained region via a hybrid region.
@@ -332,7 +332,7 @@ The minimum thickness of the hybrid region is therefore $2r_c$.
 It worth noting that the coarse-grained region does not require a buffer in the hybrid region, because
 by definition the coarse-grained region interacts with the hybrid region only via the coarse-grained intermolecular interaction.
 The new definition~\eqref{eqn:new-w} is crucial for the equilibrium statistical properties of the AdResS,
-however, the extra cost of is spent in the buffer $\{\vect r \vert \vect r \in\Omega_\HY, \dist(\vect r, \Omega_\AT) < r_c\}$,
+however, the extra cost is spent in the buffer $\{\vect r \vert \vect r \in\Omega_\HY, \dist(\vect r, \Omega_\AT) < r_c\}$,
 which is treated in atomistic resolution. This cost is relatively small for systems with a large atomistic region.
 
 % \recheck{Remark, add the remark of inversed weighting function}
@@ -354,7 +354,7 @@ If the configuration of the atomistic region in the AdResS
 is same as the corresponding subregion in the atomistic reference, then
 the AdResS  is of good accuracy (see the comparison indicated by the red arrow in Fig.~\ref{fig:compare}).
 A well-known conclusion of the standard statistical mechanics is that
-when the reference system approximate the thermodynamic limit, the subsystem is
+when the reference system approximates the thermodynamic limit, the subsystem is
 subject to the grand-canonical ensemble. Therefore, it is natural to investigate
 if the atomistic region of AdResS is also subject to the grand-canonical ensemble
 in the same thermodynamic limit. The theoretical framework presented in this section works for
@@ -367,7 +367,7 @@ both the force and potential interpolations.
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{figs/system.water/compare.eps}
-  \caption{A schematic plot of the comparison between the AdResS system (left) and the full atomistic reference system (right).}
+  \caption{A schematic plot of the comparison between an AdResS system (left) and the full atomistic reference system (right).}
   \label{fig:compare}
 \end{figure}
 
@@ -391,7 +391,7 @@ are denoted by $\{p_\AT, \mu_\AT\}$
 and $\{p_\CG, \mu_\CG\}$, respectively.
 The DOFs of molecules indexed $\moleidxone$ are $\vect x_\moleidxone = \{\vect r_\moleidxone, \vect p_\moleidxone\}$, where
 $\vect r_\moleidxone$ denotes the generalized coordinates and $\vect p_\moleidxone$ denotes the corresponding momenta.
-All DOFs of the system is denoted by $\vect x = \{\vect x_1, \cdots, \vect x_N\}$. Without lost of
+All the DOFs of the system are denoted by $\vect x = \{\vect x_1, \cdots, \vect x_N\}$. Without lost of
 generality, we consider that molecules index by $\{1, \cdots, N_\AT\}$ are in the atomistic region, then $\{N_\AT+1, \cdots, N_\AT + N_\HY\}$ are in the hybrid region, and
 the last $N_\CG$ molecules $\{N-N_\CG+1, \cdots, N\}$ are in the coarse-grained region. The corresponding DOFs are denoted by $\vect x_\AT$, $\vect x_\HY$ and $\vect x_\CG$.
 It should be noted that for simplicity, we do not explicitly consider that the number of DOFs are different for an atomistic
@@ -413,20 +413,20 @@ and a coarse-grained molecule, and uniformly encode them by the vector $\vect x$
 
 The thermodynamic limit is taken in the sense that both the atomistic
 and the coarse-grained regions are infinitely large, and at the same
-time, the atomistic region is much larger than the coarse-grained
+time, the atomistic region is much smaller than the coarse-grained
 region. The hybrid region is much smaller than both the atomistic and
 coarse-grained regions.  Therefore, the volumes of the
 three regions satisfies $V_\CG\gg V_\AT\gg V_\HY$.  The coarse-grained
 region can be treated as an infinitely large particle and energy
-reservoir of the atomistic region, and the hybrid region is an
+reservoir for the atomistic region, and the hybrid region is an
 infinitely thin filter that changes molecular resolution when a
 molecule passes by. In the
 thermodynamic limit, if there were no change of resolution (or
 considering the full atomistic reference system), it is obvious that
-the subregion corresponds to the atomistic region samples the
+the subregion corresponding to the atomistic region samples the
 grand-canonical ensemble.  The question regarding the accuracy of
 AdResS can be asked by: How accurately the atomistic region samples
-the grand-canonical ensemble in the thermodynamic limit. Being more
+the grand-canonical ensemble in the thermodynamic limit? More
 specifically, we want to prove the probability density of the atomistic region satisfies
 \begin{align}\label{eqn:dist-0}
   p(\vect x_\AT, N_\AT) \approx \frac{1}{\mathcal Z} \exp\Big\{{\beta\mu^\ast_\AT N_\AT - \beta \mh^\AT(\vect x_\AT)} \Big\}
@@ -438,7 +438,7 @@ Hamiltonian.
 % defined in the the subregion of the reference system that
 % corresponds to the atomistic region of the AdResS system.
 
-In stead of directly proving Eq.~\eqref{eqn:dist-0}, Ref.~\cite{wang2013grand}
+Instead of directly proving Eq.~\eqref{eqn:dist-0}, Ref.~\cite{wang2013grand}
 suggest investigating the following equivalent equations:
 \begin{align}\label{eqn:dist-1-0}
   p(\vect x_\AT \vert N_\AT) &\approx \frac{1}{Z_{N_\AT}} \exp\Big\{{- \beta \mh^\AT(\vect x_\AT)}\Big\}  \\\label{eqn:dist-1-1}
@@ -542,8 +542,8 @@ calculated by the following iterative scheme:
   \vect F_{k+1}^{\thf(, V)} (\vect r) = \vect F_k^{\thf(, V)} (\vect r)-
   \frac{M}{\kappa(\rho^\ast_\AT)^2} \nabla\rho_k(\vect r)
 \end{align}
-where $k$ denotes the step of iteration. $\kappa$ is the
-isothermo-compressibility. In equilibrium the density profile $\rho(\vect r)$ in the
+where $k$ denotes the step of iteration and $\kappa$ is the
+isothermal-compressibility. In equilibrium the density profile $\rho(\vect r)$ in the
 atomistic and coarse-grained regions are constants, so the thermodynamic force
 is updated only in the hybrid region. When the hybrid density is flat, the thermodynamic
 force converges. An important consequence is that
@@ -564,8 +564,8 @@ A surprising numerical observation is that although
 only the thermodynamic force is applied, the second order necessary condition~\eqref{eqn:necessary-2nd}
 is automatically fulfilled, because the RDF is identical to the reference system in the buffer hybrid region
 $\{\vect r \,:\, \vect r \in\Omega_\HY, \dist(\vect r, \Omega_\AT) < r_c\}$ that is interacting with
-the atomistic region. The third necessary condition is not satisfied because deviation
-in the three-body correlation presents in the buffer hybrid region.
+the atomistic region. The third necessary condition is not satisfied because there is deviation
+in the three-body correlation in the buffer hybrid region.
 It should be noted that there is no theoretical background why the second necessary
 condition is satisfied by only using the thermodynamic force,
 so one cannot expect the same benefit in other systems.
@@ -629,10 +629,10 @@ molecule that leaves the coarse-grained region and  enters the atomistic region.
 form Ref.~\cite{wang2013grand} is that the relation~\eqref{eqn:mu-eq}
 holds automatically when the thermodynamic force is applied so that the atomistic
 and coarse-grained densities match. The conclusion is derived under
-the assumption of thermodynamic limit and the decorrlation between the
+the assumption of thermodynamic limit and the decorrelation between the
 atomistic and coarse-grained regions.
 
-The second order accuracy is achieved if the isothermo-compressibility of the atomistic and coarse-grained resolutions match:
+The second order accuracy is achieved if the isothermal-compressibility of the atomistic and coarse-grained resolutions match:
 \begin{align}
   \kappa_\AT = \kappa_\CG
 \end{align}
@@ -712,7 +712,7 @@ chemical potential of various complex fluids and mixtures~\cite{agarwal2014chemi
 In the reference system (full atomistic), if the equilibrium state is achieved, then
 the temperature, pressure and chemical potential of different regions are identical.
 In AdResS system, the global uniform
-temperature distribution in equilibrium is equilibriated by the Langevin
+temperature distribution in equilibrium is equilibrated by the Langevin
 thermostat.  However, extra terms appear in the pressure or chemical
 potential relations when the momentum or energy conservation is absent
 (see Tab.~\ref{tab:conv-laws}), respectively.
@@ -769,7 +769,7 @@ therefore, if the system is homogeneous in the hybrid region, then the integral~
 is path independent. The ensemble average  can be estimated by sampling.
 The force of changing representation stems from the last term of potential
 interpolation~\eqref{eqn:f-v-interpol}, and contributes to the
-pressure relation~\eqref{eqn:p-eq-v} because it does not satisfies the Newton's action-reaction
+pressure relation~\eqref{eqn:p-eq-v} because it does not satisfy the Newton's action-reaction
 law~\cite{agarwal2014chemical}.
 
 Using Eq.~\eqref{eqn:mu0-v} and \eqref{eqn:mu0-f} one has $\omega^{\thf,V} - \omega^\thf = \omega^\exc$,
@@ -815,7 +815,7 @@ in Tab.~\ref{tab:thermodynamic}.
 % in sampling the equilibrium ensemble.
 In principle, all quantities that
 can be written down in terms of equilibrium ensemble averages should
-be computed with high accuracy accuracy when using an AdResS simulation that approximately samples the grand-canonical ensemble.
+be computed with high accuracy when using an AdResS simulation that approximately samples the grand-canonical ensemble.
 However, under this framework one has little knowledge regarding the quantities
 that are not ensemble averages.
 For example, the non-equilibrium response of the system
@@ -830,16 +830,16 @@ The quantities of this type are called \emph{dynamical properties} of the system
 In principle, the Hamiltonian dynamics should be used to compute the dynamical properties,
 however, due to the truncation error in computer simulations, it
 is technically difficult to conserve the energy in very long MD simulations.
-To this end thermostats are sometime coupled to keep the system at desired thermodynamic
+To this end thermostats are sometimes coupled to keep the system at desired thermodynamic
 state.
-It worth noting that the thermostats are designed to sample equilibrium distributions, and 
+It is worth noting that the thermostats are designed to sample equilibrium distributions, and 
 disturb the Hamiltonian dynamics in an artificial way.
 Therefore, when applying the thermostats
 in computing the dynamical properties, the potential artifacts
 should be checked carefully.
 In the context of AdResS, we propose an alternative way of thermostating
 the system, the local thermostat method~\cite{wang2014exploring},
-which is proved to be free of the artifacts in computing the dynamical properties in the following section.
+which is proved to be free of the artifacts in computing the dynamical properties, in the following section.
 
 % \footnote{In principle, 
 %   whether the dynamical properties are disturbed by the thermostat should
@@ -858,7 +858,7 @@ which is proved to be free of the artifacts in computing the dynamical propertie
     Langevin thermostat, respectively.
     In the simulation of Hamiltonian dynamics, the energy drift is only 0.01\%.
     The square and cross points
-    present the potential and force interpolation AdResS with local
+    represent the potential and force interpolation AdResS with local
     thermostat, respectively.  The time-scales of the global and local Langevin
   thermostat are both $\tau_T = 0.1$~ps.}
   \label{fig:vac}
@@ -887,7 +887,7 @@ properties of the system.
 
 The solution is to adopt the local thermostat method that was initially
 developed for non-equilibrium MD simulations~\cite{wang2014exploring}.
-This method divide the system into two regions.
+This method divides the system into two regions.
 The dynamical region, out of which the dynamical properties are calculated, is not coupled
 to any thermostat, so the dynamics there is preserved as Hamiltonian dynamics.
 The thermostated region is coupled to the Langevin thermostat in order to keep the system
@@ -923,14 +923,14 @@ The cut-off radius is 1.2~nm, and the van der Waals interaction is smoothed by t
 Gromacs.
 
 The Fig.~\ref{fig:vac} presents the velocity auto-correlation
-functions computed by fully equilibriated MD trajectories of length 1~ns, with the
-velocities recorded every 0.04~ps.  Here full equilibriation means
+functions computed by fully equilibrated MD trajectories of length 1~ns, with the
+velocities recorded every 0.04~ps.  Here full equilibration means
 uniform temperature and density distributions in the system.
 In the Figure, both the force and potential interpolations are
 in almost perfect agreement with the  atomistic simulation under Hamiltonian dynamics.
 % presented along with the
 % NVE atomistic simulation, and show almost perfect consistency.
-This indicates that the AdResS with the local thermostat
+This indicates that AdResS with local thermostat
 is a promising method to investigate the dynamical properties
 in the concurrent multiscale simulation.
 
@@ -1020,7 +1020,7 @@ approximates the original high-dimensional dynamics by a finite-state reduced
 Markov process.
 The accuracy analysis regarding  this approximation is well-established~\cite{sarich2010approximation,djurdjevac2012estimating}.
 The MSM has found successfully applications in various fields, for example studying complex protein systems
-(two of the hundreds examples are Ref.~\cite{noe2009constructing,kohlhoff2014cloud}).
+(two of the hundreds of examples are Ref.~\cite{noe2009constructing,kohlhoff2014cloud}).
 
 In a standard MSM approach, the full phase space is firstly decomposed into a non-overlapping union of finite number of states
 (not necessarily identical to the metastable conformations),
@@ -1115,8 +1115,8 @@ time-scale $t_i$.
   \includegraphics[width=0.3\textwidth]{figs/system.alanine/fig-eig-vec-adress-3.eps}
   \includegraphics[width=0.3\textwidth]{figs/system.alanine/fig-eig-vec-adress-4.eps}\\
   \caption{The eigenvectors corresponding to the first three leading time-scales computed using lag-time $20$~ps.
-    The first row presents the eigenvectors of the full atomistic reference, while the second
-    row presents those of the AdResS. From left to right $\Phi_2$, $\Phi_3$ and $\Phi_4$ that correspond to
+    The first row represents the eigenvectors of the full atomistic reference, while the second
+    row represents those of the AdResS. From left to right $\Phi_2$, $\Phi_3$ and $\Phi_4$ that correspond to
     time-scales $t_2$, $t_3$ and $t_4$ are given (see also Fig.~\ref{fig:ala-msm-t}). The magnitude of the eigenvectors are
     denoted by the color. 
     The conformational
@@ -1132,7 +1132,7 @@ MD simulations with the local thermostating scheme~\cite{wang2014exploring}.
 The MSM is built and analyzed by the software EMMA~\cite{senne2012emma}.
 The resulting eigenvalues and eigenvectors of AdResS are compared with the full atomistic reference under the same local thermostat in
 Fig.~\ref{fig:ala-msm-t} and \ref{fig:ala-msm-v}. The
-eigenvalues should be $\tau$ independent for sufficiently large $\tau$ if the MSM is of good
+eigenvalues should be independent for sufficiently large $\tau$ if the MSM is of good
 accuracy, and from Fig.~\ref{fig:ala-msm-t} they are so for $\tau \geq 20$~ps.
 Also from the Fig.~\ref{fig:ala-msm-t}, the full atomistic
 reference and the AdResS eigenvalues are consistent within the statistical
@@ -1162,7 +1162,7 @@ auto-correlation functions of the characteristic functions that are not equilibr
 In this paper, we investigated both the potential and force
 interpolations under a uniform theoretical framework of GC-AdResS. The
 necessary conditions for the grand-canonical like equilibrium
-simulation are provided. However, it should be noticed that these
+simulations are provided. However, it should be noticed that these
 conditions are not sufficient, and the high accuracy in the  numerical simulations indicates
 that these conditions tend to be too ``strong''.  Take the AdResS
 water simulation for example, when only the thermodynamic force is
@@ -1198,7 +1198,7 @@ with a satisfactory agreement.
 Although these positive numerically evidences cannot answer the open questions
 on the reason behind the high accuracy, nor the error estimates of the dynamical properties,
 they are strong evidence on the applicability of AdResS beyond equilibrium simulations,
-and suggests a direction of theoretical investigations.
+and suggests a direction for theoretical investigations.
 
 % These numerical result cannot answer the question
 % of the theoretical reason behind the high accuracy, however, 
@@ -1225,7 +1225,7 @@ than the atomistic interactions, one way of further boost the performance is
 to integrate the coarse-grained molecules with larger time-steps.
 If possible, the theoretical analyses on the
 consistency and the corresponding
-error estimates should be developed along the application this adaptive time-step idea.
+error estimates should be developed along the application of this adaptive time-step idea.
 All these technical difficulties would hopefully be solved in the near future.
 
 
