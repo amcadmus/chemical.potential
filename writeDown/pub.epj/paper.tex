@@ -122,6 +122,8 @@ cases of studying hydrodynamics, the momentum conservation is preferred to the e
 However, if only the equilibrium properties are of interest,
 the question should be asked on the ensemble that AdResS samples,
 rather than directly on the mechanical conservation laws.
+\recheck{It has been shown that, without the energy conservation, the force interpolation AdResS achieves
+very high accuray in equilibrium properties such as the radial distribution function, three-body correlation and chemical potential~\cite{wang2013grand}.}
 In this context,
 it is worth noting that energy conservation is not a must for theoretical analyses on the equilibrium statistical properties,
 although out of the energy conservation
@@ -138,14 +140,24 @@ modifies the way of thermodynamic equilibrium between the resolutions.
 
 The GC-AdResS framework answers how to accurately compute the  equilibrium properties.
 However, although the system is in equilibrium,
-some properties, which are called dynamical properties, cannot be simply computed from the equilibrium ensemble averages.
+some properties, which are called dynamical properties,
+\recheck{depend not only on the equilibrium ensemble, but also on the dynamics of the system.}
+% cannot be simply computed from the equilibrium ensemble averages.
 % These properties are called dynamical properties.
-A typical example is the velocity auto-correlation.
+A typical example is the velocity auto-correlation\footnote{
+  \recheck{
+  The velocity auto-correlation
+  % is the ensemble average
+  % of the spontaneous fluctuation of the molecular velocity, being more precisly,
+  is defined by the correlation between the velocity at a certain time and a time interval, e.g., $\Delta t$ later.
+  It should be noted that
+  the velocity auto-correlation depends on way that the system evolves in the time interval $\Delta t$,
+  therefore, it is a dynamical property. }}.
 % that describs the infiniesimal response of the system
 % to external perturbation.
 Moreover, the time-scales of conformational transformations
 of bio-macromolecules (e.g.~protein and DNA)
-are, again, not equilibrium averages.
+are, again, dynamical properties.
 The investigation of these  dynamical properties are out of the scope of the GC-AdResS framework,
 and to the best of our knowledge, there is no theoretical answers on how accurately  AdResS reproduces the 
 dynamical properties of a system.
@@ -216,9 +228,11 @@ uniform, which indicates that the weighting function smoothly vanishes
 at the boundary between the hybrid and the coarse-grained regions.
 AdResS requires 
 all interactions\footnote{The long-range electrostatic interactions
-  are also treated by the cut-off method, e.g.~the Reaction-Field method.
+  are also treated by the cut-off method. \recheck{It is possible by using e.g.~the Reaction-Field method
+  to calculate the electrostatic interactions.}
 } being treated
-by the cut-off method, and the thickness of
+by the cut-off method\footnote{\recheck{The general cut-off method is used
+    in AdResS MD simulations.  The details of the cut-off method can be find in, e.g., Ref.~\cite{frenkel2001understanding}}}, and the thickness of
 the hybrid region being at least one cut-off radius (denoted by $r_c$).
 Moreover, owing to the double-resolution of hybrid molecules,
 an atomistic molecule only interacts with the 
@@ -250,6 +264,10 @@ both the atomistic and coarse-grained forces are subject to the Newton's third l
 and ${\vect F}_{\moleidxone\moleidxtwo}^{\CG} = - {\vect F}_{\moleidxtwo\moleidxone}^{\CG}$. From the definition Eq.~\eqref{eqn:f-f-interpol} we have ${\vect F}_{\moleidxone\moleidxtwo} = - {\vect F}_{\moleidxtwo\moleidxone}$.
 
 The potential interpolation approach defines the hybrid energy by
+\footnote{
+\recheck{
+  It worth noting that in Ref.~\cite{potestio2013hamiltonian} the potential interpolation is defined in a slightly different way:
+  The product of the weighting functions $w_\moleidxone w_\moleidxtwo$ is replaced by the average average of them, i.e., $(w_\moleidxone + w_\moleidxtwo)/2$.}}
 \begin{align}\label{eqn:v-v-interpol}
   {V}_{\moleidxone \moleidxtwo}=w_\moleidxone w_\moleidxtwo{V}_{\moleidxone\moleidxtwo}^{\AT}+(1-w_\moleidxone w_\moleidxtwo){V}^{\CG}_{\moleidxone\moleidxtwo}.
 \end{align}
@@ -354,9 +372,9 @@ If the configuration of the atomistic region in the AdResS
 is same as the corresponding subregion in the atomistic reference, then
 the AdResS  is of good accuracy (see the comparison indicated by the red arrow in Fig.~\ref{fig:compare}).
 A well-known conclusion of the standard statistical mechanics is that
-when the reference system approximates the thermodynamic limit, the subsystem is
-subject to the grand-canonical ensemble. Therefore, it is natural to investigate
-if the atomistic region of AdResS is also subject to the grand-canonical ensemble
+when the reference system approximates the thermodynamic limit, the subsystem
+\recheck{samples} the grand-canonical ensemble. Therefore, it is natural to investigate
+if the atomistic region of AdResS also \recheck{samples} the grand-canonical ensemble
 in the same thermodynamic limit. The theoretical framework presented in this section works for
 both the force and potential interpolations.
 
@@ -433,8 +451,8 @@ specifically, we want to prove the probability density of the atomistic region s
 \end{align}
 where $\mu^\ast_\AT$ is the chemical potential of reference system in
 the desired equilibrium, $\mathcal Z$ is the partition function
-normalizing the probability density, and $\mh^\AT$ is the \emph{atomistic}
-Hamiltonian.
+normalizing the probability density, $\mh^\AT$ is the \emph{atomistic}
+Hamiltonian, \recheck{and $\beta$ denotes the inverse temperature $1/(k_BT)$.}
 % defined in the the subregion of the reference system that
 % corresponds to the atomistic region of the AdResS system.
 
@@ -463,7 +481,7 @@ The first probability density in the integral is the probability density
 of atomistic DOFs conditioned on the number of atomistic molecules and all
 hybrid DOFs.
 It can be shown that if
-(1) All interactions in the system are cut-offed;
+(1) All interactions in the system are cut-off;
 (2) The atomistic region interacts with the hybrid region only in an atomistic way;
 (3) The system is short-range correlated, and the correlation between the atomistic
 and the coarse-grained regions is negligible, then the probability density $p(\vect x_\AT \vert N_\AT; \vect x_\HY, N_\HY)$
@@ -817,7 +835,7 @@ In principle, all quantities that
 can be written down in terms of equilibrium ensemble averages should
 be computed with high accuracy when using an AdResS simulation that approximately samples the grand-canonical ensemble.
 However, under this framework one has little knowledge regarding the quantities
-that are not ensemble averages.
+that are \recheck{beyond} ensemble averages.
 For example, the non-equilibrium response of the system
 with respect to an external perturbation, which is 
 either computed by brute force non-equilibrium simulations~\cite{wang2014exploring}, or by
@@ -978,7 +996,7 @@ thermodynamic force is iteratively computed by
 Eq.~\eqref{eqn:tfi}.
 The electrostatic interaction is computed by the Reaction-Field method with dielectric constant $\varepsilon_{\textrm{rf}} = +\infty$.
 Both the electrostatic and the van der Waals interactions (smoothed by ``\texttt{switch}'' method in Gromacs)
-are cut-offed at 1.0~nm.
+are cut-off at 1.0~nm.
 
 The system presents a very clear time-scale separation: There are fast
 motions like bond and angle vibrations that happen in tens of femtoseconds, while
@@ -1141,11 +1159,22 @@ From Fig.~\ref{fig:ala-msm-v}, the conformational transitions correspond
 to $t_2$, $t_3$ and $t_4$ are $\{\confa \} \leftrightarrow \{\confc,\confd\}$,
 $\{\confa, \confc \} \leftrightarrow \{\confb\}$ and $\{\confc \} \leftrightarrow \{\confd\}$, respectively.
 The eigenvectors and the indicated conformational transitions of the AdResS are also consistent with
-those of the full atomistic reference. Although calculated from the
+those of the full atomistic reference.
+\recheck{
+  The statistical uncertainty of estimating the longest non-trivial time-scale $t_2$ is higher than
+  the shorter time-scales. One possible reason is that
+  the transitions $\{\confa \} \leftrightarrow \{\confc,\confd\}$ are less frequently sampled in
+  a MD simulation than other transition events, owing to the longer implied time-scale. Moreover, the
+  states $\confc$ and $\confd$ are less frequently visited, so the estimate of the  equilibrium probabilities of these
+  states are of lower accuracy, which also introduces larger statistical uncertainty
+  in estimating the implied time-scales of the transitions related to these states.
+  The accuracy may be improved by the enhanced sampling techniques~\cite{rosta2014free}, however, this
+  issue is out of the scope of the current paper.}
+Although calculated from the
 equilibrium MD simulations, it should be noted that the leading time-scales and the
 corresponding eigenvectors are not the equilibrium properties, because
 the transition probabilities (elements of the transition matrix) are actually
-auto-correlation functions of the characteristic functions that are not equilibrium ensemble averages.
+auto-correlation functions of the characteristic functions that are not \recheck{purely} equilibrium ensemble averages.
 
 % A good reproduction of the equilibrium probability density does
 % not necessary implies a reproduction of the auto-correlation functions.
@@ -1229,7 +1258,9 @@ error estimates should be developed along the application of this adaptive time-
 All these technical difficulties would hopefully be solved in the near future.
 
 
-
+\section*{Acknowledgments}
+The computation of this work was performed at the North-German Supercomputing Alliance (HLRN) under project bec00100. The authors are grateful for this support.
+HW would like to acknowledge the finial support from National High Technology Research and Development Program of China under Grant No.~2015AA011201.
 
 \bibliography{ref}{}
 \bibliographystyle{unsrt}
