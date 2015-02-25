@@ -186,7 +186,7 @@ hydrodynamic description~\cite{delgado2009coupling}.
 \begin{figure}
   \centering
   \includegraphics[width=0.5\textwidth]{figs/system.alanine/system-region-1.eps}
-  \caption{A schematic plot of an AdResS simulation. In side the red circle is the atomistic region. Between the red and blue circles is the hybrid region. Outside the blue circle is the coarse-grained region.}
+  \caption{A schematic plot of an AdResS simulation. Inside the red circle is the atomistic region. Between the red and blue circles is the hybrid region. Outside the blue circle is the coarse-grained region.}
   \label{fig:sys-region}
 \end{figure}
 
@@ -198,7 +198,7 @@ That means the atomistic region is always connected to the coarse-grained region
 The names of the atomistic and coarse-grained regions are self-explanatory, while
 in the hybrid region each molecule has both the atomistic and coarse-grained resolutions.
 A schematic plot of an AdResS simulation is presented in Fig.~\ref{fig:sys-region}.
-The AdResS uses a scalar weighting function $w(\vect r),\ \vect r\in\Omega$ 
+AdResS uses a scalar weighting function $w(\vect r),\ \vect r\in\Omega$ 
 to denote the resolution of the molecule at position $\vect r$.
 % In the atomistic region the value of the
 % weighting function is usually set to 1, while in the coarse-grained
@@ -244,7 +244,7 @@ there is no extra work for modeling the cross-scale interactions.
 
 The intermolecular interactions are
 well defined in the atomistic and coarse-grained regions by the corresponding models.
-To setup an AdResS simulation, one only needs to define the
+To set up an AdResS simulation, one only needs to define the
 interactions in the hybrid region. There are in general two
 possibilities: force interpolation and the potential interpolation.
 The force interpolation approach defines the hybrid force between two
@@ -307,7 +307,7 @@ We define the cumulative effect of this term by the \emph{force of changing repr
 The fundamental conservation laws satisfied by both the force and potential interpolations
 are summarized in Tab.~\ref{tab:conv-laws}. Unlike normal molecular systems, in which both
 the momentum and energy are conserved, neither of the AdResS systems conserves
-both laws. The breaking of these mechanics conservations has substantial influence on the thermodynamic
+both laws. The violation of these mechanical conservation laws has substantial influence on the thermodynamic
 properties of the AdResS systems (see the discussions in Sec.~\ref{sec:thermodynamic}).
 % The choice of the interpolation scheme depends on
 % the practical requirement, for example, in hydrodynamic systems it is crucial to have the momentum
@@ -317,7 +317,7 @@ that both approaches approximately sample the grand-canonical ensemble.
 
 When the intermolecular force is defined by either
 Eq.~\eqref{eqn:f-f-interpol} or \eqref{eqn:f-v-interpol}, the total
-force exerts on one molecule is the sum of all pairwise forces:
+force exerted on one molecule is the sum of all pairwise forces:
 \begin{align}
   \vect F_\moleidxone = \sum_\moleidxtwo \vect F_{\moleidxone\moleidxtwo}, \quad \vect F^V_\moleidxone = \sum_\moleidxtwo \vect F^V_{\moleidxone\moleidxtwo}
 \end{align}
@@ -367,9 +367,9 @@ which is treated in atomistic resolution. This cost is relatively small for syst
 In order to consider the accuracy of the AdResS from a statistical perspective, we always compare it with a full
 atomistic reference system, which is of the same size as the AdResS system,
 and contains the same number of molecules.
-If the configuration of the atomistic region in the AdResS 
-is the same as that of the corresponding subregion in the atomistic reference, then
-the AdResS  is of good accuracy (see the comparison indicated by the red arrow in Fig.~\ref{fig:compare}).
+If the configuration of the atomistic region in AdResS 
+is same as that of the corresponding subregion in the atomistic reference, then
+AdResS is of good accuracy (see the comparison indicated by the red arrow in Fig.~\ref{fig:compare}).
 A well-known conclusion of the standard statistical mechanics is that
 when the reference system approximates the thermodynamic limit, the subsystem
 \recheck{samples} the grand-canonical ensemble. Therefore, it is natural to investigate
@@ -397,7 +397,7 @@ the \emph{desired equilibrium} of AdResS.
 % system.
 The thermodynamic variables of the subregions are specified by the subscript,
 for example, those of the atomistic region are 
-$N_\AT$, $V_\AT$ and $T_\AT$. Those of the hybrid and coarse-grained regions
+$N_\AT$, $V_\AT$ and $T_\AT$ and those of the hybrid and coarse-grained regions
 are denoted by adding subscripts ``$\HY$'' and ``$\CG$'', respectively.
 Identities $N = N_\AT + N_\HY + N_\CG$ and $V = V_\AT + V_\HY + V_\CG$ obviously hold
 in the AdResS system.
@@ -550,7 +550,7 @@ thermodynamic force~\cite{fritsch2012adaptive}, which is applied on top of the A
   \vect F_\moleidxone &= \sum_\moleidxtwo \vect F_{\moleidxone\moleidxtwo}  + \vect F_\moleidxone^\thf,  \\\label{eqn:thf-p}
   \vect F^V_\moleidxone& = \sum_\moleidxtwo \vect F^V_{\moleidxone\moleidxtwo} + \vect F_\moleidxone^{\thf,V},
 \end{align}
-where the thermodynamic forces is a one-body force defined over space,
+where the thermodynamic force is a one-body force defined over space,
 i.e.~$\vect F^\thf_i = \vect F^\thf(\vect r_\moleidxone)$ and $\vect F^{\thf, V}_\moleidxone = \vect F^{\thf,V}(\vect r_\moleidxone)$,
 for force and potential interpolations, respectively.
 The thermodynamic force is applied only in the hybrid region, and is
@@ -562,7 +562,7 @@ calculated by the following iterative scheme:
 where $k$ denotes the step of iteration and $\kappa$ is the
 isothermal-compressibility. In equilibrium the density profile $\rho(\vect r)$ in the
 atomistic and coarse-grained regions are constants, so the thermodynamic force
-is updated only in the hybrid region. When the hybrid density is flat, the thermodynamic
+is updated only in the hybrid region. When the density in hybrid region is flat, the thermodynamic
 force converges. An important consequence is that
 \begin{align}
   \rho_\AT(\vect r) = \rho_\HY(\vect r) = \rho_\CG(\vect r) = \rho_\AT^\ast,
@@ -675,11 +675,11 @@ unstable. This numerical difficulty can be avoided by using capped
 atomistic interaction~\cite{praprotnik2005adaptive}, or by using a
 gradually switching-on core-softened atomistic
 interaction~\cite{heyes2010thermodynamic}.
-In Ref.~\cite{wang2013grand}, the authors instead tested with
+In Ref.~\cite{wang2013grand}, the authors instead tested 
 Weeks-Chandler-Andersen (WCA) potential~\cite{weeks1971role} as the
-coarse-grained model, which is a short-ranged and pure repulsive
+coarse-grained potential, which is a short-ranged and pure repulsive
 interaction.  For an SPC/E water system, the cut-off radius of WCA potential
-can be 2.4 time smaller than the cut-off radius used in the atomistic
+can be 2.4 times smaller than the cut-off radius used in the atomistic
 region. Since the computational cost of cut-off scheme is of order $\mo(r_c^3)$,
 the pair interaction of WCA
 is 19 times cheaper. Moreover, for each pair of molecules the atomistic model computes
@@ -983,10 +983,10 @@ one alanine dipeptide described by the CHARMM27 force field~\cite{foloppe2000all
 grid-based energy correction map (CMAP)~\cite{mackerell2004extending}. 
 The dimension of the simulation region is $6.1\times6.1\times6.1~\textrm{nm}^3$, which is divided into
 a spherical atomistic region of radius  $0.5$~nm centered at the $\alpha$-carbon and a  shell-shaped hybrid region of width 2.0~nm.
-The rest of the system is treated coarse-grainly by the WCA interaction.
+The rest of the system is coarse-grained by the WCA interaction.
 The dynamical region  is
 also centered at the $\alpha$-carbon, and is of radius 1.2~nm.
-It has been proved that the conformational dynamics of alanine dipeptide is not sensitive to the size of
+It has been proven that the conformational dynamics of alanine dipeptide is not sensitive to the size of
 the dynamical region when the radius is larger than 1.0~nm~\cite{wang2014exploring}.
 In this case, part of the hybrid region is not thermostated, so
 when using force interpolation, the extra energy production might not be effectively equilibriated.
@@ -995,7 +995,7 @@ thermodynamic force is iteratively computed by
 Eq.~\eqref{eqn:tfi}.
 The electrostatic interaction is computed by the Reaction-Field method with dielectric constant $\varepsilon_{\textrm{rf}} = +\infty$.
 Both the electrostatic and the van der Waals interactions (smoothed by ``\texttt{switch}'' method in Gromacs)
-are cut-off at 1.0~nm.
+are treated using cut-off scheme. The cut-off used in both the cases is 1.0~nm.
 
 The system presents a very clear time-scale separation: There are fast
 motions like bond and angle vibrations that happen in tens of femtoseconds, while
@@ -1228,10 +1228,10 @@ The significant time-scale of the time-correlations ranges from 1~ps in the case
 to almost 600~ps in the case of conformational relaxation of alanine dipeptide.
 In both systems the AdResS reproduces the atomistic result
 with a satisfactory agreement.
-Although these positive numerically evidences cannot answer the open questions
+Although these positive numerical evidences can neither answer the open questions
 on the reason behind the high accuracy, nor the error estimates of the dynamical properties,
 they are strong evidence on the applicability of AdResS beyond equilibrium simulations,
-and suggests a direction for theoretical investigations.
+and suggest a direction for theoretical investigations.
 
 % These numerical result cannot answer the question
 % of the theoretical reason behind the high accuracy, however, 
@@ -1254,7 +1254,7 @@ of the computational cost is actually spent on keeping and integrating the atomi
 On straightforward solution is to remove the atomistic DOFs in the coarse-grained
 region, which was actually proposed by the very original paper of AdResS~\cite{praprotnik2005adaptive}.
 Owing to the fact that the coarse-grained interactions are usually ``softer''
-than the atomistic interactions, one way of further boost the performance is
+than the atomistic interactions, one way to further boost the performance is
 to integrate the coarse-grained molecules with larger time-steps.
 If possible, the theoretical analyses on the
 consistency and the corresponding
