@@ -89,7 +89,7 @@
 
 \section{Introduction}
 
-Adaptive resolution simulation (AdResS)~\cite{praprotnik2005adaptive,praprotnik2006adaptive,praprotnik2007adaptive,praprotnik2008multiscale,poma2010classical,poblete2010coupling,praprotnik2011statistical,fritsch2012adaptive,bevc2013adaptive} is a concurrent multiscale simulation method for molecular system.
+Adaptive resolution simulation (AdResS)~\cite{praprotnik2005adaptive,praprotnik2006adaptive,praprotnik2007adaptive,praprotnik2008multiscale,poma2010classical,poblete2010coupling,praprotnik2011statistical,fritsch2012adaptive,bevc2013adaptive} is a concurrent multiscale simulation method for molecular systems.
 The terminology ``concurrent multiscale simulation'' means that
 part of the system is simulated with higher resolution molecular models for the
 purpose of accuracy, and \emph{in the meanwhile} the rest of the system is
@@ -97,25 +97,25 @@ simulated with lower resolution models for the purpose of saving computational c
 AdResS is, therefore, suitable for the systems where different physical
 phenomena is happening concurrently at different time and length scales. For example,
 the structure of a protein and its solvation shell
-should be resolved at the atomistic level, while far away form the protein,
+should be resolved at the atomistic level, while far away from the protein,
 only the hydrodynamic properties of the solvent are of interest, which can be studied with satisfactory
 accuracy with very coarse-grained or even continuum
 models~\cite{zavadlav2014adaptive,zavadlav2014adaptive1,delgado2009coupling}.
 Similar  
 techniques sharing the concurrent idea of multiscale simulation can be found, for example in Ref.~\cite{ensing2007energy,heyes2010thermodynamic,shi2006mixed,shen2014resolution,nielsen2010adaptive}.
 
-The time evolution of a classical molecular systems
+The time evolution of a classical molecular system
 is modeled with Newtonian dynamics, and fundamental conservation laws
 are satisfied, i.e.~the momentum and energy conservation.
 However, in the AdResS system,
 due to the spacial change of molecular resolution,
-the two conservation laws cannot be satisfied in the same system~\cite{praprotnik2011comment,dellesite2007some}.
+the two conservation laws cannot be satisfied at the same time~\cite{praprotnik2011comment,dellesite2007some}.
 Traditionally, the AdResS scheme follows the \emph{force interpolation} approaches
-that preserves the momentum conservation while breaks the energy
+that preserves the momentum conservation while breaking the energy
 conservation.
 Recently,
 alternative approaches based on \emph{potential interpolation},
-which preserve energy conservation while break the momentum conservation,
+which preserve energy conservation while breaking the momentum conservation,
 were designed~\cite{wang2013grand,potestio2013hamiltonian}.
 The choice between the two AdResS branches therefore depends on the application. For example, in the
 cases of studying hydrodynamics, the momentum conservation is preferred to the energy conservation.
@@ -123,7 +123,7 @@ However, if only the equilibrium properties are of interest,
 the question should be asked on the ensemble that AdResS samples,
 rather than directly on the mechanical conservation laws.
 \recheck{It has been shown that, without the energy conservation, the force interpolation AdResS achieves
-very high accuray in equilibrium properties such as the radial distribution function, three-body correlation and chemical potential~\cite{wang2013grand}.}
+very high accuracy in equilibrium properties, such as the radial distribution function, the three-body correlation and the chemical potential~\cite{wang2013grand}.}
 In this context,
 it is worth noting that energy conservation is not a must for theoretical analyses on the equilibrium statistical properties,
 although out of the energy conservation
@@ -158,8 +158,8 @@ A typical example is the velocity auto-correlation\footnote{
 Moreover, the time-scales of conformational transformations
 of bio-macromolecules (e.g.~protein and DNA)
 are, again, dynamical properties.
-The investigation of these  dynamical properties are out of the scope of the GC-AdResS framework,
-and to the best of our knowledge, there is no theoretical answers on how accurately  AdResS reproduces the 
+The investigation of these  dynamical properties are out of the scope of the GC-AdResS framework and,
+to the best of our knowledge, there is no theoretical answer on how accurately  AdResS reproduces the 
 dynamical properties of a system.
 Therefore, it is of practical significance to  provide numerical
 evidence on the performance of AdResS in computing the dynamical properties.
@@ -223,16 +223,15 @@ where $\dist(\vect r, \Omega_\AT)$ is the distance between the
 position $\vect r$ and the atomistic region, which is defined
 by $\dist(\vect r, \Omega_\AT) = \min_{\vect s\in\Omega_\AT} \vert
 \vect r - \vect s \vert$.  $d_\HY$ is the thickness of the hybrid
-region. We always assume the thickness of the hybrid region is
+region. We always assume the thickness of the hybrid region to be
 uniform, which indicates that the weighting function smoothly vanishes
 at the boundary between the hybrid and the coarse-grained regions.
 AdResS requires 
 all interactions\footnote{The long-range electrostatic interactions
-  are also treated by the cut-off method. \recheck{It is possible by using e.g.~the Reaction-Field method
+  are also treated by the cut-off method. \recheck{It is possible by using e.g.~the Reaction-Field method~\cite{onsager1936electric,tironi1995generalized}
   to calculate the electrostatic interactions.}
 } being treated
-by the cut-off method\footnote{\recheck{The general cut-off method is used
-    in AdResS MD simulations.  The details of the cut-off method can be find in, e.g., Ref.~\cite{frenkel2001understanding}}}, and the thickness of
+by the cut-off method\footnote{\recheck{AdResS uses the same general cut-off method as in normal MD simulations~\cite{frenkel2001understanding}.}}, and the thickness of
 the hybrid region being at least one cut-off radius (denoted by $r_c$).
 Moreover, owing to the double-resolution of hybrid molecules,
 an atomistic molecule only interacts with the 
@@ -280,7 +279,7 @@ which is explicitly written as
 Where $\nabla w_\moleidxone$ is the gradient of the weighting function measured at position $\vect r_\moleidxone$,
 and the superscript ``$V$'' denotes that the force is defined
 by the potential interpolation.
-By  definition~\eqref{eqn:f-v-interpol}, the force of potential interpolation is conservative. 
+By  definition~\eqref{eqn:f-v-interpol}, the force of the potential interpolation is conservative. 
 The difference between the force and potential
 interpolations lies in the last term  of Eq.~\eqref{eqn:f-v-interpol}, which is a force
 acting along the direction of decreasing weighting function.
@@ -288,7 +287,7 @@ acting along the direction of decreasing weighting function.
 It should be noted that
 this force breaks the Newton's third law, therefore the force of potential interpolation
 does not conserve the momentum.
-We define the accumulative effect of this term by the \emph{force of changing representation}:
+We define the cumulative effect of this term by the \emph{force of changing representation}:
 \begin{align}
   \vect F_\moleidxone^\rep = \sum_{\moleidxtwo}  \nabla w_\moleidxone\cdot w_\moleidxtwo (V^\AT_{\moleidxone \moleidxtwo} - V^\CG_{\moleidxone \moleidxtwo})
 \end{align}
@@ -308,7 +307,7 @@ We define the accumulative effect of this term by the \emph{force of changing re
 The fundamental conservation laws satisfied by both the force and potential interpolations
 are summarized in Tab.~\ref{tab:conv-laws}. Unlike normal molecular systems, in which both
 the momentum and energy are conserved, neither of the AdResS systems conserves
-both laws. The breaks of these mechanics conservations have substantial influence on the thermodynamic
+both laws. The breaking of these mechanics conservations has substantial influence on the thermodynamic
 properties of the AdResS systems (see the discussions in Sec.~\ref{sec:thermodynamic}).
 % The choice of the interpolation scheme depends on
 % the practical requirement, for example, in hydrodynamic systems it is crucial to have the momentum
@@ -322,17 +321,17 @@ force exerts on one molecule is the sum of all pairwise forces:
 \begin{align}
   \vect F_\moleidxone = \sum_\moleidxtwo \vect F_{\moleidxone\moleidxtwo}, \quad \vect F^V_\moleidxone = \sum_\moleidxtwo \vect F^V_{\moleidxone\moleidxtwo}
 \end{align}
-The force on the atomistic degrees of freedom (DOFs) of a hybrid molecules is distributed 
+The force on the atomistic degrees of freedom (DOFs) of a hybrid molecule is distributed 
 by, 
 \begin{align}
   \vect F_\atomidxone = \frac{m_\atomidxone}{M_\moleidxone}\vect F_\moleidxone, \quad   \vect F^V_\atomidxone = \frac{m_\atomidxone}{M_\moleidxone}\vect F^V_\moleidxone 
 \end{align}
-where  $\atomidxone$ is the indexes of atoms in molecule $\moleidxone$.
-$m_\atomidxone$ is the mass of atom, and $M_\moleidxone$ is the total mass of molecule $\moleidxone$, i.e.~$M_\moleidxone = \sum_{\atomidxone\in\moleidxone}m_\atomidxone$.
+where  $\atomidxone$ is the index of an atom in molecule $\moleidxone$.
+$m_\atomidxone$ is the mass of atom $\alpha$, and $M_\moleidxone$ is the total mass of molecule $\moleidxone$, i.e.~$M_\moleidxone = \sum_{\atomidxone\in\moleidxone}m_\atomidxone$.
 
 Before discussing the statistical and thermodynamic properties of AdResS, a remark on the
 choice of the weighting function should be added. 
-In Ref.~\cite{wang2012adaptive} the authors introduced a modified weighing function with
+In Ref.~\cite{wang2012adaptive} the authors introduced a modified weighting function with
 a buffer region so that the atomistic region
 interacts with the hybrid region only via the atomistic intermolecular interaction:
 \begin{equation}\label{eqn:new-w}
@@ -347,7 +346,7 @@ interacts with the hybrid region only via the atomistic intermolecular interacti
   \right.
 \end{equation}
 The minimum thickness of the hybrid region is therefore $2r_c$.
-It worth noting that the coarse-grained region does not require a buffer in the hybrid region, because
+It is worth noting that the coarse-grained region does not require a buffer in the hybrid region, because
 by definition the coarse-grained region interacts with the hybrid region only via the coarse-grained intermolecular interaction.
 The new definition~\eqref{eqn:new-w} is crucial for the equilibrium statistical properties of the AdResS,
 however, the extra cost is spent in the buffer $\{\vect r \vert \vect r \in\Omega_\HY, \dist(\vect r, \Omega_\AT) < r_c\}$,
@@ -365,11 +364,11 @@ which is treated in atomistic resolution. This cost is relatively small for syst
 \section{Equilibrium statistical properties of adaptive resolution simulation}
 \label{sec:statistical}
 
-In order to consider the accuracy of the AdResS from statistical perspective, we always compare it with a full
+In order to consider the accuracy of the AdResS from a statistical perspective, we always compare it with a full
 atomistic reference system, which is of the same size as the AdResS system,
 and contains the same number of molecules.
 If the configuration of the atomistic region in the AdResS 
-is same as the corresponding subregion in the atomistic reference, then
+is the same as that of the corresponding subregion in the atomistic reference, then
 the AdResS  is of good accuracy (see the comparison indicated by the red arrow in Fig.~\ref{fig:compare}).
 A well-known conclusion of the standard statistical mechanics is that
 when the reference system approximates the thermodynamic limit, the subsystem
@@ -409,7 +408,7 @@ are denoted by $\{p_\AT, \mu_\AT\}$
 and $\{p_\CG, \mu_\CG\}$, respectively.
 The DOFs of molecules indexed $\moleidxone$ are $\vect x_\moleidxone = \{\vect r_\moleidxone, \vect p_\moleidxone\}$, where
 $\vect r_\moleidxone$ denotes the generalized coordinates and $\vect p_\moleidxone$ denotes the corresponding momenta.
-All the DOFs of the system are denoted by $\vect x = \{\vect x_1, \cdots, \vect x_N\}$. Without lost of
+All the DOFs of the system are denoted by $\vect x = \{\vect x_1, \cdots, \vect x_N\}$. Without loss of
 generality, we consider that molecules index by $\{1, \cdots, N_\AT\}$ are in the atomistic region, then $\{N_\AT+1, \cdots, N_\AT + N_\HY\}$ are in the hybrid region, and
 the last $N_\CG$ molecules $\{N-N_\CG+1, \cdots, N\}$ are in the coarse-grained region. The corresponding DOFs are denoted by $\vect x_\AT$, $\vect x_\HY$ and $\vect x_\CG$.
 It should be noted that for simplicity, we do not explicitly consider that the number of DOFs are different for an atomistic
@@ -457,7 +456,7 @@ Hamiltonian, \recheck{and $\beta$ denotes the inverse temperature $1/(k_BT)$.}
 % corresponds to the atomistic region of the AdResS system.
 
 Instead of directly proving Eq.~\eqref{eqn:dist-0}, Ref.~\cite{wang2013grand}
-suggest investigating the following equivalent equations:
+suggests investigating the following equivalent equations:
 \begin{align}\label{eqn:dist-1-0}
   p(\vect x_\AT \vert N_\AT) &\approx \frac{1}{Z_{N_\AT}} \exp\Big\{{- \beta \mh^\AT(\vect x_\AT)}\Big\}  \\\label{eqn:dist-1-1}
   p(N_\AT) & \approx \frac{ Z_{N_\AT}}{\mathcal Z} \exp\Big\{{\beta\mu^\ast_\AT N_\AT}\Big\}
@@ -505,7 +504,7 @@ is identical to that of the reference system.
 % with a subregion that
 % corresponds to the hybrid region.
 The probability density and local Hamiltonian
-can be written down for the coarse-grained region analogically.
+can be written down for the coarse-grained region analogously.
 
 In general, the second probability density $p(\vect x_\HY, N_\HY\vert N_\AT)$ in Eq.~\eqref{eqn:conf-split} 
 is not the same as the reference system.  For example, it has been
@@ -525,7 +524,7 @@ at desired equilibrium:
 \end{align}
 The second necessary condition is that the two body probability
 density in the hybrid region is the same as the full atomistic
-reference, In homogeneous and isotropic system, it is equivalent to
+reference. In homogeneous and isotropic system, it is equivalent to
 ask that the hybrid radial distribution function (RDF) should be the
 same as that of the reference system:
 \begin{align}\label{eqn:necessary-2nd}
@@ -580,13 +579,13 @@ up to the three-body correlation.
 % a similar way.
 A surprising numerical observation is that although
 only the thermodynamic force is applied, the second order necessary condition~\eqref{eqn:necessary-2nd}
-is automatically fulfilled, because the RDF is identical to the reference system in the buffer hybrid region
+is automatically fulfilled, because the RDF is identical to that of the reference system in the buffer hybrid region
 $\{\vect r \,:\, \vect r \in\Omega_\HY, \dist(\vect r, \Omega_\AT) < r_c\}$ that is interacting with
 the atomistic region. The third necessary condition is not satisfied because there is deviation
 in the three-body correlation in the buffer hybrid region.
 It should be noted that there is no theoretical background why the second necessary
 condition is satisfied by only using the thermodynamic force,
-so one cannot expect the same benefit in other systems.
+so one cannot expect the same benefit in other systems than SPC/E water.
 
 The second necessary condition~\eqref{eqn:necessary-2nd} is fulfilled by the
 RDF correction $\vect F^\rdf$~\cite{wang2012adaptive}, which is a conservative two-body force added to the force interpolation~\eqref{eqn:f-f-interpol} as an extra term
@@ -613,12 +612,12 @@ where $k$ is the step of iteration. When the RDF of $k$th iteration is
 identical to that of the full atomistic reference $g^\ast_\AT(r)$, the
 iteration converges. It has been shown that the iterative scheme of
 thermodynamic force~\eqref{eqn:tfi} coupled with the iterative Boltzmann inversion~\eqref{eqn:ibi}
-is effective in correcting the density profile $g_\HY(\vect r)$ and
+is effective in correcting the density profile $\rho_\HY(\vect r)$ and
 RDF $g_\HY(r)$ simultaneously~\cite{wang2012adaptive}.
 For SPC/E water system when the RDF correction is applied, the third
 necessary condition is automatically satisfied~\cite{wang2013grand}. Again, there is no
 theoretical prove behind this phenomenon, and one cannot expect the same
-benefit for other systems.
+benefit for other systems than SPC/E water.
 
 \noindent\textbf{Remark:} The RDF correction is developed only for the force interpolation scheme,
 and a natural extension to the potential interpolation seems to be
@@ -644,7 +643,7 @@ asks for a balance of the chemical potential~\cite{wang2013grand}:
 \end{align}
 where $\omega_0$ corresponds to the work from the filter on each
 molecule that leaves the coarse-grained region and  enters the atomistic region. An important conclusion
-form Ref.~\cite{wang2013grand} is that the relation~\eqref{eqn:mu-eq}
+from Ref.~\cite{wang2013grand} is that the relation~\eqref{eqn:mu-eq}
 holds automatically when the thermodynamic force is applied so that the atomistic
 and coarse-grained densities match. The conclusion is derived under
 the assumption of thermodynamic limit and the decorrelation between the
@@ -835,7 +834,7 @@ In principle, all quantities that
 can be written down in terms of equilibrium ensemble averages should
 be computed with high accuracy when using an AdResS simulation that approximately samples the grand-canonical ensemble.
 However, under this framework one has little knowledge regarding the quantities
-that are \recheck{beyond} ensemble averages.
+that are \recheck{beyond equilibrium} ensemble averages.
 For example, the non-equilibrium response of the system
 with respect to an external perturbation, which is 
 either computed by brute force non-equilibrium simulations~\cite{wang2014exploring}, or by
@@ -1010,7 +1009,7 @@ $\phi$--$\psi$ space:
 \begin{align}
   F(\phi,\psi) = -k_BT \ln p_\equi(\phi,\psi).
 \end{align}
-The free energy of the full atomistic reference system is showed in
+The free energy of the full atomistic reference system is shown in
 Fig.~\ref{fig:ala}~(b), which clearly presents the metastability in the
 system: several highly populated regions that correspond to metastable
 conformations are separated by lowly populated regions that are
@@ -1043,7 +1042,7 @@ The MSM has found successfully applications in various fields, for example study
 In a standard MSM approach, the full phase space is firstly decomposed into a non-overlapping union of finite number of states
 (not necessarily identical to the metastable conformations),
 then
-the original time-dependent probability density define on the phase
+the original time-dependent probability density defined on the phase
 space ($p_t(\vect x)$) is approximated by a temporal discrete probability $\vect p_{k\tau}$ defined on the finite-state space.
 The step of the temporal discretization $\tau$ is called the lag-time.
 The reduced
@@ -1162,17 +1161,22 @@ The eigenvectors and the indicated conformational transitions of the AdResS are 
 those of the full atomistic reference.
 \recheck{
   The statistical uncertainty of estimating the longest non-trivial time-scale $t_2$ is higher than
-  the shorter time-scales. One possible reason is that
-  the transitions $\{\confa \} \leftrightarrow \{\confc,\confd\}$ are less frequently sampled in
-  a MD simulation than other transition events, owing to the longer implied time-scale. Moreover, the
-  states $\confc$ and $\confd$ are less frequently visited, so the estimate of the  equilibrium probabilities of these
-  states are of lower accuracy, which also introduces larger statistical uncertainty
-  in estimating the implied time-scales of the transitions related to these states.
-  The accuracy may be improved by the enhanced sampling techniques~\cite{rosta2014free}, however, this
-  issue is out of the scope of the current paper.}
+  those of the shorter time-scales, because
+  the transition $\{\confa \} \leftrightarrow \{\confc,\confd\}$ is less frequently sampled in
+  an MD simulation than other transition events corresponding to shorter time-scales.
+  Moreover, the fact that the equilibrium probability of being in states $\confc$ and $\confd$ is
+  much less than that of being in state $\{\confa \}$ also leads to low frequency of the transition.
+  % (This can be easily seen by, e.g., considering a simplified 2-state reversible Markov model).
+  % Moreover, the
+  % states $\confc$ and $\confd$ are less frequently visited, so the estimate of the  equilibrium probabilities of these
+  % states are of lower accuracy, which also introduces larger statistical uncertainty
+  % in estimating the implied time-scales of the transitions related to these states.
+  The accuracy of estimating the 
+  non-trivial time-scales may be improved by longer MD simulations, 
+  or by deliberately choosing the initial states for MD runs~\cite{kohlhoff2014cloud}.}
 Although calculated from the
 equilibrium MD simulations, it should be noted that the leading time-scales and the
-corresponding eigenvectors are not the equilibrium properties, because
+corresponding eigenvectors are not equilibrium properties, because
 the transition probabilities (elements of the transition matrix) are actually
 auto-correlation functions of the characteristic functions that are not \recheck{purely} equilibrium ensemble averages.
 
