@@ -1,0 +1,198 @@
+\documentclass{article}
+
+\addtolength{\textwidth}{2.5cm}
+\addtolength{\hoffset}{-.4in}
+
+\usepackage{graphicx}
+\usepackage[margin=10pt,font=small,labelfont=bf]{caption}
+\usepackage{lipsum}
+
+\renewcommand{\baselinestretch}{1.0}
+% \setlength{\footskip}{0cm}
+%\addtolength{\textheight}{10cm}
+% \sloppy
+
+\renewcommand{\arraystretch}{1.2}
+
+
+\newcommand{\confa}[0]{{\alpha_{\footnotesize\textrm{R}}}}
+\newcommand{\confb}[0]{{\textrm{C}7_{\textrm{eq}}}}
+\newcommand{\confc}[0]{{\alpha_{\footnotesize\textrm{L}}}}
+\newcommand{\confd}[0]{{\textrm{C}7_{\textrm{ax}}}}
+
+
+\begin{document}
+
+
+\hfill\begin{tabular}{@{}p{.4\linewidth}@{}}
+\multicolumn{1}{@{}c@{}}{} \\
+        Han Wang\\
+        CAEP Software Center for \\
+        High Performance Numerical\\
+        Simulation\\
+        Huayuan Road 6\\
+        Beijing 100088, China\\
+        \\
+        \today
+\end{tabular}
+\vskip .1cm
+\noindent
+\begin{tabular}{@{}p{.45\linewidth}@{}}
+\multicolumn{1}{@{}c@{}}{} \\
+PD Dr. Luigi Delle Site \\
+\\
+Freie Universit\"at Berlin \\
+Institute for Mathematics\\
+Arnimallee 6 \\
+14195, Berlin \\
+  Germany\\  
+\end{tabular}\hfill
+
+\vskip 1cm
+
+\noindent
+\textbf{\large Resubmission for manuscript}
+
+\vskip .5cm
+\noindent
+Dear PD Dr. Luigi Delle Site,\\
+
+On behalf of the co-author, I would like to resubmit our article:
+\textit{``Adaptive Resolution Simulation in Equilibrium and Beyond''}
+by H.~Wang and A.~Agarwal to the
+\textit{European Physical Journal Special Topics}.
+We gratefully acknowledge the reviewers for the positive reports, and for
+their insight and suggestions, which helped us improving the quality
+of the manuscript.  In response to their comments, the major questions raised by the referees are
+reported below in detail.  
+
+We revised the manuscript respectively and reworked the English.
+To help the referees spot the major changes in
+the manuscript, we have highlighted them in red.
+
+We hope that the revised manuscript is fit for publication now.
+
+\vskip 1cm
+
+\noindent Best regards,\\
+Han Wang
+
+\vskip 1cm
+\newpage
+\section*{Reply to Referee 1}
+
+\noindent
+\textit{For the sake of being a self-contained text, I would like some
+elaboration of the claim "energy conservation is not a must for
+theoretical analyses on the equilibrium statistical properties". A
+statement discussed in properly quoted references, but some words may be
+helpful here as well.}\\
+
+\noindent
+Following this suggestion, We have added a short comment on page 2, pointing out the result that
+the force interpolation AdResS (without energy conservation) achieves very high accuracy in
+equilibrium properties, such as the radial distribution function, the three-body correlation
+and the chemical potential.\\
+
+
+\noindent
+\textit{"... although the system is in equilibrium, some properties, which are
+called dynamical properties, cannot be simply computed from the
+equilibrium ensemble averages". This is actually not true; in fact,
+within the linear response theory, transport (dynamical) properties are
+sampled via equilibrium averages of spontaneous fluctuations, as, by the
+way, the authors discuss later.
+The sentence should be made more accurate.
+}\\
+
+\noindent
+The referee is correct, and we have changed the sentence to
+``... some properties, which are called dynamical properties,
+depend not only on the equilibrium ensemble, but also on the dynamics of the system.''\\
+
+\noindent
+Further, a footnote has been added to page 2 to help the readers
+understand how the dynamics of system plays a role in the definition
+of velocity auto-correlation, which was used as a typical example of the  dynamical properties.
+\\
+
+\noindent
+\textit{In Eq. 3, the authors describe a potential interpolation scheme which
+is different from the one presented in e.g., Ref 21 in this very
+manuscript. There is no contradiction in the way the potential
+interpolation scheme is presented in the present manuscript, but the
+reader may find helpful to learn that there are different
+potential-based adaptive resolution schemes. For the sake of brevity,
+this discussion could/should be limited to few sentences.}
+\\
+
+\noindent
+A footnote has been added to page 4, discussing the difference between the potential interpolation
+used in this manuscript and that of Ref.21.\\
+
+\noindent
+\textit{At the beginning of paragraph 3, the authors write two times that the
+"the subsystem/atomistic region is subject to the grand-canonical
+ensemble". I think "subject" is not the right word. A (sub)system may
+sample the ensemble, not being subject to.
+}\\
+
+\noindent
+Corrected. We have changed ``subject'' to ``sample''.\\
+
+\noindent
+\textit{$\beta$ ( = 1/kT) should be defined E(E.g, after Eq. 9). It is standard
+to use the letter $\beta$, but it is customary to define it.}\\
+
+\noindent
+The definition has been added under Eq.9.\\
+
+\noindent
+\textit{IMPORTANT: In Fig. 5 the discrepancy between all-atomistic and AdResS
+schemes increases the longer the time-scale related to an eigenvalue of
+the MSM transition matrix is. It is true the agreement between the two
+schemes is satisfactory within the error bars, but is this increased
+difference for increasing time scale a systematic behaviour or is it
+limited to the particular system studied? In either case, why this
+happens? Is there a strategy to improve the accuracy of such longer
+time-scales in case they are important to be known with high accuracy?
+Even though the answers to all these questions are not all known, some
+discussion along these lines may be helpful to the reader.}\\
+
+\noindent
+The leading time-scale is usually estimated with higher statistical
+uncertainty, because the corresponding transition is less frequently
+sampled in an MD simulation than other transition events, owing to its longer implied time-scale.
+Moreover, the fact that the probability of being in states $\{\confc,\confd\}$ is
+much less that that of being in state $\{\confa \}$ also leads to rare transition.
+This can be seen by,
+e.g., considering a simplified 2-state (saying $A$ and $B$) reversible Markov model:
+if $p(A) \gg p(B)$, by $ p(B\vert A) p(A) = p(A\vert B) p(B) $, we have $p(B\vert A) \ll p(B\vert A) \leq 1$, which indicates that the 
+transition from $A$ to $B$ is rare.\\
+
+\noindent
+Longer MD simulations will improve the accuracy.  Deliberately choosing
+initial states for MD runs also helped in recovering leading
+time-scales that are even longer than one single MD simulation, see,
+e.g., Kohlhoff et. al. Nat. Chem. 1, 15--21, 2014.  Discussion along
+these lines have been added to page 16.
+
+
+\section*{Reply to Referee 2}
+
+\noindent
+\textit{In the beginning of the paper (page 3) the paper reads ``AdResS
+requires all interactions being treated by the cutoff method''
+find the statement a bit vague. It is not clear if this is a specific
+cut-off method that is used in AdResS, and in that case should be
+defined or a reference should be added, or is just applying a general
+cutoff, and in that case the sentence should be slightly modified to
+something along the lines of ``a cut-off has to be applied''.}\\
+
+\noindent
+The cut-off method is the same as the general cut-off method  used in normal MD simulations.
+The electrostatic interactions are treated by the Reaction-Field method, so they are also cut-off.
+The footnote 2 on page 3 has been revised, and a new footnote has been added on page 3.
+
+
+\end{document}
