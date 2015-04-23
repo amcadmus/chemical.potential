@@ -122,7 +122,7 @@ cases of studying hydrodynamics, the momentum conservation is preferred to the e
 However, if only the equilibrium properties are of interest,
 the question should be asked on the ensemble that AdResS samples,
 rather than directly on the mechanical conservation laws.
-\recheck{It has been shown that, without the energy conservation, the force interpolation AdResS achieves
+{It has been shown that, without the energy conservation, the force interpolation AdResS achieves
 very high accuracy in equilibrium properties, such as the radial distribution function, the three-body correlation and the chemical potential~\cite{wang2013grand}.}
 In this context,
 it is worth noting that energy conservation is not a must for theoretical analyses on the equilibrium statistical properties,
@@ -141,11 +141,11 @@ modifies the way of thermodynamic equilibrium between the resolutions.
 The GC-AdResS framework answers how to accurately compute the  equilibrium properties.
 However, although the system is in equilibrium,
 some properties, which are called dynamical properties,
-\recheck{depend not only on the equilibrium ensemble, but also on the dynamics of the system.}
+{depend not only on the equilibrium ensemble, but also on the dynamics of the system.}
 % cannot be simply computed from the equilibrium ensemble averages.
 % These properties are called dynamical properties.
 A typical example is the velocity auto-correlation\footnote{
-  \recheck{
+  {
   The velocity auto-correlation
   % is the ensemble average
   % of the spontaneous fluctuation of the molecular velocity, being more precisly,
@@ -228,10 +228,10 @@ uniform, which indicates that the weighting function smoothly vanishes
 at the boundary between the hybrid and the coarse-grained regions.
 AdResS requires 
 all interactions\footnote{The long-range electrostatic interactions
-  are also treated by the cut-off method. \recheck{It is possible by using e.g.~the Reaction-Field method~\cite{onsager1936electric,tironi1995generalized}
+  are also treated by the cut-off method. {It is possible by using e.g.~the Reaction-Field method~\cite{onsager1936electric,tironi1995generalized}
   to calculate the electrostatic interactions.}
 } being treated
-by the cut-off method\footnote{\recheck{AdResS uses the same general cut-off method as in normal MD simulations~\cite{frenkel2001understanding}.}}, and the thickness of
+by the cut-off method\footnote{{AdResS uses the same general cut-off method as in normal MD simulations~\cite{frenkel2001understanding}.}}, and the thickness of
 the hybrid region being at least one cut-off radius (denoted by $r_c$).
 Moreover, owing to the double-resolution of hybrid molecules,
 an atomistic molecule only interacts with the 
@@ -264,7 +264,7 @@ and ${\vect F}_{\moleidxone\moleidxtwo}^{\CG} = - {\vect F}_{\moleidxtwo\moleidx
 
 The potential interpolation approach defines the hybrid energy by
 \footnote{
-\recheck{
+{
   It worth noting that in Ref.~\cite{potestio2013hamiltonian} the potential interpolation is defined in a slightly different way:
   The product of the weighting functions $w_\moleidxone w_\moleidxtwo$ is replaced by the average average of them, i.e., $(w_\moleidxone + w_\moleidxtwo)/2$.}}
 \begin{align}\label{eqn:v-v-interpol}
@@ -352,7 +352,7 @@ The new definition~\eqref{eqn:new-w} is crucial for the equilibrium statistical 
 however, the extra cost is spent in the buffer $\{\vect r \vert \vect r \in\Omega_\HY, \dist(\vect r, \Omega_\AT) < r_c\}$,
 which is treated in atomistic resolution. This cost is relatively small for systems with a large atomistic region.
 
-% \recheck{Remark, add the remark of inversed weighting function}
+% {Remark, add the remark of inversed weighting function}
 % \vskip .2cm
 % \noindent\textbf{Remark}: In the case where the high-resolution simulation
 % is extremely expensive, e.g.~the path-integral AdResS~\cite{poma2010classical},
@@ -372,15 +372,15 @@ is same as that of the corresponding subregion in the atomistic reference, then
 AdResS is of good accuracy (see the comparison indicated by the red arrow in Fig.~\ref{fig:compare}).
 A well-known conclusion of the standard statistical mechanics is that
 when the reference system approximates the thermodynamic limit, the subsystem
-\recheck{samples} the grand-canonical ensemble. Therefore, it is natural to investigate
-if the atomistic region of AdResS also \recheck{samples} the grand-canonical ensemble
+{samples} the grand-canonical ensemble. Therefore, it is natural to investigate
+if the atomistic region of AdResS also {samples} the grand-canonical ensemble
 in the same thermodynamic limit. The theoretical framework presented in this section works for
 both the force and potential interpolations.
 
 % the atomistic region is embeded into the AdResS system as if it were embeded in to an atomistic environment,
 % and the AdResS  is of good accuracy (see the red arrow in Fig.~\ref{fig:compare}).
 % Here the corresponding atomistic region in the reference sys
-% \recheck{comments on the ``atomistic region'' of the reference system}
+% {comments on the ``atomistic region'' of the reference system}
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{figs/system.water/compare.eps}
@@ -451,7 +451,7 @@ specifically, we want to prove the probability density of the atomistic region s
 where $\mu^\ast_\AT$ is the chemical potential of reference system in
 the desired equilibrium, $\mathcal Z$ is the partition function
 normalizing the probability density, $\mh^\AT$ is the \emph{atomistic}
-Hamiltonian, \recheck{and $\beta$ denotes the inverse temperature $1/(k_BT)$.}
+Hamiltonian, {and $\beta$ denotes the inverse temperature $1/(k_BT)$.}
 % defined in the the subregion of the reference system that
 % corresponds to the atomistic region of the AdResS system.
 
@@ -834,7 +834,7 @@ In principle, all quantities that
 can be written down in terms of equilibrium ensemble averages should
 be computed with high accuracy when using an AdResS simulation that approximately samples the grand-canonical ensemble.
 However, under this framework one has little knowledge regarding the quantities
-that are \recheck{beyond equilibrium} ensemble averages.
+that are {beyond equilibrium} ensemble averages.
 For example, the non-equilibrium response of the system
 with respect to an external perturbation, which is 
 either computed by brute force non-equilibrium simulations~\cite{wang2014exploring}, or by
@@ -955,7 +955,7 @@ in the concurrent multiscale simulation.
 % the equilibrium, but also the dynamical properties of a model
 % poly-peptide system: Alanine dipeptide dissolved in water.
 
-% \recheck{the difficulty of Langevin thermostat: destroy dynamics. Test local thermostating~\cite{wang2014exploring}
+% {the difficulty of Langevin thermostat: destroy dynamics. Test local thermostating~\cite{wang2014exploring}
 % }
 
 
@@ -1159,7 +1159,7 @@ to $t_2$, $t_3$ and $t_4$ are $\{\confa \} \leftrightarrow \{\confc,\confd\}$,
 $\{\confa, \confc \} \leftrightarrow \{\confb\}$ and $\{\confc \} \leftrightarrow \{\confd\}$, respectively.
 The eigenvectors and the indicated conformational transitions of the AdResS are also consistent with
 those of the full atomistic reference.
-\recheck{
+{
   The statistical uncertainty of estimating the longest non-trivial time-scale $t_2$ is higher than
   those of the shorter time-scales, because
   the transition $\{\confa \} \leftrightarrow \{\confc,\confd\}$ is less frequently sampled in
@@ -1178,7 +1178,7 @@ Although calculated from the
 equilibrium MD simulations, it should be noted that the leading time-scales and the
 corresponding eigenvectors are not equilibrium properties, because
 the transition probabilities (elements of the transition matrix) are actually
-auto-correlation functions of the characteristic functions that are not \recheck{purely} equilibrium ensemble averages.
+auto-correlation functions of the characteristic functions that are not {purely} equilibrium ensemble averages.
 
 % A good reproduction of the equilibrium probability density does
 % not necessary implies a reproduction of the auto-correlation functions.
