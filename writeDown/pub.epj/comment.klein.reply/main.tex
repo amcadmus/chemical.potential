@@ -90,7 +90,7 @@ the average molecular spacing for traditional and buffered hybrid region, respec
 
 We assume that the interactions between particles are pairwise, and denote
 the energy contribution of one particle pair by $u(r)$, with $r$ being the distance
-between the particles. Cuting-off this interaction means that it is assumed to vanish
+between the particles. Cutting-off this interaction means that it is assumed to vanish
 if the distance between the particles is larger than the cut-off radius $r_c$.
 ``The correlation between the atomistic and the coarse-grained
 regions is negligible'' means that the
@@ -98,23 +98,26 @@ degrees of freedom (positions and velocities) of two particles
 in the atomistic and the coarse-grained regions, respectively, are almost un-correlated.
 
 It is true that by introducing the adaptive resolution, the system is not homogeneous
-and isotropic anymore. Therefore, strictly speaking the standard definition
+and isotropic anymore. Therefore, strictly speaking, the standard definition
 of RDF's and 3-body correlation functions is problematic. However, if the configuration
 of the coarse-grained and the
 hybrid regions are designed with high accuracy, one can approximately
 treat the system as homogeneous and isotropic, and the RDF and 3-body correlation
 are well-defined for (at least) the center-of-mass configuration of water system.
-On the other hand, if the coarse-grained or hybrid
+On the other hand, if the hybrid
 configuration deviates from the full-atomistic reference,
 one can anyway compute the RDF,
-which is the averaged structure around a particle, and contains information on
+which is the averaged anisotropic structure around a particle, and contains information on
 the difference to the
 full-atomistic reference (probably with positive-negative cancellation).
-\redc{In practice,
-the deviating RDFs is to improve the accuracy of AdResS,} and a
-satisfactory accuracy of RDF and 3-body correlation is achieved by
-using a fully converged RDF correction force in
-AdResS~\cite{wang2012adaptive,wang2013grand}.
+In practice,
+it has been shown that this information is sufficient for computing
+a RDF correlation that drives the system
+to the correct RDF in the hybrid region~\cite{wang2012adaptive,wang2013grand}.
+
+% it has been shown that  
+% the RDF correlation can be effectively computed by using
+% this averaged RDF.
 
 
 \paragraph{The thermodynamic force}
@@ -156,12 +159,13 @@ hybrid region), the RDFs were reproduced with satisfactory
 agreement to full-atomistic reference (see e.g.~Fig.3 of Ref.~\cite{agarwal2014chemical}).
 
 \paragraph{Structure of the hybrid zone}
-The major difference between a phase coexisting system and an AdResS
-system is that the former satisfies both the momentum and energy
-conservations, while the later can satisfy only one of the two.
 It would be very interesting to establish an analogue between
-both the systems, however one must pay attention
-to this difference that may play a significant role in the final conclusions.
+a phase coexisting system
+and an AdResS system.
+We would like to note that the major difference between them
+is that the former satisfies both the momentum and energy
+conservations, while the latter can satisfy only one of the two.
+This difference may play a significant role in deriving the final conclusions.
 
 
 
