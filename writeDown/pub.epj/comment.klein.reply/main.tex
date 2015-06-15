@@ -73,9 +73,9 @@
 \maketitle
 %
 
-We would like to thank R.~Klein who provided valuable comments~\cite{klein2015comment}
-on our recent paper~\cite{wang2015adaptive}.
-The questions raised therein will be replied in the following.
+We would like to thank R.~Klein for providing valuable comments~\cite{klein2015comment}
+on our recent paper~\cite{wang2015adaptive}. 
+The questions raised therein will be replied in the following. 
 
 \paragraph{Particles in the hybrid region}
 In the AdResS Scheme, the minimum thickness of the hybrid region
@@ -84,34 +84,34 @@ should be $r_c$ (cut-off radius) if the traditional weighting function
 $2r_c$ if a buffer region  is added to the hybrid
 region (i.e.~Eq.8 in the same reference).
 The average molecular spacing of liquid water under ambient
-condition is about 0.3~nm. Therefore, if one take 1.2~nm as the cut-off
+condition is about 0.3~nm. Therefore, if one takes 1.2~nm as the cut-off
 radius, the thickness is 4 and 8 times the
 the average molecular spacing for traditional and buffered hybrid region, respectively.
 
-We assume the interactions between particles are pairwise, and denote
+We assume that the interactions between particles are pairwise, and denote
 the energy contribution of one particle pair by $u(r)$, with $r$ being the distance
-between the paticles. Cutting-off this interaction means that it is assumed to vanish
-if the distance between the paticles is larger than the cut-off radius $r_c$.
+between the particles. Cuting-off this interaction means that it is assumed to vanish
+if the distance between the particles is larger than the cut-off radius $r_c$.
 ``The correlation between the atomistic and the coarse-grained
 regions is negligible'' means that the
-degrees of freedomes (positions and velocities) of two paticles
+degrees of freedom (positions and velocities) of two particles
 in the atomistic and the coarse-grained regions, respectively, are almost un-correlated.
 
-It is true that by intrducing the adaptive resolution, the system is not homogeneous
-and isotropic anymore. Therefore, strictly speaking the definition
-of RDF and 3-body correlation is problematic. However, if the configuration
+It is true that by introducing the adaptive resolution, the system is not homogeneous
+and isotropic anymore. Therefore, strictly speaking the standard definition
+of RDF's and 3-body correlation functions is problematic. However, if the configuration
 of the coarse-grained and the
 hybrid regions are designed with high accuracy, one can approximately
 treat the system as homogeneous and isotropic, and the RDF and 3-body correlation
 are well-defined for (at least) the center-of-mass configuration of water system.
 On the other hand, if the coarse-grained or hybrid
 configuration deviates from the full-atomistic reference,
-one can anyway computes the RDF,
-which is the averged structure around a particle, and contains information on
+one can anyway compute the RDF,
+which is the averaged structure around a particle, and contains information on
 the difference to the
 full-atomistic reference (probably with positive-negative cancellation).
-In practice,
-the deviating RDFs is to improve the accuracy of AdResS, and a
+\redc{In practice,
+the deviating RDFs is to improve the accuracy of AdResS,} and a
 satisfactory accuracy of RDF and 3-body correlation is achieved by
 using a fully converged RDF correction force in
 AdResS~\cite{wang2012adaptive,wang2013grand}.
@@ -119,48 +119,48 @@ AdResS~\cite{wang2012adaptive,wang2013grand}.
 
 \paragraph{The thermodynamic force}
 The thermodynamic force in the atomistic and the coarse-grained
-regions are force to vanish, that means if a zero thermodynamic force
-is used initially, only the value in the hybrid region is updated
-iterativly. In order to calculate the density,
+regions are forced to vanish, that means if a zero thermodynamic force
+is used initially, then only the value in the hybrid region is updated
+iteratively. In order to calculate the density,
 take the pure TIP3P water system in Ref~\cite{wang2015adaptive}
 for example, we did the following:
 \begin{enumerate}
 \item The hybrid region was divided into bins of width 0.01~nm in the
-  direction of resolution changing.
-\item The number of molecules (center-of-mass position) falling in
-  each bin was counted and averged to calculate a density. Each density data point
+  direction of changing resolution.
+\item The number of molecules (center-of-mass position) in
+  each bin was counted and averaged to calculate a density. Each density data point
   has a statistical uncertainty of roughly 8\%.
   The productive trajectory for the computation was 200~ps long
   and the molecular positions were saved every 0.2~ps.
 \item The resulting density profile was still oscillatory,
   so we smooth it by fitting the density
   to a  spline with a grid spacing of 0.4~nm.
-  The spline was calculated by software VOTCA~\cite{ruehle2009versatile}.
+  The spline was calculated by VOTCA~\cite{ruehle2009versatile} software.
 \item This smoothed density was used
   by the iterative algorithm (Eq.~21 in Ref.~\cite{wang2015adaptive}),
   % that computes the
-  and the thermodynamic force converges in 10 iterations.
+  and the thermodynamic force converged within 10 iterations.
 \end{enumerate}
 
 
 \paragraph{Particular properties of the SPC/E water system}
-Actually we used the AdResS simulation to compute the chemical
+Actually we used AdResS to compute the chemical
 potential for various liquids and mixtures in
-Ref.~\cite{agarwal2014chemical}.  In the simulations, only the
+Ref.~\cite{agarwal2014chemical}. In the simulations, only 
 thermodynamic force was calculated and applied to correct the density
-in the hybrid region.  The chemical potential were computed with
+in the hybrid region. The chemical potential was computed with
 satisfactory accuracy.  Moreover, although no RDF correction was used
 and the system was simulated under extreme technical conditions (very
 small atomistic and coarse-grained regions and a relatively large
-hybrid region), the RDFs were be reproduced with satisfactory
+hybrid region), the RDFs were reproduced with satisfactory
 agreement to full-atomistic reference (see e.g.~Fig.3 of Ref.~\cite{agarwal2014chemical}).
 
 \paragraph{Structure of the hybrid zone}
 The major difference between a phase coexisting system and an AdResS
 system is that the former satisfies both the momentum and energy
 conservations, while the later can satisfy only one of the two.
-It would be very intersting to establish the analogue between
-the phase coexisting and the AdResS system, however one must pay attention
+It would be very interesting to establish an analogue between
+both the systems, however one must pay attention
 to this difference that may play a significant role in the final conclusions.
 
 
