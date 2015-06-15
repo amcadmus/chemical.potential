@@ -1,0 +1,185 @@
+%%%%%%%%%%%%%%%%%%%%%%% file template.tex %%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% This is a template file for The European Physical Journal Special Topics
+%
+% Copy it to a new file with a new name and use it as the basis
+% for your article
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\documentclass[epjST]{svjour}
+%
+\usepackage{graphics}
+\usepackage{color, colortbl}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{tabularx}
+
+\newcommand{\recheck}[1]{{\color{red} #1}}
+\newcommand{\redc}[1]{{\color{red} #1}}
+\newcommand{\bluec}[1]{{\color{red} #1}}
+\newcommand{\greenc}[1]{{\color{green} #1}}
+\newcommand{\vect}[1]{\textbf{\textit{#1}}}
+\newcommand{\dd}[1]{\textsf{#1}}
+\newcommand{\fwd}[0]{\textrm{fw}}
+\newcommand{\bwd}[0]{\textrm{bw}}
+\newcommand{\period}[0]{T_{\textrm{P}}}
+\newcommand{\ml}[0]{\mathcal {L}}
+\newcommand{\mo}[0]{\mathcal {O}}
+\newcommand{\mbp}[0]{\mathbb {P}}
+\newcommand{\mh}[0]{\mathcal {H}}
+\newcommand{\dist}[0]{\textrm {dist}}
+\newcommand{\AT}[0]{\textrm{AT}}
+\newcommand{\HY}[0]{\textrm{HY}}
+\newcommand{\CG}[0]{\textrm{CG}}
+\newcommand{\EX}[0]{\textrm{EX}}
+\newcommand{\moleidxone}[0]{i}
+\newcommand{\moleidxtwo}[0]{j}
+\newcommand{\atomidxone}[0]{\alpha}
+\newcommand{\atomidxtwo}[0]{\beta}
+\newcommand{\thf}{{\textrm{th}}}
+\newcommand{\rdf}{{\textrm{rdf}}}
+\newcommand{\rep}{{\textrm{rep}}}
+\newcommand{\dof}{{\textrm{DOF}}}
+\newcommand{\exc}{{\textrm{extra}}}
+\newcommand{\equi}{{\textrm{eq}}}
+
+\newcommand{\confa}[0]{{\alpha_{\textrm{R}}}}
+\newcommand{\confb}[0]{{\textrm{C}7_{\textrm{eq}}}}
+\newcommand{\confc}[0]{{\alpha_{\textrm{L}}}}
+\newcommand{\confd}[0]{{\textrm{C}7_{\textrm{ax}}}}
+
+
+% \usepackage{amsfonts}
+% \newcommand{\tickYes}{\checkmark}
+% \usepackage{pifont}
+% \newcommand{\tickNo}{\hspace{1pt}\ding{55}}
+% \definecolor{MyGray}{gray}{0.85}
+
+%
+\begin{document}
+%
+\title{Reply to comment by R.~Klein on ``Adaptive Resolution Simulation in Equilibrium and Beyond''}
+\author{Han Wang\inst{1}\fnmsep\thanks{\email{wang\_han@iapcm.ac.cn}}, Animesh Agarwal\inst{2}}
+%
+\institute{CAEP Software Center for High Performance Numerical Simulation, Beijing, China
+  \and Institut f\"ur Mathematik, Freie Universit\"at Berlin, Berlin, Germany}
+%
+% \abstract{
+%   We reply comments~\cite{klein2015comment}
+%   on our recent paper~\cite{wang2015adaptive}.
+% } %end of abstract
+%
+\maketitle
+%
+
+We would like to thank R.~Klein who provided valuable comments~\cite{klein2015comment}
+on our recent paper~\cite{wang2015adaptive}.
+The questions raised therein will be replied in the following.
+
+\paragraph{Particles in the hybrid region}
+In the AdResS Scheme, the minimum thickness of the hybrid region
+should be $r_c$ (cut-off radius) if the traditional weighting function
+(i.e.~Eq.1 in \cite{wang2015adaptive}) is used, while it should be at least
+$2r_c$ if a buffer region  is added to the hybrid
+region (i.e.~Eq.8 in the same reference).
+The average molecular spacing of liquid water under ambient
+condition is about 0.3~nm. Therefore, if one take 1.2~nm as the cut-off
+radius, the thickness is 4 and 8 times the
+the average molecular spacing for traditional and buffered hybrid region, respectively.
+
+We assume the interactions between particles are pairwise, and denote
+the energy contribution of one particle pair by $u(r)$, with $r$ being the distance
+between the paticles. Cutting-off this interaction means that it is assumed to vanish
+if the distance between the paticles is larger than the cut-off radius $r_c$.
+``The correlation between the atomistic and the coarse-grained
+regions is negligible'' means that the
+degrees of freedomes (positions and velocities) of two paticles
+in the atomistic and the coarse-grained regions, respectively, are almost un-correlated.
+
+It is true that by intrducing the adaptive resolution, the system is not homogeneous
+and isotropic anymore. Therefore, strictly speaking the definition
+of RDF and 3-body correlation is problematic. However, if the configuration
+of the coarse-grained and the
+hybrid regions are designed with high accuracy, one can approximately
+treat the system as homogeneous and isotropic, and the RDF and 3-body correlation
+are well-defined for (at least) the center-of-mass configuration of water system.
+On the other hand, if the coarse-grained or hybrid
+configuration deviates from the full-atomistic reference,
+one can anyway computes the RDF,
+which is the averged structure around a particle, and contains information on
+the difference to the
+full-atomistic reference (probably with positive-negative cancellation).
+In practice,
+the deviating RDFs is to improve the accuracy of AdResS, and a
+satisfactory accuracy of RDF and 3-body correlation is achieved by
+using a fully converged RDF correction force in
+AdResS~\cite{wang2012adaptive,wang2013grand}.
+
+
+\paragraph{The thermodynamic force}
+The thermodynamic force in the atomistic and the coarse-grained
+regions are force to vanish, that means if a zero thermodynamic force
+is used initially, only the value in the hybrid region is updated
+iterativly. In order to calculate the density,
+take the pure TIP3P water system in Ref~\cite{wang2015adaptive}
+for example, we did the following:
+\begin{enumerate}
+\item The hybrid region was divided into bins of width 0.01~nm in the
+  direction of resolution changing.
+\item The number of molecules (center-of-mass position) falling in
+  each bin was counted and averged to calculate a density. Each density data point
+  has a statistical uncertainty of roughly 8\%.
+  The productive trajectory for the computation was 200~ps long
+  and the molecular positions were saved every 0.2~ps.
+\item The resulting density profile was still oscillatory,
+  so we smooth it by fitting the density
+  to a  spline with a grid spacing of 0.4~nm.
+  The spline was calculated by software VOTCA~\cite{ruehle2009versatile}.
+\item This smoothed density was used
+  by the iterative algorithm (Eq.~21 in Ref.~\cite{wang2015adaptive}),
+  % that computes the
+  and the thermodynamic force converges in 10 iterations.
+\end{enumerate}
+
+
+\paragraph{Particular properties of the SPC/E water system}
+Actually we used the AdResS simulation to compute the chemical
+potential for various liquids and mixtures in
+Ref.~\cite{agarwal2014chemical}.  In the simulations, only the
+thermodynamic force was calculated and applied to correct the density
+in the hybrid region.  The chemical potential were computed with
+satisfactory accuracy.  Moreover, although no RDF correction was used
+and the system was simulated under extreme technical conditions (very
+small atomistic and coarse-grained regions and a relatively large
+hybrid region), the RDFs were be reproduced with satisfactory
+agreement to full-atomistic reference (see e.g.~Fig.3 of Ref.~\cite{agarwal2014chemical}).
+
+\paragraph{Structure of the hybrid zone}
+The major difference between a phase coexisting system and an AdResS
+system is that the former satisfies both the momentum and energy
+conservations, while the later can satisfy only one of the two.
+It would be very intersting to establish the analogue between
+the phase coexisting and the AdResS system, however one must pay attention
+to this difference that may play a significant role in the final conclusions.
+
+
+
+\bibliography{ref}{}
+\bibliographystyle{unsrt}
+
+% \begin{thebibliography}{}
+% % and use \bibitem to create references.
+% \bibitem{RefJ}
+% % Format for Journal Reference
+% Author, Journal \textbf{Volume}, (year) page numbers
+% % Format for books
+% \bibitem{RefB}
+% Author, \textit{Book title} (Publisher, place year) page numbers
+% % etc
+% \end{thebibliography}
+
+\end{document}
+
+% end of file template.tex
+
